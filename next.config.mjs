@@ -22,6 +22,14 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // Host consolidation: www is a duplicate of the canonical apex host.
+      // One permanent hop, path preserved, so Google indexes a single origin.
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.odoovations.com' }],
+        destination: 'https://odoovations.com/:path*',
+        permanent: true,
+      },
       // Consolidate the alternate integration slug onto the canonical one.
       {
         source: '/services/odoo-integration-services',

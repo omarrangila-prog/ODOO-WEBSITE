@@ -88,6 +88,7 @@ export const footerNav = {
     { label: 'Home', href: '/' },
     { label: 'About Us', href: '/company/about' },
     { label: 'Our Methodology', href: '/company/methodology' },
+    { label: 'Brand Information', href: '/company/brand' },
     { label: 'Resources', href: '/resources' },
     { label: 'Our Work', href: '/case-studies' },
   ],

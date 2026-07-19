@@ -12,7 +12,7 @@ import { ClipReveal } from '@/components/ui/motion/ClipReveal';
 import { cn } from '@/lib/utilities';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Odoo by Industry — Solutions Built Around Your Sector',
+  title: 'Odoo Solutions by Industry',
   description:
     'Odoo solutions tailored to manufacturing, textile, distribution, retail, pharmaceuticals, construction, professional services and food & hospitality.',
   path: '/industries',
@@ -95,7 +95,7 @@ export default function IndustriesIndex() {
 
                   <Link
                     href={ind.href}
-                    className="group mt-7 inline-flex items-center gap-2 font-heading text-[16px] font-medium text-violet underline-offset-4 hover:underline"
+                    className="group mt-7 inline-flex min-h-[44px] items-center gap-2 font-heading text-[16px] font-medium text-violet underline-offset-4 hover:underline"
                   >
                     Explore Odoo for {ind.name}
                     <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />

@@ -36,19 +36,26 @@ export function Hero() {
             <MaskedReveal as="span">Odoo Implementation · Karachi</MaskedReveal>
           </span>
 
-          <MaskedReveal
-            as="h1"
-            className="font-heading font-[650] leading-[0.98] tracking-[-0.045em] text-[clamp(44px,4.6vw,68px)]"
-            stagger={0.08}
-            lines={[
-              <span key="1">Run Your Whole</span>,
-              <span key="2">Business in{' '}
-                <span className="bg-[linear-gradient(90deg,#7A4DFF,#A85DF5_48%,#E04ACF)] bg-clip-text text-transparent">
-                  One System.
-                </span>
-              </span>,
-            ]}
-          />
+          <h1 className="font-heading font-[650] leading-[0.98] tracking-[-0.045em]">
+            {/* Brand line: the exact official name, visible and part of the H1,
+                so branded searches have a clear on-page signal. */}
+            <span className="mb-3 block text-[clamp(15px,1.5vw,19px)] font-semibold uppercase tracking-[0.16em] text-text-dark-muted">
+              ODOOVATIONS
+            </span>
+            <MaskedReveal
+              as="span"
+              className="block text-[clamp(44px,4.6vw,68px)]"
+              stagger={0.08}
+              lines={[
+                <span key="1">Run Your Whole</span>,
+                <span key="2">Business in{' '}
+                  <span className="bg-[linear-gradient(90deg,#7A4DFF,#A85DF5_48%,#E04ACF)] bg-clip-text text-transparent">
+                    One System.
+                  </span>
+                </span>,
+              ]}
+            />
+          </h1>
 
           <p className="mt-7 max-w-[46ch] text-[clamp(17px,1.35vw,19px)] leading-[1.62] text-text-dark/85">
             Sales on WhatsApp, stock in Excel, invoices on paper. We move it all into one Odoo

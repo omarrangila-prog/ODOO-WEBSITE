@@ -51,7 +51,7 @@ export function Header() {
           <Logo />
 
           {/* Desktop nav */}
-          <nav aria-label="Primary" className="hidden lg:block">
+          <nav aria-label="Primary" className="hidden xl:block">
             <ul className="flex items-center gap-1">
               {primaryNav.map((item) => {
                 const active = item.href !== '/' && isActive(item.href);
@@ -69,7 +69,7 @@ export function Header() {
                           aria-haspopup="true"
                           onClick={() => setOpenDropdown((p) => (p === item.label ? null : item.label))}
                           className={cn(
-                            'flex items-center gap-1 px-3.5 py-2 text-[14.5px] font-medium transition-colors',
+                            'flex items-center gap-1 whitespace-nowrap px-2.5 py-2 text-[14.5px] font-medium transition-colors 2xl:px-3.5',
                             active ? 'text-text-dark' : 'text-text-dark-muted hover:text-text-dark',
                           )}
                         >
@@ -104,7 +104,7 @@ export function Header() {
                       <Link
                         href={item.href}
                         className={cn(
-                          'relative px-3.5 py-2 text-[14.5px] font-medium transition-colors',
+                          'relative whitespace-nowrap px-2.5 py-2 text-[14.5px] font-medium transition-colors 2xl:px-3.5',
                           active ? 'text-text-dark' : 'text-text-dark-muted hover:text-text-dark',
                         )}
                       >
@@ -121,23 +121,24 @@ export function Header() {
           </nav>
 
           {/* Desktop actions — quiet phone + refined CTA */}
-          <div className="hidden items-center gap-5 lg:flex">
+          <div className="hidden items-center gap-5 xl:flex">
             <a
               href={company.phoneHref}
-              className="inline-flex items-center gap-2 text-[14px] font-medium text-text-dark-muted transition-colors hover:text-text-dark"
+              className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap text-[14px] font-medium text-text-dark-muted transition-colors hover:text-text-dark"
               aria-label={`Call us at ${company.phoneDisplay}`}
             >
               <Phone className="h-4 w-4 text-violet-bright" aria-hidden />
               {company.phoneDisplay}
             </a>
             <ButtonLink href="/contact" size="md" onClick={() => track('hero_cta_click')}>
-              Get a Free Consultation
+              <span className="2xl:hidden">Free Consultation</span>
+              <span className="hidden 2xl:inline">Get a Free Consultation</span>
               <ArrowNudge className="h-4 w-4" />
             </ButtonLink>
           </div>
 
           <button
-            className="grid h-11 w-11 place-items-center rounded-full border border-line text-text-dark lg:hidden"
+            className="grid h-11 w-11 place-items-center rounded-full border border-line text-text-dark xl:hidden"
             aria-label="Open menu"
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen(true)}

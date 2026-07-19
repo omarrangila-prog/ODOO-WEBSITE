@@ -34,7 +34,7 @@ export const resources: Resource[] = [
   {
     slug: 'odoo-implementation-cost-pakistan',
     href: '/resources/odoo-implementation-cost-pakistan',
-    metaTitle: 'Odoo Implementation Cost in Pakistan (What Drives It) | ODOOVATIONS',
+    metaTitle: 'Odoo Implementation Cost in Pakistan | ODOOVATIONS',
     metaDescription:
       'What actually drives Odoo implementation cost in Pakistan — modules, users, customisation, integrations, migration and support. An honest breakdown of the factors, not a fake price.',
     h1: 'What Drives Odoo Implementation Cost in Pakistan',
@@ -174,7 +174,7 @@ export const resources: Resource[] = [
   {
     slug: 'odoo-data-migration-checklist',
     href: '/resources/odoo-data-migration-checklist',
-    metaTitle: 'Odoo Data Migration Checklist (Excel & Legacy ERP) | ODOOVATIONS',
+    metaTitle: 'Odoo Data Migration Checklist | ODOOVATIONS',
     metaDescription:
       'A practical checklist for migrating data into Odoo from Excel or a legacy ERP — what to prepare, clean, map, validate and verify so your new system starts accurate.',
     h1: 'Odoo Data Migration Checklist',
@@ -362,7 +362,7 @@ export const resources: Resource[] = [
   {
     slug: 'common-odoo-implementation-mistakes',
     href: '/resources/common-odoo-implementation-mistakes',
-    metaTitle: 'Common Odoo Implementation Mistakes (and How to Avoid Them) | ODOOVATIONS',
+    metaTitle: 'Common Odoo Implementation Mistakes | ODOOVATIONS',
     metaDescription:
       'The mistakes that cause Odoo projects to struggle — over-customisation, skipping discovery, poor data, no ownership, weak training — and how to avoid each one.',
     h1: 'Common Odoo Implementation Mistakes and How to Avoid Them',

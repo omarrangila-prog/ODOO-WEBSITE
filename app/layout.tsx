@@ -44,8 +44,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default:
-      'Odoo Implementation and Custom Development in Pakistan | ODOOVATIONS',
+    default: 'ODOOVATIONS | Odoo Implementation & Custom Development Pakistan',
     template: '%s | ODOOVATIONS',
   },
   description:
@@ -68,10 +67,9 @@ export const metadata: Metadata = {
     type: 'website',
     url: SITE_URL,
     siteName: company.name,
-    title:
-      'Odoo Implementation and Custom Development in Pakistan | ODOOVATIONS',
+    title: 'ODOOVATIONS | Odoo Implementation & Custom Development Pakistan',
     description:
-      'From business chaos to complete control. Odoo implementation, custom development, integration and support for Pakistan and international clients.',
+      'ODOOVATIONS is a Karachi-based Odoo implementation, custom development and business-automation company serving Pakistan and international clients.',
     images: [OG_IMAGE],
     locale: 'en_US',
   },

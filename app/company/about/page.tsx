@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Check } from 'lucide-react';
 import { company } from '@/data/company';
-import { buildMetadata, breadcrumbSchema, webPageSchema, organizationSchema } from '@/lib/seo';
+import { buildMetadata, breadcrumbSchema, webPageSchema } from '@/lib/seo';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { CtaBand } from '@/components/ui/CtaBand';
 import { JsonLd } from '@/components/ui/JsonLd';
@@ -33,7 +33,9 @@ export default function AboutPage() {
 
   return (
     <>
-      <JsonLd data={[organizationSchema(), webPageSchema('About ODOOVATIONS', '/company/about', DESCRIPTION), breadcrumbSchema(crumbs)]} />
+      {/* Organization is emitted once globally in the root layout and referenced
+          by @id from the WebPage entity — no second copy here. */}
+      <JsonLd data={[webPageSchema('About ODOOVATIONS', '/company/about', DESCRIPTION), breadcrumbSchema(crumbs)]} />
 
       <section className="theme-dark grain relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-24">
         <div className="pointer-events-none absolute inset-0 arch-grid opacity-30" aria-hidden />
@@ -74,6 +76,7 @@ export default function AboutPage() {
               <Link href="/company/methodology" className="rounded-full border border-line-light bg-ivory-soft px-4 py-2 text-[14px] font-medium text-ink transition-colors hover:border-violet/40">Our methodology</Link>
               <Link href="/services" className="rounded-full border border-line-light bg-ivory-soft px-4 py-2 text-[14px] font-medium text-ink transition-colors hover:border-violet/40">Our services</Link>
               <Link href="/locations/odoo-services-karachi" className="rounded-full border border-line-light bg-ivory-soft px-4 py-2 text-[14px] font-medium text-ink transition-colors hover:border-violet/40">Odoo in Karachi</Link>
+              <Link href="/company/brand" className="rounded-full border border-line-light bg-ivory-soft px-4 py-2 text-[14px] font-medium text-ink transition-colors hover:border-violet/40">Brand information</Link>
             </div>
           </div>
           <div>

@@ -57,7 +57,7 @@ export function MobileMenu({ open, onClose }: Props) {
   const waHref = waConfigured ? whatsappLink(company.whatsapp, company.whatsappMessage) : '/contact';
 
   return (
-    <div className={cn('fixed inset-0 z-[100] lg:hidden', open ? 'pointer-events-auto' : 'pointer-events-none')} aria-hidden={!open}>
+    <div className={cn('fixed inset-0 z-[100] xl:hidden', open ? 'pointer-events-auto' : 'pointer-events-none')} aria-hidden={!open}>
       <div
         className={cn('absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-300', open ? 'opacity-100' : 'opacity-0')}
         onClick={onClose}

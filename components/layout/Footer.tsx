@@ -64,13 +64,13 @@ export function Footer() {
             <h3 className="mb-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-text-dark-muted">Contact</h3>
             <ul className="flex flex-col gap-3 text-[14.5px]">
               <li>
-                <a href={company.phoneHref} className="inline-flex items-center gap-2.5 text-text-dark-muted hover:text-text-dark">
+                <a href={company.phoneHref} className="inline-flex min-h-[44px] items-center gap-2.5 text-text-dark-muted hover:text-text-dark sm:min-h-0">
                   <Phone className="h-4 w-4 text-violet-bright" aria-hidden />
                   {company.phoneDisplay}
                 </a>
               </li>
               <li>
-                <a href={`mailto:${company.email}`} className="inline-flex items-center gap-2.5 text-text-dark-muted hover:text-text-dark">
+                <a href={`mailto:${company.email}`} className="inline-flex min-h-[44px] items-center gap-2.5 text-text-dark-muted hover:text-text-dark sm:min-h-0">
                   <Mail className="h-4 w-4 text-cyan" aria-hidden />
                   {company.email}
                 </a>
@@ -80,7 +80,7 @@ export function Footer() {
                 {company.address.full}
               </li>
               <li>
-                <a href={waHref} target={waConfigured ? '_blank' : undefined} rel={waConfigured ? 'noopener noreferrer' : undefined} className="inline-flex items-center gap-2.5 text-text-dark-muted hover:text-text-dark">
+                <a href={waHref} target={waConfigured ? '_blank' : undefined} rel={waConfigured ? 'noopener noreferrer' : undefined} className="inline-flex min-h-[44px] items-center gap-2.5 text-text-dark-muted hover:text-text-dark sm:min-h-0">
                   <MessageCircle className="h-4 w-4 text-green" aria-hidden />
                   WhatsApp
                 </a>
@@ -92,8 +92,8 @@ export function Footer() {
         <div className="flex flex-col items-start justify-between gap-4 border-t border-line py-8 sm:flex-row sm:items-center">
           <p className="text-sm text-text-dark-muted">© {year} {company.name}. Serving Pakistan and international clients.</p>
           <div className="flex items-center gap-5 text-sm">
-            <Link href="/privacy" className="text-text-dark-muted hover:text-text-dark">Privacy Policy</Link>
-            <Link href="/terms" className="text-text-dark-muted hover:text-text-dark">Terms</Link>
+            <Link href="/privacy" className="inline-flex min-h-[44px] items-center text-text-dark-muted hover:text-text-dark sm:min-h-0">Privacy Policy</Link>
+            <Link href="/terms" className="inline-flex min-h-[44px] items-center text-text-dark-muted hover:text-text-dark sm:min-h-0">Terms</Link>
             <CookiePrefsLink />
           </div>
         </div>
@@ -106,10 +106,15 @@ function FooterCol({ title, links }: { title: string; links: { label: string; hr
   return (
     <div>
       <h3 className="mb-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-text-dark-muted">{title}</h3>
-      <ul className="flex flex-col gap-2.5 text-[14.5px]">
+      <ul className="flex flex-col gap-0.5 text-[14.5px] sm:gap-2.5">
         {links.map((link) => (
           <li key={link.href}>
-            <Link href={link.href} className="text-text-dark-muted hover:text-text-dark">{link.label}</Link>
+            <Link
+              href={link.href}
+              className="inline-flex min-h-[44px] items-center text-text-dark-muted hover:text-text-dark sm:min-h-0"
+            >
+              {link.label}
+            </Link>
           </li>
         ))}
       </ul>

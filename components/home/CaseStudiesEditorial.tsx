@@ -86,7 +86,7 @@ export function CaseStudiesEditorial({ as = 'h2' }: { as?: 'h1' | 'h2' }) {
                       </div>
                     </div>
 
-                    <Link href={`/case-studies/${cs.slug}`} className="mt-7 inline-flex items-center gap-1.5 font-heading text-[15px] font-medium text-violet underline-offset-4 hover:underline">
+                    <Link href={`/case-studies/${cs.slug}`} className="mt-7 inline-flex min-h-[44px] items-center gap-1.5 font-heading text-[15px] font-medium text-violet underline-offset-4 hover:underline">
                       View the Complete Transformation
                       <ArrowUpRight className="h-4 w-4" aria-hidden />
                     </Link>

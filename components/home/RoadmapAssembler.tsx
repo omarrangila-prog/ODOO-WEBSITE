@@ -167,7 +167,7 @@ function Pathway({
   external?: boolean;
   onClick?: () => void;
 }) {
-  const cls = 'inline-flex items-center gap-2 rounded-full border border-line bg-white/[0.02] px-4 py-2 text-[13px] font-medium text-text-dark-muted transition-colors hover:border-violet-bright/40 hover:text-text-dark';
+  const cls = 'inline-flex min-h-[44px] items-center gap-2 rounded-full border border-line bg-white/[0.02] px-4 py-2 text-[13px] font-medium text-text-dark-muted transition-colors hover:border-violet-bright/40 hover:text-text-dark';
   return (
     <li>
       {external ? (

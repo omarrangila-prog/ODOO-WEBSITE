@@ -8,7 +8,7 @@ type Variant = 'primary' | 'secondary' | 'ghost';
 type Size = 'md' | 'lg';
 
 const base =
-  'group/btn relative inline-flex items-center justify-center gap-2 font-heading font-semibold rounded-control transition-all duration-200 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-bright focus-visible:ring-offset-2 focus-visible:ring-offset-transparent disabled:opacity-50 disabled:pointer-events-none select-none tracking-tight';
+  'group/btn relative inline-flex items-center justify-center gap-2 whitespace-nowrap font-heading font-semibold rounded-control transition-all duration-200 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-bright focus-visible:ring-offset-2 focus-visible:ring-offset-transparent disabled:opacity-50 disabled:pointer-events-none select-none tracking-tight';
 
 const sizes: Record<Size, string> = {
   md: 'text-[14.5px] px-5 min-h-[48px]',

@@ -32,6 +32,11 @@ export function Manifesto() {
             ]}
           />
           <p className="lede mt-7 max-w-md">
+            ODOOVATIONS is a Karachi-based Odoo implementation, custom development and
+            business-automation company helping organisations across Pakistan connect sales,
+            inventory, accounting, manufacturing, CRM and reporting in one reliable system.
+          </p>
+          <p className="lede mt-4 max-w-md">
             The point of Odoo is not more software&mdash;it&rsquo;s fewer disconnected tools. Here is
             what that looks like in practice.
           </p>

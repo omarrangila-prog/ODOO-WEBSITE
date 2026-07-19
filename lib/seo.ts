@@ -3,7 +3,7 @@ import { company } from '@/data/company';
 
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') ??
-  'https://www.odoovations.com';
+  'https://odoovations.com';
 
 export const OG_IMAGE = {
   url: '/images/odoovations-og-image.webp',
@@ -59,6 +59,13 @@ export function buildMetadata({
    Structured data (JSON-LD) builders
    --------------------------------------------------------------------- */
 
+/**
+ * Genuine, understandable variations of the official name only.
+ * These are real casing/spacing forms people actually write — not a typo dump.
+ * The official spelling is always ODOOVATIONS.
+ */
+export const BRAND_ALTERNATE_NAMES = ['Odoovations', 'OdooVations', 'Odoo Vations'];
+
 export function organizationSchema() {
   const socials = Object.values(company.social).filter(Boolean);
   return {
@@ -66,11 +73,22 @@ export function organizationSchema() {
     '@type': 'Organization',
     '@id': `${SITE_URL}/#organization`,
     name: company.name,
+    alternateName: BRAND_ALTERNATE_NAMES,
     legalName: company.legalName,
-    url: SITE_URL,
-    logo: `${SITE_URL}${LOGO_URL}`,
+    url: `${SITE_URL}/`,
+    logo: {
+      '@type': 'ImageObject',
+      '@id': `${SITE_URL}/#logo`,
+      url: `${SITE_URL}${LOGO_URL}`,
+      contentUrl: `${SITE_URL}${LOGO_URL}`,
+      caption: company.name,
+    },
+    image: { '@id': `${SITE_URL}/#logo` },
     description: company.description,
     slogan: company.tagline,
+    email: company.email,
+    telephone: company.phoneInternational,
+    areaServed: [{ '@type': 'Country', name: 'Pakistan' }],
     ...(socials.length ? { sameAs: socials } : {}),
     address: {
       '@type': 'PostalAddress',
@@ -96,12 +114,14 @@ export function localBusinessSchema() {
     '@type': 'ProfessionalService',
     '@id': `${SITE_URL}/#localbusiness`,
     name: company.name,
+    alternateName: BRAND_ALTERNATE_NAMES,
     description: company.description,
-    url: SITE_URL,
+    url: `${SITE_URL}/`,
     email: company.email,
-    telephone: company.phoneDisplay,
-    image: `${SITE_URL}${OG_IMAGE.url}`, logo: `${SITE_URL}${LOGO_URL}`,
-    priceRange: '$$',
+    telephone: company.phoneInternational,
+    parentOrganization: { '@id': `${SITE_URL}/#organization` },
+    image: `${SITE_URL}${OG_IMAGE.url}`,
+    logo: `${SITE_URL}${LOGO_URL}`,
     areaServed: [
       { '@type': 'City', name: 'Karachi' },
       { '@type': 'Country', name: 'Pakistan' },
@@ -120,8 +140,12 @@ export function websiteSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': `${SITE_URL}/#website`,
     name: company.name,
-    url: SITE_URL,
+    alternateName: BRAND_ALTERNATE_NAMES,
+    url: `${SITE_URL}/`,
+    publisher: { '@id': `${SITE_URL}/#organization` },
+    inLanguage: 'en-PK',
   };
 }
 
@@ -129,9 +153,13 @@ export function webPageSchema(name: string, path: string, description: string) {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
+    '@id': `${SITE_URL}${path}#webpage`,
     name,
     description,
     url: `${SITE_URL}${path}`,
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+    about: { '@id': `${SITE_URL}/#organization` },
+    inLanguage: 'en-PK',
   };
 }
 

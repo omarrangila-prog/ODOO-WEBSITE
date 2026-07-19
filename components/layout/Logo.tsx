@@ -32,7 +32,7 @@ export function Logo({ className }: { className?: string }) {
         <span className="font-heading text-[16px] font-bold tracking-tight text-text-dark [.theme-light_&]:text-ink">
           ODOOVATIONS
         </span>
-        <span className="mt-1 text-[9px] font-semibold uppercase tracking-[0.2em] text-text-dark-muted [.theme-light_&]:text-ink-muted">
+        <span className="mt-1 whitespace-nowrap text-[9px] font-semibold uppercase tracking-[0.2em] text-text-dark-muted [.theme-light_&]:text-ink-muted">
           Innovate • Automate • Elevate
         </span>
       </span>

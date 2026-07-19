@@ -90,7 +90,7 @@ export function IndustriesCinema() {
                         </li>
                       ))}
                     </ol>
-                    <Link href={active.href} className="mt-6 inline-flex items-center gap-1.5 font-heading text-[15px] font-medium text-white underline-offset-4 hover:underline">
+                    <Link href={active.href} className="mt-6 inline-flex min-h-[44px] items-center gap-1.5 font-heading text-[15px] font-medium text-white underline-offset-4 hover:underline">
                       Explore Odoo for {active.name}
                       <ArrowUpRight className="h-4 w-4" aria-hidden />
                     </Link>

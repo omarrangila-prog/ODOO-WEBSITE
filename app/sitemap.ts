@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/case-studies', priority: 0.8 },
     { path: '/company/about', priority: 0.6 },
     { path: '/company/methodology', priority: 0.6 },
+    { path: '/company/brand', priority: 0.5 },
     { path: '/contact', priority: 0.8 },
     { path: '/privacy', priority: 0.3 },
     { path: '/terms', priority: 0.3 },
