@@ -1,0 +1,96 @@
+import Link from 'next/link';
+import { forwardRef } from 'react';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import { Loader2 } from 'lucide-react';
+import { cn } from '@/lib/utilities';
+
+type Variant = 'primary' | 'secondary' | 'ghost';
+type Size = 'md' | 'lg';
+
+const base =
+  'group/btn relative inline-flex items-center justify-center gap-2 font-heading font-semibold rounded-control transition-all duration-200 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-bright focus-visible:ring-offset-2 focus-visible:ring-offset-transparent disabled:opacity-50 disabled:pointer-events-none select-none tracking-tight';
+
+const sizes: Record<Size, string> = {
+  md: 'text-[14.5px] px-5 min-h-[48px]',
+  lg: 'text-[15px] px-7 min-h-[52px]',
+};
+
+const variants: Record<Variant, string> = {
+  // Refined violet→magenta with inner highlight; subtle tactile lift on hover.
+  primary:
+    'text-white bg-[linear-gradient(100deg,#7C4DFF,#9868FF_45%,#E947C6)] shadow-cta hover:brightness-[1.06] hover:-translate-y-0.5 hover:shadow-[0_16px_40px_-14px_rgba(124,77,255,0.7),inset_0_1px_0_rgba(255,255,255,0.24)] active:translate-y-0 active:brightness-100 motion-reduce:hover:translate-y-0',
+  secondary:
+    'text-text-dark border border-line-strong bg-white/[0.03] hover:bg-white/[0.07] hover:border-line-strong hover:-translate-y-0.5 active:translate-y-0 motion-reduce:hover:translate-y-0 [.theme-light_&]:text-ink [.theme-light_&]:border-line-light [.theme-light_&]:bg-transparent [.theme-light_&]:hover:bg-black/[0.04]',
+  ghost:
+    'text-text-dark hover:bg-white/5 [.theme-light_&]:text-ink [.theme-light_&]:hover:bg-black/[0.04]',
+};
+
+interface CommonProps {
+  variant?: Variant;
+  size?: Size;
+  className?: string;
+  children: ReactNode;
+  fullWidth?: boolean;
+}
+
+type ButtonAsButton = CommonProps &
+  ButtonHTMLAttributes<HTMLButtonElement> & { href?: undefined; loading?: boolean };
+
+type ButtonAsLink = CommonProps & { href: string; external?: boolean; onClick?: () => void };
+
+export const Button = forwardRef<HTMLButtonElement, ButtonAsButton>(function Button(
+  { variant = 'primary', size = 'lg', className, children, fullWidth, loading, disabled, ...rest },
+  ref,
+) {
+  return (
+    <button
+      ref={ref}
+      className={cn(base, sizes[size], variants[variant], fullWidth && 'w-full', className)}
+      disabled={disabled || loading}
+      aria-busy={loading || undefined}
+      {...rest}
+    >
+      {loading && <Loader2 className="h-4 w-4 animate-spin" aria-hidden />}
+      {children}
+    </button>
+  );
+});
+
+export function ButtonLink({
+  variant = 'primary',
+  size = 'lg',
+  className,
+  children,
+  fullWidth,
+  href,
+  external,
+  onClick,
+}: ButtonAsLink) {
+  const classes = cn(base, sizes[size], variants[variant], fullWidth && 'w-full', className);
+  if (external) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={classes} onClick={onClick}>
+        {children}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className={classes} onClick={onClick}>
+      {children}
+    </Link>
+  );
+}
+
+/** Small arrow that nudges on parent-button hover. Pair with Button/ButtonLink. */
+export function ArrowNudge({ className }: { className?: string }) {
+  return (
+    <svg
+      className={cn('h-[18px] w-[18px] transition-transform duration-200 ease-premium group-hover/btn:translate-x-1', className)}
+      viewBox="0 0 20 20"
+      fill="none"
+      aria-hidden
+    >
+      <path d="M4 10h11M11 5l5 5-5 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}

@@ -1,0 +1,16 @@
+/node_modules
+/.next
+/out
+/build
+.DS_Store
+*.pem
+.env
+.env*.local
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+.leadintel-build/
+
+# Audit artifacts and source-image scratch (not needed to build the site)
+/reports
+/Odoo_Website_Images

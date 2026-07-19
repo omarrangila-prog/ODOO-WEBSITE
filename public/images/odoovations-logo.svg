@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="ODOOVATIONS">
+  <defs>
+    <linearGradient id="ovg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8D4BFF"/>
+      <stop offset="1" stop-color="#D23AD9"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="#0B0D18"/>
+  <circle cx="256" cy="196" r="60" fill="url(#ovg)"/>
+  <text x="256" y="360" text-anchor="middle" font-family="'Space Grotesk',Arial,sans-serif" font-size="72" font-weight="700" letter-spacing="-2" fill="#FFFFFF">ODOO</text>
+  <text x="256" y="428" text-anchor="middle" font-family="'Space Grotesk',Arial,sans-serif" font-size="72" font-weight="700" letter-spacing="-2" fill="#B77AFF">VATIONS</text>
+</svg>

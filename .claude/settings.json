@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(kill -9 322064 325673)",
+      "Bash(curl -s -o /dev/null -w \"3000=%{http_code}\\\\n\" --max-time 3 http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"3001=%{http_code}\\\\n\" --max-time 3 http://localhost:3001/)"
+    ]
+  }
+}
