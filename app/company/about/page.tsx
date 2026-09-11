@@ -9,7 +9,7 @@ import { JsonLd } from '@/components/ui/JsonLd';
 import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
 
 const DESCRIPTION =
-  'ODOOVATIONS is a Karachi-based Odoo implementation and development team helping businesses in Pakistan and abroad replace disconnected systems with one connected Odoo platform.';
+  'ODOOVATIONS is a Karachi-based technology company building custom software, AI automation, Odoo ERP, websites, apps, marketing and creative work for businesses in Pakistan and abroad.';
 
 export const metadata: Metadata = buildMetadata({
   title: 'About ODOOVATIONS — Karachi Odoo Implementation Team',

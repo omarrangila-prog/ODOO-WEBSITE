@@ -1,8 +1,16 @@
 import type { Metadata } from 'next';
 import { company } from '@/data/company';
 
+/**
+ * Canonical production origin.
+ *
+ * Uses `||` rather than `??` deliberately: an env var that is declared but
+ * left EMPTY is a real and easy mistake, and `??` would happily accept "" and
+ * emit broken canonicals, Open Graph URLs and sitemap entries across the whole
+ * site. An empty value must fall back to the known canonical host.
+ */
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') ??
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') ||
   'https://odoovations.com';
 
 export const OG_IMAGE = {

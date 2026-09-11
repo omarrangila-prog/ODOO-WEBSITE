@@ -17,7 +17,7 @@ export function Faq({ items = faqs, heading = 'Questions Businesses Ask Before S
           <p className="eyebrow mb-6">FAQ</p>
           <h2 className="display-2">{heading}</h2>
           <p className="lede mt-6 max-w-sm">
-            Clear, direct answers to the questions we hear most often before an Odoo project begins.
+            Clear, direct answers to the questions we hear most often before a project begins.
           </p>
         </div>
         <Accordion items={items} allowMultiple />

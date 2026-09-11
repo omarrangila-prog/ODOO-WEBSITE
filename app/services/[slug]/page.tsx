@@ -3,12 +3,15 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Check, CircleAlert } from 'lucide-react';
 import { services, getService } from '@/data/services';
+import { divisions, getDivision } from '@/data/divisions';
 import { faqs } from '@/data/faq';
 import { buildMetadata, breadcrumbSchema, serviceSchema, faqSchema } from '@/lib/seo';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { CtaBand } from '@/components/ui/CtaBand';
 import { Accordion } from '@/components/ui/Accordion';
 import { JsonLd } from '@/components/ui/JsonLd';
+import { AnswerCard } from '@/components/ui/AnswerCard';
+import { FlowDiagram } from '@/components/ui/FlowDiagram';
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -20,7 +23,8 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   return buildMetadata({ title: service.metaTitle, description: service.metaDescription, path: service.href });
 }
 
-const serviceFaq = faqs.filter((f) =>
+/** Shared fallback set — used by the Odoo service pages, which have no own FAQs. */
+const sharedFaq = faqs.filter((f) =>
   [
     'How much does an Odoo implementation cost?',
     'How long does an implementation usually take?',
@@ -33,9 +37,21 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
   const service = getService(params.slug);
   if (!service) notFound();
 
+  const serviceFaq = service.faqs ?? sharedFaq;
+  const division = service.division ? getDivision(service.division) : undefined;
+
+  // Link to siblings in the same division rather than dumping every service
+  // on every page — that reads as spam to a person and to a crawler.
+  const siblings = services.filter(
+    (s) => s.slug !== service.slug && s.division && s.division === service.division,
+  );
+  const related = siblings.length
+    ? siblings
+    : services.filter((s) => s.slug !== service.slug && !s.division).slice(0, 6);
+
   const crumbs = [
     { name: 'Home', path: '/' },
-    { name: 'Services', path: '/services' },
+    { name: 'What We Do', path: '/services' },
     { name: service.navLabel, path: service.href },
   ];
 
@@ -50,7 +66,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           <div className="pointer-events-none absolute right-0 top-16 h-[460px] w-[460px] radial-core opacity-70" aria-hidden />
           <div className="shell relative">
             <Breadcrumbs items={crumbs} />
-            <p className="eyebrow mb-6">Services</p>
+            <p className="eyebrow mb-6">{division ? division.title : 'Odoo & ERP'}</p>
             <h1 className="display-1 max-w-5xl">{service.title}</h1>
             <p className="mt-7 max-w-[var(--reading-width)] font-heading text-[clamp(20px,2.4vw,28px)] font-medium leading-[1.25] tracking-[-0.02em] text-text-dark">
               {service.tagline}
@@ -61,8 +77,30 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                 <span key={m} className="rounded-full border border-line bg-white/[0.03] px-4 py-2 text-[13.5px] text-text-dark-muted">{m}</span>
               ))}
             </div>
+
+            {service.answer && (
+              <AnswerCard
+                question={`What is ${service.navLabel.replace(/ &.*/, '')} at ODOOVATIONS?`}
+                className="mt-12 max-w-[var(--reading-width)] border-line text-text-dark-muted"
+              >
+                {service.answer}
+              </AnswerCard>
+            )}
           </div>
         </section>
+
+        {service.flow && (
+          <section className="theme-graphite bay-sm">
+            <div className="shell">
+              <FlowDiagram
+                label={service.flow.label}
+                steps={service.flow.steps}
+                note={service.flow.note}
+                className="text-text-dark"
+              />
+            </div>
+          </section>
+        )}
 
         {/* Problems + What we do */}
         <section className="theme-light bay-sm">
@@ -110,7 +148,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               </ol>
               <p className="mt-5 text-[15px] text-text-dark-muted">
                 See the full{' '}
-                <Link href="/#journey" className="text-violet-bright underline-offset-4 hover:underline">implementation journey</Link>.
+                <Link href="/#journey" className="text-violet-bright underline underline-offset-4">implementation journey</Link>.
               </p>
             </div>
             <div>
@@ -139,18 +177,29 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         <section className="theme-dark pb-4">
           <div className="shell">
             <p className="text-[15px] text-text-dark-muted">
-              Explore other services:{' '}
-              {services.filter((s) => s.slug !== service.slug).map((s, i, arr) => (
+              {division ? `More in ${division.title}: ` : 'Explore other Odoo services: '}
+              {related.map((s, i, arr) => (
                 <span key={s.slug}>
-                  <Link href={s.href} className="text-violet-bright underline-offset-4 hover:underline">{s.navLabel}</Link>
+                  <Link href={s.href} className="text-violet-bright underline underline-offset-4">{s.navLabel}</Link>
                   {i < arr.length - 1 && ' · '}
                 </span>
               ))}
             </p>
+            <p className="mt-4 text-[15px] text-text-dark-muted">
+              Other capabilities:{' '}
+              {divisions
+                .filter((d) => d.id !== service.division)
+                .map((d, i, arr) => (
+                  <span key={d.id}>
+                    <Link href={d.href} className="text-violet-bright underline underline-offset-4">{d.label}</Link>
+                    {i < arr.length - 1 && ' · '}
+                  </span>
+                ))}
+            </p>
           </div>
         </section>
 
-        <CtaBand title={`Ready to start with ${service.navLabel}?`} />
+        <CtaBand title={`Ready to start with ${service.navLabel}?`} primaryLabel={service.ctaLabel} />
       </article>
     </>
   );

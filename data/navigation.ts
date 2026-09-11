@@ -1,3 +1,5 @@
+import { divisions } from './divisions';
+
 export interface NavChild {
   label: string;
   href: string;
@@ -10,56 +12,73 @@ export interface NavItem {
   children?: NavChild[];
 }
 
+/**
+ * Primary navigation.
+ *
+ * Structured around the seven capability divisions rather than a flat list of
+ * every service — the full capability list lives on the hub pages, not in the
+ * menu. Odoo keeps its own entry because it carries the site's existing search
+ * equity, but it sits alongside the other divisions rather than above them.
+ */
 export const primaryNav: NavItem[] = [
   { label: 'Home', href: '/' },
   {
-    label: 'Services',
+    label: 'What We Do',
     href: '/services',
+    children: divisions.map((d) => ({
+      label: d.label,
+      href: d.href,
+      description: d.summary,
+    })),
+  },
+  {
+    label: 'Solutions',
+    href: '/solutions',
     children: [
       {
-        label: 'Odoo Implementation',
-        href: '/services/odoo-implementation-pakistan',
-        description: 'End-to-end Odoo setup around your real workflow.',
+        label: 'Accounting Software',
+        href: '/solutions/accounting-software',
+        description: 'Sales, purchases, expenses, receivables and reports in one place.',
       },
       {
-        label: 'Custom Odoo Development',
-        href: '/services/custom-odoo-development',
-        description: 'Modules built only where they add measurable value.',
+        label: 'POS Software',
+        href: '/solutions/pos-software',
+        description: 'Retail and multi-branch point of sale with central reporting.',
       },
       {
-        label: 'Odoo Integration',
-        href: '/services/odoo-integration',
-        description: 'Connect Odoo with the tools you already use.',
+        label: 'Restaurant POS',
+        href: '/solutions/restaurant-pos',
+        description: 'Orders, kitchen, tables, delivery and food costing.',
       },
       {
-        label: 'Consulting',
-        href: '/services/odoo-consulting',
-        description: 'Clarify scope, priorities and the right next step.',
+        label: 'Inventory Management',
+        href: '/solutions/inventory-management',
+        description: 'Stock that matches what is physically on the shelf.',
       },
       {
-        label: 'Support & Maintenance',
-        href: '/services/odoo-support-maintenance',
-        description: 'Keep your system stable after go-live.',
+        label: 'Hospital Management',
+        href: '/solutions/hospital-management-system',
+        description: 'Patients, appointments, billing, pharmacy and records.',
       },
       {
-        label: 'Odoo Migration',
-        href: '/services/odoo-migration',
-        description: 'Move from Excel or a legacy ERP with clean data.',
+        label: 'Factory Automation',
+        href: '/solutions/factory-automation',
+        description: 'Production, job cards, quality and shop-floor reporting.',
       },
       {
-        label: 'Business Automation',
-        href: '/services/odoo-business-automation',
-        description: 'Automate approvals, reordering and routine work.',
+        label: 'WhatsApp Automation',
+        href: '/services/whatsapp-automation',
+        description: 'Instant replies, lead qualification and order updates.',
       },
       {
-        label: 'AI Dashboards',
-        href: '/services/odoo-ai-dashboards',
-        description: 'Turn operational data into live decisions.',
+        label: 'AI Agents',
+        href: '/solutions/odoo-ai-agents',
+        description: 'Agents that answer, qualify and route using your own data.',
       },
       {
-        label: 'Training',
-        href: '/services/odoo-training',
-        description: 'Teams learn the system on real workflows.',
+        label: 'FBR Digital Invoicing',
+        href: '/solutions/fbr-digital-invoicing-pakistan',
+        description: 'Getting invoicing data ready for digital-invoicing rules.',
       },
     ],
   },
@@ -75,24 +94,43 @@ export const primaryNav: NavItem[] = [
       { label: 'Construction', href: '/industries/construction' },
       { label: 'Professional Services', href: '/industries/professional-services' },
       { label: 'Food & Hospitality', href: '/industries/food-hospitality' },
+      { label: 'Healthcare & Clinics', href: '/industries/healthcare-clinics' },
+      { label: 'Logistics & Transport', href: '/industries/logistics-transport' },
+      { label: 'Wholesale & Trading', href: '/industries/wholesale-trading' },
+      { label: 'Import & Export', href: '/industries/import-export' },
+      { label: 'Education', href: '/industries/education' },
+      { label: 'Agencies & Media', href: '/industries/agencies-media' },
     ],
   },
-  { label: 'Resources', href: '/resources' },
+  { label: 'Rapid Delivery', href: '/rapid-delivery' },
   { label: 'Our Work', href: '/case-studies' },
-  { label: 'About', href: '/company/about' },
+  { label: 'Resources', href: '/resources' },
+  {
+    label: 'Company',
+    href: '/company/about',
+    children: [
+      { label: 'About Us', href: '/company/about', description: 'Who we are and how we work.' },
+      { label: 'Our Methodology', href: '/company/methodology', description: 'Discovery to go-live, step by step.' },
+      { label: 'Global Delivery', href: '/company/global-delivery', description: 'Built in Pakistan, delivered worldwide.' },
+      { label: 'Brand Information', href: '/company/brand', description: 'Official name, logo, contact and boilerplate.' },
+    ],
+  },
   { label: 'Contact', href: '/contact' },
 ];
 
 export const footerNav = {
-  company: [
-    { label: 'Home', href: '/' },
-    { label: 'About Us', href: '/company/about' },
-    { label: 'Our Methodology', href: '/company/methodology' },
-    { label: 'Brand Information', href: '/company/brand' },
-    { label: 'Resources', href: '/resources' },
-    { label: 'Our Work', href: '/case-studies' },
+  capabilities: divisions.map((d) => ({ label: d.label, href: d.href })),
+  solutions: [
+    { label: 'Accounting Software', href: '/solutions/accounting-software' },
+    { label: 'POS Software', href: '/solutions/pos-software' },
+    { label: 'Restaurant POS', href: '/solutions/restaurant-pos' },
+    { label: 'Inventory Management', href: '/solutions/inventory-management' },
+    { label: 'Hospital Management', href: '/solutions/hospital-management-system' },
+    { label: 'Factory Automation', href: '/solutions/factory-automation' },
+    { label: 'FBR Digital Invoicing', href: '/solutions/fbr-digital-invoicing-pakistan' },
+    { label: 'AI Agents', href: '/solutions/odoo-ai-agents' },
   ],
-  services: [
+  odoo: [
     { label: 'Odoo Implementation', href: '/services/odoo-implementation-pakistan' },
     { label: 'Custom Odoo Development', href: '/services/custom-odoo-development' },
     { label: 'Odoo Integration', href: '/services/odoo-integration' },
@@ -107,14 +145,24 @@ export const footerNav = {
     { label: 'Retail', href: '/industries/retail-ecommerce' },
     { label: 'Pharmaceuticals', href: '/industries/pharmaceuticals' },
     { label: 'Construction', href: '/industries/construction' },
+    { label: 'Healthcare & Clinics', href: '/industries/healthcare-clinics' },
+    { label: 'Logistics & Transport', href: '/industries/logistics-transport' },
+    { label: 'Wholesale & Trading', href: '/industries/wholesale-trading' },
+    { label: 'Import & Export', href: '/industries/import-export' },
+    { label: 'Education', href: '/industries/education' },
+  ],
+  company: [
+    { label: 'About Us', href: '/company/about' },
+    { label: 'Our Methodology', href: '/company/methodology' },
+    { label: 'Global Delivery', href: '/company/global-delivery' },
+    { label: 'Rapid Delivery', href: '/rapid-delivery' },
+    { label: 'Brand Information', href: '/company/brand' },
+    { label: 'Resources', href: '/resources' },
+    { label: 'Our Work', href: '/case-studies' },
   ],
   locations: [
     { label: 'Odoo Services in Karachi', href: '/locations/odoo-services-karachi' },
     { label: 'Odoo Services in Pakistan', href: '/locations/odoo-services-pakistan' },
-  ],
-  solutions: [
-    { label: 'FBR Digital Invoicing', href: '/solutions/fbr-digital-invoicing-pakistan' },
-    { label: 'Odoo WhatsApp Integration', href: '/solutions/odoo-whatsapp-integration' },
-    { label: 'Odoo AI Agents', href: '/solutions/odoo-ai-agents' },
+    { label: 'Software & AI in Pakistan', href: '/locations/software-ai-automation-pakistan' },
   ],
 };

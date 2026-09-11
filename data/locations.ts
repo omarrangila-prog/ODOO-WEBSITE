@@ -1,7 +1,8 @@
 /**
- * Location pages — ONE genuine Karachi page (real office) and ONE Pakistan-wide
- * service page. No fabricated branch cities (no Lahore/Islamabad/Dubai pages).
- * Content is unique per page to avoid doorway/duplication issues.
+ * Location pages — ONE genuine Karachi page (real office) plus Pakistan-wide
+ * service pages split by intent: Odoo/ERP, and the broader software, AI and
+ * digital capability range. No fabricated branch cities (no Lahore/Islamabad/
+ * Dubai pages). Content is unique per page to avoid doorway/duplication issues.
  */
 
 export interface LocationPage {
@@ -120,6 +121,73 @@ export const locations: LocationPage[] = [
         question: 'How do you prevent unnecessary customisation?',
         answer:
           'We start from your real workflow and use standard, well-configured Odoo wherever it fits. Custom development is proposed only where standard Odoo genuinely cannot cover a requirement that matters to your business — and the scope is agreed before any code is written.',
+      },
+    ],
+  },
+  {
+    slug: 'software-ai-automation-pakistan',
+    href: '/locations/software-ai-automation-pakistan',
+    kind: 'country',
+    primaryKeyword: 'software and AI automation company Pakistan',
+    metaTitle: 'Software & AI Automation Company in Pakistan | ODOOVATIONS',
+    metaDescription:
+      'Custom software development, AI automation, web and mobile apps, marketing and creative production for businesses across Pakistan — delivered from Karachi, on-site or remotely.',
+    h1: 'Software, AI Automation & Digital Services Across Pakistan',
+    eyebrow: 'Pakistan-wide service',
+    intro:
+      'ODOOVATIONS builds custom software, AI automation, websites, mobile applications, marketing campaigns and creative content for businesses across Pakistan. This page covers the full capability range; if your requirement is specifically an Odoo ERP implementation, the Odoo page covers that in depth.',
+    ctaLabel: 'Tell Us What You Need',
+    sections: [
+      {
+        heading: 'Built for how business actually works here',
+        body: 'Orders arrive on WhatsApp. Stock lives in Excel. Payments are chased by phone. Approvals happen in person. Software designed for a different operating environment tends to be abandoned within months, because it assumes conditions that do not exist. We design for the conditions that do — intermittent connectivity, mixed literacy on the shop floor, staff who will not type when they can scan, and a genuine need for English and Urdu to coexist.',
+      },
+      {
+        heading: 'What we build most often',
+        body: 'Custom business systems — accounting, POS, inventory, production, hospital and clinic management. AI automation, particularly WhatsApp agents that answer and qualify leads, and document processing that removes retyping. Websites and web applications built to generate enquiries rather than to exist. And the marketing, video and creative work that brings customers to all of it.',
+      },
+      {
+        heading: 'Delivered from Karachi, nationwide',
+        body: 'Our office is in Karachi, which means on-site discovery, training and go-live support are straightforward for Karachi businesses. For clients elsewhere in Pakistan we deliver through a structured remote process: mapped workflows, written scope, prototype review, testing, data migration, training and supported go-live. Karachi is our only office — we do not maintain branches in other cities and will not claim to.',
+      },
+      {
+        heading: 'Pricing in a market that shops on price',
+        body: 'We are not the cheapest option in Pakistan and do not try to be. The cheapest quote usually reflects a smaller scope, a template, or a plan to recover margin through change requests later. We quote against a written scope after discovery, phase the work so value arrives early, and will tell you when an off-the-shelf product would serve you better than anything we could build.',
+      },
+    ],
+    services: [
+      { label: 'Custom software development', body: 'Business systems built around your process — accounting, POS, inventory, production, sector-specific platforms.' },
+      { label: 'AI automation & AI agents', body: 'WhatsApp agents, document processing, approval routing and reporting assistants connected to your real data.' },
+      { label: 'Websites & mobile apps', body: 'Corporate sites, e-commerce, portals, dashboards and applications built for speed on mobile networks.' },
+      { label: 'Digital marketing & advertising', body: 'Meta and Google campaigns, SEO and lead generation measured on qualified enquiries.' },
+      { label: 'Creative, video & content', body: 'Design, product and explainer video, animation, photography and the copy that goes with it.' },
+      { label: 'Odoo & ERP', body: 'Implementation, customisation, integration and support — covered in depth on the Odoo Pakistan page.' },
+    ],
+    faqs: [
+      {
+        question: 'Do you work with businesses outside Karachi?',
+        answer:
+          'Yes, across Pakistan. Our office is in Karachi, so on-site meetings are easiest for Karachi businesses, but the delivery process is built to work remotely: video discovery with screen sharing, written scope everyone can read, a working environment you can check at any time, and remote training and support. We do not have offices in other cities and will not pretend otherwise.',
+      },
+      {
+        question: 'Can you work in Urdu?',
+        answer:
+          'Project documentation and scope stay in professional English so there is one authoritative written record. Discussion, training and support can run in Urdu where that is more comfortable for your team — which matters most for shop-floor and counter staff who will actually use the system daily.',
+      },
+      {
+        question: 'How much does custom software cost in Pakistan?',
+        answer:
+          'It depends on scope — the number of distinct workflows, user roles, integrations, data migration and whether mobile access is needed. There is no useful category price. Our guide on custom software cost explains each factor so you can judge any quote, including ours.',
+      },
+      {
+        question: 'Do you only build on Odoo?',
+        answer:
+          'No. Odoo is one of seven divisions and the right answer for many businesses, but plenty of what we build is not Odoo at all — custom applications, AI automation, websites and mobile apps. We recommend the foundation that fits the process and the budget, not the one that suits us.',
+      },
+      {
+        question: 'Can you take over a project another company started?',
+        answer:
+          'Often yes. We begin with a short technical review of the existing code and data to establish what is salvageable, and give you an honest assessment before committing. Sometimes the right answer is to continue it; sometimes it is to rebuild, and we will say which.',
       },
     ],
   },

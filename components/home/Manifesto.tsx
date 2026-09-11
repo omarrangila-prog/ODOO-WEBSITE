@@ -2,9 +2,9 @@ import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
 import { Reveal } from '@/components/ui/Reveal';
 
 const flow = [
-  { n: '01', k: 'Connect', d: 'Bring sales, inventory, accounts and operations into one system.' },
-  { n: '02', k: 'Automate', d: 'Remove repeated work, delays, errors and constant follow-ups.' },
-  { n: '03', k: 'Control', d: 'Make faster decisions using live operational information.' },
+  { n: '01', k: 'Build', d: 'The software, system, site or app your business is missing — designed around your process rather than a template.' },
+  { n: '02', k: 'Automate', d: 'Repeated work, delays, errors and constant follow-ups removed, with a person still approving anything that carries risk.' },
+  { n: '03', k: 'Grow', d: 'Campaigns, creative and content that bring the right customers to a business now equipped to serve them.' },
 ];
 
 export function Manifesto() {
@@ -26,19 +26,20 @@ export function Manifesto() {
             as="h2"
             className="display-2"
             lines={[
-              <span key="1">One System.</span>,
-              <span key="2">Every Department.</span>,
-              <span key="3" className="signal-text">Complete Visibility.</span>,
+              <span key="1">We Build It.</span>,
+              <span key="2">We Automate It.</span>,
+              <span key="3" className="signal-text">We Help It Grow.</span>,
             ]}
           />
           <p className="lede mt-7 max-w-md">
-            ODOOVATIONS is a Karachi-based Odoo implementation, custom development and
-            business-automation company helping organisations across Pakistan connect sales,
-            inventory, accounting, manufacturing, CRM and reporting in one reliable system.
+            ODOOVATIONS is a Karachi-based technology company building custom software, AI
+            automation, Odoo ERP systems, websites, mobile apps, marketing campaigns and creative
+            content &mdash; for businesses across Pakistan and international clients served
+            remotely.
           </p>
           <p className="lede mt-4 max-w-md">
-            The point of Odoo is not more software&mdash;it&rsquo;s fewer disconnected tools. Here is
-            what that looks like in practice.
+            Three things, in that order. Most businesses come to us for one of them and discover
+            they needed the next.
           </p>
         </div>
 

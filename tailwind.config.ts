@@ -78,11 +78,18 @@ const config: Config = {
           from: { opacity: '0', transform: 'translateY(16px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
         },
+        /* Two identical rows sit side by side; shifting by half the track
+           width lands the second row exactly where the first started. */
+        marquee: {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-50%)' },
+        },
       },
       animation: {
         'float-y': 'floatY 6s ease-in-out infinite',
         'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
         'fade-up': 'fadeUp 0.6s cubic-bezier(0.22,1,0.36,1) both',
+        marquee: 'marquee 38s linear infinite',
       },
     },
   },

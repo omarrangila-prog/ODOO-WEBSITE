@@ -116,7 +116,7 @@ export function MobileMenu({ open, onClose }: Props) {
 
           <div className="mt-6 flex flex-col gap-3 px-2">
             <ButtonLink href="/contact" onClick={onClose} fullWidth>
-              Build My Odoo Roadmap
+              Tell Us What You Need
             </ButtonLink>
             <ButtonLink href={waHref} external={waConfigured} variant="secondary" fullWidth>
               <MessageCircle className="h-[18px] w-[18px]" aria-hidden />

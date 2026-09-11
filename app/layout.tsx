@@ -44,40 +44,42 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'ODOOVATIONS | Odoo Implementation & Custom Development Pakistan',
+    default: 'ODOOVATIONS | Software, AI Automation, Odoo & Digital',
     template: '%s | ODOOVATIONS',
   },
   description:
-    'ODOOVATIONS provides Odoo implementation, custom module development, integrations, automation and support for businesses in Pakistan and worldwide.',
+    'ODOOVATIONS builds custom software, AI automations, Odoo ERP systems, websites, apps, marketing campaigns, video and creative work for businesses in Pakistan and worldwide.',
   applicationName: company.name,
   authors: [{ name: company.name }],
+  // Kept short and genuinely descriptive. Search engines ignore this tag; it
+  // is here as human-readable metadata, not as a ranking attempt.
   keywords: [
-    'Odoo implementation in Pakistan',
-    'Custom Odoo development',
-    'Odoo ERP solutions',
-    'Business process automation',
-    'Odoo integration services',
-    'Odoo support in Pakistan',
-    'Odoo for manufacturing',
-    'Odoo for textile businesses',
-    'Odoo consulting',
+    'custom software development Pakistan',
+    'AI automation',
+    'AI agents',
+    'Odoo implementation Pakistan',
+    'WhatsApp automation',
+    'POS software',
+    'web development Karachi',
+    'digital marketing Pakistan',
+    'video production and creative studio',
   ],
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
     url: SITE_URL,
     siteName: company.name,
-    title: 'ODOOVATIONS | Odoo Implementation & Custom Development Pakistan',
+    title: 'ODOOVATIONS | Software, AI Automation, Odoo & Digital',
     description:
-      'ODOOVATIONS is a Karachi-based Odoo implementation, custom development and business-automation company serving Pakistan and international clients.',
+      'One team for technology, automation, software, creative and growth. Karachi-based, serving Pakistan and international clients remotely.',
     images: [OG_IMAGE],
     locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Odoo Implementation & Custom Development | ODOOVATIONS',
+    title: 'ODOOVATIONS | Software, AI Automation, Odoo & Digital',
     description:
-      'From business chaos to complete control. Odoo solutions built around your business.',
+      'We build, automate and grow businesses. Software, AI, Odoo, web, marketing and creative under one team.',
     images: [OG_IMAGE.url],
   },
   robots: { index: true, follow: true },

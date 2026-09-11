@@ -62,15 +62,23 @@ export default function IndustriesIndex() {
                     from={reversed ? 'left' : 'bottom'}
                   >
                     <div className="relative aspect-[16/10] min-h-[280px] sm:min-h-[380px]">
-                      <Image
-                        src={ind.image}
-                        alt={`${ind.name} — operational context`}
-                        fill
-                        loading={i < 2 ? 'eager' : 'lazy'}
-                        priority={i === 0}
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                        className="object-cover"
-                      />
+                      {ind.image ? (
+                        <Image
+                          src={ind.image}
+                          alt={`${ind.name} — operational context`}
+                          fill
+                          loading={i < 2 ? 'eager' : 'lazy'}
+                          priority={i === 0}
+                          sizes="(max-width: 1024px) 100vw, 50vw"
+                          className="object-cover"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 grid place-items-center bg-[linear-gradient(135deg,#161823,#241a3d_55%,#3a1d46)]">
+                          <span className="px-8 text-center font-heading text-[clamp(22px,3vw,34px)] font-semibold leading-tight tracking-[-0.03em] text-white/90">
+                            {ind.name}
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </ClipReveal>
                 </div>

@@ -65,10 +65,10 @@ function Header() {
   return (
     <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
       <div className="max-w-xl">
-        <p className="eyebrow mb-6">The Service Ecosystem</p>
+        <p className="eyebrow mb-6">Inside the Odoo &amp; ERP division</p>
         <h2 className="display-2">
           Eight Ways We Build Your{' '}
-          <span className="signal-text">Business System.</span>
+          <span className="signal-text">Odoo System.</span>
         </h2>
       </div>
       <p className="hidden text-[13px] uppercase tracking-[0.14em] text-text-dark-muted sm:block">

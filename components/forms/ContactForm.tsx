@@ -198,9 +198,9 @@ export function ContactForm() {
         <Field label="Current systems" htmlFor="currentSystems" hint="e.g. Excel, QuickBooks, a legacy ERP" error={errors.currentSystems?.message}>
           <input id="currentSystems" className={inputClass} placeholder="What you use today" {...register('currentSystems')} />
         </Field>
-        <Field label="Estimated timeline" htmlFor="timeline" hint="Optional" error={errors.timeline?.message}>
+        <Field label="How soon do you need it?" htmlFor="timeline" hint="Optional — helps us prioritise" error={errors.timeline?.message}>
           <select id="timeline" className={inputClass} defaultValue="" {...register('timeline')}>
-            <option value="">Select timeline (optional)</option>
+            <option value="">Select urgency (optional)</option>
             {timelineOptions.map((t) => <option key={t} value={t}>{t}</option>)}
           </select>
         </Field>
@@ -230,7 +230,7 @@ export function ContactForm() {
         render={({ field }) => (
           <fieldset>
             <legend className="mb-2 block text-[13.5px] font-semibold text-text-dark">
-              Required services <span className="text-magenta">*</span>
+              What do you need? <span className="text-magenta">*</span>
             </legend>
             <div className="flex flex-wrap gap-2">
               {serviceOptions.map((service) => {

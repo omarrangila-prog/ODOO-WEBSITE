@@ -1,4 +1,6 @@
 import { Hero } from '@/components/home/Hero';
+import { CapabilityStrip } from '@/components/home/CapabilityStrip';
+import { EcosystemGrid } from '@/components/home/EcosystemGrid';
 import { Manifesto } from '@/components/home/Manifesto';
 import { IntentSelector } from '@/components/home/IntentSelector';
 import { TrendingTopics } from '@/components/home/TrendingTopics';
@@ -22,15 +24,17 @@ export default function HomePage() {
       <JsonLd
         data={[
           webPageSchema(
-            'Odoo Implementation and Custom Development in Pakistan',
+            'Software, AI Automation, Odoo & Digital Services',
             '/',
-            'ODOOVATIONS provides Odoo implementation, custom module development, integrations, automation and support for businesses in Pakistan and worldwide.',
+            'ODOOVATIONS builds custom software, AI automation, Odoo ERP systems, websites, mobile apps, marketing campaigns, video and creative content for businesses in Pakistan and international clients served remotely.',
           ),
           localBusinessSchema(),
         ]}
       />
       <Hero />
+      <CapabilityStrip />
       <Manifesto />
+      <EcosystemGrid />
       <IntentSelector />
       <RoadmapProvider>
         <FrictionDiagnostic />

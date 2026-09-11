@@ -171,7 +171,7 @@ async function deliver(
     return;
   }
 
-  const to = process.env.CONTACT_TO_EMAIL ?? 'odoovations@gmail.com';
+  const to = process.env.CONTACT_TO_EMAIL ?? 'hello@odoovations.com';
   const from = process.env.CONTACT_FROM_EMAIL ?? 'website@odoovations.com';
 
   const lines = [

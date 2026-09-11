@@ -48,7 +48,20 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
         {/* Full-bleed photographic hero with overlaid content */}
         <section className="theme-dark relative min-h-[78vh] overflow-hidden">
           <div className="absolute inset-0" aria-hidden>
-            <Image src={ind.image} alt="" fill priority sizes="100vw" className="object-cover" />
+            {ind.image ? (
+              <Image src={ind.image} alt="" fill priority sizes="100vw" className="object-cover" />
+            ) : (
+              /* No commissioned photography for this industry yet — a built
+                 hero rather than a request for a file that does not exist. */
+              <div className="absolute inset-0">
+                <div
+                  className="absolute inset-0"
+                  style={{ background: 'radial-gradient(120% 90% at 70% 30%, var(--graphite) 0%, var(--midnight) 62%)' }}
+                />
+                <div className="absolute inset-0 arch-grid opacity-40" />
+                <div className="absolute right-[10%] top-[24%] h-[520px] w-[560px] rounded-full bg-[radial-gradient(circle,rgba(124,77,255,0.20),transparent_68%)]" />
+              </div>
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/60 to-midnight/30" />
             <div className="absolute inset-0 bg-gradient-to-r from-midnight/85 via-midnight/20 to-transparent" />
           </div>
@@ -59,7 +72,7 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
             <div className="mt-auto">
               <div className="shell pb-14">
                 <p className="eyebrow mb-5">Industries</p>
-                <h1 className="display-1 max-w-4xl">Odoo for {ind.name}</h1>
+                <h1 className="display-1 max-w-4xl">{ind.h1 ?? `Odoo for ${ind.name}`}</h1>
                 <p className="lede mt-6 max-w-[var(--reading-width)] text-white/85">{ind.description}</p>
                 <ol className="mt-8 flex flex-wrap items-center gap-x-2 gap-y-2">
                   {ind.workflow.map((step, i) => (
@@ -136,6 +149,42 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
           </section>
         )}
 
+        {ind.beyond && ind.beyond.length > 0 && (
+          <section className="theme-light bay-sm">
+            <div className="shell">
+              <p className="eyebrow mb-5">Beyond the ERP</p>
+              <h2 className="display-2 max-w-3xl">
+                What else this sector usually needs
+              </h2>
+              <p className="lede mt-5 max-w-[var(--reading-width)]">
+                An ERP is rarely the only thing a business in this position is missing. These are
+                the capabilities that most often matter alongside it.
+              </p>
+              <ul className="mt-10 grid gap-4 sm:grid-cols-2">
+                {ind.beyond.map((b) => (
+                  <li key={b.href}>
+                    <Link
+                      href={b.href}
+                      className="group flex h-full flex-col rounded-editorial border border-line-light bg-white/60 p-6 transition-all duration-300 ease-premium hover:-translate-y-0.5 hover:border-violet/30 hover:shadow-panel-light"
+                    >
+                      <span className="flex items-center justify-between gap-3">
+                        <span className="font-heading text-[19px] font-semibold tracking-[-0.02em] text-ink">
+                          {b.label}
+                        </span>
+                        <ArrowUpRight
+                          className="h-4 w-4 shrink-0 text-ink/30 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-violet"
+                          aria-hidden
+                        />
+                      </span>
+                      <span className="mt-2 text-[15.5px] leading-relaxed text-ink-muted">{b.body}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
+
         <section className="theme-dark bay-sm">
           <div className="shell grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
             <h2 className="display-2">Questions for {ind.name.toLowerCase()} businesses</h2>
@@ -157,7 +206,13 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
           </div>
         </section>
 
-        <CtaBand title={`See how Odoo fits ${ind.name.toLowerCase()}`} />
+        <CtaBand
+          title={
+            ind.h1
+              ? `Working in ${ind.name.toLowerCase()}?`
+              : `See how Odoo fits ${ind.name.toLowerCase()}`
+          }
+        />
       </article>
     </>
   );

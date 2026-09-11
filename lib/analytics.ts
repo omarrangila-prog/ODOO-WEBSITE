@@ -18,6 +18,7 @@ export type AnalyticsEvent =
   | 'topic_card_click'
   | 'solution_page_view'
   | 'case_study_opened'
+  | 'work_filter_used'
   | 'workflow_file_uploaded'
   | 'consultation_form_submitted'
   | 'scheduling_link_clicked';

@@ -16,7 +16,11 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const cs = getCaseStudy(params.slug);
   if (!cs) return {};
-  return buildMetadata({ title: `${cs.label} — Odoo Case Study`, description: `${cs.industry}: ${cs.challenge}`, path: `/case-studies/${cs.slug}` });
+  return buildMetadata({
+    title: cs.label,
+    description: cs.metaDescription ?? `${cs.industry}: ${cs.challenge}`,
+    path: `/case-studies/${cs.slug}`,
+  });
 }
 
 export default function CaseStudyPage({ params }: { params: { slug: string } }) {
@@ -51,11 +55,13 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
             </p>
           )}
 
-          <div className="mt-10 overflow-hidden rounded-editorial border border-line shadow-float">
-            <div className="relative aspect-[3/2] sm:aspect-[2/1]">
-              <Image src={cs.image} alt={`${cs.label} — ${cs.industry}`} fill priority sizes="(max-width: 1320px) 100vw, 1320px" className="object-cover" />
+          {cs.image && (
+            <div className="mt-10 overflow-hidden rounded-editorial border border-line shadow-float">
+              <div className="relative aspect-[3/2] sm:aspect-[2/1]">
+                <Image src={cs.image} alt={`${cs.label} — ${cs.industry}`} fill priority sizes="(max-width: 1320px) 100vw, 1320px" className="object-cover" />
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
             <div className="rounded-panel border border-line bg-white/[0.02] p-5">

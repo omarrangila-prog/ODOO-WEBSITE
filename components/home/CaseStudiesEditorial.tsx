@@ -1,11 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
-import { caseStudies } from '@/data/caseStudies';
+import { caseStudies as allCaseStudies } from '@/data/caseStudies';
 import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
 import { ClipReveal } from '@/components/ui/motion/ClipReveal';
 import { ParallaxLayer } from '@/components/ui/motion/ParallaxLayer';
 import { cn } from '@/lib/utilities';
+
+/** Photographic editorial rail — only scenarios with commissioned imagery. */
+const caseStudies = allCaseStudies.filter((c) => c.image);
 
 export function CaseStudiesEditorial({ as = 'h2' }: { as?: 'h1' | 'h2' }) {
   return (
@@ -38,7 +41,7 @@ export function CaseStudiesEditorial({ as = 'h2' }: { as?: 'h1' | 'h2' }) {
                 <div className={cn('lg:col-span-7', reversed ? 'lg:order-2 lg:col-start-6' : 'lg:col-start-1')}>
                   <ClipReveal className="relative overflow-hidden rounded-editorial border border-line-light shadow-panel-light" from={reversed ? 'left' : 'bottom'}>
                     <div className="relative aspect-[16/10]">
-                      <Image src={cs.image} alt={`${cs.label} — ${cs.industry}`} fill loading="lazy" sizes="(max-width: 1024px) 100vw, 58vw" className="object-cover" />
+                      <Image src={cs.image as string} alt={`${cs.label} — ${cs.industry}`} fill loading="lazy" sizes="(max-width: 1024px) 100vw, 58vw" className="object-cover" />
                     </div>
                   </ClipReveal>
                 </div>

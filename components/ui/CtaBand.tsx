@@ -11,7 +11,7 @@ interface Props {
 export function CtaBand({
   title,
   body = 'Send a voice note, spreadsheet or a plain description of where your business is struggling. We’ll help you find the right next step.',
-  primaryLabel = 'Build My Odoo Roadmap',
+  primaryLabel = 'Tell Us What You Need',
   primaryHref = '/contact#form',
 }: Props) {
   return (

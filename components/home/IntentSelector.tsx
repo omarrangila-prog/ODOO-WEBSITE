@@ -16,17 +16,24 @@ interface Intent {
   cta: string;
 }
 
+/**
+ * Problem-first entry points spanning every division.
+ *
+ * Phrased as "I need ..." in the language a business owner would use, not in
+ * ours — somebody who wants a shop till should not have to know the words
+ * "point of sale system" to find it.
+ */
 const intents: Intent[] = [
-  { id: 'implementation', label: 'A complete Odoo implementation', recommendation: 'Odoo Implementation', explanation: 'End-to-end setup of the modules your business needs, configured around your real workflow.', href: '/services/odoo-implementation-pakistan', cta: 'See implementation' },
-  { id: 'fbr', label: 'FBR digital invoicing', recommendation: 'FBR-Ready Invoicing', explanation: 'Structure your billing, POS and sales data so it can connect to digital-invoicing requirements.', href: '/solutions/fbr-digital-invoicing-pakistan', cta: 'See FBR solution' },
-  { id: 'custom', label: 'Custom Odoo development', recommendation: 'Custom Development', explanation: 'Precise custom modules for the gaps standard Odoo cannot cover — only where they add value.', href: '/services/custom-odoo-development', cta: 'See custom development' },
-  { id: 'integration', label: 'to connect Odoo with another system', recommendation: 'Odoo Integration', explanation: 'Connect Odoo with e-commerce, WhatsApp, payments, couriers, banking and custom APIs.', href: '/services/odoo-integration', cta: 'See integration' },
-  { id: 'support', label: 'Odoo support', recommendation: 'Support & Maintenance', explanation: 'Ongoing issue resolution, safe upgrades and continuous improvement after go-live.', href: '/services/odoo-support-maintenance', cta: 'See support' },
-  { id: 'migration', label: 'Data migration', recommendation: 'Odoo Migration', explanation: 'Move from Excel or a legacy ERP with prepared, mapped and validated data.', href: '/services/odoo-migration', cta: 'See migration' },
-  { id: 'ai', label: 'AI dashboards and reporting', recommendation: 'AI Dashboards', explanation: 'Turn the data Odoo already holds into live dashboards and AI-assisted insight.', href: '/solutions/odoo-ai-agents', cta: 'See AI dashboards' },
-  { id: 'crm', label: 'Sales and CRM automation', recommendation: 'WhatsApp & CRM Automation', explanation: 'Automate lead follow-up, pipeline stages and WhatsApp conversations inside Odoo.', href: '/solutions/odoo-whatsapp-integration', cta: 'See CRM automation' },
-  { id: 'compare', label: "to compare Odoo editions", recommendation: 'Community vs Enterprise', explanation: 'Understand the trade-offs and pick the edition that fits your features and budget.', href: '/resources/odoo-community-vs-enterprise', cta: 'Compare editions' },
-  { id: 'unsure', label: "help deciding what I need", recommendation: 'Free Workflow Review', explanation: 'Tell us how your business runs today and we will point you to the right next step — no pressure.', href: '/contact#form', cta: 'Book a workflow review' },
+  { id: 'software', label: 'software', recommendation: 'Custom Software', explanation: 'Software built around how your business actually works, instead of forcing your process into a generic product.', href: '/services/custom-software-development', cta: 'See custom software' },
+  { id: 'ai', label: 'AI automation', recommendation: 'AI & Automation', explanation: 'AI agents and automated workflows that take the repetitive work off your team — connected to your real business data.', href: '/services/ai-automation', cta: 'See AI automation' },
+  { id: 'odoo', label: 'Odoo or an ERP', recommendation: 'Odoo & ERP', explanation: 'Put sales, purchases, stock, accounts and reporting into one connected system your whole team works from.', href: '/services/odoo-implementation-pakistan', cta: 'See Odoo & ERP' },
+  { id: 'web', label: 'a website or app', recommendation: 'Websites & Apps', explanation: 'Corporate sites, landing pages, e-commerce, portals and mobile apps — built around one clear business goal.', href: '/services/web-development', cta: 'See web & apps' },
+  { id: 'marketing', label: 'marketing', recommendation: 'Marketing & Growth', explanation: 'Strategy, ads, campaigns, content and the lead-generation system behind them — measured on qualified enquiries.', href: '/services/digital-marketing', cta: 'See marketing' },
+  { id: 'creative', label: 'ads and creative', recommendation: 'Creative Studio', explanation: 'Design, ad creative and campaign assets that make a complicated offer easy to understand quickly.', href: '/services/creative-media', cta: 'See creative' },
+  { id: 'video', label: 'video', recommendation: 'Video & Animation', explanation: 'Product, corporate and explainer video, motion graphics and animation — scripted, shot and edited in house.', href: '/services/creative-media', cta: 'See video work' },
+  { id: 'whatsapp', label: 'WhatsApp automation', recommendation: 'WhatsApp Automation', explanation: 'Instant replies, lead qualification, order updates and payment reminders — with leads written into your CRM.', href: '/services/whatsapp-automation', cta: 'See WhatsApp automation' },
+  { id: 'system', label: 'a business system', recommendation: 'Business Systems', explanation: 'Accounting, POS, inventory, hospital, factory or another operational system — see exactly what each one covers.', href: '/solutions', cta: 'Browse solutions' },
+  { id: 'custom', label: 'something custom', recommendation: 'Tell Us the Problem', explanation: 'Some requirements do not have a product name yet. Describe what is going wrong and we will work out what to build.', href: '/contact#form', cta: 'Describe my requirement' },
 ];
 
 export function IntentSelector() {
@@ -45,10 +52,11 @@ export function IntentSelector() {
         <div className="max-w-2xl">
           <p className="eyebrow mb-5">Start Here</p>
           <h2 className="display-2">
-            What do you need <span className="signal-text">help with?</span>
+            What can we help you <span className="signal-text">build?</span>
           </h2>
           <p className="lede mt-5">
-            Pick what matches your situation. We&rsquo;ll point you straight to the right solution.
+            Pick whichever is closest. We&rsquo;ll point you at the right part of the team &mdash;
+            and if none of them fit, the last option is the one to use.
           </p>
         </div>
 
@@ -110,7 +118,7 @@ export function IntentSelector() {
                 </motion.div>
               ) : (
                 <p className="mt-3 text-[15px] leading-relaxed text-text-dark-muted">
-                  Select an option and we&rsquo;ll recommend the right Odoo solution and next step.
+                  Select an option and we&rsquo;ll recommend where to start.
                 </p>
               )}
             </AnimatePresence>

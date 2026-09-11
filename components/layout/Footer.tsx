@@ -34,12 +34,14 @@ export function Footer() {
         </div>
 
         {/* Navigation */}
-        <div className="grid gap-12 py-16 lg:grid-cols-[1.6fr_1fr_1.1fr_1.3fr]">
+        <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1.1fr_1fr_1.2fr]">
           <div className="max-w-xs">
             <Logo />
             <p className="mt-5 text-[14.5px] leading-relaxed text-text-dark-muted">
-              A Pakistan-based Odoo implementation and development team helping businesses automate,
-              integrate and grow with confidence.
+              {company.positioningSupport}
+            </p>
+            <p className="mt-3 text-[13px] leading-relaxed text-text-dark-muted/80">
+              Karachi, Pakistan &mdash; serving Pakistani and international clients.
             </p>
             {socials.length > 0 && (
               <ul className="mt-5 flex items-center gap-2.5">
@@ -57,8 +59,9 @@ export function Footer() {
             )}
           </div>
 
+          <FooterCol title="What We Do" links={[...footerNav.capabilities, ...footerNav.odoo.slice(0, 3)]} />
+          <FooterCol title="Solutions" links={footerNav.solutions} />
           <FooterCol title="Company" links={[...footerNav.company, ...footerNav.locations]} />
-          <FooterCol title="Services" links={[...footerNav.services, ...footerNav.solutions]} />
 
           <div>
             <h3 className="mb-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-text-dark-muted">Contact</h3>

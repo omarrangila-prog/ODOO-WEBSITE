@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
-import { industries } from '@/data/industries';
+import { industries as allIndustries } from '@/data/industries';
 import { track } from '@/lib/analytics';
 import { cn } from '@/lib/utilities';
 
@@ -14,6 +14,10 @@ import { cn } from '@/lib/utilities';
  * A large image fills the section; the active industry changes with a wipe.
  * Numbered index list (desktop) + prev/next (mobile), fully keyboard-operable.
  */
+/** This section is a full-bleed photographic showcase, so it only features
+    industries that have commissioned photography. */
+const industries = allIndustries.filter((i) => i.image);
+
 export function IndustriesCinema() {
   const [i, setI] = useState(0);
   const reduce = useReducedMotion();
@@ -39,7 +43,7 @@ export function IndustriesCinema() {
             transition={{ duration: 0.85, ease: [0.76, 0, 0.24, 1] }}
           >
             <Image
-              src={active.image}
+              src={active.image as string}
               alt={`${active.name} — operational context`}
               fill
               priority={i === 0}

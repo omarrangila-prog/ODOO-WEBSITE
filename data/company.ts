@@ -19,19 +19,31 @@ export const company = {
   name: 'ODOOVATIONS',
   legalName: 'ODOOVATIONS',
   tagline: 'Innovate • Automate • Elevate',
+
+  /**
+   * Entity description. Used in Organization schema, OG tags and the brand page.
+   * Deliberately covers the full capability range — ODOOVATIONS is not an
+   * Odoo-only company — while staying factual about what is actually delivered.
+   */
   description:
-    'ODOOVATIONS helps businesses implement, customise and connect Odoo systems around the way their operations actually work.',
+    'ODOOVATIONS is a Karachi-based technology company building custom software, AI automation, Odoo ERP systems, websites, mobile apps, marketing campaigns and creative content for businesses in Pakistan and international clients served remotely.',
+
+  /** One-line positioning used across hero, footer and answer-first summaries. */
+  positioning: 'One Team. Technology, Automation, Software, Creative & Growth.',
+  positioningSupport:
+    'ODOOVATIONS brings software engineering, AI automation, Odoo ERP, digital products, websites, marketing, content and creative production together under one team.',
+
   founded: 2019,
 
   // Contact — replace placeholders before launch
-  email: 'odoovations@gmail.com',
+  email: 'hello@odoovations.com',
   phoneDisplay: '0334 7037531',
   phoneInternational: '+92 334 7037531',
   phoneHref: 'tel:+923347037531',
   // WhatsApp: env var wins; falls back to the real number.
   whatsapp: envWhatsApp && envWhatsApp.length > 0 ? envWhatsApp : '923347037531',
   whatsappMessage:
-    'Hello ODOOVATIONS, I would like to discuss how Odoo could improve our business workflow.',
+    'Hello ODOOVATIONS, I would like to discuss a project. Here is what I need:',
 
   // Scheduling — empty means scheduling CTAs render as a WhatsApp fallback.
   schedulingUrl: envScheduling && envScheduling.length > 0 ? envScheduling : '',
@@ -63,6 +75,14 @@ export const company = {
   // Credibility flags — keep FALSE unless genuinely verified.
   odooOfficialPartner: false, // Do NOT set true without a verified partnership.
   certifications: [] as string[], // Add only verified certifications.
+
+  /**
+   * Human support hours. `staffedSupport24_7` must stay FALSE unless the
+   * business genuinely staffs humans around the clock. Inquiry intake is
+   * automated 24/7 — that is a different claim and is worded as such.
+   */
+  staffedSupport24_7: false,
+  intakeLine: '24/7 inquiry intake · replies during Pakistan business hours',
 
   // NOTE: No headline "50+ projects / 100% satisfaction" style stats are stored
   // or shown. Add only genuinely verified figures, and only where they render

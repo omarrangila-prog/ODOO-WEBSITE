@@ -29,7 +29,7 @@ export default function SolutionPage({ params }: { params: { slug: string } }) {
 
   const crumbs = [
     { name: 'Home', path: '/' },
-    { name: 'Solutions', path: sol.href },
+    { name: 'Solutions', path: '/solutions' },
     { name: sol.eyebrow, path: sol.href },
   ];
 

@@ -60,7 +60,7 @@ export async function sendEmail(job: EmailJob, opts: { forceFail?: boolean } = {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: process.env.CONTACT_FROM_EMAIL ?? 'odoovations@gmail.com', to: job.to, subject: job.subject, text: `[${job.template}]` }),
+      body: JSON.stringify({ from: process.env.CONTACT_FROM_EMAIL ?? 'hello@odoovations.com', to: job.to, subject: job.subject, text: `[${job.template}]` }),
     });
     if (!res.ok) throw new Error(`Resend HTTP ${res.status}`);
     sent.push(job);

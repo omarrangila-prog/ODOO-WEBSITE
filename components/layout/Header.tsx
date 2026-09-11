@@ -69,7 +69,7 @@ export function Header() {
                           aria-haspopup="true"
                           onClick={() => setOpenDropdown((p) => (p === item.label ? null : item.label))}
                           className={cn(
-                            'flex items-center gap-1 whitespace-nowrap px-2.5 py-2 text-[14.5px] font-medium transition-colors 2xl:px-3.5',
+                            'flex items-center gap-1 whitespace-nowrap px-2 py-2 text-[14px] font-medium transition-colors 2xl:px-3.5 2xl:text-[14.5px]',
                             active ? 'text-text-dark' : 'text-text-dark-muted hover:text-text-dark',
                           )}
                         >
@@ -78,11 +78,21 @@ export function Header() {
                         </button>
                         {openDropdown === item.label && (
                           <div
-                            className="absolute left-1/2 top-full z-50 w-[340px] -translate-x-1/2 pt-3"
+                            className={cn(
+                              'absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3',
+                              // Long menus (Industries, Solutions) go two-up so
+                              // the panel does not run off the bottom of the screen.
+                              item.children.length > 6 ? 'w-[620px]' : 'w-[340px]',
+                            )}
                             onMouseEnter={() => openMenu(item.label)}
                             onMouseLeave={scheduleClose}
                           >
-                            <div className="animate-fade-up rounded-panel border border-line bg-graphite/95 p-2 shadow-float backdrop-blur-xl">
+                            <div
+                              className={cn(
+                                'animate-fade-up rounded-panel border border-line bg-graphite/95 p-2 shadow-float backdrop-blur-xl',
+                                item.children.length > 6 && 'grid grid-cols-2 gap-x-1',
+                              )}
+                            >
                               {item.children.map((child) => (
                                 <Link
                                   key={child.href}
@@ -104,7 +114,7 @@ export function Header() {
                       <Link
                         href={item.href}
                         className={cn(
-                          'relative whitespace-nowrap px-2.5 py-2 text-[14.5px] font-medium transition-colors 2xl:px-3.5',
+                          'relative whitespace-nowrap px-2 py-2 text-[14px] font-medium transition-colors 2xl:px-3.5 2xl:text-[14.5px]',
                           active ? 'text-text-dark' : 'text-text-dark-muted hover:text-text-dark',
                         )}
                       >
@@ -124,15 +134,15 @@ export function Header() {
           <div className="hidden items-center gap-5 xl:flex">
             <a
               href={company.phoneHref}
-              className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap text-[14px] font-medium text-text-dark-muted transition-colors hover:text-text-dark"
+              className="hidden shrink-0 items-center gap-2 whitespace-nowrap text-[14px] font-medium text-text-dark-muted transition-colors hover:text-text-dark 2xl:inline-flex"
               aria-label={`Call us at ${company.phoneDisplay}`}
             >
               <Phone className="h-4 w-4 text-violet-bright" aria-hidden />
               {company.phoneDisplay}
             </a>
             <ButtonLink href="/contact" size="md" onClick={() => track('hero_cta_click')}>
-              <span className="2xl:hidden">Free Consultation</span>
-              <span className="hidden 2xl:inline">Get a Free Consultation</span>
+              <span className="2xl:hidden">Start a Project</span>
+              <span className="hidden 2xl:inline">Start a Project</span>
               <ArrowNudge className="h-4 w-4" />
             </ButtonLink>
           </div>

@@ -13,6 +13,14 @@ const pages = [
   ['solution', '/solutions/fbr-digital-invoicing-pakistan'],
   ['resource', '/resources/odoo-implementation-cost-pakistan'],
   ['contact', '/contact'],
+  // Broader-capability templates added during the repositioning.
+  ['solutions-index', '/solutions'],
+  ['capability-page', '/services/ai-automation'],
+  ['solution-new', '/solutions/accounting-software'],
+  ['rapid-delivery', '/rapid-delivery'],
+  ['global-delivery', '/company/global-delivery'],
+  ['our-work', '/case-studies'],
+  ['industry-new', '/industries/healthcare-clinics'],
 ];
 
 const browser = await chromium.launch();

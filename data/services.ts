@@ -9,9 +9,30 @@ export interface Service {
   intro: string;
   problems: string[];
   whatWeDo: { title: string; body: string }[];
+  /** Capability / module tags rendered as pills under the hero. */
   modules: string[];
   outcomes: string[];
   process: string[];
+
+  /* ---- Optional, used by the broader (non-Odoo) capability pages ---- */
+
+  /** Which capability division this belongs to — see data/divisions.ts. */
+  division?: string;
+  /**
+   * Answer-first summary placed near the top of the page. Written so a person
+   * skimming (or a retrieval system quoting) gets the whole answer in one
+   * paragraph before any marketing language.
+   */
+  answer?: string;
+  /** Intent-matched CTA so pages don't all say the same thing. */
+  ctaLabel?: string;
+  /**
+   * A named, ordered flow rendered as a diagram — the honest version of "how
+   * it works", showing where a human still approves things.
+   */
+  flow?: { label: string; steps: string[]; note?: string };
+  /** Page-specific FAQs. Falls back to the shared Odoo FAQ set when absent. */
+  faqs?: { question: string; answer: string }[];
 }
 
 export const services: Service[] = [
@@ -368,6 +389,704 @@ export const services: Service[] = [
       'Teams focused on higher-value work',
     ],
     process: ['Business Discovery', 'Solution Blueprint', 'Build & Test', 'Go-Live & Support'],
+  },
+  {
+    slug: 'ai-automation',
+    href: '/services/ai-automation',
+    division: 'ai-automation',
+    title: 'AI Automation Built Around Real Business Workflows',
+    navLabel: 'AI & Automation',
+    tagline: 'Automate the repetitive work, not the decisions that matter.',
+    metaTitle: 'AI Automation & AI Agent Development | ODOOVATIONS',
+    metaDescription:
+      'AI automation and AI agent development for businesses in Pakistan and worldwide. Automate customer conversations, document processing, follow-ups, reporting and internal workflows.',
+    answer:
+      'ODOOVATIONS builds AI automation that connects to the systems a business already runs. Typical work includes AI agents that answer and qualify customers on WhatsApp, workflows that process documents and route approvals, assistants that answer staff questions from internal company documents, and automated reporting. We keep a human approval step wherever a decision carries financial, legal or customer risk.',
+    intro:
+      'Most businesses do not need "AI" in the abstract. They need a specific repetitive process to stop consuming staff hours: the same enquiry answered forty times a day, invoices retyped from PDFs, follow-ups that never happen, a weekly report someone rebuilds by hand. We automate those processes using AI where AI genuinely helps, and ordinary rules where rules are more reliable.',
+    problems: [
+      'The same customer questions are answered manually, all day, every day.',
+      'Leads from ads go cold because nobody replies fast enough.',
+      'Information is retyped from PDFs, emails and forms into your systems.',
+      'Reports are rebuilt by hand every week from data that already exists.',
+      'Approvals sit in someone\u2019s inbox until they are chased.',
+    ],
+    whatWeDo: [
+      {
+        title: 'AI agents for customers',
+        body: 'Agents on WhatsApp, web chat or voice that answer common questions, qualify a lead against your criteria and hand a real buyer to a salesperson with the conversation attached.',
+      },
+      {
+        title: 'Document and data automation',
+        body: 'Read invoices, purchase orders, forms and emails, extract the fields you actually use, validate them against your records and write them into your system \u2014 with anything uncertain flagged for a person.',
+      },
+      {
+        title: 'Workflow and approval automation',
+        body: 'Triggers, routing and notifications so approvals, follow-ups and handoffs happen on their own, and exceptions are the only thing a human has to look at.',
+      },
+      {
+        title: 'Internal knowledge assistants',
+        body: 'An assistant your team can ask questions of, answering from your own policies, product data and documents rather than from the open internet.',
+      },
+      {
+        title: 'Reporting assistants and AI dashboards',
+        body: 'Scheduled summaries and live dashboards built from the data your business already records, so management stops waiting for someone to compile it.',
+      },
+      {
+        title: 'Integration with your existing systems',
+        body: 'Automation is only useful when it can read and write real data. We connect to Odoo, your CRM, accounting system, e-commerce platform or custom database through supported APIs.',
+      },
+    ],
+    modules: [
+      'AI Agents',
+      'WhatsApp AI',
+      'Document Automation',
+      'Workflow Automation',
+      'Knowledge Assistants (RAG)',
+      'AI Dashboards',
+    ],
+    flow: {
+      label: 'How an automation actually runs',
+      steps: ['Trigger', 'AI step', 'Your business data', 'Human approval', 'Action', 'Recorded'],
+      note: 'The human approval step is deliberate. We automate the work, not the accountability \u2014 and every run is logged so you can audit what happened.',
+    },
+    outcomes: [
+      'Repetitive digital work removed from staff workload',
+      'Faster first response to enquiries and leads',
+      'Fewer transcription errors between systems',
+      'Reporting that arrives without anyone assembling it',
+      'A clear record of what was automated and what a person approved',
+    ],
+    process: [
+      'Process Audit',
+      'Automation Map',
+      'Prototype',
+      'Build & Test',
+      'Supervised Rollout',
+      'Measure & Improve',
+    ],
+    ctaLabel: 'Find What We Can Automate',
+    faqs: [
+      {
+        question: 'What can AI realistically automate in my business?',
+        answer:
+          'Repetitive digital processes with a clear input and a clear output: answering common enquiries, qualifying leads, reading documents into a system, routing approvals, drafting replies, summarising data and generating reports. Work that requires judgement, negotiation or physical handling is not a good automation candidate, and we will say so during the audit.',
+      },
+      {
+        question: 'What cannot be automated?',
+        answer:
+          'Anything where the rules are genuinely ambiguous, where a wrong answer is expensive and undetectable, or where the process is not documented anywhere including in people\u2019s heads. In those cases the first useful step is usually defining the process, not automating it.',
+      },
+      {
+        question: 'Will an AI agent make mistakes in front of my customers?',
+        answer:
+          'Any language model can be wrong. We reduce that risk by grounding answers in your own approved content, limiting what the agent is allowed to state, handing over to a human on anything outside its scope, and reviewing transcripts during the first weeks of live use.',
+      },
+      {
+        question: 'What happens to our data?',
+        answer:
+          'We agree in writing which systems the automation may read and write, and what is sent to any third-party AI provider. Where data sensitivity requires it, we scope the design so sensitive fields are never transmitted externally.',
+      },
+      {
+        question: 'How long does an AI automation project take?',
+        answer:
+          'A single well-defined automation \u2014 one WhatsApp agent, one document flow \u2014 can be prototyped quickly and running in a matter of days. Automating a process that spans several departments and systems takes longer because the integrations and the testing take longer. We give a timeline after the process audit, not before.',
+      },
+    ],
+  },
+  {
+    slug: 'whatsapp-automation',
+    href: '/services/whatsapp-automation',
+    division: 'ai-automation',
+    title: 'WhatsApp Automation for Sales, Support & Operations',
+    navLabel: 'WhatsApp Automation',
+    tagline: 'Answer every enquiry in seconds, and never lose a lead in the inbox.',
+    metaTitle: 'WhatsApp Automation & WhatsApp AI Agents | ODOOVATIONS',
+    metaDescription:
+      'WhatsApp automation for sales, support and operations \u2014 instant replies, lead qualification, CRM handoff, order updates, payment reminders and appointment booking.',
+    answer:
+      'WhatsApp automation connects your WhatsApp number to your business systems so enquiries get an instant reply, leads are qualified and passed to a salesperson with context, and routine messages \u2014 order status, payment reminders, appointment confirmations, invoice delivery \u2014 are sent automatically. ODOOVATIONS builds these flows on the official WhatsApp Business Platform (Cloud API) where the use case requires reliability and compliance.',
+    intro:
+      'In Pakistan, WhatsApp is where business actually happens. The problem is what happens after hours, during a rush, or when one person is holding the number: enquiries sit unread, ad spend turns into unanswered messages, and follow-ups depend on someone remembering. WhatsApp automation fixes the mechanics of that, without turning your business into a robot.',
+    problems: [
+      'Ad leads message at 11pm and get a reply the next afternoon \u2014 if at all.',
+      'One person owns the WhatsApp number, so nothing is visible to the rest of the team.',
+      'Follow-ups depend on memory, and most never happen.',
+      'Order status and payment reminders are typed out by hand, one customer at a time.',
+      'There is no record of conversations in your CRM.',
+    ],
+    whatWeDo: [
+      {
+        title: 'Instant reply and qualification',
+        body: 'A lead from a Facebook, Instagram or Google ad lands on WhatsApp, gets an immediate welcome, answers a few qualifying questions and is routed to the right salesperson.',
+      },
+      {
+        title: 'CRM handoff with the full conversation',
+        body: 'The lead, its answers and its source are written into your CRM or Odoo, with a follow-up task assigned so nothing depends on someone remembering.',
+      },
+      {
+        title: 'Operational messaging',
+        body: 'Order confirmations, dispatch and delivery updates, payment reminders, invoice and document delivery, and appointment confirmations \u2014 triggered by events in your system.',
+      },
+      {
+        title: 'Support deflection',
+        body: 'Common questions answered instantly from your approved content, with a clean handover to a human for anything the agent should not attempt.',
+      },
+      {
+        title: 'Internal alerts',
+        body: 'Your team notified on WhatsApp when something needs attention \u2014 a high-value enquiry, a stuck approval, a failed payment.',
+      },
+      {
+        title: 'Shared team inbox',
+        body: 'Conversations visible to the people who need them, so the business owns the customer relationship rather than an individual phone.',
+      },
+    ],
+    modules: [
+      'WhatsApp Business Platform',
+      'Lead Qualification',
+      'CRM Handoff',
+      'Order Notifications',
+      'Payment Reminders',
+      'Appointment Booking',
+    ],
+    flow: {
+      label: 'Ad to salesperson, automatically',
+      steps: ['Ad click', 'WhatsApp', 'Instant welcome', 'Qualification', 'CRM record', 'Salesperson', 'Follow-up'],
+    },
+    outcomes: [
+      'Every enquiry answered immediately, including outside office hours',
+      'Qualified leads reaching a salesperson with context attached',
+      'Routine operational messages sent without manual typing',
+      'Conversations recorded against the customer, not lost on a phone',
+    ],
+    process: [
+      'Use-case Definition',
+      'Platform & Number Setup',
+      'Flow Design',
+      'Build & Test',
+      'Supervised Launch',
+      'Refine',
+    ],
+    ctaLabel: 'Automate My WhatsApp',
+    faqs: [
+      {
+        question: 'Is this the official WhatsApp API or an unofficial tool?',
+        answer:
+          'For business-critical messaging we build on the official WhatsApp Business Platform (Cloud API), which requires a verified business, an approved sender number and message templates approved by Meta. Unofficial automation tools exist and are cheaper, but they carry a genuine risk of the number being blocked. We will tell you plainly which route a use case needs. ODOOVATIONS is not a Meta partner and does not claim any special status with Meta.',
+      },
+      {
+        question: 'Can it use our existing WhatsApp number?',
+        answer:
+          'Usually yes, but a number moved onto the Cloud API can no longer be used in the normal WhatsApp or WhatsApp Business app on a phone. That trade-off matters, so it is a decision we walk through before starting.',
+      },
+      {
+        question: 'Will customers know they are talking to automation?',
+        answer:
+          'We recommend being straightforward about it, and designing a fast, obvious route to a human. Pretending an automation is a person tends to damage trust the first time it gets something wrong.',
+      },
+      {
+        question: 'Can it connect to Odoo or our CRM?',
+        answer:
+          'Yes. That is usually the point \u2014 the value comes from WhatsApp being connected to real order, stock, invoice and customer data rather than running as an isolated chatbot.',
+      },
+      {
+        question: 'What does WhatsApp itself cost?',
+        answer:
+          'Meta charges per conversation on the official platform, with rates that vary by country and conversation category, and those charges are billed to you directly by Meta. Our fee covers design, build and integration. We estimate the likely message volume during scoping so there are no surprises.',
+      },
+    ],
+  },
+  {
+    slug: 'custom-software-development',
+    href: '/services/custom-software-development',
+    division: 'custom-software',
+    title: 'Custom Software for Businesses That Have Outgrown Generic Tools',
+    navLabel: 'Custom Software',
+    tagline: 'Tell us how your business works. We design the software around your process.',
+    metaTitle: 'Custom Software Development in Pakistan | ODOOVATIONS',
+    metaDescription:
+      'Custom software development for business systems, POS, accounting, inventory, portals, dashboards, web apps and mobile apps \u2014 built around your workflow, not a template.',
+    answer:
+      'ODOOVATIONS designs and builds custom business software: accounting, sales and purchase, inventory, POS, manufacturing, HR, hospital and clinic systems, customer and supplier portals, dashboards, web applications and mobile applications. We start from how your business actually operates, build only the system that process needs, and hand over something your team can run and we can keep maintaining.',
+    intro:
+      'Generic software works until the day your business does something the software has no concept of \u2014 a pricing rule, an approval chain, a job card, a way of counting stock. At that point people start keeping a parallel spreadsheet, and the software stops telling the truth. Custom software is the answer when the process is the thing that makes you money and it does not fit in a box.',
+    problems: [
+      'The real process lives in spreadsheets running alongside the official system.',
+      'Your pricing, approval or costing rules are more specific than any product supports.',
+      'Three systems hold three different versions of the same number.',
+      'Adding a branch, a product line or a user costs more in licences than in value.',
+      'The previous developer left and nobody can safely change anything.',
+    ],
+    whatWeDo: [
+      {
+        title: 'Workflow mapping before code',
+        body: 'We sit with the people who do the work and document the process as it actually runs, including the exceptions everybody handles informally. That document is what we build against.',
+      },
+      {
+        title: 'The system your process needs',
+        body: 'Sales, purchase, accounting, inventory, production, orders, customers, suppliers, payments, approvals, reports, dashboards and mobile access \u2014 scoped to what you will genuinely use.',
+      },
+      {
+        title: 'Integrations with what you keep',
+        body: 'New software rarely replaces everything. We connect to the accounting package, e-commerce store, payment gateway or ERP you are keeping, so data moves instead of being retyped.',
+      },
+      {
+        title: 'Reporting management will actually read',
+        body: 'The reports and dashboards designed around the decisions your management makes, not a generic analytics screen nobody opens.',
+      },
+      {
+        title: 'Built to be handed over',
+        body: 'Documented, source code in your possession, and written so another competent developer can pick it up. You should not be locked to us by obscurity.',
+      },
+      {
+        title: 'Support after launch',
+        body: 'Software is not finished at go-live. We stay on for issues, changes and the improvements that only become obvious once people use it daily.',
+      },
+    ],
+    modules: [
+      'Business Systems',
+      'POS',
+      'Accounting',
+      'Inventory',
+      'Portals & Dashboards',
+      'Web Apps',
+      'Mobile Apps',
+      'APIs',
+    ],
+    flow: {
+      label: 'How a custom build is scoped',
+      steps: ['Your process', 'Our engineering', 'A working prototype', 'Your software'],
+      note: 'We prototype the core workflow early so you are reacting to a working screen rather than a document.',
+    },
+    outcomes: [
+      'One system that matches how the business genuinely runs',
+      'Spreadsheets retired instead of quietly maintained on the side',
+      'Reports built from a single, trustworthy set of records',
+      'Source code and documentation you own',
+    ],
+    process: [
+      'Workflow Discovery',
+      'Scope & Estimate',
+      'Architecture',
+      'Prototype',
+      'Build & Test',
+      'Data & Training',
+      'Deploy & Support',
+    ],
+    ctaLabel: 'Show Us Your Workflow',
+    faqs: [
+      {
+        question: 'How much does custom software cost in Pakistan?',
+        answer:
+          'It is driven by scope: the number of distinct workflows, how many users and roles, how many integrations, whether mobile access is needed, and how much existing data must be migrated. A single-workflow internal tool and a multi-branch operations system are different orders of magnitude. We quote against a written scope after discovery rather than guessing from a category name.',
+      },
+      {
+        question: 'Custom software or off-the-shelf \u2014 how do we decide?',
+        answer:
+          'If a standard product covers your process with configuration alone, buy it; it will be cheaper and better supported. Custom becomes the right answer when the part of your process that differentiates you is the part no product handles, or when licence costs scale badly against the value you get. We are happy to recommend the off-the-shelf route when that is the honest answer.',
+      },
+      {
+        question: 'How long does it take?',
+        answer:
+          'A focused internal tool or dashboard can be delivered quickly. A full operations system with several modules, integrations and data migration is a phased project measured in months. We scope in phases so something useful goes live early instead of everything arriving at the end.',
+      },
+      {
+        question: 'Do we own the source code?',
+        answer:
+          'Yes. Ownership terms are set out in the agreement before work starts.',
+      },
+      {
+        question: 'Can you take over software somebody else built?',
+        answer:
+          'Often, yes. We start with a short technical review of the existing code and data to establish what is salvageable and what is not, and give you an honest assessment before committing to a takeover.',
+      },
+    ],
+  },
+  {
+    slug: 'web-development',
+    href: '/services/web-development',
+    division: 'web-apps',
+    title: 'Websites & Web Applications Built to Perform',
+    navLabel: 'Websites & Apps',
+    tagline: 'Not just pages \u2014 digital systems designed around a business goal.',
+    metaTitle: 'Web Development & Web Applications | ODOOVATIONS',
+    metaDescription:
+      'Corporate websites, landing pages, e-commerce, web applications, portals, dashboards and mobile apps \u2014 fast, accessible, SEO-ready and built around a specific business goal.',
+    answer:
+      'ODOOVATIONS builds corporate websites, conversion-focused landing pages, e-commerce stores, web applications, customer portals, dashboards and mobile apps. Every build starts from the goal \u2014 generate leads, take orders, book appointments, serve customers, connect to an internal system \u2014 and is engineered for speed, search visibility and accessibility from the start rather than patched afterwards.',
+    intro:
+      'A website earns its cost by doing a job. Most do not, because they were built as a brochure and measured as a brochure. We start by naming the job \u2014 the enquiry, the order, the booking, the portal login \u2014 and design backwards from it, then build it to load fast on a mid-range phone on a Pakistani mobile network.',
+    problems: [
+      'The site looks acceptable but produces almost no enquiries.',
+      'It takes too long to load, especially on mobile data.',
+      'Nobody can update content without going back to a developer.',
+      'It ranks for the company name and nothing else.',
+      'The site knows nothing about your stock, orders or customers.',
+    ],
+    whatWeDo: [
+      {
+        title: 'Websites with a defined job',
+        body: 'Corporate sites, landing pages and e-commerce built around one primary action, with the path to it made obvious rather than decorated.',
+      },
+      {
+        title: 'Web applications and portals',
+        body: 'Customer, supplier and dealer portals, internal dashboards and SaaS interfaces \u2014 with authentication, roles and real data behind them.',
+      },
+      {
+        title: 'Mobile applications',
+        body: 'Native or cross-platform apps, and progressive web apps where an install is friction you do not need.',
+      },
+      {
+        title: 'Performance as a requirement',
+        body: 'Server-rendered content, optimised images in modern formats, controlled JavaScript and disciplined third-party scripts \u2014 targeted at good Core Web Vitals on real devices.',
+      },
+      {
+        title: 'SEO-ready and accessible from day one',
+        body: 'Clean URLs, correct canonicals, structured data, semantic headings, keyboard navigation and contrast handled during the build, not bolted on later.',
+      },
+      {
+        title: 'Connected to your systems',
+        body: 'Forms into your CRM, stock and pricing from your ERP, payments through a gateway, orders flowing into the system that fulfils them.',
+      },
+    ],
+    modules: [
+      'Corporate Sites',
+      'Landing Pages',
+      'E-commerce',
+      'Web Apps',
+      'Portals',
+      'Dashboards',
+      'Mobile Apps',
+      'Technical SEO',
+    ],
+    outcomes: [
+      'A site measured by enquiries or orders, not by page views',
+      'Fast loading on mid-range phones and mobile networks',
+      'Content your team can update without a developer',
+      'Search and analytics correctly configured from launch',
+    ],
+    process: [
+      'Goal & Audience',
+      'Structure & Wireframes',
+      'Design',
+      'Build',
+      'Content & SEO',
+      'Test & Launch',
+      'Measure',
+    ],
+    ctaLabel: 'Start a Web Project',
+    faqs: [
+      {
+        question: 'How much should a business website cost?',
+        answer:
+          'It depends on how much of it is genuinely custom. A well-built multi-page corporate site with custom design and proper SEO groundwork sits in a very different range from an e-commerce store with payment and courier integrations, or a portal with logins and live data. We price against a page and feature list, and will tell you when a smaller scope would serve you better.',
+      },
+      {
+        question: 'What is the difference between a website and a web application?',
+        answer:
+          'A website mainly publishes information to visitors. A web application does work for a specific user \u2014 it has logins, roles, records and actions, such as a customer checking their orders or a manager approving a request. Many projects need a site with a small application behind it.',
+      },
+      {
+        question: 'Can you redesign our existing site without losing our search rankings?',
+        answer:
+          'Yes, and that is a deliberate piece of work: we inventory the existing URLs, keep the ones with search equity, map permanent redirects for anything that must change, preserve the content that is ranking, and monitor after launch. Redesigns lose rankings when this step is skipped.',
+      },
+      {
+        question: 'Do you host and maintain the site?',
+        answer:
+          'We handle domain, DNS, hosting and cloud deployment, and offer ongoing maintenance. You can also take the build and host it yourself \u2014 we will hand it over properly either way.',
+      },
+    ],
+  },
+  {
+    slug: 'digital-marketing',
+    href: '/services/digital-marketing',
+    division: 'marketing',
+    title: 'Digital Marketing Built Around Leads, Sales & Measurable Growth',
+    navLabel: 'Marketing & Ads',
+    tagline: 'Campaigns judged on qualified enquiries, not impressions.',
+    metaTitle: 'Digital Marketing, Meta Ads & Google Ads | ODOOVATIONS',
+    metaDescription:
+      'Performance marketing, Meta and Google Ads, lead generation, SEO, email, landing pages and conversion optimisation \u2014 measured on lead quality and business outcomes.',
+    answer:
+      'ODOOVATIONS runs digital marketing as a connected system: audience and creative, a landing page or WhatsApp entry point, lead capture, qualification, CRM handoff, follow-up and measurement. Services include Meta Ads, Google Ads, YouTube Ads, retargeting, SEO, email marketing and conversion optimisation. We do not sell guaranteed rankings, guaranteed return figures or guaranteed lead volumes.',
+    intro:
+      'Most underperforming campaigns are not a targeting problem. The ad works, the click lands somewhere unconvincing, the enquiry arrives at an inbox nobody watches, and no one can say which ad produced the one deal that closed. We build the whole path and instrument it, so the money goes where the evidence points.',
+    problems: [
+      'Spend goes up, enquiries do not, and nobody can explain why.',
+      'Leads arrive but most are unqualified or unreachable.',
+      'There is no record of which campaign produced which customer.',
+      'The ad promises one thing and the landing page says another.',
+      'Reporting stops at clicks and cost per lead, never reaching revenue.',
+    ],
+    whatWeDo: [
+      {
+        title: 'Paid media that is actually managed',
+        body: 'Meta, Google, YouTube and search campaigns built on a tested structure, with creative and audiences iterated on evidence rather than refreshed at random.',
+      },
+      {
+        title: 'The landing experience',
+        body: 'Landing pages and WhatsApp entry points written to continue the promise of the ad, with one clear action and no distractions competing for it.',
+      },
+      {
+        title: 'Lead capture and qualification',
+        body: 'Forms and conversational flows that collect what your sales team needs to prioritise, so unqualified enquiries are filtered before they consume selling time.',
+      },
+      {
+        title: 'CRM handoff and follow-up',
+        body: 'Leads written into your CRM with source, campaign and answers attached, assigned to an owner with a follow-up task and automated nurture where it fits.',
+      },
+      {
+        title: 'SEO alongside paid',
+        body: 'Technical SEO, content and local SEO to build search visibility that does not stop the day the ad budget stops.',
+      },
+      {
+        title: 'Measurement end to end',
+        body: 'Attribution from source and campaign through to enquiry, qualified lead and \u2014 where your CRM records it \u2014 closed business.',
+      },
+    ],
+    modules: [
+      'Meta Ads',
+      'Google Ads',
+      'Lead Generation',
+      'Landing Pages',
+      'SEO',
+      'Email Marketing',
+      'Retargeting',
+      'Analytics',
+    ],
+    flow: {
+      label: 'The campaign system',
+      steps: ['Audience', 'Creative', 'Landing page / WhatsApp', 'Lead', 'Qualification', 'CRM', 'Follow-up', 'Measurement'],
+      note: 'Every stage is instrumented. When performance drops, we can see which stage caused it instead of guessing.',
+    },
+    outcomes: [
+      'Enquiries traceable to the campaign that produced them',
+      'Better lead quality reaching the sales team',
+      'Creative decisions based on tested results',
+      'Reporting that connects spend to business outcomes',
+    ],
+    process: [
+      'Goals & Baseline',
+      'Tracking Setup',
+      'Offer & Creative',
+      'Launch',
+      'Test & Iterate',
+      'Report & Scale',
+    ],
+    ctaLabel: 'Plan My Campaign',
+    faqs: [
+      {
+        question: 'Can you guarantee a number of leads or a return on ad spend?',
+        answer:
+          'No, and any agency that does is guessing. Results depend on your offer, pricing, market, competition, sales follow-up and budget \u2014 most of which sit outside our control. What we commit to is a properly structured campaign, honest measurement, and a clear recommendation when the evidence says the money should move or stop.',
+      },
+      {
+        question: 'Can you guarantee first position on Google?',
+        answer:
+          'No. Nobody can guarantee organic rankings, and Google says so explicitly. SEO work improves the factors we can influence \u2014 technical health, content quality, relevance and authority \u2014 and is reported against visibility and traffic rather than a promised position.',
+      },
+      {
+        question: 'What budget do we need to start?',
+        answer:
+          'Enough for the platform to gather meaningful data before you judge it. Too small a budget spread across too many campaigns produces numbers nobody can learn from. We recommend a starting structure based on your market and objective during scoping.',
+      },
+      {
+        question: 'Do you handle the creative as well?',
+        answer:
+          'Yes \u2014 our creative studio produces the ad creative, video and copy, which means the creative and the campaign are not arguing with each other.',
+      },
+      {
+        question: 'Who owns the ad accounts?',
+        answer:
+          'You do. We work inside your Meta Business Manager and Google Ads accounts wherever possible, so the account history, audiences and data stay yours if we ever part ways.',
+      },
+    ],
+  },
+  {
+    slug: 'creative-media',
+    href: '/services/creative-media',
+    division: 'creative',
+    title: 'Creative, Video & Content That Makes Complex Businesses Easy to Understand',
+    navLabel: 'Creative & Media',
+    tagline: 'Creative that explains, persuades and sells.',
+    metaTitle: 'Creative Studio: Design, Video & Animation | ODOOVATIONS',
+    metaDescription:
+      'Graphic design, brand identity, ad creative, video production, motion graphics, 2D and 3D animation, explainer videos, copywriting and content \u2014 from one studio.',
+    answer:
+      'The ODOOVATIONS creative studio produces graphic design, brand identity, ad creative, presentation and corporate profile design, video production and editing, motion graphics, 2D and 3D animation, explainer and product videos, short-form content, and the copywriting and scripts that go with them.',
+    intro:
+      'Technical businesses lose deals for an unglamorous reason: the buyer never quite understood the offer. Good creative is not decoration on top of that problem \u2014 it is the work of making a complicated thing clear enough to say yes to, in a format the audience will actually watch or read.',
+    problems: [
+      'What you sell takes ten minutes to explain and you have about eight seconds.',
+      'The design looks improvised because everything was made by a different hand.',
+      'Ad creative gets refreshed constantly without anyone learning from it.',
+      'The product is genuinely good and the pictures make it look ordinary.',
+      'Nobody on the team has time to write the copy properly.',
+    ],
+    whatWeDo: [
+      {
+        title: 'Brand and graphic design',
+        body: 'Identity systems, social and campaign design, corporate profiles, brochures, presentations, posters and packaging \u2014 consistent, so the brand looks like one company.',
+      },
+      {
+        title: 'Ad creative built for testing',
+        body: 'Creative produced in variations against a clear hypothesis, so the campaign has something meaningful to compare instead of one asset and a hope.',
+      },
+      {
+        title: 'Video production and editing',
+        body: 'Corporate, commercial, product and testimonial video, from script and shoot through to edit, grade and delivery in the formats each platform needs.',
+      },
+      {
+        title: 'Motion graphics and animation',
+        body: '2D and 3D animation, product animation and explainer videos \u2014 the most efficient way to show a process, a system or a product that is hard to photograph.',
+      },
+      {
+        title: 'Short-form content',
+        body: 'Reels and short video produced as a repeatable system rather than a one-off burst that stops after two weeks.',
+      },
+      {
+        title: 'Copy and scripts',
+        body: 'Website copy, sales and ad copy, scripts, storyboards, articles and voiceover scripts \u2014 written by people who understood the product first.',
+      },
+    ],
+    modules: [
+      'Graphic Design',
+      'Brand Identity',
+      'Ad Creative',
+      'Video Production',
+      'Motion Graphics',
+      '2D & 3D Animation',
+      'Copywriting',
+      'Short-form Content',
+    ],
+    outcomes: [
+      'An offer a non-expert buyer can understand quickly',
+      'Visual consistency across every touchpoint',
+      'Creative variations a campaign can genuinely learn from',
+      'Assets delivered in the formats each channel needs',
+    ],
+    process: [
+      'Brief & Objective',
+      'Concept',
+      'Script / Storyboard',
+      'Production',
+      'Edit & Review',
+      'Delivery',
+    ],
+    ctaLabel: 'Start a Creative Project',
+    faqs: [
+      {
+        question: 'Do you only do creative for your own software clients?',
+        answer:
+          'No. The studio takes standalone design, video and content work. It happens to be unusually good at technical and B2B subjects because the rest of the company builds those systems.',
+      },
+      {
+        question: 'How long does a video take?',
+        answer:
+          'A short social edit from footage you already have can turn around quickly. A scripted explainer with custom animation runs longer because scripting, storyboarding, animation and revisions each take real time. We give a schedule with the quote, and the number of revision rounds is agreed up front.',
+      },
+      {
+        question: 'Can you work from our existing brand guidelines?',
+        answer:
+          'Yes. If guidelines exist we work inside them; if they do not, we can build a lightweight system so future work stays consistent.',
+      },
+      {
+        question: 'Do you use AI in creative production?',
+        answer:
+          'Where it genuinely helps \u2014 drafting variations, rough cuts, background work. We do not pass off generic AI output as bespoke production, and anything delivered is reviewed and finished by a person.',
+      },
+    ],
+  },
+  {
+    slug: 'content-social',
+    href: '/services/content-social',
+    division: 'content-social',
+    title: 'Content, Social & Creator Management',
+    navLabel: 'Content & Social',
+    tagline: 'A brand that publishes consistently instead of in bursts.',
+    metaTitle: 'Social Media Management & Creator Campaigns | ODOOVATIONS',
+    metaDescription:
+      'Content planning, social media management, publishing, community management, creator and influencer campaign coordination, and creative analytics.',
+    answer:
+      'ODOOVATIONS plans and runs the ongoing content side of a brand: content strategy and calendars, production, scheduling and publishing, community management, creator and influencer campaign coordination, UGC campaigns, content repurposing and creative analytics.',
+    intro:
+      'Most brands do not have a content idea problem. They have an operating problem: nobody owns the calendar, production depends on whoever is free, and the account goes quiet for three weeks. Content works when it is run as an operation with a schedule, a pipeline and someone accountable for it.',
+    problems: [
+      'Posting is enthusiastic for two weeks, then stops.',
+      'Every post is made from scratch, so output depends on who has time.',
+      'Comments and DMs go unanswered and get treated as noise.',
+      'Creator collaborations are arranged ad hoc with no brief and no measurement.',
+      'Nobody knows which content actually moved anything.',
+    ],
+    whatWeDo: [
+      {
+        title: 'Content strategy and calendars',
+        body: 'Themes, formats and a publishing rhythm your business can actually sustain, planned far enough ahead that production is never a scramble.',
+      },
+      {
+        title: 'Production and publishing',
+        body: 'Assets produced against the calendar, scheduled and published across the channels that matter for your audience.',
+      },
+      {
+        title: 'Community management',
+        body: 'Comments, messages and mentions handled on a defined response standard \u2014 including the enquiries hiding among them.',
+      },
+      {
+        title: 'Creator and influencer campaigns',
+        body: 'Creator identification and outreach, briefing, deliverable and timeline coordination, and campaign reporting.',
+      },
+      {
+        title: 'Repurposing',
+        body: 'One shoot, one webinar or one long article turned into a month of short-form content instead of a single post.',
+      },
+      {
+        title: 'Creative analytics',
+        body: 'Reporting on which formats, hooks and topics performed, so the next calendar is informed by the last one.',
+      },
+    ],
+    modules: [
+      'Content Strategy',
+      'Content Calendars',
+      'Publishing',
+      'Community Management',
+      'Creator Campaigns',
+      'UGC',
+      'Repurposing',
+      'Analytics',
+    ],
+    outcomes: [
+      'A consistent publishing rhythm that survives busy months',
+      'Enquiries from social actually picked up and routed',
+      'Creator campaigns briefed and measured properly',
+      'A content library that keeps producing after it is made',
+    ],
+    process: [
+      'Audience & Goals',
+      'Content Strategy',
+      'Calendar',
+      'Production',
+      'Publish & Engage',
+      'Report & Adjust',
+    ],
+    ctaLabel: 'Plan My Content',
+    faqs: [
+      {
+        question: 'Do you guarantee follower growth?',
+        answer:
+          'No. Follower counts can be bought and are a poor measure of anything. We report on reach, engagement quality, content performance and \u2014 where it applies \u2014 enquiries generated from social.',
+      },
+      {
+        question: 'Can you manage creator campaigns and the paid ads together?',
+        answer:
+          'Yes, and it usually works better that way, because creator content that performs organically can be put behind paid spend instead of being made twice.',
+      },
+      {
+        question: 'Who approves posts before they go out?',
+        answer:
+          'You do. We work from an approved calendar with a review step, and agree in advance which categories of reply the community manager can send without checking.',
+      },
+    ],
   },
 ];
 
