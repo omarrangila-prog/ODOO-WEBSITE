@@ -80,7 +80,7 @@ export function ExpertMoment() {
               <ArrowNudge className="h-4 w-4" />
             </ButtonLink>
             {linkedin && (
-              <a href={linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[15px] font-medium text-violet underline-offset-4 hover:underline">
+              <a href={linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[44px] items-center gap-2 text-[15px] font-medium text-violet underline-offset-4 hover:underline">
                 <Linkedin className="h-4 w-4" aria-hidden />
                 Connect on LinkedIn
               </a>

@@ -7,12 +7,24 @@ import { cn } from '@/lib/utilities';
  * on a subtle light plate so it reads cleanly on the dark header, paired with a
  * crisp text wordmark that stays sharp at any size.
  */
-export function Logo({ className }: { className?: string }) {
+export function Logo({
+  className,
+  compact = false,
+}: {
+  className?: string;
+  /**
+   * Header mode. The tagline roughly doubles the lockup width (252px vs
+   * ~160px), which is the difference between the nav CTA fitting on a 1280px
+   * laptop and being pushed off-screen. In compact mode it appears only on
+   * genuinely wide screens.
+   */
+  compact?: boolean;
+}) {
   return (
     <Link
       href="/"
       aria-label="ODOOVATIONS — home"
-      className={cn('group inline-flex items-center gap-2.5', className)}
+      className={cn('group inline-flex min-h-[44px] items-center gap-2.5', className)}
     >
       <span
         aria-hidden
@@ -32,7 +44,12 @@ export function Logo({ className }: { className?: string }) {
         <span className="font-heading text-[16px] font-bold tracking-tight text-text-dark [.theme-light_&]:text-ink">
           ODOOVATIONS
         </span>
-        <span className="mt-1 whitespace-nowrap text-[9px] font-semibold uppercase tracking-[0.2em] text-text-dark-muted [.theme-light_&]:text-ink-muted">
+        <span
+          className={cn(
+            'mt-1 whitespace-nowrap text-[9px] font-semibold uppercase tracking-[0.2em] text-text-dark-muted [.theme-light_&]:text-ink-muted',
+            compact && 'hidden hd:block',
+          )}
+        >
           Innovate • Automate • Elevate
         </span>
       </span>

@@ -9,6 +9,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        /* Above this width the header can afford the full brand lockup
+           (wordmark + tagline), roomier nav spacing and the phone number.
+           Below it, those are progressively dropped so the primary CTA is
+           never pushed off-screen. */
+        hd: '1700px',
+      },
       colors: {
         midnight: 'var(--midnight)',
         graphite: 'var(--graphite)',

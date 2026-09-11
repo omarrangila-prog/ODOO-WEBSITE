@@ -41,6 +41,11 @@ export const primaryNav: NavItem[] = [
         description: 'Sales, purchases, expenses, receivables and reports in one place.',
       },
       {
+        label: 'Sales & Purchase Software',
+        href: '/solutions/sales-purchase-software',
+        description: 'Sell, buy, track and report from one connected record.',
+      },
+      {
         label: 'POS Software',
         href: '/solutions/pos-software',
         description: 'Retail and multi-branch point of sale with central reporting.',
@@ -64,6 +69,21 @@ export const primaryNav: NavItem[] = [
         label: 'Factory Automation',
         href: '/solutions/factory-automation',
         description: 'Production, job cards, quality and shop-floor reporting.',
+      },
+      {
+        label: 'Import / Export Trading',
+        href: '/solutions/trading-software',
+        description: 'Orders, shipments, documents, currencies and reconciliation.',
+      },
+      {
+        label: 'Reconciliation Software',
+        href: '/solutions/reconciliation-software',
+        description: 'What matches, what does not, and what still needs action.',
+      },
+      {
+        label: 'Appointment System',
+        href: '/solutions/appointment-system',
+        description: 'Booking, reminders and no-show control for service businesses.',
       },
       {
         label: 'WhatsApp Automation',
@@ -122,8 +142,11 @@ export const footerNav = {
   capabilities: divisions.map((d) => ({ label: d.label, href: d.href })),
   solutions: [
     { label: 'Accounting Software', href: '/solutions/accounting-software' },
+    { label: 'Sales & Purchase Software', href: '/solutions/sales-purchase-software' },
     { label: 'POS Software', href: '/solutions/pos-software' },
     { label: 'Restaurant POS', href: '/solutions/restaurant-pos' },
+    { label: 'Trading Software', href: '/solutions/trading-software' },
+    { label: 'Reconciliation Software', href: '/solutions/reconciliation-software' },
     { label: 'Inventory Management', href: '/solutions/inventory-management' },
     { label: 'Hospital Management', href: '/solutions/hospital-management-system' },
     { label: 'Factory Automation', href: '/solutions/factory-automation' },

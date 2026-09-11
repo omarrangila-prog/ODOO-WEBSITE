@@ -13,6 +13,16 @@ interface Props {
   onClose: () => void;
 }
 
+/**
+ * `inert` is a standard HTML attribute React 18's typings do not yet know
+ * about. Spreading it from a loosely-typed object keeps the JSX clean and
+ * avoids a ts-comment. It removes the closed panel from focus order and
+ * hit-testing without cutting the slide-out transition short.
+ */
+function inertWhenClosed(open: boolean): Record<string, string> {
+  return open ? {} : { inert: '' };
+}
+
 export function MobileMenu({ open, onClose }: Props) {
   const panelRef = useRef<HTMLDivElement>(null);
   const [expanded, setExpanded] = useState<string | null>(null);
@@ -20,8 +30,29 @@ export function MobileMenu({ open, onClose }: Props) {
   useEffect(() => {
     if (!open) return;
     const previousActive = document.activeElement as HTMLElement | null;
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+
+    /*
+     * Scroll lock via position:fixed rather than overflow:hidden.
+     *
+     * overflow:hidden does not reliably hold on iOS Safari, and it can lose
+     * the scroll position entirely. Pinning the body at a negative offset
+     * freezes the page exactly where it was and lets us restore to the same
+     * pixel on close. The scrollbar width is compensated so the page does not
+     * shift sideways when the bar disappears.
+     */
+    const scrollY = window.scrollY;
+    const body = document.body;
+    const scrollbar = window.innerWidth - document.documentElement.clientWidth;
+    const prev = {
+      position: body.style.position,
+      top: body.style.top,
+      width: body.style.width,
+      paddingRight: body.style.paddingRight,
+    };
+    body.style.position = 'fixed';
+    body.style.top = `-${scrollY}px`;
+    body.style.width = '100%';
+    if (scrollbar > 0) body.style.paddingRight = `${scrollbar}px`;
 
     const panel = panelRef.current;
     const focusables = panel?.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), input, [tabindex]:not([tabindex="-1"])');
@@ -48,8 +79,13 @@ export function MobileMenu({ open, onClose }: Props) {
     document.addEventListener('keydown', onKey);
     return () => {
       document.removeEventListener('keydown', onKey);
-      document.body.style.overflow = prevOverflow;
-      previousActive?.focus();
+      body.style.position = prev.position;
+      body.style.top = prev.top;
+      body.style.width = prev.width;
+      body.style.paddingRight = prev.paddingRight;
+      // Restore to the exact pixel, without smooth-scrolling back.
+      window.scrollTo({ top: scrollY, behavior: 'instant' as ScrollBehavior });
+      previousActive?.focus({ preventScroll: true });
     };
   }, [open, onClose]);
 
@@ -57,7 +93,11 @@ export function MobileMenu({ open, onClose }: Props) {
   const waHref = waConfigured ? whatsappLink(company.whatsapp, company.whatsappMessage) : '/contact';
 
   return (
-    <div className={cn('fixed inset-0 z-[100] xl:hidden', open ? 'pointer-events-auto' : 'pointer-events-none')} aria-hidden={!open}>
+    <div
+      className={cn('fixed inset-0 z-[var(--z-modal)] xl:hidden', open ? 'pointer-events-auto' : 'pointer-events-none')}
+      aria-hidden={!open}
+      {...inertWhenClosed(open)}
+    >
       <div
         className={cn('absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-300', open ? 'opacity-100' : 'opacity-0')}
         onClick={onClose}

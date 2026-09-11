@@ -42,6 +42,19 @@
   --content-max: 1280px;
   --page-max: 1320px;
   --reading-width: 720px;
+
+  /* ---------------------------------------------------------------
+     Stacking scale. One documented ladder, so raising an element is a
+     deliberate step rather than another nine-digit z-index.
+     --------------------------------------------------------------- */
+  --z-content: 0;
+  --z-decorative: 10;
+  --z-sticky: 30;
+  --z-header: 50;
+  --z-dropdown: 60;
+  --z-overlay: 80;
+  --z-modal: 100;
+  --z-toast: 120;
   --pad: clamp(20px, 5vw, 80px);
 
   /* Motion easing tokens for a consistent, premium feel */
@@ -195,6 +208,16 @@ img {
     margin-inline: auto;
     padding-inline: var(--pad);
   }
+  /* Header shell — same max-width as .shell so the logo aligns with page
+     content, but a tighter gutter so nine nav items plus the CTA fit on a
+     1280px laptop without the CTA being pushed off-screen. */
+  .site-header-shell {
+    width: 100%;
+    max-width: calc(var(--content-max) + (2 * var(--pad)));
+    margin-inline: auto;
+    padding-inline: clamp(16px, 2.4vw, 40px);
+  }
+
   /* Wide shell for cinematic sections that want closer to full page width */
   .shell-wide {
     width: 100%;
@@ -292,14 +315,24 @@ img {
 .grain {
   position: relative;
 }
-.grain::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  mix-blend-mode: overlay;
+/*
+ * The film-grain overlay is a 3.5%-opacity texture — invisible on a phone
+ * screen, but `mix-blend-mode: overlay` forces the compositor to blend this
+ * layer against everything beneath it on every section that carries it, and
+ * feTurbulence is expensive to rasterise. On a throttled mobile CPU that
+ * showed up as over two seconds of Style & Layout work. It is now desktop
+ * only; nothing visible changes on mobile.
+ */
+@media (min-width: 1024px) {
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
 }
 
 .arch-grid {

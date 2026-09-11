@@ -1,7 +1,4 @@
-'use client';
-
 import Link from 'next/link';
-import { useReducedMotion } from 'framer-motion';
 import { capabilityStrip } from '@/data/divisions';
 
 /**
@@ -12,29 +9,14 @@ import { capabilityStrip } from '@/data/divisions';
  * seamless scroll — the duplicate is aria-hidden so assistive technology and
  * crawlers see each capability exactly once.
  *
- * Motion is CSS-driven and pauses on hover; when the visitor prefers reduced
- * motion the strip renders as a static, wrapping list instead.
+ * Motion is CSS-driven and pauses on hover. Reduced-motion is handled in CSS
+ * too (`motion-reduce:` stops the marquee), so this is a server component —
+ * it ships no JavaScript at all.
  */
 export function CapabilityStrip() {
-  const reduce = useReducedMotion();
-
-  if (reduce) {
-    return (
-      <section className="theme-dark border-y border-line py-6" aria-label="What we do">
-        <ul className="shell flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-          {capabilityStrip.map((c) => (
-            <li key={c} className="text-[14px] font-medium text-text-dark/70">
-              {c}
-            </li>
-          ))}
-        </ul>
-      </section>
-    );
-  }
-
   return (
     <section
-      className="theme-dark group relative overflow-hidden border-y border-line py-6"
+      className="theme-dark group relative overflow-hidden border-y border-line py-3"
       aria-label="What we do"
     >
       {/* Edge fades so items enter and leave rather than being cut off */}
@@ -47,7 +29,7 @@ export function CapabilityStrip() {
         aria-hidden
       />
 
-      <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
+      <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none motion-reduce:flex-wrap motion-reduce:w-full motion-reduce:justify-center">
         <Row />
         <Row ariaHidden />
       </div>
@@ -63,7 +45,7 @@ function Row({ ariaHidden }: { ariaHidden?: boolean }) {
           <Link
             href="/services"
             tabIndex={ariaHidden ? -1 : undefined}
-            className="text-[14.5px] font-medium text-text-dark/60 transition-colors hover:text-text-dark"
+            className="inline-flex min-h-[44px] items-center text-[14.5px] font-medium text-text-dark/60 transition-colors hover:text-text-dark"
           >
             {c}
           </Link>

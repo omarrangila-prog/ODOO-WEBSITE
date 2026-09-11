@@ -36,7 +36,7 @@ export function Hero() {
         <div className="lg:col-span-5">
           <span className="eyebrow-pill mb-7">
             <span className="status-dot" aria-hidden />
-            <MaskedReveal as="span">Technology · AI · Software · Creative · Growth</MaskedReveal>
+            <MaskedReveal as="span">Software · AI · Automation · Odoo · Digital</MaskedReveal>
           </span>
 
           <h1 className="font-heading font-[650] leading-[0.98] tracking-[-0.045em]">
@@ -50,10 +50,10 @@ export function Hero() {
               className="block text-[clamp(44px,4.6vw,68px)]"
               stagger={0.08}
               lines={[
-                <span key="1">We Build, Automate</span>,
-                <span key="2">&amp; Grow{' '}
+                <span key="1">We Build the Systems</span>,
+                <span key="2">That Run{' '}
                   <span className="bg-[linear-gradient(90deg,#7A4DFF,#A85DF5_48%,#E04ACF)] bg-clip-text text-transparent">
-                    Businesses.
+                    Your Business.
                   </span>
                 </span>,
               ]}
@@ -61,9 +61,9 @@ export function Hero() {
           </h1>
 
           <p className="mt-7 max-w-[48ch] text-[clamp(17px,1.35vw,19px)] leading-[1.62] text-text-dark/85">
-            From AI agents and custom software to Odoo ERP, websites, advertising, video and
-            content &mdash; ODOOVATIONS brings the technology and creative capabilities a business
-            needs under one team.
+            Custom software, AI agents, WhatsApp automation, Odoo ERP, business systems, websites
+            and digital solutions &mdash; designed around the way your organisation actually
+            works.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -73,8 +73,8 @@ export function Hero() {
                 <ArrowNudge />
               </ButtonLink>
             </Magnetic>
-            <ButtonLink href="/#ecosystem" variant="secondary" className="min-h-[54px] text-[15.5px] border-[rgba(170,110,255,0.4)]">
-              Explore Our Capabilities
+            <ButtonLink href="/case-studies" variant="secondary" className="min-h-[54px] text-[15.5px] border-[rgba(170,110,255,0.4)]">
+              Explore Our Work
               <ArrowNudge className="h-[18px] w-[18px]" />
             </ButtonLink>
           </div>

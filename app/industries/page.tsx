@@ -61,7 +61,7 @@ export default function IndustriesIndex() {
                     className="overflow-hidden rounded-editorial border border-line-light shadow-panel-light"
                     from={reversed ? 'left' : 'bottom'}
                   >
-                    <div className="relative aspect-[16/10] min-h-[280px] sm:min-h-[380px]">
+                    <div className="relative w-full aspect-[16/10] sm:min-h-[380px]">
                       {ind.image ? (
                         <Image
                           src={ind.image}

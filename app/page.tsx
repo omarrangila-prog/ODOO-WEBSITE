@@ -2,6 +2,8 @@ import { Hero } from '@/components/home/Hero';
 import { CapabilityStrip } from '@/components/home/CapabilityStrip';
 import { EcosystemGrid } from '@/components/home/EcosystemGrid';
 import { Manifesto } from '@/components/home/Manifesto';
+import { GlobalDeliveryBand } from '@/components/home/GlobalDeliveryBand';
+import { AnythingCustom } from '@/components/home/AnythingCustom';
 import { IntentSelector } from '@/components/home/IntentSelector';
 import { TrendingTopics } from '@/components/home/TrendingTopics';
 import { RoadmapProvider } from '@/components/home/RoadmapContext';
@@ -42,8 +44,10 @@ export default function HomePage() {
         <TrendingTopics />
         <CustomStory />
         <IndustriesCinema />
+        <GlobalDeliveryBand />
         <JourneyRoute />
         <CaseStudiesEditorial />
+        <AnythingCustom />
         <TestimonialNarrative />
         <ExpertMoment />
         <Faq />

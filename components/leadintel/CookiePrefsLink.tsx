@@ -6,7 +6,7 @@ export function CookiePrefsLink() {
     <button
       type="button"
       onClick={() => window.dispatchEvent(new Event('odv:open-preferences'))}
-      className="text-text-dark-muted hover:text-text-dark"
+      className="inline-flex min-h-[44px] items-center text-text-dark-muted hover:text-text-dark sm:min-h-0"
     >
       Cookie preferences
     </button>

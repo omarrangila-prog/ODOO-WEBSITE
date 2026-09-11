@@ -108,7 +108,7 @@ export default function ServicesIndex() {
 
                   <Link
                     href={d.href}
-                    className="group mt-6 inline-flex items-center gap-2 text-[15.5px] font-semibold text-violet"
+                    className="group mt-6 inline-flex min-h-[44px] items-center gap-2 text-[15.5px] font-semibold text-violet"
                   >
                     {d.ctaLabel}
                     <ArrowUpRight

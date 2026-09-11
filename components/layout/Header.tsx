@@ -41,24 +41,24 @@ export function Header() {
     <>
       <header
         className={cn(
-          'fixed inset-x-0 top-0 z-50 transition-all duration-300 ease-premium',
+          'fixed inset-x-0 top-0 z-[var(--z-header)] transition-all duration-300 ease-premium',
           scrolled
             ? 'border-b border-line bg-midnight/[0.92] backdrop-blur-xl shadow-lift'
             : 'border-b border-white/[0.05] bg-transparent',
         )}
       >
-        <div className={cn('shell flex items-center justify-between transition-all duration-300', scrolled ? 'h-[70px]' : 'h-[84px]')}>
-          <Logo />
+        <div className="site-header-shell flex h-[76px] items-center justify-between gap-4">
+          <Logo compact className="shrink-0" />
 
           {/* Desktop nav */}
-          <nav aria-label="Primary" className="hidden xl:block">
-            <ul className="flex items-center gap-1">
+          <nav aria-label="Primary" className="hidden h-full min-w-0 xl:block">
+            <ul className="flex h-full items-center">
               {primaryNav.map((item) => {
                 const active = item.href !== '/' && isActive(item.href);
                 return (
                   <li
                     key={item.label}
-                    className="relative"
+                    className="relative flex h-full items-center"
                     onMouseEnter={() => item.children && openMenu(item.label)}
                     onMouseLeave={() => item.children && scheduleClose()}
                   >
@@ -69,7 +69,7 @@ export function Header() {
                           aria-haspopup="true"
                           onClick={() => setOpenDropdown((p) => (p === item.label ? null : item.label))}
                           className={cn(
-                            'flex items-center gap-1 whitespace-nowrap px-2 py-2 text-[14px] font-medium transition-colors 2xl:px-3.5 2xl:text-[14.5px]',
+                            'flex items-center gap-1 whitespace-nowrap px-2 py-2 text-[14px] font-medium transition-colors hd:px-3 hd:text-[14.5px]',
                             active ? 'text-text-dark' : 'text-text-dark-muted hover:text-text-dark',
                           )}
                         >
@@ -79,7 +79,7 @@ export function Header() {
                         {openDropdown === item.label && (
                           <div
                             className={cn(
-                              'absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3',
+                              'absolute left-1/2 top-full z-[var(--z-dropdown)] -translate-x-1/2 pt-3',
                               // Long menus (Industries, Solutions) go two-up so
                               // the panel does not run off the bottom of the screen.
                               item.children.length > 6 ? 'w-[620px]' : 'w-[340px]',
@@ -114,7 +114,7 @@ export function Header() {
                       <Link
                         href={item.href}
                         className={cn(
-                          'relative whitespace-nowrap px-2 py-2 text-[14px] font-medium transition-colors 2xl:px-3.5 2xl:text-[14.5px]',
+                          'relative whitespace-nowrap px-2 py-2 text-[14px] font-medium transition-colors hd:px-3 hd:text-[14.5px]',
                           active ? 'text-text-dark' : 'text-text-dark-muted hover:text-text-dark',
                         )}
                       >
@@ -131,18 +131,17 @@ export function Header() {
           </nav>
 
           {/* Desktop actions — quiet phone + refined CTA */}
-          <div className="hidden items-center gap-5 xl:flex">
+          <div className="hidden shrink-0 items-center gap-4 xl:flex">
             <a
               href={company.phoneHref}
-              className="hidden shrink-0 items-center gap-2 whitespace-nowrap text-[14px] font-medium text-text-dark-muted transition-colors hover:text-text-dark 2xl:inline-flex"
+              className="hidden shrink-0 items-center gap-2 whitespace-nowrap text-[14px] font-medium text-text-dark-muted transition-colors hover:text-text-dark hd:inline-flex"
               aria-label={`Call us at ${company.phoneDisplay}`}
             >
               <Phone className="h-4 w-4 text-violet-bright" aria-hidden />
               {company.phoneDisplay}
             </a>
             <ButtonLink href="/contact" size="md" onClick={() => track('hero_cta_click')}>
-              <span className="2xl:hidden">Start a Project</span>
-              <span className="hidden 2xl:inline">Start a Project</span>
+              Start a Project
               <ArrowNudge className="h-4 w-4" />
             </ButtonLink>
           </div>

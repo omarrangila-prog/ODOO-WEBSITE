@@ -23,7 +23,20 @@ interface Props {
  * Masked text reveal — the animation is a PROGRESSIVE ENHANCEMENT. Text renders
  * visible (y:0) in SSR and without JS; the slide-up only plays once mounted, so
  * a failed/slow hydration can never leave the headline hidden.
+ *
+ * `immediate` mode additionally refuses to animate text the visitor has
+ * already seen. On a server-rendered page hydration always lands after first
+ * paint, so "mount, then start from y:110%" meant the headline appeared,
+ * vanished, and slid back in — a visible flash and a layout shift on the LCP
+ * element. If first-contentful-paint has already fired when we mount, the
+ * text is left exactly where it is. Scroll-in (`immediate={false}`) reveals
+ * are unaffected: they trigger before the element is in view.
  */
+function alreadyPainted(): boolean {
+  if (typeof performance === 'undefined' || !performance.getEntriesByType) return true;
+  return performance.getEntriesByType('paint').some((e) => e.name === 'first-contentful-paint');
+}
+
 export function MaskedReveal({
   children,
   lines,
@@ -34,13 +47,16 @@ export function MaskedReveal({
   immediate = true,
 }: Props) {
   const reduce = useReducedMotion();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const [mode, setMode] = useState<'static' | 'animate'>('static');
+  useEffect(() => {
+    // Above-the-fold text that has already painted must stay put.
+    setMode(immediate && alreadyPainted() ? 'static' : 'animate');
+  }, [immediate]);
 
   const content = lines ?? [children];
 
-  // Static (SSR, no-JS, reduced-motion, or before mount): show text at rest.
-  if (reduce || !mounted) {
+  // Static (SSR, no-JS, reduced-motion, or already-seen hero text): text at rest.
+  if (reduce || mode === 'static') {
     return <Tag className={className}>{lines ? lines : children}</Tag>;
   }
 

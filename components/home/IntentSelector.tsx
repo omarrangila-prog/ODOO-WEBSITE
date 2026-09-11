@@ -24,15 +24,17 @@ interface Intent {
  * "point of sale system" to find it.
  */
 const intents: Intent[] = [
-  { id: 'software', label: 'software', recommendation: 'Custom Software', explanation: 'Software built around how your business actually works, instead of forcing your process into a generic product.', href: '/services/custom-software-development', cta: 'See custom software' },
-  { id: 'ai', label: 'AI automation', recommendation: 'AI & Automation', explanation: 'AI agents and automated workflows that take the repetitive work off your team — connected to your real business data.', href: '/services/ai-automation', cta: 'See AI automation' },
-  { id: 'odoo', label: 'Odoo or an ERP', recommendation: 'Odoo & ERP', explanation: 'Put sales, purchases, stock, accounts and reporting into one connected system your whole team works from.', href: '/services/odoo-implementation-pakistan', cta: 'See Odoo & ERP' },
-  { id: 'web', label: 'a website or app', recommendation: 'Websites & Apps', explanation: 'Corporate sites, landing pages, e-commerce, portals and mobile apps — built around one clear business goal.', href: '/services/web-development', cta: 'See web & apps' },
-  { id: 'marketing', label: 'marketing', recommendation: 'Marketing & Growth', explanation: 'Strategy, ads, campaigns, content and the lead-generation system behind them — measured on qualified enquiries.', href: '/services/digital-marketing', cta: 'See marketing' },
-  { id: 'creative', label: 'ads and creative', recommendation: 'Creative Studio', explanation: 'Design, ad creative and campaign assets that make a complicated offer easy to understand quickly.', href: '/services/creative-media', cta: 'See creative' },
-  { id: 'video', label: 'video', recommendation: 'Video & Animation', explanation: 'Product, corporate and explainer video, motion graphics and animation — scripted, shot and edited in house.', href: '/services/creative-media', cta: 'See video work' },
-  { id: 'whatsapp', label: 'WhatsApp automation', recommendation: 'WhatsApp Automation', explanation: 'Instant replies, lead qualification, order updates and payment reminders — with leads written into your CRM.', href: '/services/whatsapp-automation', cta: 'See WhatsApp automation' },
-  { id: 'system', label: 'a business system', recommendation: 'Business Systems', explanation: 'Accounting, POS, inventory, hospital, factory or another operational system — see exactly what each one covers.', href: '/solutions', cta: 'Browse solutions' },
+  { id: 'sales', label: 'to manage my sales', recommendation: 'Sales & Purchase Software', explanation: 'Quotations, orders, deliveries, invoices and receipts in one flow — with customer balances you can trust.', href: '/solutions/sales-purchase-software', cta: 'See sales software' },
+  { id: 'purchases', label: 'to manage purchases', recommendation: 'Sales & Purchase Software', explanation: 'Purchase orders, supplier bills, payments and stock receipts recorded once and connected to accounts.', href: '/solutions/sales-purchase-software', cta: 'See purchase software' },
+  { id: 'stock', label: 'to control my stock', recommendation: 'Inventory Management', explanation: 'Stock that matches the shelf — barcode receiving and picking, multi-warehouse, batch and expiry, reorder rules.', href: '/solutions/inventory-management', cta: 'See inventory software' },
+  { id: 'accounts', label: 'to manage accounts', recommendation: 'Accounting Software', explanation: 'What you sold, what you bought, who owes you, what you owe and what is in stock — in one connected system.', href: '/solutions/accounting-software', cta: 'See accounting software' },
+  { id: 'whatsapp', label: 'to automate WhatsApp', recommendation: 'WhatsApp Automation', explanation: 'Instant replies, lead qualification, order updates and payment reminders — with every lead saved to your CRM.', href: '/services/whatsapp-automation', cta: 'See WhatsApp automation' },
+  { id: 'software', label: 'custom software', recommendation: 'Custom Software', explanation: 'Software built around how your business actually works, instead of forcing your process into a generic product.', href: '/services/custom-software-development', cta: 'See custom software' },
+  { id: 'automate', label: 'to automate repetitive work', recommendation: 'AI & Automation', explanation: 'AI agents and automated workflows that take the repetitive work off your team — connected to real business data.', href: '/services/ai-automation', cta: 'See AI automation' },
+  { id: 'factory', label: 'to manage my factory', recommendation: 'Factory Operations Automation', explanation: 'Production orders, job cards, material tracking, quality checks and live shop-floor reporting.', href: '/solutions/factory-automation', cta: 'See factory automation' },
+  { id: 'trade', label: 'to manage imports / exports', recommendation: 'Trading Software', explanation: 'Orders, shipments, containers, documents, landed cost, currencies and reconciliation — from order to payment.', href: '/solutions/trading-software', cta: 'See trading software' },
+  { id: 'pos', label: 'to build a POS', recommendation: 'POS Software', explanation: 'Make the sale, print the bill and update stock at the same time — single shop or multi-branch.', href: '/solutions/pos-software', cta: 'See POS software' },
+  { id: 'hospital', label: 'to manage a hospital / clinic', recommendation: 'Hospital Management', explanation: 'Registration, appointments, OPD and IPD, billing, pharmacy and laboratory on one patient record.', href: '/solutions/hospital-management-system', cta: 'See hospital software' },
   { id: 'custom', label: 'something custom', recommendation: 'Tell Us the Problem', explanation: 'Some requirements do not have a product name yet. Describe what is going wrong and we will work out what to build.', href: '/contact#form', cta: 'Describe my requirement' },
 ];
 
@@ -52,7 +54,7 @@ export function IntentSelector() {
         <div className="max-w-2xl">
           <p className="eyebrow mb-5">Start Here</p>
           <h2 className="display-2">
-            What can we help you <span className="signal-text">build?</span>
+            What do you want to <span className="signal-text">improve?</span>
           </h2>
           <p className="lede mt-5">
             Pick whichever is closest. We&rsquo;ll point you at the right part of the team &mdash;

@@ -26,7 +26,7 @@ export function HeroDashboardVisual() {
     <div ref={ref} onMouseMove={onMove} onMouseLeave={() => setTilt({ x: 0, y: 0 })} className="relative">
       {/* glow behind */}
       <div className="pointer-events-none absolute -inset-10 -z-10" aria-hidden>
-        <div className="absolute right-[10%] top-[20%] h-[380px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(124,77,255,0.28),transparent_70%)] blur-[10px]" />
+        <div className="absolute right-[10%] top-[20%] h-[380px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(124,77,255,0.28),transparent_72%)]" />
         <div className="absolute bottom-[8%] right-[6%] h-[220px] w-[260px] rounded-full bg-[radial-gradient(circle,rgba(210,58,217,0.18),transparent_70%)]" />
       </div>
 
@@ -47,6 +47,11 @@ export function HeroDashboardVisual() {
         >
           {/* glass reflection */}
           <span className="pointer-events-none absolute inset-0 rounded-[26px] bg-[linear-gradient(135deg,rgba(255,255,255,0.06),transparent_35%)]" aria-hidden />
+          {/* Every figure in this dashboard is illustrative. The badge is
+              real, visible text so nobody reads sample numbers as revenue. */}
+          <span className="absolute left-4 top-4 z-10 rounded-full border border-amber/40 bg-[#0b0d18]/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-amber">
+            Illustrative demo
+          </span>
           <OdooDashboard />
 
           {/* Floating panel — Total Profit (upper right) */}

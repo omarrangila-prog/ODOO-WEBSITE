@@ -71,7 +71,7 @@ export default function SolutionPage({ params }: { params: { slug: string } }) {
                 <MessageCircle className="h-[18px] w-[18px]" aria-hidden />
                 Talk on WhatsApp
               </ButtonLink>
-              <a href={company.phoneHref} className="inline-flex items-center gap-2 px-2 text-[15px] font-medium text-text-dark-muted transition-colors hover:text-text-dark">
+              <a href={company.phoneHref} className="inline-flex min-h-[44px] items-center gap-2 px-2 text-[15px] font-medium text-text-dark-muted transition-colors hover:text-text-dark">
                 <Phone className="h-4 w-4 text-violet-bright" aria-hidden />
                 {company.phoneDisplay}
               </a>
@@ -132,7 +132,7 @@ export default function SolutionPage({ params }: { params: { slug: string } }) {
               <ul className="mt-5 space-y-2">
                 {sol.officialSources.map((s) => (
                   <li key={s.url}>
-                    <a href={s.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[15px] font-medium text-violet-bright underline-offset-4 hover:underline">
+                    <a href={s.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[44px] items-center gap-2 text-[15px] font-medium text-violet-bright underline-offset-4 hover:underline">
                       <ExternalLink className="h-4 w-4" aria-hidden />
                       {s.label}
                     </a>
@@ -196,6 +196,31 @@ function SolBlockView({ block }: { block: SolBlock }) {
             </li>
           ))}
         </ol>
+      );
+    case 'table':
+      // Tables may legitimately be wider than a phone; they scroll inside
+      // their own container so the page itself never scrolls sideways.
+      return (
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[520px] border-collapse text-left text-[15px]">
+            <thead>
+              <tr className="border-b border-line-light">
+                {block.head.map((h) => (
+                  <th key={h} className="py-3 pr-4 font-heading text-[14px] font-semibold text-ink">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {block.rows.map((row, i) => (
+                <tr key={i} className="border-b border-line-light/60">
+                  {row.map((cell, j) => (
+                    <td key={j} className={j === 0 ? 'py-3 pr-4 font-medium text-ink' : 'py-3 pr-4 text-ink-muted'}>{cell}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       );
     case 'note':
       return (

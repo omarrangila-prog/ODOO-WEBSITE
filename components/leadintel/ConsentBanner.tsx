@@ -53,7 +53,7 @@ export function ConsentBanner() {
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-[90] p-3 sm:p-4 safe-b" role="dialog" aria-modal="false" aria-label="Cookie and privacy preferences">
+    <div className="fixed inset-x-0 bottom-0 z-[var(--z-overlay)] p-3 sm:p-4 safe-b" role="dialog" aria-modal="false" aria-label="Cookie and privacy preferences">
       <div className="consent-surface mx-auto max-w-2xl rounded-[18px] border border-line-strong p-4 shadow-float sm:p-5">
         <div className="flex items-start gap-3">
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-line-strong bg-white/[0.04] text-violet-bright">
