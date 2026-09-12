@@ -96,6 +96,8 @@ export function organizationSchema() {
     slogan: company.tagline,
     email: company.email,
     telephone: company.phoneInternational,
+    // ODOOVATIONS operates within the Kausar Innovations group.
+    parentOrganization: { '@type': 'Organization', name: 'Kausar Innovations' },
     areaServed: [{ '@type': 'Country', name: 'Pakistan' }],
     ...(socials.length ? { sameAs: socials } : {}),
     address: {

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { MapPin, Video, FileText, Clock3, ShieldCheck, Languages } from 'lucide-react';
 import { company } from '@/data/company';
-import { countries, priorityCountryCodes } from '@/data/countries';
+import { countries, priorityCountryCodes, flagEmoji } from '@/data/countries';
 import { verifiedCountries } from '@/data/global-projects';
 import { buildMetadata, breadcrumbSchema, webPageSchema, faqSchema } from '@/lib/seo';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
@@ -203,8 +203,9 @@ export default function GlobalDeliveryPage() {
                 return c ? (
                   <li
                     key={c.code}
-                    className="rounded-full border border-line-light bg-white/60 px-3.5 py-1.5 text-[14px] text-ink"
+                    className="inline-flex items-center gap-2 rounded-full border border-line-light bg-white/60 px-3.5 py-1.5 text-[14px] text-ink"
                   >
+                    <span aria-hidden>{flagEmoji(c.code)}</span>
                     {c.name}
                   </li>
                 ) : null;
@@ -224,6 +225,7 @@ export default function GlobalDeliveryPage() {
             <ul className="mt-5 columns-2 gap-x-8 text-[14.5px] leading-[1.9] text-ink-muted sm:columns-3 lg:columns-4">
               {countries.map((c) => (
                 <li key={c.code} className="break-inside-avoid">
+                  <span className="mr-2" aria-hidden>{flagEmoji(c.code)}</span>
                   {c.name}
                 </li>
               ))}

@@ -1,7 +1,13 @@
-import { countryNamesForForm } from './countries';
+import { countryNamesForForm, countries as allCountries, flagEmoji } from './countries';
 
 /** Full country list — priority markets first, then A–Z. See data/countries.ts. */
 export const countries = [...countryNamesForForm, 'Other'];
+
+/** Visible label for a country option; the option VALUE is always the plain name. */
+export function countryLabel(name: string): string {
+  const c = allCountries.find((x) => x.name === name);
+  return c ? `${flagEmoji(c.code)}  ${name}` : name;
+}
 
 export const industryOptions = [
   'Manufacturing',

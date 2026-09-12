@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Video, FileText, Clock3, ShieldCheck } from 'lucide-react';
 import { verifiedCountries, hasVerifiedInternationalFootprint } from '@/data/global-projects';
+import { flagEmoji } from '@/data/countries';
 import { ButtonLink, ArrowNudge } from '@/components/ui/Button';
 
 const practices = [
@@ -47,15 +48,17 @@ export function GlobalDeliveryBand() {
                 {verifiedCountries.map((c) => (
                   <span
                     key={c.countryCode}
-                    className="rounded-full border border-line px-3 py-1.5 text-[13.5px] text-text-dark"
+                    className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1.5 text-[13.5px] text-text-dark"
                   >
+                    <span aria-hidden>{flagEmoji(c.countryCode)}</span>
                     {c.countryName}
                   </span>
                 ))}
               </>
             ) : (
               <>
-                <span className="rounded-full border border-violet-bright/40 bg-violet/10 px-3.5 py-1.5 text-[13.5px] font-medium text-text-dark">
+                <span className="inline-flex items-center gap-2 rounded-full border border-violet-bright/40 bg-violet/10 px-3.5 py-1.5 text-[13.5px] font-medium text-text-dark">
+                  <span aria-hidden>{flagEmoji('PK')}</span>
                   Karachi, Pakistan &mdash; headquarters
                 </span>
                 <span className="rounded-full border border-line px-3.5 py-1.5 text-[13.5px] text-text-dark-muted">

@@ -83,6 +83,10 @@ export default function BrandPage() {
                   and international clients through remote delivery.
                 </p>
                 <p className="mt-3">
+                  ODOOVATIONS is part of the Kausar Innovations group. Selected group clients are
+                  listed on the <Link href="/company/clients">clients page</Link>.
+                </p>
+                <p className="mt-3">
                   The company operates as seven capability divisions: AI &amp; Automation, Custom
                   Software &amp; Product Development, Odoo &amp; ERP, Web &amp; App Development,
                   Marketing &amp; Advertising, Creative &amp; Media, and Content &amp; Social.

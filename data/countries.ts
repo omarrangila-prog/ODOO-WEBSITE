@@ -42,6 +42,7 @@ export const countries: Country[] = [
   { code: 'BR', name: 'Brazil' },
   { code: 'BN', name: 'Brunei' },
   { code: 'BG', name: 'Bulgaria' },
+  { code: 'BT', name: 'Bhutan' },
   { code: 'BF', name: 'Burkina Faso' },
   { code: 'BI', name: 'Burundi' },
   { code: 'CV', name: 'Cabo Verde' },
@@ -152,6 +153,7 @@ export const countries: Country[] = [
   { code: 'OM', name: 'Oman' },
   { code: 'PK', name: 'Pakistan' },
   { code: 'PW', name: 'Palau' },
+  { code: 'PS', name: 'Palestine' },
   { code: 'PA', name: 'Panama' },
   { code: 'PG', name: 'Papua New Guinea' },
   { code: 'PY', name: 'Paraguay' },
@@ -221,6 +223,21 @@ export const countries: Country[] = [
  * common case is one click. Pakistan is the home market; the rest are the
  * Gulf and the English-speaking markets where remote delivery is routine.
  */
+/**
+ * Flag from an ISO 3166-1 alpha-2 code, as the pair of regional-indicator
+ * code points every major mobile OS and macOS render as a flag. No image
+ * assets, no bundle cost. Windows renders the two letters instead, which is
+ * why the country NAME is always the accessible text and the flag is
+ * decorative (aria-hidden).
+ */
+export function flagEmoji(code: string): string {
+  return code
+    .toUpperCase()
+    .split('')
+    .map((c) => String.fromCodePoint(0x1f1e6 + c.charCodeAt(0) - 65))
+    .join('');
+}
+
 export const priorityCountryCodes = ['PK', 'AE', 'SA', 'QA', 'OM', 'BH', 'KW', 'GB', 'US', 'CA', 'AU'];
 
 /** Country names in form order: priority markets first, then everything else A–Z. */

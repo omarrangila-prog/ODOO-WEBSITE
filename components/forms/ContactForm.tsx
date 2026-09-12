@@ -8,6 +8,7 @@ import { CheckCircle2, AlertTriangle, Send } from 'lucide-react';
 import { contactSchema, type ContactFormValues } from '@/lib/validation';
 import {
   countries,
+  countryLabel,
   industryOptions,
   companySizes,
   serviceOptions,
@@ -180,7 +181,7 @@ export function ContactForm() {
         <Field label="Country" htmlFor="country" required error={errors.country?.message}>
           <select id="country" className={inputClass} defaultValue="" {...fieldInvalid(errors.country?.message)} {...register('country')}>
             <option value="" disabled>Select a country</option>
-            {countries.map((c) => <option key={c} value={c}>{c}</option>)}
+            {countries.map((c) => <option key={c} value={c}>{countryLabel(c)}</option>)}
           </select>
         </Field>
         <Field label="Industry" htmlFor="industry" required error={errors.industry?.message}>

@@ -11,8 +11,8 @@ scenarios.
 
 | Project | Evidence found in repo? | Screenshots? | Client approval? | Country public? | Status | What is needed |
 |---|---|---|---|---|---|---|
-| KCCIA Election System | No | No | No | No | NEEDS_VERIFICATION | Exact organisation name; written permission to name; scope of what ODOOVATIONS built; launch date; technology; screenshots; whether a public case study is allowed |
-| Al Jadeed Election System | No | No | No | No | NEEDS_VERIFICATION | Same as above |
+| KCCIA Election System | No — "Civil Aviation Club — CAC" is a group client but is a different organisation | No | No | No | NEEDS_VERIFICATION | Exact organisation name; written permission to name; scope of what ODOOVATIONS built; launch date; technology; screenshots; whether a public case study is allowed |
+| Al Jadeed Election System | Partial — "Al Jadeed Properties" appears in the Kausar Innovations client roster (real estate) | No | No | No | NEEDS_VERIFICATION | Client relationship is evidenced at group level; the election system itself still needs scope, screenshots and permission to describe |
 | KCCS Software | No | No | No | No | NEEDS_VERIFICATION | What KCCS stands for; what was built; client; permission |
 | Scrabble Tournament Timer | No | No | No | No | NEEDS_VERIFICATION | Confirmed feature list; client or internal; screenshots; permission |
 | WhatsApp Karobar OS | No | No | No | No | NEEDS_VERIFICATION | Exact official name; client project / internal product / prototype / concept; actual capabilities |
