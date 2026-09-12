@@ -22,6 +22,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/company/methodology', priority: 0.6 },
     { path: '/company/global-delivery', priority: 0.6 },
     { path: '/company/clients', priority: 0.7 },
+    { path: '/company/pricing', priority: 0.7 },
+    { path: '/faq', priority: 0.7 },
     { path: '/company/brand', priority: 0.5 },
     { path: '/contact', priority: 0.8 },
     { path: '/privacy', priority: 0.3 },

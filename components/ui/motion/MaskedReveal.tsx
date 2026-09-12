@@ -55,9 +55,27 @@ export function MaskedReveal({
 
   const content = lines ?? [children];
 
-  // Static (SSR, no-JS, reduced-motion, or already-seen hero text): text at rest.
+  /**
+   * Static (SSR, no-JS, reduced-motion, or already-seen hero text): text at
+   * rest. Each line is still its own block so the layout is identical to the
+   * animated branch — rendering the lines as bare inline spans put two
+   * headline lines on one line as "SystemsThat". The leading space text node
+   * is collapsed by CSS inside a block, so it is invisible, but it means
+   * textContent reads "Systems That" for scrapers and retrieval systems that
+   * do not honour block layout the way innerText does.
+   */
   if (reduce || mode === 'static') {
-    return <Tag className={className}>{lines ? lines : children}</Tag>;
+    if (!lines) return <Tag className={className}>{children}</Tag>;
+    return (
+      <Tag className={className}>
+        {lines.map((line, i) => (
+          <span key={i} className="block">
+            {i > 0 && ' '}
+            {line}
+          </span>
+        ))}
+      </Tag>
+    );
   }
 
   const trigger = immediate
@@ -68,6 +86,7 @@ export function MaskedReveal({
     <Tag className={className}>
       {content.map((line, i) => (
         <span key={i} className="block overflow-hidden pb-[0.12em]">
+          {i > 0 && ' '}
           <motion.span
             className="block"
             {...trigger}

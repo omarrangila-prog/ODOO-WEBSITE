@@ -44,7 +44,7 @@ export function Hero() {
                 so branded searches have a clear on-page signal. */}
             <span className="mb-3 block text-[clamp(15px,1.5vw,19px)] font-semibold uppercase tracking-[0.16em] text-text-dark-muted">
               ODOOVATIONS
-            </span>
+            </span>{' '}
             <MaskedReveal
               as="span"
               className="block text-[clamp(44px,4.6vw,68px)]"

@@ -5,6 +5,36 @@ export interface FaqItem {
 
 export const faqs: FaqItem[] = [
   {
+    question: 'Are you an official Odoo partner?',
+    answer:
+      'No. ODOOVATIONS is an independent Odoo implementation and development team, and we say so rather than leave the question open. We do not display partner, Gold or certification badges we do not hold. What we do show is how we scope, build and support, and the work we have delivered.',
+  },
+  {
+    question: 'Do you only build on Odoo?',
+    answer:
+      'No. Odoo is one of seven divisions. Much of what we build is not Odoo at all: custom business software, POS, hospital and election systems, AI and WhatsApp automation, websites and mobile apps, plus marketing and creative work. We recommend the foundation that fits the process and the budget, not the one that suits us.',
+  },
+  {
+    question: 'How is pricing structured?',
+    answer:
+      'Against a written scope, after discovery. There is no useful category price for software, because two projects with the same name can be very different sizes. We quote fixed-price for defined scopes, phase larger builds so value arrives early, and offer support retainers after go-live. We are not the cheapest option and do not try to be.',
+  },
+  {
+    question: 'Can you deliver a project urgently?',
+    answer:
+      'Selected scopes, yes: landing pages, prototypes, dashboards, single automations and focused software modules can move through a rapid-delivery track. A delivery date is confirmed only after we review the scope, and there are things we will not rush, such as accounting systems, data migration and anything touching patient or payment data.',
+  },
+  {
+    question: 'Where are you based, and do you work internationally?',
+    answer:
+      'One office, in Karachi, Pakistan. We serve clients across Pakistan and internationally through remote delivery: video discovery, written scope, a shared working environment, an agreed time-zone overlap, remote testing, training and support. We do not have offices in other cities or countries and will not claim to.',
+  },
+  {
+    question: 'Do you offer bookkeeping or accounting services?',
+    answer:
+      'No. We build accounting software; we do not keep your books, post entries or prepare returns. Your team and your accountant record the transactions and the system keeps them consistent, controlled and reportable. If you need someone to do the bookkeeping, that is a different service from a different kind of firm.',
+  },
+  {
     question: 'Is Odoo suitable for a small or medium-sized business?',
     answer:
       'Yes. Odoo scales from a few users to large operations, and you only pay for and run the parts you need. For small and medium businesses in Pakistan it is often the most practical way to replace a stack of spreadsheets and disconnected tools with one affordable, connected system. We start with a focused core and expand as you grow, so you are never paying for complexity you do not use.',
