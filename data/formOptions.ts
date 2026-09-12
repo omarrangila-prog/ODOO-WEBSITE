@@ -1,16 +1,7 @@
-export const countries = [
-  'Pakistan',
-  'United Arab Emirates',
-  'Saudi Arabia',
-  'United Kingdom',
-  'United States',
-  'Canada',
-  'Australia',
-  'Qatar',
-  'Oman',
-  'Bahrain',
-  'Other',
-];
+import { countryNamesForForm } from './countries';
+
+/** Full country list — priority markets first, then A–Z. See data/countries.ts. */
+export const countries = [...countryNamesForForm, 'Other'];
 
 export const industryOptions = [
   'Manufacturing',

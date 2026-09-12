@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { MapPin, Video, FileText, Clock3, ShieldCheck, Languages } from 'lucide-react';
 import { company } from '@/data/company';
+import { countries, priorityCountryCodes } from '@/data/countries';
+import { verifiedCountries } from '@/data/global-projects';
 import { buildMetadata, breadcrumbSchema, webPageSchema, faqSchema } from '@/lib/seo';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { Accordion } from '@/components/ui/Accordion';
@@ -174,6 +176,59 @@ export default function GlobalDeliveryPage() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Service area. This is where we ACCEPT work from — deliberately
+          separate from where we can evidence delivered work, which is the
+          verified list in data/global-projects.ts. */}
+      <section className="theme-light bay-sm">
+        <div className="shell">
+          <p className="eyebrow mb-5">Where we deliver</p>
+          <h2 className="display-2 max-w-3xl">Remote delivery is available to clients in any country.</h2>
+          <p className="lede mt-5 max-w-[var(--reading-width)]">
+            The list below is where we accept projects from &mdash; it is not a claim of work
+            already delivered. Verified project locations are shown separately, and today that
+            list is{' '}
+            {verifiedCountries.map((c) => c.countryName).join(', ')}.
+          </p>
+
+          <div className="mt-10">
+            <h3 className="text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-muted">
+              Markets we work with most
+            </h3>
+            <ul className="mt-3 flex flex-wrap gap-2">
+              {priorityCountryCodes.map((code) => {
+                const c = countries.find((x) => x.code === code);
+                return c ? (
+                  <li
+                    key={c.code}
+                    className="rounded-full border border-line-light bg-white/60 px-3.5 py-1.5 text-[14px] text-ink"
+                  >
+                    {c.name}
+                  </li>
+                ) : null;
+              })}
+            </ul>
+          </div>
+
+          {/* Native disclosure: no JavaScript, keyboard-accessible, and the
+              full list stays in the HTML for anyone who wants to search it. */}
+          <details className="group mt-8 rounded-editorial border border-line-light bg-white/60 p-6">
+            <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 text-[16px] font-semibold text-ink [&::-webkit-details-marker]:hidden">
+              All {countries.length} countries we accept projects from
+              <span className="text-[13px] font-medium text-ink-muted transition-transform group-open:rotate-180" aria-hidden>
+                &#9662;
+              </span>
+            </summary>
+            <ul className="mt-5 columns-2 gap-x-8 text-[14.5px] leading-[1.9] text-ink-muted sm:columns-3 lg:columns-4">
+              {countries.map((c) => (
+                <li key={c.code} className="break-inside-avoid">
+                  {c.name}
+                </li>
+              ))}
+            </ul>
+          </details>
         </div>
       </section>
 
