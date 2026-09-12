@@ -19,8 +19,6 @@ const practices = [
  * count and no flag wall — see data/global-projects.ts for why.
  */
 export function GlobalDeliveryBand() {
-  const international = verifiedCountries.filter((c) => c.countryCode !== 'PK');
-
   return (
     <section className="theme-graphite grain relative overflow-hidden bay-sm">
       <div className="pointer-events-none absolute right-[-10%] top-[10%] h-[520px] w-[620px] radial-core opacity-50" aria-hidden />
@@ -42,8 +40,8 @@ export function GlobalDeliveryBand() {
             {/* Verified footprint only. Today that is the registered office. */}
             {hasVerifiedInternationalFootprint ? (
               <>
-                <span className="text-[13px] font-semibold uppercase tracking-[0.12em] text-text-dark-muted">
-                  Verified project markets
+                <span className="basis-full text-[12px] font-semibold uppercase tracking-[0.12em] text-text-dark-muted">
+                  Markets we have delivered in
                 </span>
                 {verifiedCountries.map((c) => (
                   <span
@@ -66,11 +64,6 @@ export function GlobalDeliveryBand() {
                 </span>
               </>
             )}
-            {international.map((c) => (
-              <span key={c.countryCode} className="rounded-full border border-line px-3.5 py-1.5 text-[13.5px] text-text-dark-muted">
-                {c.countryName}
-              </span>
-            ))}
           </div>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">

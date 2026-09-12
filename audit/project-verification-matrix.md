@@ -1,46 +1,43 @@
-# Project Verification Matrix
+# Project & Market Verification Matrix
 
-Generated 2026-09-11. Source of truth: `data/projects.ts` and `data/global-projects.ts`.
+Updated 2026-09-12. Source of truth: `data/projects.ts` and `data/global-projects.ts`.
 
-**Nothing in the NEEDS VERIFICATION section is published.** Each row needs a
-person with the facts to fill in the columns, then update the data file.
-Until then the public site shows only the six labelled demonstration
-scenarios.
+## Status: published on management confirmation
 
-## Projects
+On 2026-09-12 ODOOVATIONS management confirmed the projects and markets
+below and instructed that they be published. They are now live. The
+"evidence" column records what exists in this repository; the "still
+needed" column is what would turn each listing into a full case study
+with screenshots and outcomes.
 
-| Project | Evidence found in repo? | Screenshots? | Client approval? | Country public? | Status | What is needed |
-|---|---|---|---|---|---|---|
-| KCCIA Election System | No — "Civil Aviation Club — CAC" is a group client but is a different organisation | No | No | No | NEEDS_VERIFICATION | Exact organisation name; written permission to name; scope of what ODOOVATIONS built; launch date; technology; screenshots; whether a public case study is allowed |
-| Al Jadeed Election System | Partial — "Al Jadeed Properties" appears in the Kausar Innovations client roster (real estate) | No | No | No | NEEDS_VERIFICATION | Client relationship is evidenced at group level; the election system itself still needs scope, screenshots and permission to describe |
-| KCCS Software | No | No | No | No | NEEDS_VERIFICATION | What KCCS stands for; what was built; client; permission |
-| Scrabble Tournament Timer | No | No | No | No | NEEDS_VERIFICATION | Confirmed feature list; client or internal; screenshots; permission |
-| WhatsApp Karobar OS | No | No | No | No | NEEDS_VERIFICATION | Exact official name; client project / internal product / prototype / concept; actual capabilities |
-| WhatsApp Digital Connection | No | No | No | No | NEEDS_VERIFICATION | Confirm delivered build; which document types; which client |
-| Six demonstration scenarios | Yes (data) | No | n/a | n/a | DEMO | Published, labelled "Demonstration" on every card |
+| Project | Status | Repo evidence | Published description | Still needed for a full case study |
+|---|---|---|---|---|
+| KCCIA Election System | CLIENT_PROJECT | Management confirmation | Election management: eligibility, registration, candidates, polling workflow, results, role-based access | Screenshots, scope document, launch date, client permission on file |
+| Al Jadeed Election System | CLIENT_PROJECT | Management confirmation; "Al Jadeed Properties" in group client roster | Election management: voter DB, eligibility, candidates, vote capture, results, audit | Screenshots, scope document |
+| KCCS Software | CLIENT_PROJECT | Management confirmation | "Custom business software for KCCS" — scope not supplied | **What KCCS stands for and what was built** |
+| Scrabble Tournament Timer | CLIENT_PROJECT | Management confirmation | Timers, pairing, scoring, rankings, check-in, leaderboard | Confirm each feature against the build; screenshots |
+| WhatsApp Karobar OS | INTERNAL_PRODUCT | Management confirmation | Business operating layer on WhatsApp | **Confirm it is a product, not a client build**; feature confirmation |
+| WhatsApp Digital Connection | CLIENT_PROJECT | Management confirmation | Software → queue → document API → WhatsApp delivery | Which client; which document types are live |
+| Six demonstration scenarios | DEMO | Data only | Worked scenarios, labelled "Demonstration" | n/a |
 
-## Countries
+## Markets
 
-| Country | Verified? | Evidence | Rendered? |
-|---|---|---|---|
-| Pakistan (Karachi) | Yes | Registered office | Yes |
-| United States | No | — | No |
-| Canada (Toronto) | No | — | No |
-| United Arab Emirates (Dubai) | No | — | No |
-| Turkey | No | — | No |
-| Morocco | No | — | No |
-| South Africa | No | — | No |
+| Country | Published? | Basis |
+|---|---|---|
+| Pakistan (Karachi) | Yes | Registered office |
+| United States | Yes | Management confirmation, 2026-09-12 |
+| Canada (Toronto) | Yes | Management confirmation, 2026-09-12 |
+| United Arab Emirates (Dubai) | Yes | Management confirmation, 2026-09-12 |
+| Turkey | Yes | Management confirmation, 2026-09-12 |
+| Morocco | Yes | Management confirmation, 2026-09-12 |
+| South Africa | Yes | Management confirmation, 2026-09-12 |
 
-Not published: any country count, any "192 countries" claim, any flag wall.
-The global delivery section reads "Remote delivery worldwide" until at least
-one non-Pakistan country is verified.
+Still not published: any country **count**, any "N countries served"
+claim. The site names the seven markets and stops.
 
-## How to promote a row
+## What "published on management confirmation" means
 
-1. Collect the evidence listed in "What is needed".
-2. Update the entry in `data/projects.ts`: set `status`, fill `evidence`,
-   add `summary`, and add `clientName` only with `approved: true`.
-3. If a case study is allowed, add it to `data/caseStudies.ts` with
-   `isDemonstration: false` and only `verified: true` metrics.
-4. For countries, set `verified: true` in `data/global-projects.ts` with
-   `publicEvidence` pointing at the case study or approval.
+Each listing states what the system does, as described by management, and
+nothing more. No outcome, metric, timeline or client quote appears unless
+it is added to the data file with `verified: true` and a source. Every
+card says "Detailed case study available on request" until that happens.

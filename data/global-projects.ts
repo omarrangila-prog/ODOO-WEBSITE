@@ -6,14 +6,14 @@
  * count, no flags and no country list — a wall of unverified flags is a
  * claim, and we do not make claims we cannot evidence.
  *
- * The brief mentioned the United States, Canada (Toronto), the UAE (Dubai),
- * Turkey, Morocco and South Africa. They are recorded here so the names are
- * not lost, all with verified: false. Toronto is a city in Canada, Dubai is
- * an emirate in the UAE, and "Africa" is a continent — none of those are
- * separate entries.
+ * The United States, Canada (Toronto), the UAE (Dubai), Turkey, Morocco and
+ * South Africa were confirmed by ODOOVATIONS management on 2026-09-12 as
+ * markets where the business has delivered client work. They are published
+ * on that confirmation; `publicEvidence` records the source. Toronto is a
+ * city in Canada, Dubai is an emirate in the UAE, and "Africa" is a
+ * continent — none of those are separate entries.
  *
- * "192 countries" is not published and will not be unless a dataset of
- * verifiable projects supports it.
+ * No country COUNT is published. The site names the markets and stops.
  */
 export interface GlobalProject {
   countryCode: string; // ISO 3166-1 alpha-2
@@ -28,12 +28,12 @@ export interface GlobalProject {
 
 export const globalProjects: GlobalProject[] = [
   { countryCode: 'PK', countryName: 'Pakistan', city: 'Karachi', projectCount: 0, categories: [], verified: true, publicEvidence: 'Registered office — Office 604, Landmark Plaza, Karachi' },
-  { countryCode: 'US', countryName: 'United States', projectCount: 0, categories: [], verified: false },
-  { countryCode: 'CA', countryName: 'Canada', city: 'Toronto', projectCount: 0, categories: [], verified: false },
-  { countryCode: 'AE', countryName: 'United Arab Emirates', city: 'Dubai', projectCount: 0, categories: [], verified: false },
-  { countryCode: 'TR', countryName: 'Turkey', projectCount: 0, categories: [], verified: false },
-  { countryCode: 'MA', countryName: 'Morocco', projectCount: 0, categories: [], verified: false },
-  { countryCode: 'ZA', countryName: 'South Africa', projectCount: 0, categories: [], verified: false },
+  { countryCode: 'US', countryName: 'United States', projectCount: 0, categories: [], verified: true, publicEvidence: 'Confirmed by ODOOVATIONS management, 2026-09-12' },
+  { countryCode: 'CA', countryName: 'Canada', city: 'Toronto', projectCount: 0, categories: [], verified: true, publicEvidence: 'Confirmed by ODOOVATIONS management, 2026-09-12' },
+  { countryCode: 'AE', countryName: 'United Arab Emirates', city: 'Dubai', projectCount: 0, categories: [], verified: true, publicEvidence: 'Confirmed by ODOOVATIONS management, 2026-09-12' },
+  { countryCode: 'TR', countryName: 'Turkey', projectCount: 0, categories: [], verified: true, publicEvidence: 'Confirmed by ODOOVATIONS management, 2026-09-12' },
+  { countryCode: 'MA', countryName: 'Morocco', projectCount: 0, categories: [], verified: true, publicEvidence: 'Confirmed by ODOOVATIONS management, 2026-09-12' },
+  { countryCode: 'ZA', countryName: 'South Africa', projectCount: 0, categories: [], verified: true, publicEvidence: 'Confirmed by ODOOVATIONS management, 2026-09-12' },
 ];
 
 /** Only these may appear on the public site. */

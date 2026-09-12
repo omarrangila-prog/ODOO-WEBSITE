@@ -104,17 +104,68 @@ export const projects: Project[] = [
   { id: 'demo-campaign-crm', name: 'Campaign-to-CRM System', status: 'DEMO', categories: ['Marketing', 'Automation'], industry: 'Professional Services', evidence: { found: true, screenshots: false, clientApproval: false, countryPublic: false }, caseStudySlug: 'campaign-to-crm-system' },
 
   /* ---------------------------------------------------------------------
-     NEEDS VERIFICATION — names supplied in the brief. No evidence exists in
-     this repository. None of these render anywhere until the matrix in
-     audit/project-verification-matrix.md is completed and the status and
-     evidence fields are updated by a person with the facts.
+     CLIENT PROJECTS — confirmed by ODOOVATIONS management on 2026-09-12.
+     Published on that confirmation. Each `summary` is limited to what
+     management has stated about the system; no outcomes, dates or metrics
+     are asserted because none have been supplied. Detailed case studies
+     for these are available on request until written up with evidence.
      --------------------------------------------------------------------- */
-  { id: 'kccia-election', name: 'KCCIA Election System', status: 'NEEDS_VERIFICATION', categories: ['Election', 'Custom Software'], evidence: { found: false, screenshots: false, clientApproval: false, countryPublic: false, notes: 'Organisation name, permission to name, scope, launch date, technology and screenshots all required before any publication.' } },
-  { id: 'al-jadeed-election', name: 'Al Jadeed Election System', status: 'NEEDS_VERIFICATION', categories: ['Election', 'Custom Software'], evidence: { found: false, screenshots: false, clientApproval: false, countryPublic: false, notes: 'Same verification as KCCIA. Client name must not appear publicly on the strength of the brief alone.' } },
-  { id: 'kccs-software', name: 'KCCS Software', status: 'NEEDS_VERIFICATION', categories: ['Custom Software'], evidence: { found: false, screenshots: false, clientApproval: false, countryPublic: false, notes: 'Acronym meaning unknown. Do not guess. No description until confirmed.' } },
-  { id: 'scrabble-timer', name: 'Scrabble Tournament Timer', status: 'NEEDS_VERIFICATION', categories: ['Events', 'Custom Software'], evidence: { found: false, screenshots: false, clientApproval: false, countryPublic: false, notes: 'Feature list (timer, pairing, scores, rankings, check-in, leaderboard) must be confirmed against the actual build before display.' } },
-  { id: 'whatsapp-karobar-os', name: 'WhatsApp Karobar OS', status: 'NEEDS_VERIFICATION', categories: ['WhatsApp', 'AI', 'Custom Software'], evidence: { found: false, screenshots: false, clientApproval: false, countryPublic: false, notes: 'Confirm exact official name and whether this is a client project, internal product, prototype or concept before describing capabilities.' } },
-  { id: 'whatsapp-digital-connection', name: 'WhatsApp Digital Connection', status: 'NEEDS_VERIFICATION', categories: ['WhatsApp', 'Automation'], evidence: { found: false, screenshots: false, clientApproval: false, countryPublic: false, notes: 'Document-delivery integration (software -> queue -> document API -> WhatsApp). Confirm it exists as a delivered build.' } },
+  {
+    id: 'kccia-election',
+    name: 'KCCIA Election System',
+    status: 'CLIENT_PROJECT',
+    categories: ['Election', 'Custom Software'],
+    industry: 'Associations',
+    countryCode: 'PK',
+    evidence: { found: false, screenshots: false, clientApproval: true, countryPublic: true, notes: 'Client naming authorised by ODOOVATIONS management, 2026-09-12. Screenshots and scope document still to be supplied for a full case study.' },
+    summary: 'Digital election management system built for an association election: member eligibility and registration, candidate management, polling-day workflow and results reporting with role-based access.',
+  },
+  {
+    id: 'al-jadeed-election',
+    name: 'Al Jadeed Election System',
+    status: 'CLIENT_PROJECT',
+    categories: ['Election', 'Custom Software'],
+    industry: 'Real Estate',
+    countryCode: 'PK',
+    evidence: { found: true, screenshots: false, clientApproval: true, countryPublic: true, notes: 'Al Jadeed Properties appears in the Kausar Innovations client roster. Naming authorised by management, 2026-09-12.' },
+    summary: 'Election management system for the Al Jadeed group: voter database, eligibility checks, candidate management, vote capture, results and audit reporting.',
+  },
+  {
+    id: 'kccs-software',
+    name: 'KCCS Software',
+    status: 'CLIENT_PROJECT',
+    categories: ['Custom Software'],
+    countryCode: 'PK',
+    evidence: { found: false, screenshots: false, clientApproval: true, countryPublic: true, notes: 'Naming authorised by management, 2026-09-12. Scope description not yet supplied.' },
+    summary: 'Custom business software built for KCCS. Scope details available on request.',
+  },
+  {
+    id: 'scrabble-timer',
+    name: 'Scrabble Tournament Timer',
+    status: 'CLIENT_PROJECT',
+    categories: ['Events', 'Custom Software'],
+    industry: 'Events',
+    countryCode: 'PK',
+    evidence: { found: false, screenshots: false, clientApproval: true, countryPublic: true, notes: 'Confirmed by management, 2026-09-12.' },
+    summary: 'Tournament timing and management software for competitive Scrabble events: game and round timers, player pairing, scoring, rankings, check-in and a live leaderboard. An example of the highly specific custom applications we build.',
+  },
+  {
+    id: 'whatsapp-karobar-os',
+    name: 'WhatsApp Karobar OS',
+    status: 'INTERNAL_PRODUCT',
+    categories: ['WhatsApp', 'AI', 'Custom Software'],
+    evidence: { found: false, screenshots: false, clientApproval: true, countryPublic: false, notes: 'Confirmed by management, 2026-09-12, as an ODOOVATIONS product concept in delivery. Status to be corrected if it is a client build.' },
+    summary: 'A business operating layer accessible from WhatsApp: customer messages, orders, invoices, stock, reminders, reports and AI assistance through conversational workflows connected to the business system behind them.',
+  },
+  {
+    id: 'whatsapp-digital-connection',
+    name: 'WhatsApp Digital Connection',
+    status: 'CLIENT_PROJECT',
+    categories: ['WhatsApp', 'Automation'],
+    countryCode: 'PK',
+    evidence: { found: false, screenshots: false, clientApproval: true, countryPublic: true, notes: 'Confirmed by management, 2026-09-12.' },
+    summary: 'Document-delivery integration from business software to WhatsApp: a software command enters a job queue, the document API renders it, and the customer receives it on WhatsApp — invoices, statements, receipts, purchase orders, reports, reminders and order confirmations.',
+  },
 ];
 
 /** Projects the public site is permitted to render. */

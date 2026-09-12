@@ -188,8 +188,7 @@ export default function GlobalDeliveryPage() {
           <h2 className="display-2 max-w-3xl">Remote delivery is available to clients in any country.</h2>
           <p className="lede mt-5 max-w-[var(--reading-width)]">
             The list below is where we accept projects from &mdash; it is not a claim of work
-            already delivered. Verified project locations are shown separately, and today that
-            list is{' '}
+            already delivered. Markets where we have delivered client work:{' '}
             {verifiedCountries.map((c) => c.countryName).join(', ')}.
           </p>
 

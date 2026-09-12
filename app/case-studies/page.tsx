@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { caseStudies } from '@/data/caseStudies';
+import { publishableProjects } from '@/data/projects';
 import { buildMetadata, breadcrumbSchema, webPageSchema } from '@/lib/seo';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { WorkGrid } from '@/components/work/WorkGrid';
@@ -10,7 +11,7 @@ import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
 
 const PATH = '/case-studies';
 const DESCRIPTION =
-  'Worked scenarios across AI automation, custom software, Odoo, web and marketing — showing how we approach each problem, clearly labelled as demonstrations rather than client claims.';
+  'Client projects, products and worked scenarios across custom software, AI, WhatsApp automation, election systems, event software, Odoo, web and marketing — searchable and filterable by capability.';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Our Work | ODOOVATIONS',
@@ -34,12 +35,16 @@ export default function CaseStudiesIndex() {
             '@context': 'https://schema.org',
             '@type': 'ItemList',
             name: 'ODOOVATIONS work',
-            itemListElement: caseStudies.map((c, i) => ({
-              '@type': 'ListItem',
-              position: i + 1,
-              name: c.label,
-              url: `https://odoovations.com/case-studies/${c.slug}`,
-            })),
+            itemListElement: [
+              ...publishableProjects()
+                .filter((p) => p.status !== 'DEMO')
+                .map((p) => ({ '@type': 'ListItem', name: p.name })),
+              ...caseStudies.map((c) => ({
+                '@type': 'ListItem',
+                name: c.label,
+                url: `https://odoovations.com/case-studies/${c.slug}`,
+              })),
+            ].map((it, i) => ({ ...it, position: i + 1 })),
           },
         ]}
       />
@@ -54,25 +59,26 @@ export default function CaseStudiesIndex() {
             as="h1"
             className="font-heading font-[650] leading-[1.0] tracking-[-0.045em] text-[clamp(40px,5vw,72px)] max-w-4xl"
             lines={[
-              <span key="1">How We Approach</span>,
-              <span key="2">Real <span className="signal-text">Problems.</span></span>,
+              <span key="1">Systems We Have</span>,
+              <span key="2">Actually <span className="signal-text">Built.</span></span>,
             ]}
           />
           <p className="lede mt-7 max-w-[var(--reading-width)]">
-            Filter by capability to see how we would tackle each kind of problem &mdash; the
-            existing workflow, what gets built, and what actually changes.
+            Election systems, tournament software, WhatsApp integrations, business systems and
+            more &mdash; search or filter by capability.
           </p>
 
           <AnswerCard
-            question="Are these real client projects?"
+            question="Which of these are real client projects?"
             className="mt-12 max-w-[var(--reading-width)] border-line text-text-dark-muted"
           >
-            No, and every card says so. These are worked demonstration scenarios showing our
-            approach to a class of problem. We do not publish client names, logos or results
-            without written permission, and we do not publish performance figures we cannot
-            verify &mdash; so rather than invent them, we show the reasoning instead. We are happy
-            to walk through actual delivered work, and arrange client references, during a
-            conversation.
+            Every card carries a status badge. <strong>Client Project</strong> and{' '}
+            <strong>Internal Product</strong> entries are delivered work, published on the
+            confirmation of ODOOVATIONS management; their descriptions state what the system does
+            and nothing more, because we do not publish outcomes or figures we have not
+            evidenced. <strong>Demonstration</strong> entries are worked scenarios showing how we
+            approach a class of problem. Detailed case studies and client references are
+            available on request.
           </AnswerCard>
         </div>
       </section>
