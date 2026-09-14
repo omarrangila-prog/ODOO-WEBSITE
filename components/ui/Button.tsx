@@ -39,12 +39,13 @@ type ButtonAsButton = CommonProps &
 type ButtonAsLink = CommonProps & { href: string; external?: boolean; onClick?: () => void };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonAsButton>(function Button(
-  { variant = 'primary', size = 'lg', className, children, fullWidth, loading, disabled, ...rest },
+  { variant = 'primary', size = 'lg', className, children, fullWidth, loading, disabled, type = 'button', ...rest },
   ref,
 ) {
   return (
     <button
       ref={ref}
+      type={type}
       className={cn(base, sizes[size], variants[variant], fullWidth && 'w-full', className)}
       disabled={disabled || loading}
       aria-busy={loading || undefined}

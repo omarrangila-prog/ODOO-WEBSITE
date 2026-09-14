@@ -1,8 +1,8 @@
 {
-  "name": "ahm-international-odoo",
+  "name": "odoovations",
   "version": "1.0.0",
   "private": true,
-  "description": "AHM International — Odoo implementation, custom development, integration and support. From business chaos to complete control.",
+  "description": "ODOOVATIONS — custom software, AI automation, Odoo ERP, websites, apps, marketing and creative. Karachi-based, serving Pakistan and international clients.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

@@ -20,7 +20,7 @@ export function Manifesto() {
       <div className="shell bay grid gap-14 lg:grid-cols-[5fr_6fr] lg:gap-16">
         {/* Left: large heading */}
         <div className="lg:sticky lg:top-28 lg:h-fit lg:self-start">
-          <p className="eyebrow mb-6">The Objective</p>
+          <p className="eyebrow mb-6">The Objective</p>{' '}
           <MaskedReveal
             immediate={false}
             as="h2"
@@ -30,13 +30,13 @@ export function Manifesto() {
               <span key="2">We Automate It.</span>,
               <span key="3" className="signal-text">We Help It Grow.</span>,
             ]}
-          />
+          />{' '}
           <p className="lede mt-7 max-w-md">
             ODOOVATIONS is a Karachi-based technology company building custom software, AI
             automation, Odoo ERP systems, websites, mobile apps, marketing campaigns and creative
             content &mdash; for businesses across Pakistan and international clients served
             remotely.
-          </p>
+          </p>{' '}
           <p className="lede mt-4 max-w-md">
             Three things, in that order. Most businesses come to us for one of them and discover
             they needed the next.
@@ -44,20 +44,22 @@ export function Manifesto() {
         </div>
 
         {/* Right: three large numbered stages with a connecting line */}
-        <ol className="relative">
+        <div className="relative">
           <span className="absolute left-[38px] top-4 bottom-4 hidden w-px bg-line-light sm:block" aria-hidden />
-          {flow.map((item, i) => (
-            <Reveal key={item.k} delay={i * 0.08} as="li" className="relative flex gap-6 border-b border-line-light py-10 first:pt-0 last:border-b-0 last:pb-0 sm:gap-8">
-              <span className="relative z-10 font-heading text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-none tracking-[-0.04em] text-ink/15">
-                {item.n}
-              </span>
-              <div className="pt-1">
-                <h3 className="display-3 font-semibold">{item.k}</h3>
-                <p className="mt-3 max-w-md text-[17px] leading-relaxed text-ink-muted">{item.d}</p>
-              </div>
-            </Reveal>
-          ))}
-        </ol>
+          <ol>
+            {flow.map((item, i) => (
+              <Reveal key={item.k} delay={i * 0.08} as="li" className="relative flex gap-6 border-b border-line-light py-10 first:pt-0 last:border-b-0 last:pb-0 sm:gap-8">
+                <span className="relative z-10 font-heading text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-none tracking-[-0.04em] text-ink/15" aria-hidden>
+                  {item.n}
+                </span>{' '}
+                <div className="pt-1">
+                  <h3 className="display-3 font-semibold">{item.k}</h3>{' '}
+                  <p className="mt-3 max-w-md text-[17px] leading-relaxed text-ink-muted">{item.d}</p>
+                </div>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
       </div>
     </section>
   );

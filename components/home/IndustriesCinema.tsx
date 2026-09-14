@@ -82,7 +82,7 @@ export function IndustriesCinema() {
                     </span>
                     <h3 className="mt-2 font-heading text-[clamp(2rem,5vw,3.5rem)] font-semibold uppercase tracking-tight text-white">
                       {active.name}
-                    </h3>
+                    </h3>{' '}
                     <p className="mt-3 max-w-lg text-[15.5px] leading-relaxed text-white/85">
                       {active.description}
                     </p>
@@ -103,32 +103,31 @@ export function IndustriesCinema() {
 
                 {/* Mobile controls */}
                 <div className="mt-8 flex items-center gap-3 lg:hidden">
-                  <button onClick={() => go(i - 1)} aria-label="Previous industry" className="grid h-11 w-11 place-items-center rounded-full border border-white/25 bg-black/40 text-white backdrop-blur">
+                  <button type="button" onClick={() => go(i - 1)} aria-label="Previous industry" className="grid h-11 w-11 place-items-center rounded-full border border-white/25 bg-black/40 text-white backdrop-blur">
                     <ChevronLeft className="h-5 w-5" aria-hidden />
                   </button>
-                  <button onClick={() => go(i + 1)} aria-label="Next industry" className="grid h-11 w-11 place-items-center rounded-full border border-white/25 bg-black/40 text-white backdrop-blur">
+                  <button type="button" onClick={() => go(i + 1)} aria-label="Next industry" className="grid h-11 w-11 place-items-center rounded-full border border-white/25 bg-black/40 text-white backdrop-blur">
                     <ChevronRight className="h-5 w-5" aria-hidden />
                   </button>
                 </div>
               </div>
 
-              {/* Index list (desktop) — tabs must be DIRECT children of the
-                  tablist (no <li> wrappers) to satisfy ARIA parent/child rules. */}
-              <div role="tablist" aria-label="Industries" className="hidden w-[240px] lg:block">
+              {/* Index list (desktop) — aria-pressed buttons, not incomplete tabs */}
+              <div role="group" aria-label="Industries" className="hidden w-[240px] lg:block">
                 {industries.map((ind, idx) => {
                   const on = idx === i;
                   return (
                     <button
                       key={ind.slug}
-                      role="tab"
-                      aria-selected={on}
+                      type="button"
+                      aria-pressed={on}
                       onClick={() => go(idx)}
                       className={cn(
                         'group flex w-full items-center gap-3 border-t border-white/12 py-3 text-left transition-colors last:border-b',
                         on ? 'text-white' : 'text-white/70 hover:text-white',
                       )}
                     >
-                      <span className="text-[11px] tabular-nums">{String(idx + 1).padStart(2, '0')}</span>
+                      <span className="text-[11px] tabular-nums" aria-hidden>{String(idx + 1).padStart(2, '0')}</span>{' '}
                       <span className="font-heading text-[15px] font-medium">{ind.name}</span>
                       <span className={cn('ml-auto h-px flex-1 max-w-[40px] transition-all', on ? 'bg-violet-bright' : 'bg-transparent')} aria-hidden />
                     </button>

@@ -43,7 +43,7 @@ export function Logo({
       <span className="flex flex-col leading-none">
         <span className="font-heading text-[16px] font-bold tracking-tight text-text-dark [.theme-light_&]:text-ink">
           ODOOVATIONS
-        </span>
+        </span>{' '}
         <span
           className={cn(
             'mt-1 whitespace-nowrap text-[9px] font-semibold uppercase tracking-[0.2em] text-text-dark-muted [.theme-light_&]:text-ink-muted',

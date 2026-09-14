@@ -40,6 +40,7 @@ export function ContactForm() {
     formState: { errors, isSubmitting },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
+    shouldFocusError: false,
     defaultValues: {
       fullName: '',
       company: '',
@@ -80,6 +81,15 @@ export function ContactForm() {
     }
   }, [searchParams, setValue]);
 
+  // Focus the error summary after it mounts (RHF first-field focus is disabled).
+  useEffect(() => {
+    if (Object.keys(errors).length === 0) return;
+    const id = window.requestAnimationFrame(() => {
+      errorSummaryRef.current?.focus();
+    });
+    return () => window.cancelAnimationFrame(id);
+  }, [errors]);
+
   async function onSubmit(values: ContactFormValues) {
     if (status === 'submitting') return; // prevent duplicate submissions
     setStatus('submitting');
@@ -119,10 +129,6 @@ export function ContactForm() {
     }
   }
 
-  function onInvalid() {
-    errorSummaryRef.current?.focus();
-  }
-
   if (status === 'success') {
     return (
       <div
@@ -144,7 +150,7 @@ export function ContactForm() {
   const errorList = Object.entries(errors);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit, onInvalid)} noValidate className="space-y-5">
+    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
       {/* Error summary for accessibility */}
       {errorList.length > 0 && (
         <div

@@ -44,7 +44,7 @@ export function JourneyRoute() {
           <h2 className="display-2">
             Your Route to a{' '}
             <span className="signal-text">Working Odoo System.</span>
-          </h2>
+          </h2>{' '}
           <p className="lede mt-6">
             A calm, controlled path from first conversation to a live, supported system&mdash;with a
             clear deliverable at every checkpoint.
@@ -53,7 +53,7 @@ export function JourneyRoute() {
 
         <div ref={ref} className="mt-16 grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
           {/* The route */}
-          <ol className="relative">
+          <div className="relative">
             {/* base line — aligned to the circle centre (8px pl + 27px radius) */}
             <span className="absolute left-[35px] top-6 bottom-6 w-px bg-line" aria-hidden />
             {/* progress line */}
@@ -62,12 +62,14 @@ export function JourneyRoute() {
               style={{ bottom: 24, scaleY: reduce ? 1 : lineScale }}
               aria-hidden
             />
+            <ol>
             {journeyStages.map((s, idx) => {
               const on = idx === active;
               const done = idx < active;
               return (
                 <li key={s.n} className="relative">
                   <button
+                    type="button"
                     onClick={() => pick(idx)}
                     aria-pressed={on}
                     aria-label={`Stage ${s.n}: ${s.title}`}
@@ -85,13 +87,14 @@ export function JourneyRoute() {
                             ? 'border-green/40 bg-green/10 text-green'
                             : 'border-line bg-graphite text-text-dark-muted group-hover:border-line-strong group-hover:text-text-dark',
                       )}
+                      aria-hidden
                     >
-                      {done ? <Check className="h-5 w-5" aria-hidden /> : s.n}
-                    </span>
+                      {done ? <Check className="h-5 w-5" /> : s.n}
+                    </span>{' '}
                     <span className="min-w-0 flex-1">
                       <span className={cn('block font-heading text-[17px] font-medium transition-colors', on ? 'text-text-dark' : 'text-text-dark-muted group-hover:text-text-dark')}>
                         {s.title}
-                      </span>
+                      </span>{' '}
                       <span className="mt-0.5 flex items-center gap-1.5 text-[12.5px] text-text-dark-muted">
                         <span className={cn('h-1 w-1 rounded-full', on ? 'bg-violet-bright' : 'bg-text-dark-muted/40')} aria-hidden />
                         {s.deliverable}
@@ -102,7 +105,8 @@ export function JourneyRoute() {
                 </li>
               );
             })}
-          </ol>
+            </ol>
+          </div>
 
           {/* Active detail (sticky) */}
           <div className="lg:sticky lg:top-28 lg:h-fit lg:self-start">
@@ -113,7 +117,7 @@ export function JourneyRoute() {
                   Stage {stage.n} of {journeyStages.length}
                 </span>
                 <span className="inline-flex items-center gap-2 rounded-full border border-violet-bright/30 bg-violet/[0.08] px-3 py-1 text-[11px] font-semibold text-violet-bright">
-                  <span className="text-text-dark-muted">Output</span>
+                  <span className="text-text-dark-muted">Output</span>{' '}
                   {stage.deliverable}
                 </span>
               </div>
@@ -132,7 +136,7 @@ export function JourneyRoute() {
                   </span>
                   <h3 className="mt-2 font-heading text-[clamp(1.75rem,4vw,2.75rem)] font-semibold tracking-[-0.035em]">
                     {stage.title}
-                  </h3>
+                  </h3>{' '}
                   <p className="lede mt-4">{stage.purpose}</p>
 
                   <div className="mt-8 grid gap-6 sm:grid-cols-2">

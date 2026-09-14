@@ -246,7 +246,7 @@ export function WorkGrid() {
 
                     <h3 className={cn('mt-5 font-heading text-[clamp(21px,2.2vw,26px)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink', it.href && 'transition-colors group-hover:text-violet')}>
                       {it.name}
-                    </h3>
+                    </h3>{' '}
                     <p className="mt-3 text-[15.5px] leading-relaxed text-ink-muted">{it.summary}</p>
 
                     <div className="mt-auto flex items-end justify-between gap-4 border-t border-line-light pt-5">

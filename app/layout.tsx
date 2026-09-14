@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     description:
       'One team for technology, automation, software, creative and growth. Karachi-based, serving Pakistan and international clients remotely.',
     images: [OG_IMAGE],
-    locale: 'en_US',
+    locale: 'en_PK',
   },
   twitter: {
     card: 'summary_large_image',
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${manrope.variable}`}>
+    <html lang="en-PK" className={`${spaceGrotesk.variable} ${manrope.variable}`}>
       <body>
         {/* Global entity graph: Organization + WebSite only. LocalBusiness /
             ProfessionalService is scoped to the homepage, contact and Karachi

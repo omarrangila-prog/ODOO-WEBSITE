@@ -83,16 +83,16 @@ function ServicePanel({ index, service }: { index: number; service: (typeof ecoS
   return (
     <article className="relative flex h-full min-h-[420px] flex-col overflow-hidden rounded-editorial border border-line bg-graphite/70 p-8 shadow-float sm:p-10">
       <span className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 radial-core opacity-70" aria-hidden />
-      <span className="font-heading text-[clamp(3rem,6vw,5rem)] font-semibold leading-none tracking-[-0.05em] text-text-dark/10">
+      <span className="font-heading text-[clamp(3rem,6vw,5rem)] font-semibold leading-none tracking-[-0.05em] text-text-dark/10" aria-hidden>
         {String(index + 1).padStart(2, '0')}
-      </span>
+      </span>{' '}
       <div className="mt-4 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.12em] text-violet-bright">
         <Icon className="h-4 w-4" aria-hidden />
         {service.name}
-      </div>
+      </div>{' '}
       <h3 className="mt-4 font-heading text-[clamp(1.5rem,2.6vw,2.25rem)] font-semibold leading-[1.08] tracking-[-0.035em]">
         {service.statement}
-      </h3>
+      </h3>{' '}
       <p className="mt-4 max-w-md text-[15px] leading-relaxed text-text-dark-muted">{service.body}</p>
 
       <ul className="mt-6 grid gap-2 sm:grid-cols-2">

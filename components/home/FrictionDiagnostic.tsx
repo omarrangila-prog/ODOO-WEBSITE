@@ -30,7 +30,7 @@ export function FrictionDiagnostic() {
           <h2 className="display-2">
             Where Is Your Business{' '}
             <span className="signal-text">Losing Control?</span>
-          </h2>
+          </h2>{' '}
           <p className="lede mt-6 max-w-md">
             Switch on the friction your team feels every week. We&rsquo;ll read the signal&mdash;and
             carry your selections down to a personalised roadmap request at the end of the page.

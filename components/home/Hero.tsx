@@ -58,13 +58,13 @@ export function Hero() {
                 </span>,
               ]}
             />
-          </h1>
+          </h1>{' '}
 
           <p className="mt-7 max-w-[48ch] text-[clamp(17px,1.35vw,19px)] leading-[1.62] text-text-dark/85">
             Custom software, AI agents, WhatsApp automation, Odoo ERP, business systems, websites
             and digital solutions &mdash; designed around the way your organisation actually
             works.
-          </p>
+          </p>{' '}
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Magnetic>
@@ -72,17 +72,17 @@ export function Hero() {
                 Tell Us What You Need
                 <ArrowNudge />
               </ButtonLink>
-            </Magnetic>
+            </Magnetic>{' '}
             <ButtonLink href="/case-studies" variant="secondary" className="min-h-[54px] text-[15.5px] border-[rgba(170,110,255,0.4)]">
               Explore Our Work
               <ArrowNudge className="h-[18px] w-[18px]" />
             </ButtonLink>
-          </div>
+          </div>{' '}
           <p className="mt-4 flex items-center gap-2 text-[13px] text-text-dark-muted">
-            <span className="h-1 w-1 rounded-full bg-[#B77AFF]" aria-hidden />
+            <span className="h-1 w-1 rounded-full bg-[#B77AFF]" aria-hidden />{' '}
             Describe the problem. We&rsquo;ll help you find the right solution&mdash;a voice note or a
             spreadsheet is enough to start.
-          </p>
+          </p>{' '}
 
           {/* Capability pillars */}
           <ul className="mt-12 grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:max-w-lg">
@@ -96,7 +96,7 @@ export function Hero() {
                   <c.icon className="h-[18px] w-[18px]" aria-hidden />
                 </span>
                 <span className="leading-tight">
-                  <span className="block text-[13.5px] font-semibold text-text-dark">{c.label}</span>
+                  <span className="block text-[13.5px] font-semibold text-text-dark">{c.label}</span>{' '}
                   <span className="mt-0.5 block text-[11.5px] leading-tight text-text-dark-muted">{c.sub}</span>
                 </span>
                 </Link>

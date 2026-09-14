@@ -55,7 +55,7 @@ export function IntentSelector() {
           <p className="eyebrow mb-5">Start Here</p>
           <h2 className="display-2">
             What do you want to <span className="signal-text">improve?</span>
-          </h2>
+          </h2>{' '}
           <p className="lede mt-5">
             Pick whichever is closest. We&rsquo;ll point you at the right part of the team &mdash;
             and if none of them fit, the last option is the one to use.
@@ -108,7 +108,7 @@ export function IntentSelector() {
                 >
                   <h3 className="mt-3 font-heading text-[clamp(1.5rem,2.4vw,2rem)] font-semibold signal-text">
                     {active.recommendation}
-                  </h3>
+                  </h3>{' '}
                   <p className="mt-3 text-[15px] leading-relaxed text-text-dark-muted">{active.explanation}</p>
                   <Link
                     href={active.href}

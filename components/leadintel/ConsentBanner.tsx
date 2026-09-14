@@ -83,25 +83,25 @@ export function ConsentBanner() {
             )}
 
             <div className="mt-4 flex flex-wrap gap-2.5">
-              <button onClick={() => apply(acceptAll())} className="rounded-control bg-[linear-gradient(100deg,#7C4DFF,#E947C6)] px-4 py-2.5 text-[14px] font-semibold text-white min-h-[44px]">
+              <button type="button" onClick={() => apply(acceptAll())} className="rounded-control bg-[linear-gradient(100deg,#7C4DFF,#E947C6)] px-4 py-2.5 text-[14px] font-semibold text-white min-h-[44px]">
                 Accept all
               </button>
-              <button onClick={() => apply(rejectAll())} className="rounded-control border border-line-strong px-4 py-2.5 text-[14px] font-semibold text-text-dark min-h-[44px] hover:bg-white/5">
+              <button type="button" onClick={() => apply(rejectAll())} className="rounded-control border border-line-strong px-4 py-2.5 text-[14px] font-semibold text-text-dark min-h-[44px] hover:bg-white/5">
                 Reject all
               </button>
               {showSettings ? (
-                <button onClick={() => apply(savePreferences(analytics, marketing))} className="rounded-control border border-violet-bright/40 bg-violet/10 px-4 py-2.5 text-[14px] font-semibold text-text-dark min-h-[44px]">
+                <button type="button" onClick={() => apply(savePreferences(analytics, marketing))} className="rounded-control border border-violet-bright/40 bg-violet/10 px-4 py-2.5 text-[14px] font-semibold text-text-dark min-h-[44px]">
                   Save preferences
                 </button>
               ) : (
-                <button onClick={() => setShowSettings(true)} className="inline-flex items-center gap-1.5 rounded-control px-4 py-2.5 text-[14px] font-semibold text-text-dark-muted min-h-[44px] hover:text-text-dark">
+                <button type="button" onClick={() => setShowSettings(true)} className="inline-flex items-center gap-1.5 rounded-control px-4 py-2.5 text-[14px] font-semibold text-text-dark-muted min-h-[44px] hover:text-text-dark">
                   <Settings2 className="h-4 w-4" aria-hidden />
                   Settings
                 </button>
               )}
             </div>
           </div>
-          <button onClick={() => apply(rejectAll())} aria-label="Reject all and close" className="grid h-8 w-8 shrink-0 place-items-center rounded-full text-text-dark-muted hover:bg-white/5">
+          <button type="button" onClick={() => apply(rejectAll())} aria-label="Reject all and close" className="grid h-8 w-8 shrink-0 place-items-center rounded-full text-text-dark-muted hover:bg-white/5">
             <X className="h-4 w-4" aria-hidden />
           </button>
         </div>
@@ -114,7 +114,7 @@ function ToggleRow({ label, desc, checked, onChange, disabled }: { label: string
   return (
     <div className="flex items-center justify-between gap-4 rounded-control border border-line bg-white/[0.02] px-4 py-3">
       <span className="min-w-0">
-        <span className="block text-[14px] font-medium text-text-dark">{label}</span>
+        <span className="block text-[14px] font-medium text-text-dark">{label}</span>{' '}
         <span className="block text-[12px] text-text-dark-muted">{desc}</span>
       </span>
       <button

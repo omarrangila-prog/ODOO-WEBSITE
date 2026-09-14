@@ -62,6 +62,7 @@ export function Tabs({
           return (
             <button
               key={tab.id}
+              type="button"
               ref={(el) => {
                 refs.current[i] = el;
               }}

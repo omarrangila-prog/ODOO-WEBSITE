@@ -25,7 +25,7 @@ export function EcosystemGrid() {
           <p className="eyebrow mb-5">The ecosystem</p>
           <h2 className="display-2">
             Seven capabilities. <span className="signal-text">One team.</span>
-          </h2>
+          </h2>{' '}
           <p className="lede mt-5">
             Most businesses end up managing a software house, an agency, a designer and a video
             editor who have never spoken to each other. These sit in one place, which is why the
@@ -57,8 +57,7 @@ export function EcosystemGrid() {
                     )}
                   >
                     {d.label}
-                  </h3>
-
+                  </h3>{' '}
                   <p
                     className={cn(
                       'mt-3 max-w-[46ch] leading-relaxed text-ink-muted',

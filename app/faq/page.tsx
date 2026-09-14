@@ -38,7 +38,7 @@ export default function FaqPage() {
         <div className="pointer-events-none absolute inset-0 arch-grid opacity-30" aria-hidden />
         <div className="shell relative">
           <Breadcrumbs items={crumbs} />
-          <p className="eyebrow mb-6">FAQ</p>
+          <p className="eyebrow mb-6">FAQ</p>{' '}
           <MaskedReveal
             as="h1"
             className="font-heading font-[650] leading-[1.0] tracking-[-0.045em] text-[clamp(40px,5vw,72px)] max-w-4xl"
@@ -46,7 +46,7 @@ export default function FaqPage() {
               <span key="1">The Questions We</span>,
               <span key="2">Hear <span className="signal-text">Most.</span></span>,
             ]}
-          />
+          />{' '}
           <AnswerCard
             question="What is ODOOVATIONS?"
             className="mt-12 max-w-[var(--reading-width)] border-line text-text-dark-muted"
@@ -61,7 +61,7 @@ export default function FaqPage() {
 
       <section className="theme-light bay-sm">
         <div className="shell max-w-4xl">
-          <Accordion items={faqs} allowMultiple />
+          <Accordion items={faqs} allowMultiple />{' '}
           <p className="mt-10 text-[15.5px] text-ink-muted">
             Question not here? See{' '}
             <Link href="/company/pricing" className="text-violet underline-offset-4 hover:underline">

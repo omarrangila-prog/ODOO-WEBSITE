@@ -35,7 +35,7 @@ export default function AdminPage() {
     <section className="theme-dark grain min-h-[70vh] pt-32 pb-20">
       <div className="shell max-w-2xl">
         <p className="eyebrow mb-6"><Lock className="h-4 w-4" aria-hidden />Admin</p>
-        <h1 className="display-2">Lead Intelligence Dashboard</h1>
+        <h1 className="display-2">Lead Intelligence Dashboard</h1>{' '}
         <p className="lede mt-4">Enter your admin token to view operational summaries. No raw personal data is shown here.</p>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -47,7 +47,7 @@ export default function AdminPage() {
             className="flex-1 rounded-control border border-line bg-white/[0.03] px-4 py-3 text-[15px] text-text-dark min-h-[48px]"
             aria-label="Admin token"
           />
-          <button onClick={load} disabled={loading || !token} className="rounded-control bg-[linear-gradient(100deg,#7C4DFF,#E947C6)] px-6 py-3 font-semibold text-white min-h-[48px] disabled:opacity-50">
+          <button type="button" onClick={load} disabled={loading || !token} className="rounded-control bg-[linear-gradient(100deg,#7C4DFF,#E947C6)] px-6 py-3 font-semibold text-white min-h-[48px] disabled:opacity-50">
             {loading ? 'Loading…' : 'Load'}
           </button>
         </div>

@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Video, FileText, Clock3, ShieldCheck } from 'lucide-react';
 import { verifiedCountries, hasVerifiedInternationalFootprint } from '@/data/global-projects';
 import { flagEmoji } from '@/data/countries';
@@ -14,9 +13,9 @@ const practices = [
 /**
  * Global delivery, stated at the level the evidence supports.
  *
- * Country chips render only from `verifiedCountries`. With nothing verified
- * beyond Pakistan, the section says "remote delivery worldwide" and shows no
- * count and no flag wall — see data/global-projects.ts for why.
+ * Country chips render from `verifiedCountries`. When international markets
+ * are verified, they appear as a flag wall; otherwise the section says
+ * "remote delivery worldwide" with no count and no flags.
  */
 export function GlobalDeliveryBand() {
   return (
@@ -29,7 +28,7 @@ export function GlobalDeliveryBand() {
             Built in Karachi.
             <br />
             <span className="signal-text">Delivered across borders.</span>
-          </h2>
+          </h2>{' '}
           <p className="lede mt-6 max-w-[46ch]">
             Remote discovery, development, demonstrations, testing and support let one team
             deliver projects across time zones &mdash; from one office, with no branches we would

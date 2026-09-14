@@ -67,10 +67,10 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           <div className="shell relative">
             <Breadcrumbs items={crumbs} />
             <p className="eyebrow mb-6">{division ? division.title : 'Odoo & ERP'}</p>
-            <h1 className="display-1 max-w-5xl">{service.title}</h1>
+            <h1 className="display-1 max-w-5xl">{service.title}</h1>{' '}
             <p className="mt-7 max-w-[var(--reading-width)] font-heading text-[clamp(20px,2.4vw,28px)] font-medium leading-[1.25] tracking-[-0.02em] text-text-dark">
               {service.tagline}
-            </p>
+            </p>{' '}
             <p className="lede mt-5 max-w-[var(--reading-width)]">{service.intro}</p>
             <div className="mt-9 flex flex-wrap gap-2">
               {service.modules.map((m) => (
@@ -106,24 +106,25 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         <section className="theme-light bay-sm">
           <div className="shell grid gap-14 lg:grid-cols-2 lg:gap-16">
             <div>
-              <h2 className="display-2">Problems this solves</h2>
+              <h2 className="display-2">Problems this solves</h2>{' '}
               <ul className="mt-9 divide-y divide-line-light border-t border-line-light">
                 {service.problems.map((p) => (
                   <li key={p} className="flex items-start gap-4 py-5">
-                    <CircleAlert className="mt-0.5 h-5 w-5 shrink-0 text-magenta" aria-hidden />
+                    <CircleAlert className="mt-0.5 h-5 w-5 shrink-0 text-magenta" aria-hidden />{' '}
                     <span className="text-[17px] leading-relaxed text-ink-muted">{p}</span>
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <h2 className="display-2">What we do</h2>
+              <h2 className="display-2">What we do</h2>{' '}
               <div className="mt-9 space-y-8">
                 {service.whatWeDo.map((w, i) => (
                   <div key={w.title} className="flex gap-5 border-t border-line-light pt-6 first:border-t-0 first:pt-0">
-                    <span className="font-heading text-[22px] font-semibold leading-none text-ink/20">{String(i + 1).padStart(2, '0')}</span>
+                    {i > 0 && ' '}
+                    <span className="font-heading text-[22px] font-semibold leading-none text-ink/20" aria-hidden>{String(i + 1).padStart(2, '0')}</span>{' '}
                     <div>
-                      <h3 className="display-3 text-[clamp(20px,2vw,26px)] font-semibold">{w.title}</h3>
+                      <h3 className="display-3 text-[clamp(20px,2vw,26px)] font-semibold">{w.title}</h3>{' '}
                       <p className="mt-2 text-[16px] leading-relaxed text-ink-muted">{w.body}</p>
                     </div>
                   </div>
@@ -137,11 +138,11 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         <section className="theme-graphite bay-sm">
           <div className="shell grid gap-14 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
             <div>
-              <h2 className="display-2">How we work</h2>
+              <h2 className="display-2">How we work</h2>{' '}
               <ol className="mt-9 border-t border-line">
                 {service.process.map((step, i) => (
                   <li key={step} className="flex items-center gap-5 border-b border-line py-5">
-                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[linear-gradient(120deg,#7C4DFF,#E947C6)] text-[15px] font-bold text-white">{i + 1}</span>
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[linear-gradient(120deg,#7C4DFF,#E947C6)] text-[15px] font-bold text-white" aria-hidden>{i + 1}</span>{' '}
                     <span className="text-[17px] font-medium text-text-dark">{step}</span>
                   </li>
                 ))}
@@ -152,11 +153,11 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               </p>
             </div>
             <div>
-              <h2 className="display-2">Outcomes</h2>
+              <h2 className="display-2">Outcomes</h2>{' '}
               <ul className="mt-9 space-y-4">
                 {service.outcomes.map((o) => (
                   <li key={o} className="flex items-start gap-3 text-[17px] leading-relaxed text-text-dark-muted">
-                    <Check className="mt-1 h-5 w-5 shrink-0 text-green" aria-hidden />
+                    <Check className="mt-1 h-5 w-5 shrink-0 text-green" aria-hidden />{' '}
                     {o}
                   </li>
                 ))}
@@ -168,7 +169,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         {/* FAQ */}
         <section className="theme-dark bay-sm">
           <div className="shell grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-            <h2 className="display-2">Common questions</h2>
+            <h2 className="display-2">Common questions</h2>{' '}
             <Accordion items={serviceFaq} allowMultiple />
           </div>
         </section>
@@ -184,7 +185,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                   {i < arr.length - 1 && ' · '}
                 </span>
               ))}
-            </p>
+            </p>{' '}
             <p className="mt-4 text-[15px] text-text-dark-muted">
               Other capabilities:{' '}
               {divisions

@@ -15,7 +15,7 @@ export function ClientWall() {
             <p className="eyebrow mb-4">Selected clients</p>
             <h2 className="font-heading text-[clamp(22px,2.6vw,32px)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
               Businesses across education, food, commodities, publishing, textiles and retail.
-            </h2>
+            </h2>{' '}
             <p className="mt-3 text-[15px] text-ink-muted">
               Clients of the {clientSource.parentCompany} group, of which ODOOVATIONS is part.
             </p>

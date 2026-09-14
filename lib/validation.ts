@@ -15,7 +15,22 @@ export const ACCEPTED_FILE_TYPES = [
 export const ACCEPTED_FILE_EXTENSIONS =
   '.pdf,.xls,.xlsx,.csv,.doc,.docx,.png,.jpg,.jpeg';
 
+const ACCEPTED_EXTENSION_SET = new Set(
+  ACCEPTED_FILE_EXTENSIONS.split(',').map((e) => e.trim().toLowerCase()),
+);
+
 export const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+
+/** True when MIME is accepted, or when MIME is empty and the extension is known (CSV often has type ""). */
+export function isAcceptedUpload(name: string, type: string): boolean {
+  if (type && ACCEPTED_FILE_TYPES.includes(type as (typeof ACCEPTED_FILE_TYPES)[number])) {
+    return true;
+  }
+  const dot = name.lastIndexOf('.');
+  if (dot < 0) return false;
+  const ext = name.slice(dot).toLowerCase();
+  return ACCEPTED_EXTENSION_SET.has(ext);
+}
 
 const phoneRegex = /^[+]?[\d\s()\-]{7,20}$/;
 
@@ -77,7 +92,7 @@ export function validateFileMeta(
   type: string,
 ): string | null {
   if (size > MAX_FILE_SIZE) return 'File exceeds the 10 MB limit.';
-  if (!ACCEPTED_FILE_TYPES.includes(type as (typeof ACCEPTED_FILE_TYPES)[number])) {
+  if (!isAcceptedUpload(name, type)) {
     return 'This file type is not supported.';
   }
   if (name.length > 200) return 'File name is too long.';

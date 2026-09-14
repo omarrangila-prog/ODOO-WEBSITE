@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { company } from '@/data/company';
+import { verifiedCountries } from '@/data/global-projects';
 
 /**
  * Canonical production origin.
@@ -52,7 +53,7 @@ export function buildMetadata({
       title,
       description,
       images: [OG_IMAGE],
-      locale: 'en_US',
+      locale: 'en_PK',
     },
     twitter: {
       card: 'summary_large_image',
@@ -98,7 +99,7 @@ export function organizationSchema() {
     telephone: company.phoneInternational,
     // ODOOVATIONS operates within the Kausar Innovations group.
     parentOrganization: { '@type': 'Organization', name: 'Kausar Innovations' },
-    areaServed: [{ '@type': 'Country', name: 'Pakistan' }],
+    areaServed: verifiedCountries.map((c) => ({ '@type': 'Country', name: c.countryName })),
     ...(socials.length ? { sameAs: socials } : {}),
     address: {
       '@type': 'PostalAddress',
@@ -110,7 +111,7 @@ export function organizationSchema() {
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'sales',
-      telephone: company.phoneDisplay,
+      telephone: company.phoneInternational,
       email: company.email,
       areaServed: ['PK', 'Worldwide'],
       availableLanguage: ['English', 'Urdu'],

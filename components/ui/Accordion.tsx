@@ -2,7 +2,6 @@
 
 import { useId, useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utilities';
 
 export interface AccordionItem {
@@ -16,10 +15,31 @@ interface Props {
   className?: string;
 }
 
+/** `inert` is not yet in React 18's attribute typings; spread it from a plain object. */
+function inertWhenClosed(open: boolean): Record<string, string> {
+  return open ? {} : { inert: '' };
+}
+
+/**
+ * Accordion whose answers are ALWAYS in the DOM.
+ *
+ * The previous version rendered a panel only while open, so a page with 18
+ * FAQs shipped one answer in its HTML — the rest existed only in JSON-LD.
+ * Search engines read the schema, but text-based crawlers and retrieval
+ * systems saw questions with no answers. Every panel is now server-rendered;
+ * open/close is a CSS grid-row transition (0fr → 1fr) with no JavaScript
+ * animation library involved. Closed panels are `inert` and aria-hidden —
+ * out of the accessibility tree and tab order — while their text stays in
+ * the document for extraction. (`hidden` was not used: its UA display:none
+ * is overridden by the grid class, and display:none would kill the
+ * transition anyway.) Reduced-motion users get an instant toggle.
+ *
+ * A single space text node sits between question and panel so textContent
+ * reads "…business? Yes. Odoo scales…" rather than fusing the two.
+ */
 export function Accordion({ items, allowMultiple = false, className }: Props) {
   const [open, setOpen] = useState<Set<number>>(new Set([0]));
   const baseId = useId();
-  const reduce = useReducedMotion();
 
   function toggle(index: number) {
     setOpen((prev) => {
@@ -38,9 +58,11 @@ export function Accordion({ items, allowMultiple = false, className }: Props) {
         const panelId = `${baseId}-panel-${i}`;
         return (
           <div key={i}>
+            {i > 0 && ' '}
             <h3 className="m-0">
               <button
                 id={btnId}
+                type="button"
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => toggle(i)}
@@ -59,29 +81,31 @@ export function Accordion({ items, allowMultiple = false, className }: Props) {
                     'grid h-9 w-9 shrink-0 place-items-center rounded-full border transition-colors',
                     isOpen ? 'border-violet-bright/50 text-violet-bright' : 'border-line text-text-dark-muted [.theme-light_&]:border-line-light [.theme-light_&]:text-ink-muted',
                   )}
+                  aria-hidden
                 >
-                  {isOpen ? <Minus className="h-4 w-4" aria-hidden /> : <Plus className="h-4 w-4" aria-hidden />}
+                  {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
                 </span>
               </button>
-            </h3>
-            <AnimatePresence initial={false}>
-              {isOpen && (
-                <motion.div
-                  id={panelId}
-                  role="region"
-                  aria-labelledby={btnId}
-                  initial={reduce ? false : { height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={reduce ? undefined : { height: 0, opacity: 0 }}
-                  transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
-                  className="overflow-hidden"
-                >
-                  <p className="max-w-[44rem] pb-7 text-[16px] leading-[1.7] text-text-dark-muted [.theme-light_&]:text-ink-muted">
-                    {item.answer}
-                  </p>
-                </motion.div>
+            </h3>{' '}
+            {/* Always rendered; the grid-rows trick animates height without
+                measuring it. Closed panels are inert + aria-hidden. */}
+            <div
+              id={panelId}
+              role="region"
+              aria-labelledby={btnId}
+              aria-hidden={!isOpen}
+              {...inertWhenClosed(isOpen)}
+              className={cn(
+                'grid transition-[grid-template-rows] duration-300 ease-premium motion-reduce:transition-none',
+                isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
               )}
-            </AnimatePresence>
+            >
+              <div className="min-h-0 overflow-hidden">
+                <p className="max-w-[44rem] pb-7 text-[16px] leading-[1.7] text-text-dark-muted [.theme-light_&]:text-ink-muted">
+                  {item.answer}
+                </p>
+              </div>
+            </div>
           </div>
         );
       })}

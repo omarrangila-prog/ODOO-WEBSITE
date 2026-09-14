@@ -7,6 +7,11 @@ import { company, PLACEHOLDER } from '@/data/company';
 import { whatsappLink } from '@/lib/utilities';
 import { track } from '@/lib/analytics';
 
+/** `inert` is not yet in React 18's attribute typings. */
+function inertWhenHidden(visible: boolean): Record<string, string> {
+  return visible ? {} : { inert: '' };
+}
+
 /**
  * Mobile-only sticky conversion bar: WhatsApp | Call | Free Consultation.
  * Appears after the user scrolls past the hero and hides near the footer so it
@@ -40,6 +45,7 @@ export function MobileCtaBar() {
         visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-full opacity-0'
       }`}
       aria-hidden={!visible}
+      {...inertWhenHidden(visible)}
     >
       <div className="glass mx-auto grid max-w-md grid-cols-3 gap-1.5 rounded-2xl p-1.5">
         <a

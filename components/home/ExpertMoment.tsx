@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { Linkedin, Check } from 'lucide-react';
 import { company } from '@/data/company';
 import { ButtonLink, ArrowNudge } from '@/components/ui/Button';
@@ -13,9 +12,8 @@ const expertise = [
 ];
 
 /**
- * Founder photo is intentionally NOT shown as an empty placeholder box.
- * When a real portrait exists, set company.founderPhoto and it renders;
- * otherwise a designed operational visual panel is shown in its place.
+ * Team / expertise band. Portrait photo intentionally omitted until a real
+ * founder image is supplied via company.founderPhoto.
  */
 export function ExpertMoment() {
   const linkedin = company.social.linkedin;
@@ -51,18 +49,18 @@ export function ExpertMoment() {
           <h2 className="display-2">
             You Are Not Hiring a Software Vendor.{' '}
             <span className="signal-text">You Are Building a Better Way to Run Your Business.</span>
-          </h2>
+          </h2>{' '}
 
-          <blockquote className="mt-8 border-l-2 border-violet/40 pl-6 text-[clamp(18px,2vw,22px)] leading-relaxed text-ink">
-            &ldquo;We begin by understanding your workflow, your team and your operational
-            problems. The technology comes after the business logic is clear.&rdquo;
-          </blockquote>
+          <p className="mt-8 border-l-2 border-violet/40 pl-6 font-heading text-[clamp(18px,2vw,22px)] font-medium leading-relaxed text-ink">
+            Our working principle: we begin by understanding your workflow, your team and your
+            operational problems. The technology comes after the business logic is clear.
+          </p>{' '}
 
           <p className="mt-6 max-w-xl text-[16px] leading-relaxed text-ink-muted">
-            ODOOVATIONS is a Pakistan-based team of Odoo implementers and developers who have
-            helped businesses replace disconnected spreadsheets and manual approvals with one
-            connected system. We combine local operational understanding with structured,
-            international-standard delivery.
+            ODOOVATIONS is a Karachi-based team of software engineers, Odoo implementers,
+            automation specialists and creatives, part of the Kausar Innovations group. We
+            combine local operational understanding with structured, international-standard
+            delivery &mdash; for clients across Pakistan and abroad.
           </p>
 
           <ul className="mt-7 grid gap-2.5 sm:grid-cols-2">

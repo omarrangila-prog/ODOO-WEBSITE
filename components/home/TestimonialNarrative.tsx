@@ -33,6 +33,7 @@ export function TestimonialNarrative() {
             {verified.map((item, idx) => (
               <button
                 key={idx}
+                type="button"
                 onClick={() => setI(idx)}
                 aria-pressed={idx === i}
                 className={cn(
@@ -61,7 +62,7 @@ export function TestimonialNarrative() {
             </blockquote>
 
             <figcaption className="mt-12 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-line pt-6">
-              <span className="font-heading text-lg font-semibold text-text-dark">{t.name}</span>
+              <span className="font-heading text-lg font-semibold text-text-dark">{t.name}</span>{' '}
               <span className="text-[14px] text-text-dark-muted">{t.role} · {t.companyLabel}</span>
               <span className="ml-auto flex gap-2">
                 <span className="rounded-full border border-line bg-white/[0.03] px-3 py-0.5 text-[11px] text-text-dark-muted">{t.industry}</span>
@@ -79,7 +80,7 @@ function NarrativePart({ label, text, tone }: { label: string; text: string; ton
   const color = { amber: 'text-amber', violet: 'text-violet-bright', green: 'text-green' }[tone];
   return (
     <div>
-      <p className={cn('text-[11px] font-bold uppercase tracking-[0.14em]', color)}>{label}</p>
+      <p className={cn('text-[11px] font-bold uppercase tracking-[0.14em]', color)}>{label}</p>{' '}
       <p className="mt-3 font-heading text-[clamp(1.15rem,1.9vw,1.6rem)] font-medium leading-[1.3] tracking-[-0.02em] text-text-dark">
         {text}
       </p>

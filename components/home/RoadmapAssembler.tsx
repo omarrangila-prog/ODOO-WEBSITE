@@ -57,7 +57,7 @@ export function RoadmapAssembler() {
             Bring Us the Mess.
             <br />
             <span className="signal-text">We&rsquo;ll Assemble the System.</span>
-          </h2>
+          </h2>{' '}
           <p className="lede mt-6 max-w-md">
             Send a voice note, spreadsheet, screenshot or a plain description of where your business
             is struggling. We&rsquo;ll turn it into a clear next step.
@@ -126,6 +126,7 @@ export function RoadmapAssembler() {
                       transition={{ duration: 0.25 }}
                     >
                       <button
+                        type="button"
                         onClick={() => toggle(item.id)}
                         className="group inline-flex items-center gap-2 rounded-full border border-violet-bright/40 bg-violet/[0.1] py-1.5 pl-3.5 pr-2.5 text-[13px] font-medium text-text-dark transition-colors hover:border-violet-bright/70"
                         aria-label={`Remove ${item.label}`}

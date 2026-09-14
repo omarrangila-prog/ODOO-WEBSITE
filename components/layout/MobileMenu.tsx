@@ -114,7 +114,7 @@ export function MobileMenu({ open, onClose }: Props) {
       >
         <div className="flex items-center justify-between px-6 pt-5 pb-3">
           <span className="eyebrow">Menu</span>
-          <button onClick={onClose} aria-label="Close menu" className="grid h-11 w-11 place-items-center rounded-full border border-line text-text-dark hover:bg-white/5">
+          <button type="button" onClick={onClose} aria-label="Close menu" className="grid h-11 w-11 place-items-center rounded-full border border-line text-text-dark hover:bg-white/5">
             <X className="h-5 w-5" aria-hidden />
           </button>
         </div>
@@ -126,6 +126,7 @@ export function MobileMenu({ open, onClose }: Props) {
                 {item.children ? (
                   <>
                     <button
+                      type="button"
                       aria-expanded={expanded === item.label}
                       onClick={() => setExpanded((p) => (p === item.label ? null : item.label))}
                       className="flex w-full items-center justify-between px-2 py-4 text-left"

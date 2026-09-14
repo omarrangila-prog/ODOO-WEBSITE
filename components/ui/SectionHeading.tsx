@@ -24,7 +24,10 @@ export function SectionHeading({
       {eyebrow && <span className="eyebrow mb-5">{eyebrow}</span>}
       <Tag className={as === 'h1' ? 'display-1' : 'display-2'}>{title}</Tag>
       {intro && (
-        <p className={cn('lede mt-6 max-w-[42rem]', align === 'center' && 'mx-auto')}>{intro}</p>
+        <>
+          {' '}
+          <p className={cn('lede mt-6 max-w-[42rem]', align === 'center' && 'mx-auto')}>{intro}</p>
+        </>
       )}
     </div>
   );

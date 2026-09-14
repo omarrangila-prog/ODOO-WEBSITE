@@ -48,7 +48,7 @@ export default function MethodologyPage() {
       <section className="theme-light bay-sm">
         <div className="shell">
           <ol className="space-y-0">
-            {journeyStages.map((s, i) => (
+            {journeyStages.map((s) => (
               <li key={s.n} className="grid gap-6 border-t border-line-light py-10 first:border-t-0 sm:grid-cols-[120px_1fr] sm:gap-10">
                 <span className="font-heading text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-none tracking-[-0.045em] text-ink/15">
                   {String(s.n).padStart(2, '0')}

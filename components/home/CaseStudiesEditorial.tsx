@@ -24,7 +24,7 @@ export function CaseStudiesEditorial({ as = 'h2' }: { as?: 'h1' | 'h2' }) {
               <span key="1">How Odoo Maps to</span>,
               <span key="2">Your <span className="signal-text">Operations.</span></span>,
             ]}
-          />
+          />{' '}
           <p className="lede mt-7 max-w-[var(--reading-width)]">
             These are demonstration scenarios that show how we connect a real industry
             workflow in Odoo. They are clearly labelled as demonstrations&mdash;we publish named
@@ -50,9 +50,9 @@ export function CaseStudiesEditorial({ as = 'h2' }: { as?: 'h1' | 'h2' }) {
                 <div className={cn('lg:col-span-5 lg:row-span-1', reversed ? 'lg:order-1 lg:col-start-1' : 'lg:col-start-8')}>
                   <ParallaxLayer offset={26}>
                     <div className="flex items-baseline gap-4">
-                      <span className="font-heading text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-none tracking-[-0.05em] text-ink/10">
+                      <span className="font-heading text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-none tracking-[-0.05em] text-ink/10" aria-hidden>
                         {String(i + 1).padStart(2, '0')}
-                      </span>
+                      </span>{' '}
                       <span className="text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-muted">{cs.industry}</span>
                     </div>
                     {cs.isDemonstration && (
@@ -62,7 +62,7 @@ export function CaseStudiesEditorial({ as = 'h2' }: { as?: 'h1' | 'h2' }) {
                     )}
                     <h3 className="mt-3 font-heading text-[clamp(1.75rem,3.4vw,2.75rem)] font-semibold tracking-[-0.035em]">
                       {cs.label}
-                    </h3>
+                    </h3>{' '}
 
                     <div className="mt-6 grid grid-cols-[auto_1fr] gap-x-4">
                       <div className="flex flex-col items-center pt-1.5">
@@ -85,6 +85,7 @@ export function CaseStudiesEditorial({ as = 'h2' }: { as?: 'h1' | 'h2' }) {
                     <div className="mt-7 flex items-center gap-5">
                       <div>
                         <span className="font-heading text-3xl font-semibold signal-text">{cs.highlightMetric.value}</span>
+                        {' '}
                         <span className="ml-2 text-[13px] text-ink-muted">{cs.highlightMetric.label}</span>
                       </div>
                     </div>

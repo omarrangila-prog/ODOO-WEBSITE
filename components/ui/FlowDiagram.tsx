@@ -18,7 +18,7 @@ interface Props {
 export function FlowDiagram({ label, steps, note, className }: Props) {
   return (
     <figure className={cn('m-0', className)}>
-      <figcaption className="eyebrow mb-6">{label}</figcaption>
+      <figcaption className="eyebrow mb-6">{label}</figcaption>{' '}
       <ol className="flex flex-wrap items-stretch gap-x-2 gap-y-3">
         {steps.map((step, i) => (
           <li key={step} className="flex items-center gap-2">
@@ -26,12 +26,21 @@ export function FlowDiagram({ label, steps, note, className }: Props) {
               {step}
             </span>
             {i < steps.length - 1 && (
-              <ArrowRight className="h-4 w-4 shrink-0 opacity-40" aria-hidden />
+              <>
+                {' '}
+                <ArrowRight className="h-4 w-4 shrink-0 opacity-40" aria-hidden />
+                {' '}
+              </>
             )}
           </li>
         ))}
       </ol>
-      {note && <p className="mt-6 max-w-[var(--reading-width)] text-[15.5px] leading-relaxed opacity-70">{note}</p>}
+      {note && (
+        <>
+          {' '}
+          <p className="mt-6 max-w-[var(--reading-width)] text-[15.5px] leading-relaxed opacity-70">{note}</p>
+        </>
+      )}
     </figure>
   );
 }

@@ -40,7 +40,8 @@ export function TrendingTopics() {
             />
           </div>
           <p className="max-w-xs text-[14px] leading-relaxed text-text-dark-muted">
-            Curated and editor-reviewed. Labels are transparent&mdash;no fake popularity numbers.
+            Guides on the decisions businesses actually face &mdash; cost, timelines, compliance
+            and what to automate first.
           </p>
         </div>
 
@@ -60,7 +61,7 @@ export function TrendingTopics() {
 
                 <h3 className="mt-4 font-heading text-[19px] font-semibold leading-snug text-text-dark">
                   {t.title}
-                </h3>
+                </h3>{' '}
                 <p className="mt-2.5 flex-1 text-[14px] leading-relaxed text-text-dark-muted">
                   {t.shortAnswer}
                 </p>

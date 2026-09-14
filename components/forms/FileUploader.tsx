@@ -3,9 +3,9 @@
 import { useRef, useState, useId } from 'react';
 import { Upload, X, FileText, AlertCircle } from 'lucide-react';
 import {
-  ACCEPTED_FILE_TYPES,
   ACCEPTED_FILE_EXTENSIONS,
   MAX_FILE_SIZE,
+  isAcceptedUpload,
 } from '@/lib/validation';
 import { cn } from '@/lib/utilities';
 
@@ -28,7 +28,7 @@ export function FileUploader({ file, onChange }: Props) {
 
   function validate(f: File): string | null {
     if (f.size > MAX_FILE_SIZE) return 'File exceeds the 10 MB limit.';
-    if (!ACCEPTED_FILE_TYPES.includes(f.type as (typeof ACCEPTED_FILE_TYPES)[number])) {
+    if (!isAcceptedUpload(f.name, f.type)) {
       return 'Unsupported file type. Use PDF, Excel, CSV, Word, PNG or JPG.';
     }
     return null;

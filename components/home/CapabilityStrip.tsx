@@ -48,7 +48,7 @@ function Row({ ariaHidden }: { ariaHidden?: boolean }) {
             className="inline-flex min-h-[44px] items-center text-[14.5px] font-medium text-text-dark/60 transition-colors hover:text-text-dark"
           >
             {c}
-          </Link>
+          </Link>{' '}
           <span className="h-1 w-1 rounded-full bg-violet-bright/40" aria-hidden />
         </li>
       ))}

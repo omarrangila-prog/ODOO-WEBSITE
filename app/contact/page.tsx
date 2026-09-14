@@ -40,11 +40,11 @@ export default function ContactPage() {
 
           <div className="grid gap-14 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
             <div className="lg:sticky lg:top-28 lg:h-fit lg:self-start">
-              <p className="eyebrow mb-6">Start the Conversation</p>
+              <p className="eyebrow mb-6">Start the Conversation</p>{' '}
               <h1 className="display-1">
                 Bring Us the Mess. We&rsquo;ll Help You Build the{' '}
                 <span className="signal-text">System.</span>
-              </h1>
+              </h1>{' '}
               <p className="lede mt-7 max-w-[var(--reading-width)]">
                 Send us a voice note, Excel sheet, process document, screenshot, or simply explain
                 where your team is struggling. We&rsquo;ll help you identify the right next
@@ -95,7 +95,7 @@ function ContactRow({
         <Icon className="h-5 w-5" aria-hidden />
       </span>
       <span>
-        <span className="block text-[13px] font-semibold uppercase tracking-wide text-text-dark-muted">{label}</span>
+        <span className="block text-[13px] font-semibold uppercase tracking-wide text-text-dark-muted">{label}</span>{' '}
         <span className="block text-[15px] text-text-dark">{value}</span>
       </span>
     </>

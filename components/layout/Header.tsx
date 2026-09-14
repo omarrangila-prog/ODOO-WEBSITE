@@ -65,6 +65,7 @@ export function Header() {
                     {item.children ? (
                       <>
                         <button
+                          type="button"
                           aria-expanded={openDropdown === item.label}
                           aria-haspopup="true"
                           onClick={() => setOpenDropdown((p) => (p === item.label ? null : item.label))}
@@ -102,7 +103,10 @@ export function Header() {
                                 >
                                   <span className="block text-[14px] font-medium text-text-dark">{child.label}</span>
                                   {child.description && (
-                                    <span className="mt-0.5 block text-[12.5px] leading-snug text-text-dark-muted">{child.description}</span>
+                                    <>
+                                      {' '}
+                                      <span className="mt-0.5 block text-[12.5px] leading-snug text-text-dark-muted">{child.description}</span>
+                                    </>
                                   )}
                                 </Link>
                               ))}
@@ -147,6 +151,7 @@ export function Header() {
           </div>
 
           <button
+            type="button"
             className="grid h-11 w-11 place-items-center rounded-full border border-line text-text-dark xl:hidden"
             aria-label="Open menu"
             aria-expanded={menuOpen}

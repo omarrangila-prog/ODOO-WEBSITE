@@ -96,12 +96,12 @@ export function CustomStory() {
           <h2 className="display-2">
             Your Business Should Not Be Forced Into{' '}
             <span className="signal-text">Generic Software.</span>
-          </h2>
+          </h2>{' '}
 
           {/* Live visual comparison of the current stage */}
           <div className="mt-10 rounded-editorial border border-line-light bg-ivory-soft p-6 shadow-panel-light">
             <div className="mb-4 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.1em] text-ink-muted">
-              <span className="text-ink">{active.n}</span>
+              <span className="text-ink" aria-hidden>{active.n}</span>{' '}
               {active.title}
             </div>
             <ol className="space-y-2">
@@ -116,7 +116,7 @@ export function CustomStory() {
                     className={cn('flex items-center justify-between gap-3 rounded-control border px-4 py-3 text-[14px] transition-colors duration-500', stateStyle[step.state], '[.theme-light_&]:text-ink')}
                   >
                     <span className="flex items-center gap-2">
-                      <span className="text-[11px] font-semibold text-ink">{i + 1}</span>
+                      <span className="text-[11px] font-semibold text-ink" aria-hidden>{i + 1}</span>{' '}
                       {step.label}
                     </span>
                     <span className={cn('text-[11px] font-semibold', tag.color)}>{tag.label}</span>
@@ -138,12 +138,12 @@ export function CustomStory() {
               }}
               className="flex min-h-[70vh] flex-col justify-center border-t border-line-light py-10 first:border-t-0 lg:min-h-[80vh]"
             >
-              <span className="font-heading text-[clamp(3rem,8vw,6rem)] font-semibold leading-none tracking-[-0.04em] text-ink/10">
+              <span className="font-heading text-[clamp(3rem,8vw,6rem)] font-semibold leading-none tracking-[-0.04em] text-ink/10" aria-hidden>
                 {stage.n}
-              </span>
+              </span>{' '}
               <h3 className="mt-4 font-heading text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold tracking-[-0.035em]">
                 {stage.title}
-              </h3>
+              </h3>{' '}
               <p className="mt-4 max-w-md text-[17px] leading-relaxed text-ink-muted">{stage.body}</p>
             </div>
           ))}

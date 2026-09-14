@@ -29,7 +29,7 @@ export function AnswerCard({ question, children, className }: Props) {
         <h2 className="font-heading text-[clamp(17px,1.7vw,20px)] font-semibold tracking-[-0.01em]">
           {question}
         </h2>
-      )}
+      )}{' '}
       <div className={cn('text-[17px] leading-[1.65]', question && 'mt-3')}>{children}</div>
     </div>
   );
