@@ -50,8 +50,14 @@ export function HeroDashboardVisual() {
           <span className="pointer-events-none absolute inset-0 rounded-[26px] bg-[linear-gradient(135deg,rgba(255,255,255,0.06),transparent_35%)]" aria-hidden />
           {/* Every figure in this dashboard is illustrative. The badge is
               real, visible text so nobody reads sample numbers as revenue. */}
-          <span className="absolute left-4 top-4 z-10 rounded-full border border-amber/40 bg-[#0b0d18]/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-amber">
-            Illustrative demo
+          {/*
+            The dashboard shows fabricated PKR figures at 17px. A 10px label
+            was easy to miss, so a visitor could read sample numbers as real
+            client results. Sized to compete with the figures it qualifies.
+          */}
+          <span className="absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full border border-amber/60 bg-amber/[0.14] px-3 py-1.5 text-[12px] font-bold uppercase tracking-[0.1em] text-amber backdrop-blur-sm">
+            <span aria-hidden>&#9888;</span>
+            Sample data &mdash; not client results
           </span>
           <OdooDashboard />
 

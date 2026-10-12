@@ -8,7 +8,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { JsonLd } from '@/components/ui/JsonLd';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Contact ODOOVATIONS — Start Your Odoo Roadmap',
+  title: 'Contact ODOOVATIONS | Software, AI & ERP Projects',
   description:
     'Tell us how your business works and we will help you find the right next step. Send a workflow document, book a discovery call or message us on WhatsApp.',
   path: '/contact',
@@ -22,7 +22,11 @@ export default function ContactPage() {
     <>
       <JsonLd
         data={[
-          webPageSchema('Contact ODOOVATIONS', '/contact', 'Start your Odoo roadmap.'),
+          webPageSchema(
+            'Contact ODOOVATIONS',
+            '/contact',
+            'Tell us what you need built, automated or improved. Software, AI automation, Odoo ERP, websites, marketing and creative projects.',
+          ),
           localBusinessSchema(),
           breadcrumbSchema([
             { name: 'Home', path: '/' },

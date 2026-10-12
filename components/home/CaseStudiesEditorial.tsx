@@ -16,14 +16,14 @@ export function CaseStudiesEditorial({ as = 'h2' }: { as?: 'h1' | 'h2' }) {
     <section id="case-studies" className="theme-light bay">
       <div className="shell">
         <div className="max-w-3xl">
-          <p className="eyebrow mb-6">Selected Work</p>
+          <p className="eyebrow mb-6">Illustrative walkthroughs</p>
           <MaskedReveal
             immediate={false}
             as={as}
             className={as === 'h1' ? 'display-1' : 'display-2'}
             lines={[
-              <span key="1">How Odoo Maps to</span>,
-              <span key="2">Your <span className="signal-text">Operations.</span></span>,
+              <span key="1">Explore how connected</span>,
+              <span key="2">ERP systems <span className="signal-text">work.</span></span>,
             ]}
           />{' '}
           <p className="lede mt-7 max-w-[var(--reading-width)]">

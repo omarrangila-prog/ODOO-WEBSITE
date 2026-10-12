@@ -38,6 +38,7 @@ export interface Service {
 export const services: Service[] = [
   {
     slug: 'odoo-implementation-pakistan',
+    division: 'odoo-erp',
     href: '/services/odoo-implementation-pakistan',
     title: 'Odoo Implementation in Pakistan',
     navLabel: 'Odoo Implementation',
@@ -85,6 +86,7 @@ export const services: Service[] = [
   },
   {
     slug: 'custom-odoo-development',
+    division: 'odoo-erp',
     href: '/services/custom-odoo-development',
     title: 'Custom Odoo Development',
     navLabel: 'Custom Odoo Development',
@@ -132,6 +134,7 @@ export const services: Service[] = [
   },
   {
     slug: 'odoo-integration',
+    division: 'odoo-erp',
     href: '/services/odoo-integration',
     title: 'Odoo Integration Services',
     navLabel: 'Odoo Integration',
@@ -179,6 +182,7 @@ export const services: Service[] = [
   },
   {
     slug: 'odoo-consulting',
+    division: 'odoo-erp',
     href: '/services/odoo-consulting',
     title: 'Odoo Consulting',
     navLabel: 'Consulting',
@@ -219,6 +223,7 @@ export const services: Service[] = [
   },
   {
     slug: 'odoo-support-maintenance',
+    division: 'odoo-erp',
     href: '/services/odoo-support-maintenance',
     title: 'Odoo Support & Maintenance',
     navLabel: 'Support & Maintenance',
@@ -259,6 +264,7 @@ export const services: Service[] = [
   },
   {
     slug: 'odoo-training',
+    division: 'odoo-erp',
     href: '/services/odoo-training',
     title: 'Odoo Training',
     navLabel: 'Training',
@@ -299,6 +305,7 @@ export const services: Service[] = [
   },
   {
     slug: 'odoo-migration',
+    division: 'odoo-erp',
     href: '/services/odoo-migration',
     title: 'Odoo Migration Services',
     navLabel: 'Odoo Migration',
@@ -330,6 +337,7 @@ export const services: Service[] = [
   },
   {
     slug: 'odoo-ai-dashboards',
+    division: 'odoo-erp',
     href: '/services/odoo-ai-dashboards',
     title: 'Odoo AI Dashboards & Analytics',
     navLabel: 'AI Dashboards',
@@ -361,6 +369,7 @@ export const services: Service[] = [
   },
   {
     slug: 'odoo-business-automation',
+    division: 'odoo-erp',
     href: '/services/odoo-business-automation',
     title: 'Odoo Business Process Automation',
     navLabel: 'Business Automation',

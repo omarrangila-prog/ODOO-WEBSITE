@@ -118,7 +118,13 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           </div>
         </div>
       </article>
-      <CtaBand title="Ready for the same clarity in your business?" />
+      {/* Carries the project slug so the enquiry arrives with the reference
+          the visitor was reading about. Slug only — no private detail. */}
+      <CtaBand
+        title="Ready for the same clarity in your business?"
+        primaryLabel="Build Something Similar"
+        primaryHref={`/contact?from=project-${cs.slug}#form`}
+      />
     </>
   );
 }

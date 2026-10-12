@@ -11,6 +11,7 @@ import { RoadmapProvider } from '@/components/home/RoadmapContext';
 import { FrictionDiagnostic } from '@/components/home/FrictionDiagnostic';
 import { IndustriesCinema } from '@/components/home/IndustriesCinema';
 import { CaseStudiesEditorial } from '@/components/home/CaseStudiesEditorial';
+import { RealWork } from '@/components/home/RealWork';
 import { ExpertMoment } from '@/components/home/ExpertMoment';
 import { Faq } from '@/components/home/Faq';
 import { RoadmapAssembler } from '@/components/home/RoadmapAssembler';
@@ -59,6 +60,7 @@ export default function HomePage() {
       <RoadmapProvider>
         <FrictionDiagnostic />
         <IndustriesCinema />
+        <RealWork />
         <CaseStudiesEditorial />
         <GlobalDeliveryBand />
         <AnythingCustom />

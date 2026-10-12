@@ -73,6 +73,16 @@ export function ContactForm() {
    */
   useEffect(() => {
     const sp = new URLSearchParams(window.location.search);
+
+    /*
+     * Preselect the service a CTA came from (see data/ctas.ts). Validated
+     * against serviceOptions rather than trusted: the value arrives from a
+     * URL, and an unrecognised string would fail the form's own zod check
+     * on submit while looking selected to the visitor.
+     */
+    const svc = sp.get('service');
+    if (svc && serviceOptions.includes(svc)) setValue('services', [svc]);
+
     const issues = sp.get('issues');
     const friction = sp.get('friction');
     if (issues) {

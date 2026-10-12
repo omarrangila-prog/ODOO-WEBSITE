@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Check, CircleAlert } from 'lucide-react';
 import { services, getService } from '@/data/services';
 import { divisions, getDivision } from '@/data/divisions';
+import { ctaForDivision, ctaForService, ctas } from '@/data/ctas';
 import { faqs } from '@/data/faq';
 import { buildMetadata, breadcrumbSchema, serviceSchema, faqSchema } from '@/lib/seo';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
@@ -39,6 +40,16 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
   if (!service) notFound();
 
   const serviceFaq = service.faqs ?? sharedFaq;
+  /*
+   * Most specific CTA wins: a per-slug override, else the service's division,
+   * else the neutral CTA. The nine Odoo services carry no ctaLabel of their
+   * own, so before they were given a division they fell through to "Discuss
+   * Your Project" while the newer AI pages got specific wording — backwards.
+   */
+  const serviceCta =
+    ctaForService[service.slug] ??
+    (service.division ? ctaForDivision[service.division] : undefined) ??
+    ctas.general;
   const division = service.division ? getDivision(service.division) : undefined;
 
   // Link to siblings in the same division rather than dumping every service
@@ -46,9 +57,16 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
   const siblings = services.filter(
     (s) => s.slug !== service.slug && s.division && s.division === service.division,
   );
-  const related = siblings.length
+  /*
+   * Five divisions hold a single service, so siblings is empty for them. The
+   * old fallback drew from services with no division, which is now nobody —
+   * every service is classified. An empty list rendered "More in X:" with no
+   * links after it, so fall back to other services and say so in the label.
+   */
+  const usingSiblings = siblings.length > 0;
+  const related = usingSiblings
     ? siblings
-    : services.filter((s) => s.slug !== service.slug && !s.division).slice(0, 6);
+    : services.filter((s) => s.slug !== service.slug).slice(0, 6);
 
   const crumbs = [
     { name: 'Home', path: '/' },
@@ -180,7 +198,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         <section className="theme-dark pb-4">
           <div className="shell">
             <p className="text-[15px] text-text-dark-muted">
-              {division ? `More in ${division.title}: ` : 'Explore other Odoo services: '}
+              {usingSiblings && division ? `More in ${division.title}: ` : 'Explore other services: '}
               {related.map((s, i, arr) => (
                 <span key={s.slug}>
                   <Link href={s.href} className="text-violet-bright underline underline-offset-4">{s.navLabel}</Link>
@@ -202,7 +220,14 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           </div>
         </section>
 
-        <CtaBand title={`Ready to start with ${service.navLabel}?`} primaryLabel={service.ctaLabel} />
+        {/* CTA follows the division, so an AI page asks about automation and
+            an Odoo page asks about an Odoo roadmap — and the enquiry form
+            arrives with that service already selected. */}
+        <CtaBand
+          title={`Ready to start with ${service.navLabel}?`}
+          primaryLabel={service.ctaLabel ?? serviceCta.label}
+          primaryHref={serviceCta.href}
+        />
       </article>
     </>
   );

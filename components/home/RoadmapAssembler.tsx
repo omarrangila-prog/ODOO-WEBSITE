@@ -68,7 +68,7 @@ export function RoadmapAssembler() {
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Magnetic>
               <ButtonLink href={roadmapHref} onClick={() => track('roadmap_request', { source: 'assembler', count: problems.size })}>
-                Request My Odoo Roadmap
+                Discuss Your Project
                 <ArrowNudge />
               </ButtonLink>
             </Magnetic>

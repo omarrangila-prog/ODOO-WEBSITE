@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { caseStudies } from '@/data/caseStudies';
 import { publishableProjects } from '@/data/projects';
+import { ctas } from '@/data/ctas';
 import { buildMetadata, breadcrumbSchema, webPageSchema } from '@/lib/seo';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { WorkGrid } from '@/components/work/WorkGrid';
@@ -88,7 +89,8 @@ export default function CaseStudiesIndex() {
       <CtaBand
         title="Have a problem that looks like one of these?"
         body="Describe how it works today — a voice note, a spreadsheet or a screenshot is enough. We will tell you what we would build and what we would leave alone."
-        primaryLabel="Describe My Requirement"
+        primaryLabel={ctas.portfolio.label}
+        primaryHref={ctas.portfolio.href}
       />
     </>
   );
