@@ -12,8 +12,24 @@ export type SolBlock =
   | { type: 'table'; head: string[]; rows: string[][] }
   | { type: 'note'; text: string };
 
+/**
+ * Discovery category for the /solutions filter. Deliberately coarse: a
+ * visitor who wants "something for stock" should not have to know whether we
+ * filed it under warehousing or inventory.
+ */
+export type SolutionCategory =
+  | 'Finance & Accounting'
+  | 'Sales & POS'
+  | 'Inventory & Operations'
+  | 'Import, Export & Trading'
+  | 'Manufacturing'
+  | 'Healthcare'
+  | 'AI & Automation';
+
 export interface Solution {
   slug: string;
+  /** Filter group on /solutions. A solution may belong to several. */
+  categories: SolutionCategory[];
   href: string;
   metaTitle: string;
   metaDescription: string;
@@ -37,6 +53,7 @@ export interface Solution {
 export const solutions: Solution[] = [
   {
     slug: 'fbr-digital-invoicing-pakistan',
+    categories: ['Finance & Accounting', 'Sales & POS'],
     href: '/solutions/fbr-digital-invoicing-pakistan',
     primaryKeyword: 'FBR digital invoicing Pakistan',
     metaTitle: 'FBR Digital Invoicing with Odoo (Pakistan) | ODOOVATIONS',
@@ -98,6 +115,7 @@ export const solutions: Solution[] = [
   },
   {
     slug: 'odoo-whatsapp-integration',
+    categories: ['AI & Automation', 'Sales & POS'],
     href: '/solutions/odoo-whatsapp-integration',
     primaryKeyword: 'Odoo WhatsApp integration',
     metaTitle: 'Odoo WhatsApp Integration for Sales & Support | ODOOVATIONS',
@@ -148,6 +166,7 @@ export const solutions: Solution[] = [
   },
   {
     slug: 'odoo-ai-agents',
+    categories: ['AI & Automation'],
     href: '/solutions/odoo-ai-agents',
     primaryKeyword: 'Odoo AI agents',
     metaTitle: 'Odoo AI Agents & AI Dashboards | ODOOVATIONS',
@@ -198,6 +217,7 @@ export const solutions: Solution[] = [
   },
   {
     slug: 'accounting-software',
+    categories: ['Finance & Accounting'],
     href: '/solutions/accounting-software',
     primaryKeyword: 'custom accounting software',
     metaTitle: 'Custom Accounting Software for Businesses | ODOOVATIONS',
@@ -288,6 +308,7 @@ export const solutions: Solution[] = [
   },
   {
     slug: 'pos-software',
+    categories: ['Sales & POS', 'Inventory & Operations'],
     href: '/solutions/pos-software',
     primaryKeyword: 'POS software Pakistan',
     metaTitle: 'POS Software for Retail & Multi-Branch | ODOOVATIONS',
@@ -366,6 +387,7 @@ export const solutions: Solution[] = [
   },
   {
     slug: 'restaurant-pos',
+    categories: ['Sales & POS', 'Inventory & Operations'],
     href: '/solutions/restaurant-pos',
     primaryKeyword: 'restaurant POS software',
     metaTitle: 'Restaurant POS Software & Kitchen Management | ODOOVATIONS',
@@ -448,6 +470,7 @@ export const solutions: Solution[] = [
   },
   {
     slug: 'inventory-management',
+    categories: ['Inventory & Operations'],
     href: '/solutions/inventory-management',
     primaryKeyword: 'inventory management system',
     metaTitle: 'Inventory & Warehouse Management System | ODOOVATIONS',
@@ -533,6 +556,7 @@ export const solutions: Solution[] = [
   },
   {
     slug: 'hospital-management-system',
+    categories: ['Healthcare'],
     href: '/solutions/hospital-management-system',
     primaryKeyword: 'hospital management system',
     metaTitle: 'Hospital & Clinic Management System | ODOOVATIONS',
@@ -611,6 +635,7 @@ export const solutions: Solution[] = [
   },
   {
     slug: 'factory-automation',
+    categories: ['Manufacturing', 'Inventory & Operations'],
     href: '/solutions/factory-automation',
     primaryKeyword: 'factory automation software',
     metaTitle: 'Factory & Production Automation Software | ODOOVATIONS',
@@ -706,6 +731,7 @@ export const solutions: Solution[] = [
   },
   {
     slug: 'sales-purchase-software',
+    categories: ['Sales & POS', 'Finance & Accounting', 'Inventory & Operations'],
     href: '/solutions/sales-purchase-software',
     primaryKeyword: 'sales and purchase software',
     metaTitle: 'Sales & Purchase Software for Businesses | ODOOVATIONS',
@@ -789,6 +815,7 @@ export const solutions: Solution[] = [
   },
   {
     slug: 'export-management-software',
+    categories: ['Import, Export & Trading'],
     href: '/solutions/export-management-software',
     primaryKeyword: 'export management software',
     metaTitle: 'Export Management Software for Exporters | ODOOVATIONS',
@@ -878,6 +905,7 @@ export const solutions: Solution[] = [
   },
   {
     slug: 'import-management-software',
+    categories: ['Import, Export & Trading', 'Finance & Accounting'],
     href: '/solutions/import-management-software',
     primaryKeyword: 'import management software',
     metaTitle: 'Import Management Software with Landed Costing | ODOOVATIONS',
@@ -960,6 +988,7 @@ export const solutions: Solution[] = [
   },
   {
     slug: 'trading-software',
+    categories: ['Import, Export & Trading', 'Finance & Accounting'],
     href: '/solutions/trading-software',
     primaryKeyword: 'import export trading software',
     metaTitle: 'Import / Export Trading Software | ODOOVATIONS',
@@ -1040,6 +1069,7 @@ export const solutions: Solution[] = [
   },
   {
     slug: 'reconciliation-software',
+    categories: ['Finance & Accounting'],
     href: '/solutions/reconciliation-software',
     primaryKeyword: 'reconciliation software',
     metaTitle: 'Reconciliation Software for Businesses | ODOOVATIONS',
@@ -1117,6 +1147,7 @@ export const solutions: Solution[] = [
   },
   {
     slug: 'appointment-system',
+    categories: ['Healthcare', 'AI & Automation'],
     href: '/solutions/appointment-system',
     primaryKeyword: 'appointment booking system',
     metaTitle: 'Appointment Booking System | ODOOVATIONS',

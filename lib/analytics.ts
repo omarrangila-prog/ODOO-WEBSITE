@@ -21,6 +21,7 @@ export type AnalyticsEvent =
   | 'work_filter_used'
   | 'playground_flow_selected'
   | 'playground_played'
+  | 'solution_filter_used'
   | 'workflow_file_uploaded'
   | 'consultation_form_submitted'
   | 'scheduling_link_clicked';

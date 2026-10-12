@@ -9,6 +9,7 @@ import { CtaBand } from '@/components/ui/CtaBand';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { AnswerCard } from '@/components/ui/AnswerCard';
 import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
+import { SolutionFinder } from '@/components/solutions/SolutionFinder';
 import { TextGap } from '@/components/ui/TextGap';
 
 const PATH = '/solutions';
@@ -80,50 +81,10 @@ export default function SolutionsIndex() {
         </div>
       </section>
 
-      {/* Editorial rows — matches the /services hub pattern */}
-      <section className="theme-light bay-sm">
-        <div className="shell">
-          <ol>
-            {solutions.map((s, i) => (
-              <li key={s.slug} className="border-t border-line-light last:border-b">
-                <Link
-                  href={s.href}
-                  className="group flex flex-col gap-4 py-10 transition-colors sm:flex-row sm:items-start sm:gap-10 sm:py-12"
-                >
-                  <span className="font-heading text-[15px] font-semibold text-ink/25 sm:w-16 sm:shrink-0 sm:pt-2">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span className="flex-1">
-                    <span className="block text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-muted">
-                      {s.eyebrow}
-                    </span>
-                    <span className="mt-2 block font-heading text-[clamp(24px,2.8vw,34px)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink transition-colors group-hover:text-violet">
-                      {s.h1}
-                    </span>
-                    <span className="mt-3 block max-w-[52ch] text-[16.5px] leading-relaxed text-ink-muted">
-                      {s.metaDescription}
-                    </span>
-                    <span className="mt-4 flex flex-wrap gap-2">
-                      {s.modules.slice(0, 5).map((m) => (
-                        <span
-                          key={m}
-                          className="rounded-full border border-line-light px-3 py-1 text-[12.5px] text-ink-muted"
-                        >
-                          {m}
-                        </span>
-                      ))}
-                    </span>
-                  </span>
-                  <ArrowUpRight
-                    className="h-6 w-6 shrink-0 text-ink/30 transition-all group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-violet sm:mt-2"
-                    aria-hidden
-                  />
-                </Link>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+      {/* Searchable, filterable library. Replaces the static editorial list:
+          15 solutions is past the point where a plain list helps someone
+          find the one they need. */}
+      <SolutionFinder />
 
       {/* Route back up to the capability divisions */}
       <section className="theme-graphite bay-sm">
