@@ -22,7 +22,12 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   return buildMetadata({ title: ind.metaTitle, description: ind.metaDescription, path: ind.href });
 }
 
-const industryFaq = faqs.filter((f) =>
+/*
+ * Fallback only. Every industry now carries its own questions; this generic
+ * set remains for any industry added later that has not been written up yet,
+ * so the page still renders rather than shipping an empty FAQ section.
+ */
+const sharedIndustryFaq = faqs.filter((f) =>
   [
     'Is Odoo suitable for a small or medium-sized business?',
     'Can Odoo follow our existing business process?',
@@ -34,6 +39,8 @@ const industryFaq = faqs.filter((f) =>
 export default function IndustryPage({ params }: { params: { slug: string } }) {
   const ind = getIndustry(params.slug);
   if (!ind) notFound();
+
+  const industryFaq = ind.faqs ?? sharedIndustryFaq;
 
   const crumbs = [
     { name: 'Home', path: '/' },

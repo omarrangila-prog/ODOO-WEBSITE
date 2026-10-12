@@ -24,6 +24,8 @@ const viewports = [
   ['390x844', 390, 844],
   ['393x873', 393, 873],
   ['414x896', 414, 896],
+  // 430 is the iPhone 15/16 Pro Max CSS width, named in the mobile audit.
+  ['430x932', 430, 932],
   ['768x1024', 768, 1024],
   ['820x1180', 820, 1180],
   ['1024x768', 1024, 768],
@@ -48,6 +50,8 @@ const pages = [
   ['global', '/company/global-delivery'],
   ['resources', '/resources'],
   ['contact', '/contact'],
+  ['about', '/company/about'],
+  ['clients', '/company/clients'],
 ];
 
 /** Runs inside the page. Returns every layout defect it can see. */

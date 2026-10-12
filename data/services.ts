@@ -39,6 +39,28 @@ export const services: Service[] = [
   {
     slug: 'odoo-implementation-pakistan',
     division: 'odoo-erp',
+    faqs: [
+      {
+        question: 'Do we have to move everything to Odoo at once?',
+        answer:
+          'No. A phased go-live is usually safer: start with the modules that carry the most daily pain — often sales, inventory or accounting — run them properly, then add the rest. A single big-bang cutover concentrates every risk on one weekend, and it also asks your team to learn everything simultaneously.',
+      },
+      {
+        question: 'What do you need from our team during implementation?',
+        answer:
+          'Time from the people who actually do the work, not only management. We need someone per area who can say how the process really runs, answer questions during configuration, and test their own workflows before go-live. Implementations slow down far more often from unavailable decision-makers than from technical problems.',
+      },
+      {
+        question: 'What happens to our existing data?',
+        answer:
+          'It is prepared, cleaned and validated before go-live rather than copied as-is. Most sources — Excel, an older ERP, or a mix — contain duplicates, inconsistent names and incomplete records that would otherwise become permanent. We agree exactly what moves during the blueprint stage.',
+      },
+      {
+        question: 'Is Odoo a sensible choice for a small business?',
+        answer:
+          'Often, because you run only the modules you need and add more later. It is a poor choice if you want something that works with no configuration at all, or if nobody internally will own the system. We will tell you if we think a simpler tool fits your situation better.',
+      },
+    ],
     href: '/services/odoo-implementation-pakistan',
     title: 'Odoo Implementation in Pakistan',
     navLabel: 'Odoo Implementation',
@@ -87,6 +109,28 @@ export const services: Service[] = [
   {
     slug: 'custom-odoo-development',
     division: 'odoo-erp',
+    faqs: [
+      {
+        question: 'When is custom development the wrong answer?',
+        answer:
+          'When standard Odoo already does the job in a slightly different way to your current habit. Every custom module is code that must be maintained and re-tested at each upgrade, so we look first for configuration, then for an existing app, and only then build. Changing a process is sometimes cheaper than encoding it forever.',
+      },
+      {
+        question: 'Will custom modules break when Odoo upgrades?',
+        answer:
+          'Custom code is the part most likely to need work at an upgrade — that is true of any Odoo project. We reduce the cost by keeping customisations in separate modules rather than editing core, and by preferring documented extension points over overrides, so an upgrade is a review rather than a rewrite.',
+      },
+      {
+        question: 'Who owns the code you write?',
+        answer:
+          'You do. Custom modules built for your project are yours, and you receive the source. You are not locked into us to keep the system running, and another competent Odoo developer can pick the work up.',
+      },
+      {
+        question: 'Can you work on modules another developer built?',
+        answer:
+          'Usually yes, after reading the code. We ask for repository access and look at how it was built before quoting, because taking over undocumented customisations without reviewing them first is how estimates go badly wrong.',
+      },
+    ],
     href: '/services/custom-odoo-development',
     title: 'Custom Odoo Development',
     navLabel: 'Custom Odoo Development',
@@ -135,6 +179,28 @@ export const services: Service[] = [
   {
     slug: 'odoo-integration',
     division: 'odoo-erp',
+    faqs: [
+      {
+        question: 'What can Odoo realistically integrate with?',
+        answer:
+          'Anything with a documented API or a reliable file exchange: payment gateways, couriers, e-commerce platforms, bank statements, marketplaces, WhatsApp, and most modern SaaS. Systems with no API can sometimes be bridged with scheduled file imports, which is slower and more fragile but often sufficient.',
+      },
+      {
+        question: 'What happens when an integration fails at 2am?',
+        answer:
+          'A well-built integration queues and retries rather than silently dropping the record, and logs failures somewhere a person will actually see. We design for the failure case explicitly, because the question is not whether an external service will be unavailable but what your system does when it is.',
+      },
+      {
+        question: 'Can you integrate with a system we built in-house?',
+        answer:
+          'Yes, if it can expose data in some consistent way. The practical constraint is rarely Odoo — it is whether the other system has a stable interface and someone who understands it well enough to answer questions.',
+      },
+      {
+        question: 'Is two-way sync always the right design?',
+        answer:
+          'No. Two-way sync creates conflicts when the same record changes on both sides, so it needs rules about which system wins. Where one system is clearly the source of truth, one-way sync is simpler, cheaper and much easier to debug.',
+      },
+    ],
     href: '/services/odoo-integration',
     title: 'Odoo Integration Services',
     navLabel: 'Odoo Integration',
@@ -183,6 +249,28 @@ export const services: Service[] = [
   {
     slug: 'odoo-consulting',
     division: 'odoo-erp',
+    faqs: [
+      {
+        question: 'What does a consulting engagement produce?',
+        answer:
+          'A written assessment of how your processes currently run, where the system is being worked around, and what we would recommend changing — in what order and why. It is useful on its own: you can take it to another implementer, or to your own team.',
+      },
+      {
+        question: 'Can you review an Odoo system someone else implemented?',
+        answer:
+          'Yes, and it is a common request. We look at configuration, customisations, data quality and how the system is actually used day to day, which is often where the real problem sits rather than in the software.',
+      },
+      {
+        question: 'Do you only recommend Odoo?',
+        answer:
+          'No. If your requirement is genuinely served better by something else, or by fixing a process rather than buying software, we will say so. A recommendation that ignores that is not worth paying for.',
+      },
+      {
+        question: 'Is consulting worth it if we already know what we want?',
+        answer:
+          'Sometimes not, and we will tell you. It earns its cost when the requirement is unclear, when stakeholders disagree about what the system should do, or when a previous attempt failed and nobody has established why.',
+      },
+    ],
     href: '/services/odoo-consulting',
     title: 'Odoo Consulting',
     navLabel: 'Consulting',
@@ -224,6 +312,28 @@ export const services: Service[] = [
   {
     slug: 'odoo-support-maintenance',
     division: 'odoo-erp',
+    faqs: [
+      {
+        question: 'What does support actually cover?',
+        answer:
+          'Fixing things that break, answering how-to questions, applying updates, monitoring the parts that fail quietly, and making small changes as the business shifts. What it covers for you is written down before we start, so neither side is guessing.',
+      },
+      {
+        question: 'How quickly do you respond?',
+        answer:
+          'Response targets are agreed in writing per engagement rather than advertised as a single number, because a stopped production line and a formatting question are not the same urgency. We do not claim staffed 24/7 cover: enquiries sent outside working hours are received automatically and picked up by a person when work resumes.',
+      },
+      {
+        question: 'Do you support systems you did not build?',
+        answer:
+          'Yes, after a review. We need to understand the configuration and any custom modules before taking responsibility for keeping them running, so there is usually a short assessment first.',
+      },
+      {
+        question: 'What happens if we stop support?',
+        answer:
+          'The system keeps running and remains yours — support is not a licence. You lose the monitoring, the updates and the person who knows your configuration, which matters most at upgrades and when something breaks.',
+      },
+    ],
     href: '/services/odoo-support-maintenance',
     title: 'Odoo Support & Maintenance',
     navLabel: 'Support & Maintenance',
@@ -265,6 +375,28 @@ export const services: Service[] = [
   {
     slug: 'odoo-training',
     division: 'odoo-erp',
+    faqs: [
+      {
+        question: 'Who should attend training?',
+        answer:
+          'The people who will use the system daily, in their own workflows, rather than one representative who then has to teach everyone else. Second-hand training is where most of the understanding is lost.',
+      },
+      {
+        question: 'Is training a one-off session?',
+        answer:
+          'It works better as a short session before go-live and another once people have hit real situations, because the useful questions only appear after a few weeks of actual use. A single pre-launch session tends to be forgotten.',
+      },
+      {
+        question: 'Do you train administrators differently from end users?',
+        answer:
+          'Yes. End users need their own daily tasks done confidently. Administrators need to understand configuration, user access, and what they can safely change themselves without calling anyone.',
+      },
+      {
+        question: 'Do we get materials we can reuse?',
+        answer:
+          'Yes — documentation covering your configuration, not generic Odoo manuals, so new staff can be brought up to speed without repeating the whole engagement.',
+      },
+    ],
     href: '/services/odoo-training',
     title: 'Odoo Training',
     navLabel: 'Training',
@@ -306,6 +438,28 @@ export const services: Service[] = [
   {
     slug: 'odoo-migration',
     division: 'odoo-erp',
+    faqs: [
+      {
+        question: 'How long does a migration take?',
+        answer:
+          'It depends almost entirely on data quality and how much custom code exists, not on the record count. Clean data in a standard configuration moves quickly; years of inconsistent entry and undocumented customisations are what extend the timeline. We assess both before giving you a schedule.',
+      },
+      {
+        question: 'Will we lose data?',
+        answer:
+          'The source system stays intact and available until you have accepted the new one. Migration is a copy that is validated, not a move, and we agree the verification checks with you beforehand so acceptance is based on evidence rather than impression.',
+      },
+      {
+        question: 'Can we migrate from Excel rather than another ERP?',
+        answer:
+          'Yes, and it is common. Spreadsheets usually need more cleaning than an ERP export because they allow inconsistencies a database would have rejected — duplicate customers, varying date formats, totals typed by hand.',
+      },
+      {
+        question: 'Do we have to migrate all our history?',
+        answer:
+          'No, and often you should not. Open transactions and current master data are essential; ten years of closed records may be better kept as an archive you can still read, rather than carried into the new system where it slows everything down.',
+      },
+    ],
     href: '/services/odoo-migration',
     title: 'Odoo Migration Services',
     navLabel: 'Odoo Migration',
@@ -338,6 +492,28 @@ export const services: Service[] = [
   {
     slug: 'odoo-ai-dashboards',
     division: 'odoo-erp',
+    faqs: [
+      {
+        question: 'Are the figures in your demo dashboard real?',
+        answer:
+          'No. Every number in the dashboard shown on this site is sample data, labelled as such on the page. Your dashboards are built from your own Odoo records.',
+      },
+      {
+        question: 'What makes a dashboard actually get used?',
+        answer:
+          'Answering a question someone already has, and being trustworthy. A dashboard that disagrees with the numbers people check elsewhere gets abandoned immediately, so reconciling definitions — what counts as a sale, when revenue is recognised — matters more than the visualisation.',
+      },
+      {
+        question: 'What does the AI part do?',
+        answer:
+          'It summarises and explains what the data shows, surfaces changes worth attention, and answers questions in plain language. It does not invent figures: the numbers come from your records, and where a conclusion is uncertain it should be presented as uncertain.',
+      },
+      {
+        question: 'Can dashboards show data from outside Odoo?',
+        answer:
+          'Yes, where that data can be reached through an API or a scheduled import. Combining Odoo with, say, advertising spend or marketplace sales is a frequent requirement.',
+      },
+    ],
     href: '/services/odoo-ai-dashboards',
     title: 'Odoo AI Dashboards & Analytics',
     navLabel: 'AI Dashboards',
@@ -370,6 +546,28 @@ export const services: Service[] = [
   {
     slug: 'odoo-business-automation',
     division: 'odoo-erp',
+    faqs: [
+      {
+        question: 'What is worth automating first?',
+        answer:
+          'High-frequency, rule-based steps where a human adds no judgement: status updates, document generation, routine approvals that always follow the same rule, notifications. The best early candidates are usually boring and daily rather than complex and occasional.',
+      },
+      {
+        question: 'What should not be automated?',
+        answer:
+          'Decisions involving negotiation, exceptions or judgement, and any process nobody can describe consistently. Automating an unclear process makes it faster and harder to fix, so we document how it actually runs before writing a rule.',
+      },
+      {
+        question: 'What happens when an automated step is wrong?',
+        answer:
+          'There must be a way for a person to see it happened and reverse it. Automation without visibility produces errors that compound silently, so we build logging and an override path alongside the rule itself.',
+      },
+      {
+        question: 'Will automation replace our staff?',
+        answer:
+          'In our experience it removes specific repetitive tasks rather than roles, and the realistic gain is people spending less time on data entry and chasing. We would rather set that expectation than promise headcount savings we cannot evidence.',
+      },
+    ],
     href: '/services/odoo-business-automation',
     title: 'Odoo Business Process Automation',
     navLabel: 'Business Automation',

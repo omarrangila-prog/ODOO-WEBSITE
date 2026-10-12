@@ -36,11 +36,39 @@ export interface Industry {
    * page looking like an Odoo-only pitch.
    */
   beyond?: { label: string; body: string; href: string }[];
+  /**
+   * Industry-specific FAQs. Every industry page previously rendered one
+   * identical shared set, which meant fourteen pages emitting the same
+   * FAQPage schema and answering questions nobody asked on that page.
+   */
+  faqs?: { question: string; answer: string }[];
 }
 
 export const industries: Industry[] = [
   {
     slug: 'manufacturing',
+    faqs: [
+      {
+        question: 'Can Odoo handle our bills of materials and production routing?',
+        answer:
+          'Yes — multi-level BoMs, work centres, routings and work orders are standard manufacturing functionality. The real work is capturing how your shop floor actually sequences jobs, including the informal steps people have learned to do, rather than the version written in a procedure document.',
+      },
+      {
+        question: 'How do we track actual production cost versus estimate?',
+        answer:
+          'By recording material consumption and work-centre time against each manufacturing order, so the costed BoM can be compared with what was really consumed. This only produces trustworthy numbers if the shop floor records scrap and rework honestly, which is a process question before it is a software one.',
+      },
+      {
+        question: 'What about subcontracted operations?',
+        answer:
+          'Odoo supports subcontracting, where components are issued to a vendor and a finished or semi-finished item comes back. It needs deciding upfront who owns the stock while it is out, because that affects both your inventory valuation and what you can promise customers.',
+      },
+      {
+        question: 'Do operators need to use the system directly?',
+        answer:
+          'For accurate data, yes — someone at the point of work has to confirm what was produced and consumed. A tablet at the work centre with a deliberately small set of actions works far better than asking the office to key in yesterday\'s paperwork.',
+      },
+    ],
     href: '/industries/manufacturing',
     name: 'Manufacturing',
     image: '/images/industry-manufacturing.webp',
@@ -78,6 +106,28 @@ export const industries: Industry[] = [
   },
   {
     slug: 'textile-apparel',
+    faqs: [
+      {
+        question: 'Can the system handle style, colour and size variants?',
+        answer:
+          'Yes. Product variants are designed for exactly this, so one style carries its colour and size combinations without creating hundreds of unrelated products. Getting the variant structure right at the start matters, because restructuring it later affects every historical transaction.',
+      },
+      {
+        question: 'How do we handle fabric consumption and wastage?',
+        answer:
+          'Through the bill of materials with a wastage allowance, and by recording actual consumption against production. Cutting wastage varies by marker efficiency and fabric, so a single fixed percentage across all styles will quietly misstate your costs.',
+      },
+      {
+        question: 'Can we manage export documentation from the same system?',
+        answer:
+          'Export paperwork can be generated from the sales and delivery records rather than retyped into separate templates. What each destination requires differs, so the document set is configured to your markets rather than assumed.',
+      },
+      {
+        question: 'What about seasonal and sample production?',
+        answer:
+          'Samples are typically handled as their own production flow so their cost does not distort production costing for bulk orders. Seasonal planning depends more on how far ahead your buyers commit than on the software.',
+      },
+    ],
     href: '/industries/textile-apparel',
     name: 'Textile & Apparel',
     image: '/images/industry-textile-apparel.webp',
@@ -115,6 +165,28 @@ export const industries: Industry[] = [
   },
   {
     slug: 'distribution',
+    faqs: [
+      {
+        question: 'Can we manage multiple warehouses and inter-warehouse transfers?',
+        answer:
+          'Yes, including transfer routes, lead times between locations and stock reservations per warehouse. The configuration decision that matters is which location fulfils which customer, because that drives both availability promises and replenishment.',
+      },
+      {
+        question: 'How does the system handle batch or expiry tracking?',
+        answer:
+          'Lots and serial numbers track batches, with removal strategies such as FEFO so stock nearest expiry is picked first. This requires scanning or recording at receipt, which is the step most often skipped and the reason traceability later fails.',
+      },
+      {
+        question: 'Can we set different prices for different customers?',
+        answer:
+          'Yes — price lists by customer, customer group, quantity break or date range. Where pricing currently lives in individual sales reps\' heads, the hardest part is agreeing the actual rules, not configuring them.',
+      },
+      {
+        question: 'What about goods returned from customers?',
+        answer:
+          'Returns are handled as reverse movements with their own quality decision: back to saleable stock, to quarantine, or to scrap. Deciding that routing explicitly prevents returned goods from silently re-entering stock in unknown condition.',
+      },
+    ],
     href: '/industries/distribution',
     name: 'Distribution',
     image: '/images/industry-distribution.webp',
@@ -152,6 +224,28 @@ export const industries: Industry[] = [
   },
   {
     slug: 'retail-ecommerce',
+    faqs: [
+      {
+        question: 'Can Odoo keep our online store and physical stock in sync?',
+        answer:
+          'Yes, through integration with your e-commerce platform or by running the store on Odoo itself. The critical design question is which system owns stock levels, because two systems both believing they can allocate the same unit is how overselling happens.',
+      },
+      {
+        question: 'Does the POS work when the internet drops?',
+        answer:
+          'Odoo POS continues taking sales offline and synchronises when the connection returns. It is worth testing this deliberately before go-live rather than discovering the behaviour during a busy trading day.',
+      },
+      {
+        question: 'Can we run promotions and loyalty?',
+        answer:
+          'Discounts, coupons, promotional pricing and loyalty programmes are standard. The practical limit is usually how clearly the promotion rules are defined — overlapping promotions need a stated precedence or the result is unpredictable.',
+      },
+      {
+        question: 'How do we handle online orders that are picked in store?',
+        answer:
+          'As a delivery operation from that store\'s location, so stock is deducted where it physically was. This only works if in-store stock accuracy is good enough to trust, which often needs addressing first.',
+      },
+    ],
     href: '/industries/retail-ecommerce',
     name: 'Retail & E-commerce',
     image: '/images/industry-retail-ecommerce.webp',
@@ -189,6 +283,28 @@ export const industries: Industry[] = [
   },
   {
     slug: 'pharmaceuticals',
+    faqs: [
+      {
+        question: 'Does the system support batch traceability and expiry control?',
+        answer:
+          'Yes — lot tracking with expiry dates, FEFO picking, and the ability to trace a batch forward to customers and back to supplier receipt. Traceability depends entirely on lot capture at every movement, so the process has to make that unavoidable rather than optional.',
+      },
+      {
+        question: 'Can we handle recalls?',
+        answer:
+          'Lot traceability lets you identify every delivery containing an affected batch. How quickly you can act then depends on the quality of your customer and delivery records, which is worth auditing before you need them.',
+      },
+      {
+        question: 'What about regulatory documentation?',
+        answer:
+          'Documents can be generated from transaction records rather than maintained separately. We do not claim any pre-certified regulatory compliance: what the system produces must be reviewed against your obligations by someone qualified to do that.',
+      },
+      {
+        question: 'Can we control which stock is released for sale?',
+        answer:
+          'Yes, through quality control states and separate quarantine locations, so material is not saleable until it has been released. This is a configuration of your own release process, which has to be documented first.',
+      },
+    ],
     href: '/industries/pharmaceuticals',
     name: 'Pharmaceuticals',
     image: '/images/industry-pharmaceuticals.webp',
@@ -226,6 +342,28 @@ export const industries: Industry[] = [
   },
   {
     slug: 'construction',
+    faqs: [
+      {
+        question: 'Can we track cost per project rather than per month?',
+        answer:
+          'Yes — analytic accounting attributes material, labour and subcontractor cost to a specific project or phase, so margin is visible per job. The usual obstacle is site costs that never reach the office as documents, not the accounting structure.',
+      },
+      {
+        question: 'How do we handle variations and change orders?',
+        answer:
+          'As amendments to the project scope with their own approved value, kept distinct from the original contract. Keeping them separate is what lets you show a client why the final figure differs from the quotation.',
+      },
+      {
+        question: 'Can the system manage retention?',
+        answer:
+          'Retention held against invoices can be tracked so the outstanding amount and its release date remain visible rather than being forgotten until someone reconciles the ledger.',
+      },
+      {
+        question: 'What about equipment and plant?',
+        answer:
+          'Equipment can be tracked with maintenance schedules and allocated to projects. Whether to charge internal plant to a project at a rate is a policy decision that should be settled before configuration.',
+      },
+    ],
     href: '/industries/construction',
     name: 'Construction',
     image: '/images/industry-construction.webp',
@@ -263,6 +401,28 @@ export const industries: Industry[] = [
   },
   {
     slug: 'professional-services',
+    faqs: [
+      {
+        question: 'Can we track billable time accurately?',
+        answer:
+          'Timesheets link time to a project and task, and can feed invoicing directly. Accuracy depends on how quickly people record time — reconstructed at the end of the month, timesheets become an estimate rather than a record.',
+      },
+      {
+        question: 'Does it handle fixed-price as well as time-and-materials?',
+        answer:
+          'Yes. Fixed-price work still needs time recorded to show whether the engagement was profitable, even though the client is not billed on it.',
+      },
+      {
+        question: 'Can we see utilisation across the team?',
+        answer:
+          'Yes, from recorded time against available capacity. Utilisation is only meaningful once you have defined what counts as billable, which is a question firms frequently answer inconsistently between teams.',
+      },
+      {
+        question: 'What about retainers and recurring billing?',
+        answer:
+          'Recurring invoices with an agreed scope are supported, and drawdown against a retainer balance can be tracked so both sides can see what remains.',
+      },
+    ],
     href: '/industries/professional-services',
     name: 'Professional Services',
     image: '/images/industry-professional-services.webp',
@@ -300,6 +460,28 @@ export const industries: Industry[] = [
   },
   {
     slug: 'food-hospitality',
+    faqs: [
+      {
+        question: 'Can it handle recipes and portion costing?',
+        answer:
+          'Yes, through bills of materials for menu items, so ingredient cost rolls up to the plate. Yields and trim loss need to be realistic, otherwise theoretical food cost will not match what the stock count says.',
+      },
+      {
+        question: 'Does it support multiple outlets?',
+        answer:
+          'Yes, with per-location stock and sales, and central purchasing where that makes sense. Outlets usually need some local autonomy over ordering, which is a policy question to settle before configuration.',
+      },
+      {
+        question: 'Can we track wastage?',
+        answer:
+          'Wastage can be recorded as its own stock movement with a reason, which is what makes the difference between theoretical and actual consumption explainable rather than just visible.',
+      },
+      {
+        question: 'What about kitchen display and order routing?',
+        answer:
+          'Orders can be routed to the relevant preparation area from the point of sale. How many stations and what routing rules apply depends on your kitchen layout rather than on the software.',
+      },
+    ],
     href: '/industries/food-hospitality',
     name: 'Food & Hospitality',
     image: '/images/industry-food-hospitality.webp',
@@ -337,6 +519,28 @@ export const industries: Industry[] = [
   },
   {
     slug: 'healthcare-clinics',
+    faqs: [
+      {
+        question: 'Can we manage appointments and patient records?',
+        answer:
+          'Scheduling, patient records and billing can run in one system. Clinical record requirements vary by jurisdiction and specialism, so what may be stored and for how long must be confirmed against your own obligations rather than assumed.',
+      },
+      {
+        question: 'How is patient data protected?',
+        answer:
+          'Through role-based access so staff see only what their role requires, plus audit logging of access. We do not claim certification against any specific health data standard; the controls are configured to the requirements you are subject to.',
+      },
+      {
+        question: 'Can we handle insurance or panel billing?',
+        answer:
+          'Billing to a third party such as an insurer or corporate panel can be configured with its own rates and approval steps. The complexity is in the claim rules, which differ per payer.',
+      },
+      {
+        question: 'Does it handle pharmacy or consumable stock?',
+        answer:
+          'Yes, including batch and expiry tracking for medicines and consumables, with the same traceability as any other lot-tracked stock.',
+      },
+    ],
     href: '/industries/healthcare-clinics',
     name: 'Healthcare & Clinics',
     h1: 'Software for Hospitals, Clinics and Diagnostic Centres',
@@ -373,6 +577,28 @@ export const industries: Industry[] = [
   },
   {
     slug: 'logistics-transport',
+    faqs: [
+      {
+        question: 'Can we track shipments and delivery status?',
+        answer:
+          'Yes, with delivery orders, routes and status visible to both operations and customer service, so the answer to "where is my order" does not require a phone call to the driver.',
+      },
+      {
+        question: 'Does it integrate with courier services?',
+        answer:
+          'Where the courier offers an API, label generation and tracking updates can be automated. Couriers without one usually still support a file exchange, which is slower but workable.',
+      },
+      {
+        question: 'Can we calculate freight cost per consignment?',
+        answer:
+          'Freight cost can be attributed to a consignment or job so margin is visible per movement rather than only as a monthly total. Accuracy depends on fuel, toll and driver costs reaching the system.',
+      },
+      {
+        question: 'What about fleet maintenance?',
+        answer:
+          'Vehicles can be tracked with service schedules and cost history, which makes the running cost of individual vehicles comparable rather than pooled.',
+      },
+    ],
     href: '/industries/logistics-transport',
     name: 'Logistics & Transport',
     h1: 'Software for Logistics, Transport and Delivery Businesses',
@@ -409,6 +635,28 @@ export const industries: Industry[] = [
   },
   {
     slug: 'wholesale-trading',
+    faqs: [
+      {
+        question: 'Can we manage customer-specific pricing at scale?',
+        answer:
+          'Yes, through price lists by customer, group, quantity and date. Where pricing is currently negotiated per order and remembered informally, the configuration work is mostly agreeing what the rules actually are.',
+      },
+      {
+        question: 'How do we handle credit limits?',
+        answer:
+          'Credit limits can block or warn on new orders when a customer is over their limit or overdue. Whether it blocks or warns is a commercial decision, and it is worth deciding before go-live rather than during a dispute.',
+      },
+      {
+        question: 'Can we see real margin per customer or product?',
+        answer:
+          'Yes, provided landed costs are recorded. Margin calculated on purchase price alone will overstate profitability wherever freight and duty are significant.',
+      },
+      {
+        question: 'What about partial deliveries and backorders?',
+        answer:
+          'Partial delivery with an automatic backorder for the remainder is standard, so what is owed to the customer stays visible rather than being tracked on a side list.',
+      },
+    ],
     href: '/industries/wholesale-trading',
     name: 'Wholesale & Trading',
     h1: 'Software for Wholesale and Trading Businesses',
@@ -445,6 +693,28 @@ export const industries: Industry[] = [
   },
   {
     slug: 'import-export',
+    faqs: [
+      {
+        question: 'Can the system handle landed cost?',
+        answer:
+          'Yes — freight, duty, clearing and other charges can be apportioned across a shipment so the true cost per unit is known rather than estimated. The apportionment basis, whether value, weight or volume, should be chosen deliberately as it changes unit costs.',
+      },
+      {
+        question: 'Does it support multiple currencies?',
+        answer:
+          'Yes, with transaction currency, revaluation and realised exchange differences handled in the ledger. The configuration needs to match how your accountant expects gains and losses to be recognised.',
+      },
+      {
+        question: 'Can we track consignments through customs stages?',
+        answer:
+          'Shipment status can be tracked through its stages so delays are visible before they affect a customer commitment. The stages are configured to your actual process and destinations.',
+      },
+      {
+        question: 'What about export documentation?',
+        answer:
+          'Documents can be generated from the underlying records rather than retyped. Requirements differ per destination, so the document set is built for the markets you ship to.',
+      },
+    ],
     href: '/industries/import-export',
     name: 'Import & Export',
     h1: 'Software for Importers, Exporters and Trading Houses',
@@ -481,6 +751,28 @@ export const industries: Industry[] = [
   },
   {
     slug: 'education',
+    faqs: [
+      {
+        question: 'Can we manage student enrolment and fees?',
+        answer:
+          'Enrolment, fee schedules, invoicing and payment tracking can run in one place, including instalment plans and the follow-up of what is outstanding.',
+      },
+      {
+        question: 'Does it handle multiple programmes or campuses?',
+        answer:
+          'Yes, with separate programmes, intakes and locations, and reporting that can be viewed per campus or consolidated.',
+      },
+      {
+        question: 'Can parents or students see their own records?',
+        answer:
+          'A portal can expose fee statements and payment history to the account holder. What else is exposed is a policy decision, particularly where students are minors.',
+      },
+      {
+        question: 'What about staff payroll and HR?',
+        answer:
+          'HR records, leave and payroll can be managed in the same system. Payroll rules are country-specific and must be configured to local regulation rather than assumed from a template.',
+      },
+    ],
     href: '/industries/education',
     name: 'Education',
     h1: 'Software for Schools, Colleges and Training Institutes',
@@ -517,6 +809,28 @@ export const industries: Industry[] = [
   },
   {
     slug: 'agencies-media',
+    faqs: [
+      {
+        question: 'Can we track profitability per client and per project?',
+        answer:
+          'Yes, by attributing time and external costs to a project. The common gap is unbilled scope creep, which only becomes visible once time is recorded against the job it actually served.',
+      },
+      {
+        question: 'Does it handle retainers?',
+        answer:
+          'Retainers with an agreed monthly scope are supported, with drawdown visible so overservicing can be identified while there is still time to discuss it.',
+      },
+      {
+        question: 'Can we manage freelancer and supplier costs?',
+        answer:
+          'External costs can be attributed to the project they belong to, so project margin reflects bought-in work rather than only internal time.',
+      },
+      {
+        question: 'What about approvals and revisions?',
+        answer:
+          'Approval stages can be tracked so it is clear what was signed off and when. Where revision rounds are contractually limited, recording them is what makes an additional-cost conversation possible.',
+      },
+    ],
     href: '/industries/agencies-media',
     name: 'Agencies & Media',
     h1: 'Systems for Agencies, Studios and Media Businesses',
