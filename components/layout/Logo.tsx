@@ -6,6 +6,12 @@ import { cn } from '@/lib/utilities';
  * Brand lockup: the real ODOOVATIONS ring mark (cropped from the supplied logo)
  * on a subtle light plate so it reads cleanly on the dark header, paired with a
  * crisp text wordmark that stays sharp at any size.
+ *
+ * No aria-label: the visible wordmark and tagline already form the accessible
+ * name, and an aria-label omitting the tagline made the accessible name a
+ * mismatch for the visible text (WCAG 2.5.3 — Lighthouse reports this as
+ * label-content-name-mismatch). A trailing sr-only "home" states the
+ * destination without contradicting what is on screen.
  */
 export function Logo({
   className,
@@ -23,7 +29,6 @@ export function Logo({
   return (
     <Link
       href="/"
-      aria-label="ODOOVATIONS — home"
       className={cn('group inline-flex min-h-[44px] items-center gap-2.5', className)}
     >
       <span
@@ -53,6 +58,7 @@ export function Logo({
           Innovate • Automate • Elevate
         </span>
       </span>
+      <span className="sr-only">home</span>
     </Link>
   );
 }

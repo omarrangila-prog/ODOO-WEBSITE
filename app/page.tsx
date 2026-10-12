@@ -7,21 +7,35 @@ import { Manifesto } from '@/components/home/Manifesto';
 import { GlobalDeliveryBand } from '@/components/home/GlobalDeliveryBand';
 import { AnythingCustom } from '@/components/home/AnythingCustom';
 import { IntentSelector } from '@/components/home/IntentSelector';
-import { TrendingTopics } from '@/components/home/TrendingTopics';
 import { RoadmapProvider } from '@/components/home/RoadmapContext';
 import { FrictionDiagnostic } from '@/components/home/FrictionDiagnostic';
-import { ServicesRail } from '@/components/home/ServicesRail';
-import { CustomStory } from '@/components/home/CustomStory';
 import { IndustriesCinema } from '@/components/home/IndustriesCinema';
-import { JourneyRoute } from '@/components/home/JourneyRoute';
 import { CaseStudiesEditorial } from '@/components/home/CaseStudiesEditorial';
-import { TestimonialNarrative } from '@/components/home/TestimonialNarrative';
 import { ExpertMoment } from '@/components/home/ExpertMoment';
 import { Faq } from '@/components/home/Faq';
 import { RoadmapAssembler } from '@/components/home/RoadmapAssembler';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { webPageSchema, localBusinessSchema } from '@/lib/seo';
 
+/**
+ * Homepage — a directed story, not a catalogue.
+ *
+ * Order: what we do (hero, capabilities, ecosystem) → who trusts us
+ * (clients) → what do you need (selector) → how it works (playground,
+ * diagnostic) → proof (industries, work) → reassurance (global, custom,
+ * people) → questions → start.
+ *
+ * Deliberately NOT here, and why:
+ *  - ServicesRail, CustomStory and JourneyRoute are Odoo-specific depth
+ *    (the rail alone was 5,760px, 22% of the page). They live on /services,
+ *    the Odoo & ERP hub, where someone researching Odoo actually lands.
+ *  - TrendingTopics duplicated the resources hub.
+ *  - TestimonialNarrative is held back until named, verified client
+ *    testimonials exist; an unattributed testimonial section is worse than
+ *    none.
+ *  - The FAQ shows six company-level questions and links to /faq, which
+ *    owns the FAQPage schema.
+ */
 export default function HomePage() {
   return (
     <>
@@ -44,15 +58,10 @@ export default function HomePage() {
       <SystemsPlayground />
       <RoadmapProvider>
         <FrictionDiagnostic />
-        <ServicesRail />
-        <TrendingTopics />
-        <CustomStory />
         <IndustriesCinema />
-        <GlobalDeliveryBand />
-        <JourneyRoute />
         <CaseStudiesEditorial />
+        <GlobalDeliveryBand />
         <AnythingCustom />
-        <TestimonialNarrative />
         <ExpertMoment />
         <Faq />
         <RoadmapAssembler />
