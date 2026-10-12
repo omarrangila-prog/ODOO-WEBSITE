@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { TrendingUp, Zap, PackageCheck } from 'lucide-react';
 import { OdooDashboard } from './OdooDashboard';
+import { TextGap } from '@/components/ui/TextGap';
 
 /**
  * Premium floating dashboard with perspective, controlled glow, three floating
@@ -62,6 +63,7 @@ export function HeroDashboardVisual() {
               </span>
               <div>
                 <p className="text-[10px] text-white/55">Total Profit</p>
+                <TextGap />
                 <p className="font-heading text-[15px] font-bold text-white">PKR 2.45M</p>
               </div>
             </div>
@@ -76,6 +78,7 @@ export function HeroDashboardVisual() {
               </span>
               <div>
                 <p className="text-[10px] text-white/55">Automation</p>
+                <TextGap />
                 <p className="font-heading text-[15px] font-bold text-white">46 workflows</p>
               </div>
             </div>
@@ -90,6 +93,7 @@ export function HeroDashboardVisual() {
               </span>
               <div>
                 <p className="text-[9.5px] text-white/55">Live Inventory</p>
+                <TextGap />
                 <p className="text-[11.5px] font-semibold text-white">Accurate stock</p>
               </div>
             </div>

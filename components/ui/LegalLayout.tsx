@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { Breadcrumbs } from './Breadcrumbs';
+import { TextGap } from '@/components/ui/TextGap';
 
 interface Props {
   title: string;
@@ -22,6 +23,7 @@ export function LegalLayout({ title, updated, crumbLabel, crumbPath, children }:
         <div className="shell relative">
           <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: crumbLabel, path: crumbPath }]} />
           <h1 className="display-1">{title}</h1>
+          <TextGap />
           <p className="mt-5 text-[15px] text-text-dark-muted">Last updated: {updated}</p>
         </div>
       </section>

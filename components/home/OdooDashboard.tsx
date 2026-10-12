@@ -12,6 +12,7 @@ import {
   Search,
   Bell,
 } from 'lucide-react';
+import { TextGap } from '@/components/ui/TextGap';
 
 /**
  * Clean, coded Odoo-style operations dashboard — crisp at any size, correct
@@ -88,7 +89,9 @@ export function OdooDashboard() {
           {/* automations callout */}
           <div className="mt-2 rounded-xl border border-violet-bright/25 bg-[radial-gradient(circle_at_30%_0%,rgba(141,75,255,0.18),transparent)] p-2.5">
             <p className="text-[10px] font-semibold text-white/50">Automations</p>
+            <TextGap />
             <p className="mt-0.5 font-heading text-[16px] font-bold text-white">46 <span className="text-[11px] font-medium text-white/60">flows</span></p>
+            <TextGap />
             <p className="text-[10px] text-green">Running smoothly</p>
           </div>
         </nav>
@@ -102,7 +105,9 @@ export function OdooDashboard() {
             {kpis.map((k) => (
               <div key={k.label} className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-3">
                 <p className="text-[10px] text-white/50">{k.label}</p>
+                <TextGap />
                 <p className="mt-1 font-heading text-[15px] font-bold text-white sm:text-[17px]">{k.value}</p>
+                <TextGap />
                 <div className="mt-1.5 flex items-center justify-between gap-2">
                   <span className={`text-[10px] font-semibold ${k.up ? 'text-green' : 'text-[#ff6b7a]'}`}>{k.delta}</span>
                   <svg viewBox="0 0 48 18" className="h-4 w-14" fill="none" aria-hidden>
@@ -118,6 +123,7 @@ export function OdooDashboard() {
             {/* sales bar chart */}
             <div className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-3">
               <p className="text-[11px] font-medium text-white/70">Sales Overview</p>
+              <TextGap />
               <div className="mt-3 flex h-[86px] items-end gap-1.5">
                 {bars.map((h, i) => (
                   <div key={i} className="flex flex-1 flex-col items-center gap-1">
@@ -134,6 +140,7 @@ export function OdooDashboard() {
             {/* donut */}
             <div className="rounded-xl border border-white/[0.06] bg-white/[0.03] p-3">
               <p className="text-[11px] font-medium text-white/70">Top Products</p>
+              <TextGap />
               <div className="mt-2 flex items-center gap-3">
                 <svg viewBox="0 0 36 36" className="h-[70px] w-[70px] -rotate-90" aria-hidden>
                   {donut.map((d) => {
@@ -170,6 +177,7 @@ export function OdooDashboard() {
           {/* activity table */}
           <div className="mt-2.5 rounded-xl border border-white/[0.06] bg-white/[0.03] p-3">
             <p className="text-[11px] font-medium text-white/70">Recent Activities</p>
+            <TextGap />
             <ul className="mt-2 space-y-1.5">
               {activity.map((a) => (
                 <li key={a.what} className="flex items-center gap-2 text-[11px]">

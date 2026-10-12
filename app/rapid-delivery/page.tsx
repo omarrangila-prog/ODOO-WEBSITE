@@ -8,6 +8,7 @@ import { JsonLd } from '@/components/ui/JsonLd';
 import { AnswerCard } from '@/components/ui/AnswerCard';
 import { CtaBand } from '@/components/ui/CtaBand';
 import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
+import { TextGap } from '@/components/ui/TextGap';
 
 const PATH = '/rapid-delivery';
 const DESCRIPTION =
@@ -178,6 +179,7 @@ export default function RapidDeliveryPage() {
       <section className="theme-light bay-sm">
         <div className="shell">
           <h2 className="display-2">Four delivery tracks</h2>
+          <TextGap />
           <p className="lede mt-5 max-w-[var(--reading-width)]">
             Each track lists what it covers and what it does not. Read the exclusions &mdash;
             they are what make the rest of it credible.
@@ -197,6 +199,7 @@ export default function RapidDeliveryPage() {
                     <h3 className="font-heading text-[22px] font-semibold tracking-[-0.02em] text-ink">
                       {t.name}
                     </h3>
+                    <TextGap />
                     <p className="text-[13.5px] text-ink-muted">{t.window}</p>
                   </div>
                 </div>
@@ -204,6 +207,7 @@ export default function RapidDeliveryPage() {
                 <p className="mt-6 text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-muted">
                   Typically fits
                 </p>
+                <TextGap />
                 <ul className="mt-3 space-y-2">
                   {t.fits.map((f) => (
                     <li key={f} className="flex items-start gap-2.5 text-[15.5px] leading-relaxed text-ink-muted">
@@ -239,6 +243,7 @@ export default function RapidDeliveryPage() {
         <div className="shell grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <div>
             <h2 className="display-2">What we will not rush</h2>
+            <TextGap />
             <p className="lede mt-5">
               Speed is a feature until it becomes a liability. These are the things where we will
               recommend the normal schedule, even if you would rather hear otherwise.
@@ -262,10 +267,12 @@ export default function RapidDeliveryPage() {
       <section className="theme-light bay-sm">
         <div className="shell max-w-[var(--reading-width)]">
           <h2 className="display-2">What do you need, and when do you need it?</h2>
+          <TextGap />
           <p className="lede mt-5">
             Send the requirement and the deadline. We will come back with whether it fits a rapid
             track, what would have to be true for it to, and what we would deliver by when.
           </p>
+          <TextGap />
           <ul className="mt-8 space-y-2.5 text-[16px] text-ink-muted">
             {[
               'What you need built',
@@ -294,6 +301,7 @@ export default function RapidDeliveryPage() {
       <section className="theme-dark bay-sm">
         <div className="shell grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <h2 className="display-2">Common questions</h2>
+          <TextGap />
           <Accordion items={faqs} allowMultiple />
         </div>
       </section>

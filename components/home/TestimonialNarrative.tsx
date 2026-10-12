@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { testimonials } from '@/data/testimonials';
 import { cn } from '@/lib/utilities';
+import { TextGap } from '@/components/ui/TextGap';
 
 /**
  * Full-width human narrative. One testimonial fills the section as a large
@@ -26,6 +27,7 @@ export function TestimonialNarrative() {
         <div className="mb-12 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <div>
             <p className="eyebrow mb-4">In Their Words</p>
+            <TextGap />
             <h2 className="display-2 max-w-xl">What Changed After Working With Us.</h2>
           </div>
           {/* Selectable identities */}

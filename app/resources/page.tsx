@@ -7,6 +7,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { CtaBand } from '@/components/ui/CtaBand';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
+import { TextGap } from '@/components/ui/TextGap';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Odoo Resources & Implementation Guides | ODOOVATIONS',
@@ -60,6 +61,7 @@ export default function ResourcesIndex() {
                   <h2 className="mt-3 font-heading text-[clamp(20px,2vw,26px)] font-semibold leading-tight tracking-[-0.025em]">
                     {r.h1}
                   </h2>
+                  <TextGap />
                   <p className="mt-2.5 flex-1 text-[15.5px] leading-relaxed text-ink-muted">{r.summary.split('. ')[0]}.</p>
                   <span className="mt-4 inline-flex items-center gap-1.5 text-[13px] text-ink-muted">
                     <Clock className="h-3.5 w-3.5" aria-hidden />

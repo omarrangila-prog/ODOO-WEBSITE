@@ -9,6 +9,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { Accordion } from '@/components/ui/Accordion';
 import { CtaBand } from '@/components/ui/CtaBand';
 import { JsonLd } from '@/components/ui/JsonLd';
+import { TextGap } from '@/components/ui/TextGap';
 
 export function generateStaticParams() {
   return resources.map((r) => ({ slug: r.slug }));
@@ -64,7 +65,9 @@ export default function ResourcePage({ params }: { params: { slug: string } }) {
           <div className="shell relative">
             <Breadcrumbs items={crumbs} />
             <p className="eyebrow mb-6">{r.eyebrow}</p>
+            <TextGap />
             <h1 className="display-1 max-w-4xl">{r.h1}</h1>
+            <TextGap />
             <div className="mt-6 flex items-center gap-4 text-[13px] text-text-dark-muted">
               <span className="inline-flex items-center gap-1.5">
                 <Clock className="h-3.5 w-3.5" aria-hidden />
@@ -94,6 +97,7 @@ export default function ResourcePage({ params }: { params: { slug: string } }) {
               {/* Related services */}
               <div className="mt-14 border-t border-line-light pt-8">
                 <p className="text-[12px] font-semibold uppercase tracking-[0.1em] text-ink-muted">Related services</p>
+                <TextGap />
                 <div className="mt-4 flex flex-wrap gap-2.5">
                   {r.relatedServices.map((s) => (
                     <Link key={s.href} href={s.href} className="inline-flex items-center gap-1.5 rounded-full border border-line-light bg-ivory-soft px-4 py-2 text-[14px] font-medium text-ink transition-colors hover:border-violet/40">
@@ -111,6 +115,7 @@ export default function ResourcePage({ params }: { params: { slug: string } }) {
         <section className="theme-dark bay-sm">
           <div className="shell grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
             <h2 className="display-2">Questions</h2>
+            <TextGap />
             <Accordion items={r.faqs} allowMultiple />
           </div>
         </section>
@@ -120,6 +125,7 @@ export default function ResourcePage({ params }: { params: { slug: string } }) {
           <section className="theme-dark pb-8">
             <div className="shell">
               <p className="mb-5 text-[12px] font-semibold uppercase tracking-[0.1em] text-text-dark-muted">Keep reading</p>
+              <TextGap />
               <div className="grid gap-4 sm:grid-cols-2">
                 {related.map((rr) => (
                   <Link key={rr.slug} href={rr.href} className="group flex items-center justify-between gap-4 rounded-editorial border border-line bg-graphite/60 p-6 transition-colors hover:border-violet-bright/40">

@@ -8,6 +8,7 @@ import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { industries as allIndustries } from '@/data/industries';
 import { track } from '@/lib/analytics';
 import { cn } from '@/lib/utilities';
+import { TextGap } from '@/components/ui/TextGap';
 
 /**
  * Full-screen photographic industries with clip-path image transitions.
@@ -59,6 +60,7 @@ export function IndustriesCinema() {
         <div className="relative z-10 flex min-h-[92vh] flex-col">
           <div className="shell pt-24">
             <p className="eyebrow mb-4">Industries</p>
+            <TextGap />
             <h2 className="display-2 max-w-2xl">
               Built Around the Way Your Industry{' '}
               <span className="signal-text">Actually Works.</span>
@@ -86,6 +88,7 @@ export function IndustriesCinema() {
                     <p className="mt-3 max-w-lg text-[15.5px] leading-relaxed text-white/85">
                       {active.description}
                     </p>
+                    <TextGap />
                     <ol className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-2">
                       {active.workflow.map((step, idx) => (
                         <li key={step} className="flex items-center gap-2 text-[13px] font-medium text-white/90">

@@ -20,6 +20,7 @@ import { ButtonLink, ArrowNudge } from '@/components/ui/Button';
 import { CtaBand } from '@/components/ui/CtaBand';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
+import { TextGap } from '@/components/ui/TextGap';
 
 export function generateStaticParams() {
   return locations.map((l) => ({ slug: l.slug }));
@@ -99,6 +100,7 @@ export default function LocationPage({ params }: { params: { slug: string } }) {
             {loc.sections.map((s) => (
               <div key={s.heading}>
                 <h2 className="display-3 font-semibold">{s.heading}</h2>
+                <TextGap />
                 <p className="mt-4 text-[17px] leading-relaxed text-ink-muted">{s.body}</p>
               </div>
             ))}
@@ -111,12 +113,14 @@ export default function LocationPage({ params }: { params: { slug: string } }) {
             <h2 className="display-2">
               What we deliver {loc.kind === 'city' ? 'in Karachi' : 'across Pakistan'}
             </h2>
+            <TextGap />
             <ul className="mt-9 grid gap-x-10 gap-y-6 sm:grid-cols-2">
               {loc.services.map((s) => (
                 <li key={s.label} className="flex items-start gap-3 border-t border-line pt-5">
                   <Check className="mt-1 h-5 w-5 shrink-0 text-green" aria-hidden />
                   <div>
                     <h3 className="font-heading text-[18px] font-semibold text-text-dark">{s.label}</h3>
+                    <TextGap />
                     <p className="mt-1 text-[15px] leading-relaxed text-text-dark-muted">{s.body}</p>
                   </div>
                 </li>
@@ -145,6 +149,7 @@ export default function LocationPage({ params }: { params: { slug: string } }) {
             <h2 className="display-2">
               {loc.kind === 'city' ? 'Karachi Odoo questions' : 'Pakistan Odoo questions'}
             </h2>
+            <TextGap />
             <Accordion items={loc.faqs} allowMultiple />
           </div>
         </section>

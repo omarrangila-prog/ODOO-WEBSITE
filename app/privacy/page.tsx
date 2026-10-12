@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { buildMetadata } from '@/lib/seo';
 import { LegalLayout } from '@/components/ui/LegalLayout';
 import { company } from '@/data/company';
+import { TextGap } from '@/components/ui/TextGap';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Privacy Policy',
@@ -21,7 +22,9 @@ export default function PrivacyPage() {
       </p>
 
       <h2>Information we collect</h2>
+      <TextGap />
       <p>When you submit our contact form, we collect the details you provide, which may include:</p>
+      <TextGap />
       <ul>
         <li>Your name, company name, work email and phone or WhatsApp number.</li>
         <li>Your country, industry, company size and current systems.</li>
@@ -30,6 +33,7 @@ export default function PrivacyPage() {
       </ul>
 
       <h2>How we use your information</h2>
+      <TextGap />
       <ul>
         <li>To respond to your enquiry and propose a suitable next step.</li>
         <li>To prepare a scope or proposal at your request.</li>
@@ -38,6 +42,7 @@ export default function PrivacyPage() {
       <p>We do not sell your information. We do not use it for unrelated marketing without your consent.</p>
 
       <h2>Workflow documents</h2>
+      <TextGap />
       <p>
         Documents you upload are treated as confidential business information. They are used only
         to understand your requirements. We do not publish uploaded files or expose them publicly.
@@ -46,6 +51,7 @@ export default function PrivacyPage() {
       </p>
 
       <h2>Data security</h2>
+      <TextGap />
       <p>
         We apply reasonable technical and organisational measures to protect your information,
         including server-side validation, file-type and size restrictions, and secure handling of
@@ -53,12 +59,14 @@ export default function PrivacyPage() {
       </p>
 
       <h2>Analytics</h2>
+      <TextGap />
       <p>
         We use privacy-respecting analytics only when configured, to understand aggregate website
         usage. Where used, analytics are configured to minimise personal data collection.
       </p>
 
       <h2>Your rights</h2>
+      <TextGap />
       <p>
         You may request access to, correction of, or deletion of the personal information you have
         provided. To make a request, contact us at{' '}
@@ -66,6 +74,7 @@ export default function PrivacyPage() {
       </p>
 
       <h2>Contact</h2>
+      <TextGap />
       <p>
         For any questions about this policy, email{' '}
         <a href={`mailto:${company.email}`}>{company.email}</a>.

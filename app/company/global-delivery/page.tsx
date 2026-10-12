@@ -12,6 +12,7 @@ import { AnswerCard } from '@/components/ui/AnswerCard';
 import { FlowDiagram } from '@/components/ui/FlowDiagram';
 import { CtaBand } from '@/components/ui/CtaBand';
 import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
+import { TextGap } from '@/components/ui/TextGap';
 
 const PATH = '/company/global-delivery';
 const DESCRIPTION =
@@ -140,10 +141,12 @@ export default function GlobalDeliveryPage() {
       <section className="theme-light bay-sm">
         <div className="shell">
           <h2 className="display-2">How a remote project runs</h2>
+          <TextGap />
           <p className="lede mt-5 max-w-[var(--reading-width)]">
             The same methodology we use locally, with the communication designed around distance
             rather than fighting it.
           </p>
+          <TextGap />
           <FlowDiagram
             label="Discovery to support, remotely"
             steps={[
@@ -172,6 +175,7 @@ export default function GlobalDeliveryPage() {
                 <h3 className="mt-5 font-heading text-[20px] font-semibold leading-snug tracking-[-0.02em] text-ink">
                   {p.title}
                 </h3>
+                <TextGap />
                 <p className="mt-3 text-[15.5px] leading-relaxed text-ink-muted">{p.body}</p>
               </article>
             ))}
@@ -185,7 +189,9 @@ export default function GlobalDeliveryPage() {
       <section className="theme-light bay-sm">
         <div className="shell">
           <p className="eyebrow mb-5">Where we deliver</p>
+          <TextGap />
           <h2 className="display-2 max-w-3xl">Remote delivery is available to clients in any country.</h2>
+          <TextGap />
           <p className="lede mt-5 max-w-[var(--reading-width)]">
             The list below is where we accept projects from &mdash; it is not a claim of work
             already delivered. Markets where we have delivered client work:{' '}
@@ -196,6 +202,7 @@ export default function GlobalDeliveryPage() {
             <h3 className="text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-muted">
               Markets we work with most
             </h3>
+            <TextGap />
             <ul className="mt-3 flex flex-wrap gap-2">
               {priorityCountryCodes.map((code) => {
                 const c = countries.find((x) => x.code === code);
@@ -236,6 +243,7 @@ export default function GlobalDeliveryPage() {
       <section className="theme-graphite bay-sm">
         <div className="shell max-w-[var(--reading-width)]">
           <h2 className="display-2">What we will not claim</h2>
+          <TextGap />
           <p className="lede mt-6">
             We have one office, in Karachi. We do not list addresses in Dubai, London or New York
             to look larger than we are, we do not present automated enquiry intake as a staffed
@@ -243,6 +251,7 @@ export default function GlobalDeliveryPage() {
             team. If a capability matters to your project and we do not have it, we will say so
             and help you find who does.
           </p>
+          <TextGap />
           <p className="mt-6 text-[16px] leading-relaxed text-text-dark-muted">
             Read more about{' '}
             <Link href="/company/methodology" className="text-violet-bright underline underline-offset-4">
@@ -260,6 +269,7 @@ export default function GlobalDeliveryPage() {
       <section className="theme-dark bay-sm">
         <div className="shell grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <h2 className="display-2">Common questions</h2>
+          <TextGap />
           <Accordion items={faqs} allowMultiple />
         </div>
       </section>

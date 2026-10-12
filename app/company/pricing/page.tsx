@@ -9,6 +9,7 @@ import { JsonLd } from '@/components/ui/JsonLd';
 import { AnswerCard } from '@/components/ui/AnswerCard';
 import { FlowDiagram } from '@/components/ui/FlowDiagram';
 import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
+import { TextGap } from '@/components/ui/TextGap';
 
 const PATH = '/company/pricing';
 const DESCRIPTION =
@@ -131,6 +132,7 @@ export default function PricingPage() {
       <section className="theme-light bay-sm">
         <div className="shell">
           <h2 className="display-2">Four ways we work</h2>
+          <TextGap />
           <div className="mt-12 grid gap-5 md:grid-cols-2">
             {models.map((m) => (
               <article key={m.name} className="rounded-editorial border border-line-light bg-white/60 p-7 sm:p-8">
@@ -138,9 +140,13 @@ export default function PricingPage() {
                   <m.icon className="h-5 w-5" aria-hidden />
                 </span>
                 <h3 className="mt-5 font-heading text-[22px] font-semibold tracking-[-0.02em] text-ink">{m.name}</h3>
+                <TextGap />
                 <p className="mt-3 text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-muted">Fits</p>
+                <TextGap />
                 <p className="mt-1 text-[15.5px] leading-relaxed text-ink-muted">{m.fits}</p>
+                <TextGap />
                 <p className="mt-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-muted">How it works</p>
+                <TextGap />
                 <p className="mt-1 text-[15.5px] leading-relaxed text-ink-muted">{m.how}</p>
               </article>
             ))}
@@ -152,6 +158,7 @@ export default function PricingPage() {
         <div className="shell grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
           <div>
             <h2 className="display-2">What moves the number</h2>
+            <TextGap />
             <ul className="mt-8 space-y-3">
               {drivers.map((d) => (
                 <li key={d} className="flex items-start gap-3 text-[16.5px] leading-relaxed text-text-dark-muted">
@@ -163,6 +170,7 @@ export default function PricingPage() {
           </div>
           <div>
             <h2 className="display-2">From first call to a number</h2>
+            <TextGap />
             <FlowDiagram
               label="How a quote is produced"
               steps={['Enquiry', 'Discovery', 'Written scope', 'Estimate', 'Your decision', 'Build']}
@@ -185,6 +193,7 @@ export default function PricingPage() {
       <section className="theme-dark bay-sm">
         <div className="shell grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <h2 className="display-2">Pricing questions</h2>
+          <TextGap />
           <Accordion items={faqs} allowMultiple />
         </div>
       </section>

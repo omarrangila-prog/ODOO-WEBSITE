@@ -9,6 +9,7 @@ import { CtaBand } from '@/components/ui/CtaBand';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { AnswerCard } from '@/components/ui/AnswerCard';
 import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
+import { TextGap } from '@/components/ui/TextGap';
 
 const PATH = '/services';
 const DESCRIPTION =
@@ -102,6 +103,7 @@ export default function ServicesIndex() {
                   <h2 className="mt-5 font-heading text-[clamp(26px,3.2vw,40px)] font-semibold leading-[1.1] tracking-[-0.03em] text-ink">
                     {d.title}
                   </h2>
+                  <TextGap />
                   <p className="mt-4 max-w-[44ch] text-[16.5px] leading-relaxed text-ink-muted">
                     {d.answer}
                   </p>
@@ -140,6 +142,7 @@ export default function ServicesIndex() {
                       <h3 className="text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-muted">
                         {group.group}
                       </h3>
+                      <TextGap />
                       <ul className="mt-3 space-y-1.5">
                         {group.items.map((item) => (
                           <li key={item} className="text-[15.5px] leading-snug text-ink-muted">
@@ -160,10 +163,12 @@ export default function ServicesIndex() {
       <section className="theme-graphite bay-sm">
         <div className="shell">
           <h2 className="display-2">Every capability page</h2>
+          <TextGap />
           <p className="lede mt-5 max-w-[var(--reading-width)]">
             Each one covers the problems it solves, how we work, what you get and what it depends
             on.
           </p>
+          <TextGap />
           <ul className="mt-10 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((s) => (
               <li key={s.slug}>

@@ -10,6 +10,7 @@ import { track } from '@/lib/analytics';
 import { ButtonLink, ArrowNudge } from '@/components/ui/Button';
 import { Magnetic } from '@/components/ui/motion/Magnetic';
 import { useRoadmap } from './RoadmapContext';
+import { TextGap } from '@/components/ui/TextGap';
 
 /**
  * Final section: assembles the visitor's selected workflow problems (chosen in
@@ -53,6 +54,7 @@ export function RoadmapAssembler() {
         {/* Left: message */}
         <div>
           <p className="eyebrow mb-6">Your Personalised Roadmap</p>
+          <TextGap />
           <h2 className="font-heading text-[clamp(2.25rem,5vw,4rem)] font-semibold leading-[1.03] tracking-[-0.04em]">
             Bring Us the Mess.
             <br />
@@ -141,6 +143,7 @@ export function RoadmapAssembler() {
 
               <div className="mt-6 rounded-control border border-line bg-white/[0.02] p-4">
                 <p className="text-[12px] font-semibold uppercase tracking-[0.1em] text-text-dark-muted">Recommended start</p>
+                <TextGap />
                 <p className="mt-1 font-heading text-[15px] font-medium text-violet-bright">Operations &amp; Workflow Discovery</p>
               </div>
 

@@ -10,6 +10,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { CtaBand } from '@/components/ui/CtaBand';
 import { Accordion } from '@/components/ui/Accordion';
 import { JsonLd } from '@/components/ui/JsonLd';
+import { TextGap } from '@/components/ui/TextGap';
 
 export function generateStaticParams() {
   return industries.map((i) => ({ slug: i.slug }));
@@ -72,8 +73,11 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
             <div className="mt-auto">
               <div className="shell pb-14">
                 <p className="eyebrow mb-5">Industries</p>
+                <TextGap />
                 <h1 className="display-1 max-w-4xl">{ind.h1 ?? `Odoo for ${ind.name}`}</h1>
+                <TextGap />
                 <p className="lede mt-6 max-w-[var(--reading-width)] text-white/85">{ind.description}</p>
+                <TextGap />
                 <ol className="mt-8 flex flex-wrap items-center gap-x-2 gap-y-2">
                   {ind.workflow.map((step, i) => (
                     <li key={step} className="flex items-center gap-2 text-[14px] font-medium text-white">
@@ -91,6 +95,7 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
           <div className="shell grid gap-14 lg:grid-cols-2 lg:gap-16">
             <div>
               <h2 className="display-2">Common problems</h2>
+              <TextGap />
               <ul className="mt-9 divide-y divide-line-light border-t border-line-light">
                 {ind.problems.map((p) => (
                   <li key={p} className="flex items-start gap-4 py-5">
@@ -102,6 +107,7 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
             </div>
             <div>
               <h2 className="display-2">Expected outcomes</h2>
+              <TextGap />
               <ul className="mt-9 space-y-4">
                 {ind.outcomes.map((o) => (
                   <li key={o} className="flex items-start gap-3 text-[17px] leading-relaxed text-ink">
@@ -124,6 +130,7 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
             <div className="shell grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
               <div>
                 <h2 className="display-2">How we implement Odoo for {ind.name.toLowerCase()}</h2>
+                <TextGap />
                 <p className="mt-6 max-w-[var(--reading-width)] text-[17px] leading-[1.7] text-text-dark-muted">
                   {ind.approach}
                 </p>
@@ -133,6 +140,7 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
                   <p className="text-[12px] font-semibold uppercase tracking-[0.1em] text-text-dark-muted">
                     Departments we connect
                   </p>
+                  <TextGap />
                   <ul className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                     {ind.departments.map((d) => (
                       <li
@@ -153,13 +161,16 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
           <section className="theme-light bay-sm">
             <div className="shell">
               <p className="eyebrow mb-5">Beyond the ERP</p>
+              <TextGap />
               <h2 className="display-2 max-w-3xl">
                 What else this sector usually needs
               </h2>
+              <TextGap />
               <p className="lede mt-5 max-w-[var(--reading-width)]">
                 An ERP is rarely the only thing a business in this position is missing. These are
                 the capabilities that most often matter alongside it.
               </p>
+              <TextGap />
               <ul className="mt-10 grid gap-4 sm:grid-cols-2">
                 {ind.beyond.map((b) => (
                   <li key={b.href}>
@@ -188,6 +199,7 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
         <section className="theme-dark bay-sm">
           <div className="shell grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
             <h2 className="display-2">Questions for {ind.name.toLowerCase()} businesses</h2>
+            <TextGap />
             <Accordion items={industryFaq} allowMultiple />
           </div>
         </section>

@@ -12,6 +12,7 @@ import {
   type ConsentState,
 } from '@/lib/leadintel/consent';
 import { deleteSession } from '@/lib/leadintel/session';
+import { TextGap } from '@/components/ui/TextGap';
 
 /**
  * Consent banner + preference centre.
@@ -61,6 +62,7 @@ export function ConsentBanner() {
           </span>
           <div className="min-w-0 flex-1">
             <p className="font-heading text-[16px] font-semibold text-text-dark">Your privacy choices</p>
+            <TextGap />
             <p className="mt-1.5 text-[13.5px] leading-relaxed text-text-dark-muted">
               We use strictly-necessary storage to run the site. With your consent we also enable
               analytics and marketing. You can change this any time.{' '}

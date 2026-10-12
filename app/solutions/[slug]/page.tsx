@@ -12,6 +12,7 @@ import { ButtonLink, ArrowNudge } from '@/components/ui/Button';
 import { CtaBand } from '@/components/ui/CtaBand';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
+import { TextGap } from '@/components/ui/TextGap';
 
 export function generateStaticParams() {
   return solutions.map((s) => ({ slug: s.slug }));
@@ -85,6 +86,7 @@ export default function SolutionPage({ params }: { params: { slug: string } }) {
             <div className="max-w-[820px] space-y-6">
               <div>
                 <h2 className="display-3 font-semibold">Who this is for</h2>
+                <TextGap />
                 <p className="mt-3 text-[17px] leading-relaxed text-ink-muted">{sol.forWho}</p>
               </div>
               {sol.blocks.map((b, i) => (
@@ -95,6 +97,7 @@ export default function SolutionPage({ params }: { params: { slug: string } }) {
             <aside className="lg:sticky lg:top-24 lg:h-fit lg:self-start">
               <div className="rounded-editorial border border-line-light bg-ivory-soft p-6 shadow-panel-light">
                 <h3 className="text-[12px] font-semibold uppercase tracking-wide text-ink-muted">Relevant Odoo modules</h3>
+                <TextGap />
                 <div className="mt-3 flex flex-wrap gap-2">
                   {sol.modules.map((m) => (
                     <span key={m} className="rounded-full border border-line-light bg-white px-3 py-1 text-[13px] text-ink">{m}</span>
@@ -102,16 +105,19 @@ export default function SolutionPage({ params }: { params: { slug: string } }) {
                 </div>
 
                 <h3 className="mt-6 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-wide text-ink-muted"><Wallet className="h-3.5 w-3.5" aria-hidden />What affects cost</h3>
+                <TextGap />
                 <ul className="mt-2 space-y-1.5">
                   {sol.costFactors.map((c) => <li key={c} className="text-[14px] text-ink-muted">• {c}</li>)}
                 </ul>
 
                 <h3 className="mt-6 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-wide text-ink-muted"><Clock className="h-3.5 w-3.5" aria-hidden />What affects timeline</h3>
+                <TextGap />
                 <ul className="mt-2 space-y-1.5">
                   {sol.timelineFactors.map((c) => <li key={c} className="text-[14px] text-ink-muted">• {c}</li>)}
                 </ul>
 
                 <h3 className="mt-6 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-wide text-ink-muted"><CircleAlert className="h-3.5 w-3.5 text-magenta" aria-hidden />Risks to plan for</h3>
+                <TextGap />
                 <ul className="mt-2 space-y-1.5">
                   {sol.risks.map((c) => <li key={c} className="text-[14px] text-ink-muted">• {c}</li>)}
                 </ul>
@@ -125,10 +131,12 @@ export default function SolutionPage({ params }: { params: { slug: string } }) {
           <section className="theme-graphite bay-sm">
             <div className="shell">
               <h2 className="display-3 font-semibold">Official sources</h2>
+              <TextGap />
               <p className="mt-3 max-w-[var(--reading-width)] text-[16px] leading-relaxed text-text-dark-muted">
                 Always confirm current requirements with the official source. ODOOVATIONS is an Odoo
                 implementation company, not a tax authority or advisor.
               </p>
+              <TextGap />
               <ul className="mt-5 space-y-2">
                 {sol.officialSources.map((s) => (
                   <li key={s.url}>
@@ -147,6 +155,7 @@ export default function SolutionPage({ params }: { params: { slug: string } }) {
         <section className="theme-dark bay-sm">
           <div className="shell grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
             <h2 className="display-2">Questions</h2>
+            <TextGap />
             <Accordion items={sol.faqs} allowMultiple />
           </div>
         </section>

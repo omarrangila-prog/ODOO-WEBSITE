@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { divisions } from '@/data/divisions';
 import { cn } from '@/lib/utilities';
+import { TextGap } from '@/components/ui/TextGap';
 
 /**
  * The capability ecosystem, as a bento grid.
@@ -23,6 +24,7 @@ export function EcosystemGrid() {
       <div className="shell">
         <div className="max-w-3xl">
           <p className="eyebrow mb-5">The ecosystem</p>
+          <TextGap />
           <h2 className="display-2">
             Seven capabilities. <span className="signal-text">One team.</span>
           </h2>{' '}

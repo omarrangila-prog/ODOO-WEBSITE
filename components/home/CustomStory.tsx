@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utilities';
+import { TextGap } from '@/components/ui/TextGap';
 
 interface Stage {
   n: string;
@@ -93,6 +94,7 @@ export function CustomStory() {
         {/* Sticky left */}
         <div className="lg:sticky lg:top-28 lg:h-fit lg:self-start">
           <p className="eyebrow mb-6">Custom Where It Counts</p>
+          <TextGap />
           <h2 className="display-2">
             Your Business Should Not Be Forced Into{' '}
             <span className="signal-text">Generic Software.</span>

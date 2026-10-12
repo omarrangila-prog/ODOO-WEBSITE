@@ -6,6 +6,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { track } from '@/lib/analytics';
 import { cn } from '@/lib/utilities';
+import { TextGap } from '@/components/ui/TextGap';
 
 interface Intent {
   id: string;
@@ -53,6 +54,7 @@ export function IntentSelector() {
       <div className="shell relative">
         <div className="max-w-2xl">
           <p className="eyebrow mb-5">Start Here</p>
+          <TextGap />
           <h2 className="display-2">
             What do you want to <span className="signal-text">improve?</span>
           </h2>{' '}

@@ -6,6 +6,7 @@ import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
 import { ClipReveal } from '@/components/ui/motion/ClipReveal';
 import { ParallaxLayer } from '@/components/ui/motion/ParallaxLayer';
 import { cn } from '@/lib/utilities';
+import { TextGap } from '@/components/ui/TextGap';
 
 /** Photographic editorial rail — only scenarios with commissioned imagery. */
 const caseStudies = allCaseStudies.filter((c) => c.image);
@@ -73,10 +74,12 @@ export function CaseStudiesEditorial({ as = 'h2' }: { as?: 'h1' | 'h2' }) {
                       <div className="space-y-5">
                         <div>
                           <p className="text-[11px] font-bold uppercase tracking-wide text-ink-muted">Before &mdash; Disconnected</p>
+                          <TextGap />
                           <p className="mt-1 text-[15px] leading-relaxed text-ink-muted">{cs.before}</p>
                         </div>
                         <div>
                           <p className="text-[11px] font-bold uppercase tracking-wide text-violet">After &mdash; Controlled</p>
+                          <TextGap />
                           <p className="mt-1 text-[15px] leading-relaxed text-ink">{cs.after}</p>
                         </div>
                       </div>

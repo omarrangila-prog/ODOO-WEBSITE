@@ -2,6 +2,7 @@ import { Video, FileText, Clock3, ShieldCheck } from 'lucide-react';
 import { verifiedCountries, hasVerifiedInternationalFootprint } from '@/data/global-projects';
 import { flagEmoji } from '@/data/countries';
 import { ButtonLink, ArrowNudge } from '@/components/ui/Button';
+import { TextGap } from '@/components/ui/TextGap';
 
 const practices = [
   { icon: Video, label: 'Remote discovery & demos' },
@@ -24,6 +25,7 @@ export function GlobalDeliveryBand() {
       <div className="shell relative grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
         <div>
           <p className="eyebrow mb-5">Global delivery</p>
+          <TextGap />
           <h2 className="display-2">
             Built in Karachi.
             <br />

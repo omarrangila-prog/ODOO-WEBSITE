@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { buildMetadata } from '@/lib/seo';
 import { LegalLayout } from '@/components/ui/LegalLayout';
 import { company } from '@/data/company';
+import { TextGap } from '@/components/ui/TextGap';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Terms of Use',
@@ -18,12 +19,14 @@ export default function TermsPage() {
       </p>
 
       <h2>Use of this website</h2>
+      <TextGap />
       <p>
         You may use this website for lawful purposes only. You agree not to misuse the website,
         attempt to gain unauthorised access, or interfere with its normal operation.
       </p>
 
       <h2>Information provided</h2>
+      <TextGap />
       <p>
         Content on this website is provided for general information. Service descriptions,
         timelines and outcomes are indicative and depend on the specifics of each engagement.
@@ -31,6 +34,7 @@ export default function TermsPage() {
       </p>
 
       <h2>Enquiries and submissions</h2>
+      <TextGap />
       <p>
         By submitting the contact form, you confirm the information you provide is accurate and
         that you are authorised to share any documents you upload. You retain ownership of your
@@ -38,18 +42,21 @@ export default function TermsPage() {
       </p>
 
       <h2>Intellectual property</h2>
+      <TextGap />
       <p>
         The design, text and branding of this website are the property of {company.name} unless
         otherwise stated. You may not reproduce them without permission.
       </p>
 
       <h2>Limitation of liability</h2>
+      <TextGap />
       <p>
         To the extent permitted by law, {company.name} is not liable for any indirect or
         consequential loss arising from use of this website.
       </p>
 
       <h2>Contact</h2>
+      <TextGap />
       <p>
         Questions about these terms can be sent to{' '}
         <a href={`mailto:${company.email}`}>{company.email}</a>.

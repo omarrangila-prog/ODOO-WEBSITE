@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { featuredClients, clientSource, clientCount } from '@/data/clients';
+import { TextGap } from '@/components/ui/TextGap';
 
 /**
  * Typographic client strip. Real names from the group profile, no logos,
@@ -13,6 +14,7 @@ export function ClientWall() {
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-xl">
             <p className="eyebrow mb-4">Selected clients</p>
+            <TextGap />
             <h2 className="font-heading text-[clamp(22px,2.6vw,32px)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
               Businesses across education, food, commodities, publishing, textiles and retail.
             </h2>{' '}

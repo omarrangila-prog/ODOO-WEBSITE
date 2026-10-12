@@ -6,6 +6,7 @@ import { whatsappLink } from '@/lib/utilities';
 import { ButtonLink, ArrowNudge } from '@/components/ui/Button';
 import { Logo } from './Logo';
 import { CookiePrefsLink } from '@/components/leadintel/CookiePrefsLink';
+import { TextGap } from '@/components/ui/TextGap';
 
 const socialIcons = { linkedin: Linkedin, facebook: Facebook, instagram: Instagram, youtube: Youtube };
 
@@ -25,6 +26,7 @@ export function Footer() {
             Ready to Build a Business System That{' '}
             <span className="signal-text">Actually Fits?</span>
           </h2>
+          <TextGap />
           <div className="lg:justify-self-end">
             <ButtonLink href="/contact#form">
               Start the Conversation

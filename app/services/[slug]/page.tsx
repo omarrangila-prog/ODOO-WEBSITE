@@ -12,6 +12,7 @@ import { Accordion } from '@/components/ui/Accordion';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { AnswerCard } from '@/components/ui/AnswerCard';
 import { FlowDiagram } from '@/components/ui/FlowDiagram';
+import { TextGap } from '@/components/ui/TextGap';
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -72,6 +73,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               {service.tagline}
             </p>{' '}
             <p className="lede mt-5 max-w-[var(--reading-width)]">{service.intro}</p>
+            <TextGap />
             <div className="mt-9 flex flex-wrap gap-2">
               {service.modules.map((m) => (
                 <span key={m} className="rounded-full border border-line bg-white/[0.03] px-4 py-2 text-[13.5px] text-text-dark-muted">{m}</span>

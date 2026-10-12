@@ -1,6 +1,7 @@
 import { Linkedin, Check } from 'lucide-react';
 import { company } from '@/data/company';
 import { ButtonLink, ArrowNudge } from '@/components/ui/Button';
+import { TextGap } from '@/components/ui/TextGap';
 
 const expertise = [
   'Odoo implementation & configuration',
@@ -46,6 +47,7 @@ export function ExpertMoment() {
         {/* Statement */}
         <div>
           <p className="eyebrow mb-6">The People Behind It</p>
+          <TextGap />
           <h2 className="display-2">
             You Are Not Hiring a Software Vendor.{' '}
             <span className="signal-text">You Are Building a Better Way to Run Your Business.</span>

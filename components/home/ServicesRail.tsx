@@ -6,6 +6,7 @@ import { Check } from 'lucide-react';
 import { ecoServices } from '@/data/ecosystem';
 import { ButtonLink, ArrowNudge } from '@/components/ui/Button';
 import { cn } from '@/lib/utilities';
+import { TextGap } from '@/components/ui/TextGap';
 
 /**
  * Horizontal cinematic storytelling: the section pins while services scroll
@@ -66,6 +67,7 @@ function Header() {
     <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
       <div className="max-w-xl">
         <p className="eyebrow mb-6">Inside the Odoo &amp; ERP division</p>
+        <TextGap />
         <h2 className="display-2">
           Eight Ways We Build Your{' '}
           <span className="signal-text">Odoo System.</span>

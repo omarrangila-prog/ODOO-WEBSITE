@@ -6,6 +6,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { CtaBand } from '@/components/ui/CtaBand';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
+import { TextGap } from '@/components/ui/TextGap';
 
 const DESCRIPTION =
   'How ODOOVATIONS delivers Odoo projects — a structured, stage-by-stage methodology from discovery and blueprint through build, migration, training, go-live and support.';
@@ -61,9 +62,11 @@ export default function MethodologyPage() {
                     </span>
                   </div>
                   <p className="mt-3 max-w-[var(--reading-width)] text-[17px] leading-relaxed text-ink-muted">{s.purpose}</p>
+                  <TextGap />
                   <div className="mt-4 grid gap-4 sm:grid-cols-2">
                     <div>
                       <p className="text-[12px] font-semibold uppercase tracking-wide text-ink-muted">What happens</p>
+                      <TextGap />
                       <ul className="mt-2 space-y-1.5">
                         {s.activities.map((a) => (
                           <li key={a} className="flex items-start gap-2 text-[15px] text-ink-muted">
@@ -75,6 +78,7 @@ export default function MethodologyPage() {
                     </div>
                     <div>
                       <p className="text-[12px] font-semibold uppercase tracking-wide text-ink-muted">Your part</p>
+                      <TextGap />
                       <ul className="mt-2 space-y-1.5">
                         {s.clientRole.map((c) => (
                           <li key={c} className="flex items-start gap-2 text-[15px] text-ink-muted">

@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { frictionItems, computeFriction, type FrictionStatus } from '@/data/calculator';
 import { useRoadmap } from './RoadmapContext';
 import { formatHourRange, cn } from '@/lib/utilities';
+import { TextGap } from '@/components/ui/TextGap';
 
 const statusMap: Record<FrictionStatus, { label: string; tone: string; bar: string }> = {
   Low: { label: 'Controlled', tone: 'text-green', bar: '#38D39F' },
@@ -27,6 +28,7 @@ export function FrictionDiagnostic() {
       <div className="shell relative grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
         <div className="lg:sticky lg:top-28 lg:h-fit lg:self-start">
           <p className="eyebrow mb-6">Operational Diagnostic</p>
+          <TextGap />
           <h2 className="display-2">
             Where Is Your Business{' '}
             <span className="signal-text">Losing Control?</span>
@@ -35,6 +37,7 @@ export function FrictionDiagnostic() {
             Switch on the friction your team feels every week. We&rsquo;ll read the signal&mdash;and
             carry your selections down to a personalised roadmap request at the end of the page.
           </p>
+          <TextGap />
           <p className="mt-8 text-[12px] leading-relaxed text-text-dark-muted">
             An indicative operational reading based on the selected workflow challenges &mdash; not a
             financial calculation.
@@ -72,6 +75,7 @@ export function FrictionDiagnostic() {
 
           <div className="flex flex-col rounded-editorial border border-line bg-midnight/60 p-6">
             <p className="text-[12px] font-semibold uppercase tracking-[0.1em] text-text-dark-muted">Control reading</p>
+            <TextGap />
             <div className="mt-5 flex flex-1 items-end gap-4" aria-live="polite">
               <div className="flex flex-col-reverse gap-1.5">
                 {Array.from({ length: SEGMENTS }).map((_, idx) => (
@@ -84,6 +88,7 @@ export function FrictionDiagnostic() {
                 ) : (
                   <>
                     <p className={cn('font-heading text-2xl font-semibold', status?.tone)}>{status?.label}</p>
+                    <TextGap />
                     <p className="mt-1 text-[13px] text-text-dark-muted">Est. {formatHourRange(result.hoursMin, result.hoursMax)} lost / week</p>
                   </>
                 )}

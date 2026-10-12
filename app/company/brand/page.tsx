@@ -5,6 +5,7 @@ import { buildMetadata, breadcrumbSchema, webPageSchema, faqSchema } from '@/lib
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { CtaBand } from '@/components/ui/CtaBand';
 import { JsonLd } from '@/components/ui/JsonLd';
+import { TextGap } from '@/components/ui/TextGap';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Official ODOOVATIONS Company and Brand Information',
@@ -67,7 +68,9 @@ export default function BrandPage() {
         <div className="shell relative">
           <Breadcrumbs items={crumbs} />
           <p className="eyebrow mb-6">Brand &amp; Media Information</p>
+          <TextGap />
           <h1 className="display-1 max-w-4xl">Official ODOOVATIONS Company and Brand Information</h1>
+          <TextGap />
           <p className="lede mt-7 max-w-[var(--reading-width)]">
             This page exists so customers, journalists, partners, directories and vendors can
             reference ODOOVATIONS accurately. Everything below is the official, current information.
@@ -82,10 +85,12 @@ export default function BrandPage() {
                   marketing campaigns and creative content. It serves businesses across Pakistan
                   and international clients through remote delivery.
                 </p>
+                <TextGap />
                 <p className="mt-3">
                   ODOOVATIONS is part of the Kausar Innovations group. Selected group clients are
                   listed on the <Link href="/company/clients">clients page</Link>.
                 </p>
+                <TextGap />
                 <p className="mt-3">
                   The company operates as seven capability divisions: AI &amp; Automation, Custom
                   Software &amp; Product Development, Odoo &amp; ERP, Web &amp; App Development,
@@ -102,15 +107,18 @@ export default function BrandPage() {
                   {' '}O-D-O-O-V-A-T-I-O-N-S. The name combines &ldquo;Odoo&rdquo; with
                   &ldquo;innovations&rdquo;.
                 </p>
+                <TextGap />
                 <p className="mt-3">
                   It is written as one word. When the name appears in body text, sentence case
                   (&ldquo;Odoovations&rdquo;) is acceptable, but the preferred form in listings,
                   citations and links is ODOOVATIONS.
                 </p>
+                <TextGap />
                 <div className="mt-5 rounded-panel border border-line bg-white/[0.02] p-5">
                   <p className="text-[13px] font-bold uppercase tracking-wide text-text-dark-muted">
                     Commonly written incorrectly as
                   </p>
+                  <TextGap />
                   <ul className="mt-2 flex flex-wrap gap-2">
                     {misspellings.map((m) => (
                       <li
@@ -132,14 +140,17 @@ export default function BrandPage() {
                 <p className="text-[13px] font-bold uppercase tracking-wide text-text-dark-muted">
                   Short
                 </p>
+                <TextGap />
                 <p className="mt-1.5">
                   ODOOVATIONS is a Karachi-based technology company providing custom software, AI
                   automation, Odoo ERP, web and mobile development, digital marketing and creative
                   production for businesses in Pakistan and international markets.
                 </p>
+                <TextGap />
                 <p className="mt-5 text-[13px] font-bold uppercase tracking-wide text-text-dark-muted">
                   Medium
                 </p>
+                <TextGap />
                 <p className="mt-1.5">
                   ODOOVATIONS is a Karachi-based technology company bringing software engineering,
                   AI automation, Odoo ERP, digital products, websites, marketing, content and
@@ -147,9 +158,11 @@ export default function BrandPage() {
                   runs on and the campaigns and content that bring customers to it, for clients in
                   Pakistan and internationally.
                 </p>
+                <TextGap />
                 <p className="mt-5 text-[13px] font-bold uppercase tracking-wide text-text-dark-muted">
                   Long
                 </p>
+                <TextGap />
                 <p className="mt-1.5">
                   ODOOVATIONS is a technology, automation, software, creative and growth company
                   based in Karachi, Pakistan, serving businesses across Pakistan and international
@@ -180,6 +193,7 @@ export default function BrandPage() {
             <aside className="lg:sticky lg:top-28 lg:h-fit lg:self-start">
               <div className="rounded-editorial border border-line bg-graphite/60 p-6">
                 <h2 className="font-heading text-lg font-semibold">Official details</h2>
+                <TextGap />
                 <dl className="mt-4 space-y-3.5 text-[15px]">
                   <Detail label="Official name" value="ODOOVATIONS" />
                   <Detail label="Tagline" value={company.tagline} />
@@ -209,6 +223,7 @@ export default function BrandPage() {
 
           <div className="mt-16">
             <h2 className="display-3">Frequently asked brand questions</h2>
+            <TextGap />
             <dl className="mt-8 space-y-6 max-w-[var(--reading-width)]">
               {faqs.map((f) => (
                 <div key={f.question} className="border-t border-line pt-5">
@@ -232,6 +247,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   return (
     <section>
       <h2 className="font-heading text-2xl font-semibold tracking-[-0.02em]">{title}</h2>
+      <TextGap />
       <div className="mt-3 space-y-1 text-[16px] leading-relaxed text-text-dark-muted">
         {children}
       </div>

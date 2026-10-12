@@ -10,6 +10,7 @@ import { JsonLd } from '@/components/ui/JsonLd';
 import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
 import { ClipReveal } from '@/components/ui/motion/ClipReveal';
 import { cn } from '@/lib/utilities';
+import { TextGap } from '@/components/ui/TextGap';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Odoo Solutions by Industry',
@@ -88,6 +89,7 @@ export default function IndustriesIndex() {
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <h2 className="display-3 mt-3 font-semibold">{ind.name}</h2>
+                  <TextGap />
                   <p className="mt-4 max-w-[var(--reading-width)] text-[17px] leading-relaxed text-ink-muted">
                     {ind.description}
                   </p>

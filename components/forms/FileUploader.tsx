@@ -8,6 +8,7 @@ import {
   isAcceptedUpload,
 } from '@/lib/validation';
 import { cn } from '@/lib/utilities';
+import { TextGap } from '@/components/ui/TextGap';
 
 interface Props {
   file: File | null;
@@ -105,6 +106,7 @@ export function FileUploader({ file, onChange }: Props) {
           </span>
           <div className="min-w-0 flex-1">
             <p className="truncate text-[14px] font-medium text-text-dark">{file.name}</p>
+            <TextGap />
             <p className="text-[12px] text-text-dark-muted">{formatBytes(file.size)}</p>
           </div>
           <button

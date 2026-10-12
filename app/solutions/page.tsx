@@ -9,6 +9,7 @@ import { CtaBand } from '@/components/ui/CtaBand';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { AnswerCard } from '@/components/ui/AnswerCard';
 import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
+import { TextGap } from '@/components/ui/TextGap';
 
 const PATH = '/solutions';
 const DESCRIPTION =
@@ -128,10 +129,12 @@ export default function SolutionsIndex() {
       <section className="theme-graphite bay-sm">
         <div className="shell">
           <h2 className="display-2">Not sure which one you need?</h2>
+          <TextGap />
           <p className="lede mt-5 max-w-[var(--reading-width)]">
             Start from the capability instead. Each division explains what it covers and links to
             the systems it delivers.
           </p>
+          <TextGap />
           <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {divisions.map((d) => (
               <li key={d.id}>

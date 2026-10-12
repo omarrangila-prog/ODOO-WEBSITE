@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useScroll, useTransform, useMotionValueEvent, 
 import { Check, ArrowRight } from 'lucide-react';
 import { journeyStages } from '@/data/journey';
 import { cn } from '@/lib/utilities';
+import { TextGap } from '@/components/ui/TextGap';
 
 /**
  * Moving route: a vertical path draws itself as you scroll, and each checkpoint
@@ -41,6 +42,7 @@ export function JourneyRoute() {
       <div className="shell relative">
         <div className="max-w-2xl">
           <p className="eyebrow mb-6">The Route</p>
+          <TextGap />
           <h2 className="display-2">
             Your Route to a{' '}
             <span className="signal-text">Working Odoo System.</span>
@@ -142,6 +144,7 @@ export function JourneyRoute() {
                   <div className="mt-8 grid gap-6 sm:grid-cols-2">
                     <div>
                       <p className="text-[12px] font-semibold uppercase tracking-[0.1em] text-text-dark-muted">What happens</p>
+                      <TextGap />
                       <ul className="mt-3 space-y-2">
                         {stage.activities.map((a) => (
                           <li key={a} className="flex items-start gap-2.5 text-[14px] text-text-dark-muted">
@@ -153,6 +156,7 @@ export function JourneyRoute() {
                     </div>
                     <div>
                       <p className="text-[12px] font-semibold uppercase tracking-[0.1em] text-text-dark-muted">Your part</p>
+                      <TextGap />
                       <ul className="mt-3 space-y-2">
                         {stage.clientRole.map((c) => (
                           <li key={c} className="flex items-start gap-2.5 text-[14px] text-text-dark-muted">

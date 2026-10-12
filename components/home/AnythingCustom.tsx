@@ -1,5 +1,6 @@
 import { ButtonLink, ArrowNudge } from '@/components/ui/Button';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
+import { TextGap } from '@/components/ui/TextGap';
 
 /**
  * The "no product name for what I need" case. Kept deliberately short: one
@@ -11,6 +12,7 @@ export function AnythingCustom() {
       <div className="shell">
         <div className="rounded-editorial border border-line-light bg-white/60 p-8 sm:p-12 lg:p-16">
           <p className="eyebrow mb-5">Can&rsquo;t find the software you need?</p>
+          <TextGap />
           <h2 className="display-2 max-w-4xl">
             That is exactly when <span className="signal-text">custom software</span> makes sense.
           </h2>{' '}

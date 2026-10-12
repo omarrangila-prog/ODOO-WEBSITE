@@ -7,6 +7,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { CtaBand } from '@/components/ui/CtaBand';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
+import { TextGap } from '@/components/ui/TextGap';
 
 const DESCRIPTION =
   'ODOOVATIONS is a Karachi-based technology company building custom software, AI automation, Odoo ERP, websites, apps, marketing and creative work for businesses in Pakistan and abroad.';
@@ -72,6 +73,7 @@ export default function AboutPage() {
               partner or certification status. We prefer to be judged on process, communication and
               real work.
             </p>
+            <TextGap />
             <div className="mt-8 flex flex-wrap gap-2.5">
               <Link href="/company/methodology" className="rounded-full border border-line-light bg-ivory-soft px-4 py-2 text-[14px] font-medium text-ink transition-colors hover:border-violet/40">Our methodology</Link>{' '}
               <Link href="/services" className="rounded-full border border-line-light bg-ivory-soft px-4 py-2 text-[14px] font-medium text-ink transition-colors hover:border-violet/40">Our services</Link>{' '}

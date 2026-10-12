@@ -8,6 +8,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { CtaBand } from '@/components/ui/CtaBand';
 import { DevPlaceholder } from '@/components/ui/DevPlaceholder';
 import { JsonLd } from '@/components/ui/JsonLd';
+import { TextGap } from '@/components/ui/TextGap';
 
 export function generateStaticParams() {
   return caseStudies.map((c) => ({ slug: c.slug }));
@@ -66,10 +67,12 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
             <div className="rounded-panel border border-line bg-white/[0.02] p-5">
               <p className="text-[13px] font-bold uppercase tracking-wide text-text-dark-muted">Before &mdash; Disconnected</p>
+              <TextGap />
               <p className="mt-1.5 text-[15px] text-text-dark-muted">{cs.before}</p>
             </div>
             <div className="rounded-panel border border-violet-bright/25 bg-violet/[0.08] p-5">
               <p className="text-[13px] font-bold uppercase tracking-wide text-violet-bright">After &mdash; Controlled</p>
+              <TextGap />
               <p className="mt-1.5 text-[15px] text-text-dark">{cs.after}</p>
             </div>
           </div>
@@ -84,6 +87,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
             <aside className="lg:sticky lg:top-28 lg:self-start">
               <div className="rounded-editorial border border-line bg-graphite/60 p-6">
                 <h2 className="text-[13px] font-semibold uppercase tracking-wide text-text-dark-muted">Odoo modules used</h2>
+                <TextGap />
                 <ul className="mt-3 space-y-2">
                   {cs.modules.map((m) => (
                     <li key={m} className="flex items-center gap-2 text-[15px] text-text-dark">
@@ -94,6 +98,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                 </ul>
                 <div className="mt-6 border-t border-line pt-5">
                   <h2 className="text-[13px] font-semibold uppercase tracking-wide text-text-dark-muted">Measurable results</h2>
+                  <TextGap />
                   <div className="mt-3 space-y-2">
                     {cs.metrics.map((m) =>
                       m.verified ? (
@@ -122,6 +127,7 @@ function Block({ title, body }: { title: string; body: string }) {
   return (
     <div>
       <h2 className="font-heading text-xl font-semibold">{title}</h2>
+      <TextGap />
       <p className="mt-2 text-[15.5px] leading-relaxed text-text-dark-muted">{body}</p>
     </div>
   );

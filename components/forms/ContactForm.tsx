@@ -22,6 +22,7 @@ import { Field, inputClass, fieldInvalid } from './Field';
 import { FileUploader } from './FileUploader';
 import { track } from '@/lib/analytics';
 import { cn } from '@/lib/utilities';
+import { TextGap } from '@/components/ui/TextGap';
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -139,6 +140,7 @@ export function ContactForm() {
           <CheckCircle2 className="h-7 w-7" aria-hidden />
         </span>
         <h3 className="mt-5 font-heading text-2xl font-[650]">Thank you — message received.</h3>
+        <TextGap />
         <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-text-dark-muted">
           We&rsquo;ll review what you sent and get back to you with a practical next step. If
           it&rsquo;s urgent, message us on WhatsApp and mention you&rsquo;ve submitted the form.
@@ -163,6 +165,7 @@ export function ContactForm() {
             <AlertTriangle className="h-4 w-4" aria-hidden />
             Please correct the following:
           </p>
+          <TextGap />
           <ul className="mt-2 list-disc space-y-0.5 pl-8 text-[13.5px] text-[#ff8a8f]/90">
             {errorList.map(([key, val]) => (
               <li key={key}>{val?.message as string}</li>
