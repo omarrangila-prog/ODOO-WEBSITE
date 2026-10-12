@@ -1,60 +1,7 @@
 {
-  "base": "http://localhost:3481",
+  "base": "http://localhost:3501",
   "total": 0,
   "byType": {},
   "issues": [],
-  "consoleErrors": [
-    {
-      "viewport": "2560x1440",
-      "text": "Failed to fetch RSC payload for http://localhost:3481/industries. Falling back to browser navigation. TypeError: Failed to fetch\n    at f (http://localhost:3481/_next/static/chunks/117-4f5b424f20efdcae.js:1:45433)\n    at http://localhost:3481/_next/static/chunks/117-4f5b424f20efdcae.js:1:58959\n    a"
-    },
-    {
-      "viewport": "2560x1440",
-      "text": "Failed to fetch RSC payload for http://localhost:3481/resources. Falling back to browser navigation. TypeError: network error"
-    },
-    {
-      "viewport": "2560x1440",
-      "text": "Failed to fetch RSC payload for http://localhost:3481/case-studies. Falling back to browser navigation. TypeError: network error"
-    },
-    {
-      "viewport": "2560x1440",
-      "text": "Failed to fetch RSC payload for http://localhost:3481/contact. Falling back to browser navigation. TypeError: network error"
-    },
-    {
-      "viewport": "2560x1440",
-      "text": "Failed to fetch RSC payload for http://localhost:3481/case-studies. Falling back to browser navigation. TypeError: Failed to fetch\n    at f (http://localhost:3481/_next/static/chunks/117-4f5b424f20efdcae.js:1:45433)\n    at http://localhost:3481/_next/static/chunks/117-4f5b424f20efdcae.js:1:58959\n   "
-    },
-    {
-      "viewport": "2560x1440",
-      "text": "Failed to fetch RSC payload for http://localhost:3481/resources. Falling back to browser navigation. TypeError: Failed to fetch\n    at f (http://localhost:3481/_next/static/chunks/117-4f5b424f20efdcae.js:1:45433)\n    at http://localhost:3481/_next/static/chunks/117-4f5b424f20efdcae.js:1:58959\n    at"
-    },
-    {
-      "viewport": "2560x1440",
-      "text": "Failed to fetch RSC payload for http://localhost:3481/. Falling back to browser navigation. TypeError: Failed to fetch\n    at f (http://localhost:3481/_next/static/chunks/117-4f5b424f20efdcae.js:1:45433)\n    at http://localhost:3481/_next/static/chunks/117-4f5b424f20efdcae.js:1:58959\n    at Object.u"
-    },
-    {
-      "viewport": "2560x1440",
-      "text": "Failed to fetch RSC payload for http://localhost:3481/contact. Falling back to browser navigation. TypeError: Failed to fetch\n    at f (http://localhost:3481/_next/static/chunks/117-4f5b424f20efdcae.js:1:45433)\n    at http://localhost:3481/_next/static/chunks/117-4f5b424f20efdcae.js:1:58959\n    at O"
-    },
-    {
-      "viewport": "2560x1440",
-      "text": "Failed to fetch RSC payload for http://localhost:3481/company/about. Falling back to browser navigation. TypeError: Failed to fetch\n    at f (http://localhost:3481/_next/static/chunks/117-4f5b424f20efdcae.js:1:45433)\n    at http://localhost:3481/_next/static/chunks/117-4f5b424f20efdcae.js:1:58959\n  "
-    },
-    {
-      "viewport": "2560x1440",
-      "text": "Failed to fetch RSC payload for http://localhost:3481/contact. Falling back to browser navigation. TypeError: network error"
-    },
-    {
-      "viewport": "2560x1440",
-      "text": "Failed to fetch RSC payload for http://localhost:3481/resources. Falling back to browser navigation. TypeError: network error"
-    },
-    {
-      "viewport": "2560x1440",
-      "text": "Failed to fetch RSC payload for http://localhost:3481/rapid-delivery. Falling back to browser navigation. TypeError: network error"
-    },
-    {
-      "viewport": "2560x1440",
-      "text": "Failed to fetch RSC payload for http://localhost:3481/case-studies. Falling back to browser navigation. TypeError: network error"
-    }
-  ]
+  "consoleErrors": []
 }
