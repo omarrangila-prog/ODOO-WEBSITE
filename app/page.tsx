@@ -1,6 +1,7 @@
 import { Hero } from '@/components/home/Hero';
 import { CapabilityStrip } from '@/components/home/CapabilityStrip';
 import { EcosystemGrid } from '@/components/home/EcosystemGrid';
+import { SystemsPlayground } from '@/components/home/SystemsPlayground';
 import { ClientWall } from '@/components/home/ClientWall';
 import { Manifesto } from '@/components/home/Manifesto';
 import { GlobalDeliveryBand } from '@/components/home/GlobalDeliveryBand';
@@ -40,6 +41,7 @@ export default function HomePage() {
       <EcosystemGrid />
       <ClientWall />
       <IntentSelector />
+      <SystemsPlayground />
       <RoadmapProvider>
         <FrictionDiagnostic />
         <ServicesRail />

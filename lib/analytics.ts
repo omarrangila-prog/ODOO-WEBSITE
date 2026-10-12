@@ -19,6 +19,8 @@ export type AnalyticsEvent =
   | 'solution_page_view'
   | 'case_study_opened'
   | 'work_filter_used'
+  | 'playground_flow_selected'
+  | 'playground_played'
   | 'workflow_file_uploaded'
   | 'consultation_form_submitted'
   | 'scheduling_link_clicked';
