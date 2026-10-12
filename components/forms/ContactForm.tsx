@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useSearchParams } from 'next/navigation';
 import { CheckCircle2, AlertTriangle, Send } from 'lucide-react';
 import { contactSchema, type ContactFormValues } from '@/lib/validation';
 import {
@@ -27,7 +26,6 @@ import { TextGap } from '@/components/ui/TextGap';
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
 export function ContactForm() {
-  const searchParams = useSearchParams();
   const [status, setStatus] = useState<Status>('idle');
   const [serverError, setServerError] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
@@ -63,10 +61,20 @@ export function ContactForm() {
     },
   });
 
-  // Prefill from friction calculator selections
+  /**
+   * Prefill from the friction-diagnostic selections.
+   *
+   * Reads window.location after mount rather than useSearchParams: that hook
+   * forces this subtree to render client-only, which made the whole contact
+   * form ship as a "Loading form…" placeholder in the HTML and disappear
+   * entirely without JavaScript. The prefill is a convenience that only
+   * matters once JS is running, so it does not need to be server-rendered —
+   * but the form does.
+   */
   useEffect(() => {
-    const issues = searchParams.get('issues');
-    const friction = searchParams.get('friction');
+    const sp = new URLSearchParams(window.location.search);
+    const issues = sp.get('issues');
+    const friction = sp.get('friction');
     if (issues) {
       const labels = issues
         .split(',')
@@ -80,7 +88,7 @@ export function ContactForm() {
         );
       }
     }
-  }, [searchParams, setValue]);
+  }, [setValue]);
 
   // Focus the error summary after it mounts (RHF first-field focus is disabled).
   useEffect(() => {

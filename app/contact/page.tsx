@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import { MessageCircle, Mail, Phone, MapPin, CalendarClock } from 'lucide-react';
 import { buildMetadata, breadcrumbSchema, webPageSchema, localBusinessSchema } from '@/lib/seo';
@@ -63,9 +62,7 @@ export default function ContactPage() {
             </div>
 
             <div id="form" className="scroll-mt-28 rounded-editorial border border-line bg-graphite/60 p-6 shadow-float sm:p-8">
-              <Suspense fallback={<div className="text-text-dark-muted">Loading form…</div>}>
-                <ContactForm />
-              </Suspense>
+              <ContactForm />
             </div>
           </div>
         </div>
