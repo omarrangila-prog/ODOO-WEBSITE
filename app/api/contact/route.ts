@@ -174,24 +174,39 @@ async function deliver(
   const to = process.env.CONTACT_TO_EMAIL ?? 'hello@odoovations.com';
   const from = process.env.CONTACT_FROM_EMAIL ?? 'website@odoovations.com';
 
+  /*
+   * Everything except name, email and the description is optional now that
+   * the form asks in two stages, so a blank field is normal rather than a
+   * fault. Omit the empty ones instead of printing "undefined" or a dash
+   * for each: whoever reads this should see what the person actually told
+   * us, not hunt for it among placeholders.
+   */
+  const optional: Array<[string, string | undefined]> = [
+    ['Company', data.company],
+    ['Phone/WhatsApp', data.phone],
+    ['Country', data.country],
+    ['Industry', data.industry],
+    ['Company size', data.companySize],
+    ['Current systems', data.currentSystems],
+    ['Timeline', data.timeline],
+    ['Budget', data.budget],
+    ['Preferred contact', data.preferredContact],
+    ['Services', data.services.join(', ')],
+  ];
+  const provided = optional.filter(([, v]) => v && v.trim() !== '');
+  const omitted = optional.filter(([, v]) => !v || v.trim() === '').map(([k]) => k);
+
   const lines = [
-    `New workflow enquiry from ${data.fullName} (${data.company})`,
+    `New enquiry from ${data.fullName}${data.company ? ` (${data.company})` : ''}`,
     '',
     `Email: ${data.email}`,
-    `Phone/WhatsApp: ${data.phone}`,
-    `Country: ${data.country}`,
-    `Industry: ${data.industry}`,
-    `Company size: ${data.companySize}`,
-    `Current systems: ${data.currentSystems || '—'}`,
-    `Timeline: ${data.timeline || '—'}`,
-    `Budget: ${data.budget || '—'}`,
-    `Preferred contact: ${data.preferredContact}`,
-    `Services: ${data.services.join(', ')}`,
+    ...provided.map(([k, v]) => `${k}: ${v}`),
     '',
-    'Challenge:',
+    'What they need:',
     data.challenge,
     '',
     fileMeta ? `Attached file: ${fileMeta.name} (${fileMeta.type}, ${fileMeta.size} bytes)` : 'No file attached.',
+    ...(omitted.length ? ['', `Not provided (optional stage skipped): ${omitted.join(', ')}`] : []),
   ].join('\n');
 
   const res = await fetch('https://api.resend.com/emails', {
@@ -204,7 +219,7 @@ async function deliver(
       from,
       to,
       reply_to: data.email,
-      subject: `New Odoo enquiry — ${data.company}`,
+      subject: `New enquiry — ${data.company || data.fullName}`,
       text: lines,
     }),
   });

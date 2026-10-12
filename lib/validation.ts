@@ -40,11 +40,14 @@ export const contactSchema = z.object({
     .trim()
     .min(2, 'Please enter your full name.')
     .max(120, 'Name is too long.'),
-  company: z
-    .string()
-    .trim()
-    .min(2, 'Please enter your company name.')
-    .max(160, 'Company name is too long.'),
+  /*
+   * Stage 2 of the enquiry form is optional, so everything it collects must
+   * be optional here too. Asking twelve questions before a stranger will
+   * talk to us cost enquiries we never saw; name, email and a description
+   * are enough to reply usefully. Lead scoring already treats these as
+   * optional, and the notification email omits whatever is blank.
+   */
+  company: z.string().trim().max(160, 'Company name is too long.').optional().or(z.literal('')),
   email: z
     .string()
     .trim()
@@ -53,23 +56,27 @@ export const contactSchema = z.object({
   phone: z
     .string()
     .trim()
-    .min(1, 'Phone or WhatsApp number is required.')
-    .regex(phoneRegex, 'Please enter a valid phone number.'),
-  country: z.string().trim().min(1, 'Please select your country.'),
-  industry: z.string().trim().min(1, 'Please select an industry.'),
-  companySize: z.string().trim().min(1, 'Please select company size.'),
+    .regex(phoneRegex, 'Please enter a valid phone number.')
+    .optional()
+    .or(z.literal('')),
+  country: z.string().trim().max(120).optional().or(z.literal('')),
+  industry: z.string().trim().max(120).optional().or(z.literal('')),
+  companySize: z.string().trim().max(120).optional().or(z.literal('')),
   currentSystems: z.string().trim().max(400).optional().or(z.literal('')),
   timeline: z.string().trim().max(60).optional().or(z.literal('')),
   budget: z.string().trim().max(60).optional().or(z.literal('')),
   challenge: z
     .string()
     .trim()
-    .min(10, 'Please describe your main challenge (at least 10 characters).')
+    .min(10, 'Please tell us a little more — at least 10 characters.')
     .max(2000, 'Please keep this under 2000 characters.'),
-  services: z.array(z.string()).min(1, 'Please select at least one service.'),
-  preferredContact: z.enum(['whatsapp', 'email', 'call'], {
-    errorMap: () => ({ message: 'Please choose a preferred contact method.' }),
-  }),
+  // Optional: a CTA often preselects this, and a visitor who is unsure of
+  // the category should not be blocked from describing their problem.
+  services: z.array(z.string()).default([]),
+  preferredContact: z
+    .enum(['whatsapp', 'email', 'call'])
+    .optional()
+    .or(z.literal('')),
   // "consent" here is the privacy/contact permission required to submit the form
   // (transactional). It is NOT marketing consent.
   consent: z.literal(true, {

@@ -14,19 +14,25 @@ import type { ScoreResult, RoutingResult } from './leadScore';
 import type { SessionData } from './session';
 
 export interface LeadInput {
+  /*
+   * Only name, email and the description are guaranteed. The enquiry form
+   * asks everything else in an optional second stage, so these arrive blank
+   * whenever someone sends a quick enquiry — mark them optional here rather
+   * than letting a missing value reach Odoo as the string "undefined".
+   */
   fullName: string;
-  company: string;
+  company?: string;
   email: string;
-  phone: string;
-  country: string;
-  industry: string;
-  companySize: string;
+  phone?: string;
+  country?: string;
+  industry?: string;
+  companySize?: string;
   currentSystems?: string;
   timeline?: string;
   budget?: string;
   challenge: string;
   services: string[];
-  preferredContact: string;
+  preferredContact?: string;
   /** Separate from marketing consent — the person asked us to contact them. */
   contactPermission: boolean;
   marketingConsent: boolean;
@@ -44,7 +50,7 @@ export function mapToOdooLead(
   const desc = [
     lead.challenge,
     '',
-    `Services: ${lead.services.join(', ')}`,
+    `Services: ${lead.services.join(', ') || '—'}`,
     `Timeline: ${lead.timeline || '—'}  Budget: ${lead.budget || '—'}`,
     `Current systems: ${lead.currentSystems || '—'}`,
     `Lead score: ${score.score} (${score.band}) — ${score.reasons.join('; ')}`,
@@ -55,13 +61,19 @@ export function mapToOdooLead(
     last ? `Last touch: ${last.page} via ${utmStr(last.utm)}` : '',
   ].join('\n');
 
+  /*
+   * A quick enquiry carries no company, so fall back to the person's name
+   * for the lead title — "undefined — Odoo enquiry" is not a lead anyone can
+   * work. Blank optional fields are sent as '' rather than undefined, which
+   * Odoo's XML-RPC layer would otherwise reject or store as a literal.
+   */
   return {
-    name: `${lead.company} — ${lead.services[0] ?? 'Odoo enquiry'}`,
+    name: `${lead.company || lead.fullName} — ${lead.services[0] ?? 'Enquiry'}`,
     contact_name: lead.fullName,
-    partner_name: lead.company,
+    partner_name: lead.company ?? '',
     email_from: lead.email,
-    phone: lead.phone,
-    country_code: lead.country,
+    phone: lead.phone ?? '',
+    country_code: lead.country ?? '',
     description: desc,
     type: 'lead',
     priority: routing.priority === 'P1' ? '3' : routing.priority === 'P2' ? '2' : '1',

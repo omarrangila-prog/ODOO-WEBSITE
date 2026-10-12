@@ -192,55 +192,17 @@ export function ContactForm() {
         </div>
       )}
 
+      {/* ---- Stage 1: everything we actually need to reply ---- */}
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Full name" htmlFor="fullName" required error={errors.fullName?.message}>
           <input id="fullName" className={inputClass} autoComplete="name" {...fieldInvalid(errors.fullName?.message)} {...register('fullName')} />
         </Field>
-        <Field label="Company name" htmlFor="company" required error={errors.company?.message}>
-          <input id="company" className={inputClass} autoComplete="organization" {...fieldInvalid(errors.company?.message)} {...register('company')} />
-        </Field>
         <Field label="Work email" htmlFor="email" required error={errors.email?.message}>
           <input id="email" type="email" className={inputClass} autoComplete="email" {...fieldInvalid(errors.email?.message)} {...register('email')} />
         </Field>
-        <Field label="Phone / WhatsApp" htmlFor="phone" required error={errors.phone?.message}>
-          <input id="phone" type="tel" className={inputClass} autoComplete="tel" placeholder="+92 300 0000000" {...fieldInvalid(errors.phone?.message)} {...register('phone')} />
-        </Field>
-        <Field label="Country" htmlFor="country" required error={errors.country?.message}>
-          <select id="country" className={inputClass} defaultValue="" {...fieldInvalid(errors.country?.message)} {...register('country')}>
-            <option value="" disabled>Select a country</option>
-            {countries.map((c) => <option key={c} value={c}>{countryLabel(c)}</option>)}
-          </select>
-        </Field>
-        <Field label="Industry" htmlFor="industry" required error={errors.industry?.message}>
-          <select id="industry" className={inputClass} defaultValue="" {...fieldInvalid(errors.industry?.message)} {...register('industry')}>
-            <option value="" disabled>Select an industry</option>
-            {industryOptions.map((c) => <option key={c} value={c}>{c}</option>)}
-          </select>
-        </Field>
-        <Field label="Company size" htmlFor="companySize" required error={errors.companySize?.message}>
-          <select id="companySize" className={inputClass} defaultValue="" {...fieldInvalid(errors.companySize?.message)} {...register('companySize')}>
-            <option value="" disabled>Select company size</option>
-            {companySizes.map((c) => <option key={c} value={c}>{c}</option>)}
-          </select>
-        </Field>
-        <Field label="Current systems" htmlFor="currentSystems" hint="e.g. Excel, QuickBooks, a legacy ERP" error={errors.currentSystems?.message}>
-          <input id="currentSystems" className={inputClass} placeholder="What you use today" {...register('currentSystems')} />
-        </Field>
-        <Field label="How soon do you need it?" htmlFor="timeline" hint="Optional — helps us prioritise" error={errors.timeline?.message}>
-          <select id="timeline" className={inputClass} defaultValue="" {...register('timeline')}>
-            <option value="">Select urgency (optional)</option>
-            {timelineOptions.map((t) => <option key={t} value={t}>{t}</option>)}
-          </select>
-        </Field>
-        <Field label="Budget range" htmlFor="budget" hint="Optional — helps us scope" error={errors.budget?.message}>
-          <select id="budget" className={inputClass} defaultValue="" {...register('budget')}>
-            <option value="">Select budget (optional)</option>
-            {budgetOptions.map((b) => <option key={b} value={b}>{b}</option>)}
-          </select>
-        </Field>
       </div>
 
-      <Field label="Main workflow challenge" htmlFor="challenge" required error={errors.challenge?.message}>
+      <Field label="What do you need?" htmlFor="challenge" required error={errors.challenge?.message}>
         <textarea
           id="challenge"
           rows={5}
@@ -258,7 +220,8 @@ export function ContactForm() {
         render={({ field }) => (
           <fieldset>
             <legend className="mb-2 block text-[13.5px] font-semibold text-text-dark">
-              What do you need? <span className="text-magenta">*</span>
+              Which area is this?{' '}
+              <span className="font-normal text-text-dark-muted">(optional)</span>
             </legend>
             <div className="flex flex-wrap gap-2">
               {serviceOptions.map((service) => {
@@ -296,13 +259,77 @@ export function ContactForm() {
         )}
       />
 
-      {/* Preferred contact */}
-      <fieldset>
-        <legend className="mb-2 block text-[13.5px] font-semibold text-text-dark">
-          Preferred contact method <span className="text-magenta">*</span>
-        </legend>
-        <div className="flex flex-wrap gap-2">
-          {contactMethods.map((m) => (
+      {/*
+        Stage 2 is optional. A <details> element keeps every input in the
+        server-rendered HTML and reachable by the browser's own find-on-page;
+        mounting these fields on click would drop them from the static HTML,
+        which has already caused two regressions on this site.
+      */}
+      <details className="group rounded-panel border border-line/70 bg-white/[0.02]">
+        <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-3 px-4 py-3.5 text-[14px] font-semibold text-text-dark [&::-webkit-details-marker]:hidden">
+          <span>
+            Add project details{' '}
+            <span className="font-normal text-text-dark-muted">(optional)</span>
+          </span>
+          <span className="shrink-0 transition-transform group-open:rotate-180" aria-hidden>
+            &#9662;
+          </span>
+        </summary>
+        <div className="border-t border-line/70 px-4 pb-5 pt-5">
+          <p className="mb-5 text-[13.5px] leading-relaxed text-text-dark-muted">
+            None of this is required. It helps us reach the first call with
+            something useful instead of a list of questions.
+          </p>
+          <div className="grid gap-5 sm:grid-cols-2">
+            <Field label="Company name" htmlFor="company" error={errors.company?.message}>
+              <input id="company" className={inputClass} autoComplete="organization" {...fieldInvalid(errors.company?.message)} {...register('company')} />
+            </Field>
+            <Field label="Phone / WhatsApp" htmlFor="phone" error={errors.phone?.message}>
+              <input id="phone" type="tel" className={inputClass} autoComplete="tel" placeholder="+92 300 0000000" {...fieldInvalid(errors.phone?.message)} {...register('phone')} />
+            </Field>
+            <Field label="Country" htmlFor="country" error={errors.country?.message}>
+              <select id="country" className={inputClass} defaultValue="" {...fieldInvalid(errors.country?.message)} {...register('country')}>
+            <option value="" disabled>Select a country</option>
+            {countries.map((c) => <option key={c} value={c}>{countryLabel(c)}</option>)}
+              </select>
+            </Field>
+            <Field label="Industry" htmlFor="industry" error={errors.industry?.message}>
+              <select id="industry" className={inputClass} defaultValue="" {...fieldInvalid(errors.industry?.message)} {...register('industry')}>
+            <option value="" disabled>Select an industry</option>
+            {industryOptions.map((c) => <option key={c} value={c}>{c}</option>)}
+              </select>
+            </Field>
+            <Field label="Company size" htmlFor="companySize" error={errors.companySize?.message}>
+              <select id="companySize" className={inputClass} defaultValue="" {...fieldInvalid(errors.companySize?.message)} {...register('companySize')}>
+            <option value="" disabled>Select company size</option>
+            {companySizes.map((c) => <option key={c} value={c}>{c}</option>)}
+              </select>
+            </Field>
+            <Field label="Current systems" htmlFor="currentSystems" hint="e.g. Excel, QuickBooks, a legacy ERP" error={errors.currentSystems?.message}>
+              <input id="currentSystems" className={inputClass} placeholder="What you use today" {...register('currentSystems')} />
+            </Field>
+            <Field label="How soon do you need it?" htmlFor="timeline" hint="Optional — helps us prioritise" error={errors.timeline?.message}>
+              <select id="timeline" className={inputClass} defaultValue="" {...register('timeline')}>
+            <option value="">Select urgency (optional)</option>
+            {timelineOptions.map((t) => <option key={t} value={t}>{t}</option>)}
+              </select>
+            </Field>
+            <Field label="Budget range" htmlFor="budget" hint="Optional — helps us scope" error={errors.budget?.message}>
+              <select id="budget" className={inputClass} defaultValue="" {...register('budget')}>
+            <option value="">Select budget (optional)</option>
+            {budgetOptions.map((b) => <option key={b} value={b}>{b}</option>)}
+              </select>
+            </Field>
+          </div>
+
+
+              <fieldset className="mt-5">
+            <legend className="mb-2 block text-[13.5px] font-semibold text-text-dark">
+              Preferred contact method{' '}
+              <span className="font-normal text-text-dark-muted">(optional)</span>
+            </legend>
+            <div className="flex flex-wrap gap-2">
+              {contactMethods.map((m) => (
             <label
               key={m.value}
               className="flex cursor-pointer items-center gap-2 rounded-full border border-line px-3.5 py-2 text-[14px] text-text-dark-muted has-[:checked]:border-violet-bright/60 has-[:checked]:bg-violet/10 has-[:checked]:text-text-dark"
@@ -310,11 +337,15 @@ export function ContactForm() {
               <input type="radio" value={m.value} className="accent-violet-bright" {...register('preferredContact')} />
               {m.label}
             </label>
-          ))}
-        </div>
-      </fieldset>
+              ))}
+            </div>
+          </fieldset>
 
-      <FileUploader file={file} onChange={setFile} />
+          <div className="mt-5">
+            <FileUploader file={file} onChange={setFile} />
+          </div>
+        </div>
+      </details>
 
       {/* Honeypot — visually hidden, off-screen; bots fill it */}
       <div aria-hidden className="absolute left-[-9999px] top-[-9999px] h-0 w-0 overflow-hidden">
@@ -352,7 +383,7 @@ export function ContactForm() {
       )}
 
       <Button type="submit" loading={isSubmitting || status === 'submitting'} fullWidth>
-        {status === 'submitting' ? 'Sending…' : 'Show Us How Your Business Works'}
+        {status === 'submitting' ? 'Sending…' : 'Send Enquiry'}
         {status !== 'submitting' && <Send className="h-[18px] w-[18px]" aria-hidden />}
       </Button>
 
