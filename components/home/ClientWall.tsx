@@ -35,7 +35,7 @@ export function ClientWall() {
           {featuredClients.map((name) => (
             <li
               key={name}
-              className="border-l-2 border-line-light pl-4 font-heading text-[15.5px] font-semibold leading-snug tracking-[-0.01em] text-ink/80"
+              className="border-l-2 border-line-light pl-4 font-heading text-[16px] font-semibold leading-snug tracking-[-0.01em] text-ink/80"
             >
               {name}
             </li>

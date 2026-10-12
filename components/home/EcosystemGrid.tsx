@@ -63,7 +63,7 @@ export function EcosystemGrid() {
                   <p
                     className={cn(
                       'mt-3 max-w-[46ch] leading-relaxed text-ink-muted',
-                      large ? 'text-[17px]' : 'text-[15.5px]',
+                      large ? 'text-[17px]' : 'text-[16px]',
                     )}
                   >
                     {d.summary}
@@ -75,7 +75,7 @@ export function EcosystemGrid() {
                       {d.capabilities[0].items.slice(0, 5).map((item) => (
                         <li
                           key={item}
-                          className="rounded-full border border-line-light px-3 py-1 text-[12.5px] text-ink-muted"
+                          className="rounded-full border border-line-light px-3 py-1 text-[13px] text-ink-muted"
                         >
                           {item}
                         </li>
@@ -87,7 +87,7 @@ export function EcosystemGrid() {
                 <div className="mt-8 flex items-end justify-between gap-4 border-t border-line-light pt-5">
                   {/* The outcome is the payoff line — it slides in on hover on
                       pointer devices, and is simply always visible otherwise. */}
-                  <span className="text-[14.5px] font-medium leading-snug text-ink/70 transition-colors group-hover:text-violet">
+                  <span className="text-[15px] font-medium leading-snug text-ink/70 transition-colors group-hover:text-violet">
                     {d.outcome}
                   </span>
                   <ArrowUpRight

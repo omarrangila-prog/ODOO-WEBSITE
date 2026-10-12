@@ -163,7 +163,7 @@ export function WorkGrid() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search projects, systems or industries…"
-            className="w-full rounded-control border border-line-light bg-white/70 py-3.5 pl-11 pr-4 text-[15.5px] text-ink placeholder:text-ink/40 focus:border-violet focus:outline-none focus:ring-2 focus:ring-violet/20"
+            className="w-full rounded-control border border-line-light bg-white/70 py-3.5 pl-11 pr-4 text-[16px] text-ink placeholder:text-ink/40 focus:border-violet focus:outline-none focus:ring-2 focus:ring-violet/20"
           />
         </label>
 
@@ -247,11 +247,11 @@ export function WorkGrid() {
                     <h3 className={cn('mt-5 font-heading text-[clamp(21px,2.2vw,26px)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink', it.href && 'transition-colors group-hover:text-violet')}>
                       {it.name}
                     </h3>{' '}
-                    <p className="mt-3 text-[15.5px] leading-relaxed text-ink-muted">{it.summary}</p>
+                    <p className="mt-3 text-[16px] leading-relaxed text-ink-muted">{it.summary}</p>
 
                     <div className="mt-auto flex items-end justify-between gap-4 border-t border-line-light pt-5">
                       {it.metric ? (
-                        <span className="text-[14.5px] font-medium text-ink/70">
+                        <span className="text-[15px] font-medium text-ink/70">
                           <span className="font-semibold text-violet">{it.metric.value}</span> {it.metric.label}
                         </span>
                       ) : (

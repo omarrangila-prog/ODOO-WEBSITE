@@ -107,13 +107,13 @@ export default function ServicesIndex() {
                     {d.title}
                   </h2>
                   <TextGap />
-                  <p className="mt-4 max-w-[44ch] text-[16.5px] leading-relaxed text-ink-muted">
+                  <p className="mt-4 max-w-[44ch] text-[17px] leading-relaxed text-ink-muted">
                     {d.answer}
                   </p>
 
                   <Link
                     href={d.href}
-                    className="group mt-6 inline-flex min-h-[44px] items-center gap-2 text-[15.5px] font-semibold text-violet"
+                    className="group mt-6 inline-flex min-h-[44px] items-center gap-2 text-[16px] font-semibold text-violet"
                   >
                     {d.ctaLabel}
                     <ArrowUpRight
@@ -148,7 +148,7 @@ export default function ServicesIndex() {
                       <TextGap />
                       <ul className="mt-3 space-y-1.5">
                         {group.items.map((item) => (
-                          <li key={item} className="text-[15.5px] leading-snug text-ink-muted">
+                          <li key={item} className="text-[16px] leading-snug text-ink-muted">
                             {item}
                           </li>
                         ))}
@@ -187,10 +187,10 @@ export default function ServicesIndex() {
                   className="group flex h-full items-start justify-between gap-4 rounded-panel border border-line bg-white/[0.02] p-5 transition-colors hover:border-violet-bright/40 hover:bg-white/[0.04]"
                 >
                   <span>
-                    <span className="block text-[15.5px] font-semibold text-text-dark">
+                    <span className="block text-[16px] font-semibold text-text-dark">
                       {s.navLabel}
                     </span>
-                    <span className="mt-1 block text-[13.5px] leading-relaxed text-text-dark-muted">
+                    <span className="mt-1 block text-[14px] leading-relaxed text-text-dark-muted">
                       {s.tagline}
                     </span>
                   </span>

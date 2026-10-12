@@ -74,7 +74,7 @@ export function RealWork() {
                 <h3 className="mt-5 font-heading text-[clamp(21px,2.2vw,26px)] font-semibold leading-[1.15] tracking-[-0.025em] text-ink">
                   {p.name}
                 </h3>{' '}
-                <p className="mt-3 text-[15.5px] leading-relaxed text-ink-muted">{p.summary}</p>{' '}
+                <p className="mt-3 text-[16px] leading-relaxed text-ink-muted">{p.summary}</p>{' '}
 
                 <p className="mt-auto border-t border-line-light pt-5 text-[14px] text-ink/60">
                   Detailed case study available on request
@@ -87,7 +87,7 @@ export function RealWork() {
         <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3">
           <Link
             href="/case-studies"
-            className="group inline-flex min-h-[44px] items-center gap-2 text-[15.5px] font-semibold text-violet"
+            className="group inline-flex min-h-[44px] items-center gap-2 text-[16px] font-semibold text-violet"
           >
             All work, searchable by capability
             <ArrowUpRight
@@ -97,7 +97,7 @@ export function RealWork() {
           </Link>
           <Link
             href={ctas.portfolio.href}
-            className="inline-flex min-h-[44px] items-center text-[15.5px] font-medium text-ink-muted underline-offset-4 hover:text-ink hover:underline"
+            className="inline-flex min-h-[44px] items-center text-[16px] font-medium text-ink-muted underline-offset-4 hover:text-ink hover:underline"
           >
             {ctas.portfolio.label}
           </Link>

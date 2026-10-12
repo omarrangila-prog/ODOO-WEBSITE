@@ -200,7 +200,7 @@ export default function RapidDeliveryPage() {
                       {t.name}
                     </h3>
                     <TextGap />
-                    <p className="text-[13.5px] text-ink-muted">{t.window}</p>
+                    <p className="text-[14px] text-ink-muted">{t.window}</p>
                   </div>
                 </div>
 
@@ -210,7 +210,7 @@ export default function RapidDeliveryPage() {
                 <TextGap />
                 <ul className="mt-3 space-y-2">
                   {t.fits.map((f) => (
-                    <li key={f} className="flex items-start gap-2.5 text-[15.5px] leading-relaxed text-ink-muted">
+                    <li key={f} className="flex items-start gap-2.5 text-[16px] leading-relaxed text-ink-muted">
                       <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-violet" aria-hidden />
                       {f}
                     </li>
@@ -228,7 +228,7 @@ export default function RapidDeliveryPage() {
             ))}
           </div>
 
-          <p className="mt-10 max-w-[var(--reading-width)] rounded-panel border border-line-light bg-white/60 p-6 text-[15.5px] leading-relaxed text-ink-muted">
+          <p className="mt-10 max-w-[var(--reading-width)] rounded-panel border border-line-light bg-white/60 p-6 text-[16px] leading-relaxed text-ink-muted">
             <strong className="font-semibold text-ink">How delivery dates are set.</strong>{' '}
             Delivery times depend on scope, access, integrations, approvals and testing
             requirements. A final delivery commitment is confirmed after we review the project
@@ -253,7 +253,7 @@ export default function RapidDeliveryPage() {
             {notRushed.map((n) => (
               <li
                 key={n}
-                className="flex items-start gap-3.5 border-b border-line pb-4 text-[16.5px] leading-relaxed text-text-dark-muted last:border-b-0"
+                className="flex items-start gap-3.5 border-b border-line pb-4 text-[17px] leading-relaxed text-text-dark-muted last:border-b-0"
               >
                 <CircleAlert className="mt-1 h-5 w-5 shrink-0 text-amber" aria-hidden />
                 {n}
@@ -287,7 +287,7 @@ export default function RapidDeliveryPage() {
               </li>
             ))}
           </ul>
-          <p className="mt-8 text-[15.5px] text-ink-muted">
+          <p className="mt-8 text-[16px] text-ink-muted">
             The{' '}
             <Link href="/contact#form" className="text-violet underline underline-offset-4">
               contact form

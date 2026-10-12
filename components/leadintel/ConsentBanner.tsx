@@ -63,7 +63,7 @@ export function ConsentBanner() {
           <div className="min-w-0 flex-1">
             <p className="font-heading text-[16px] font-semibold text-text-dark">Your privacy choices</p>
             <TextGap />
-            <p className="mt-1.5 text-[13.5px] leading-relaxed text-text-dark-muted">
+            <p className="mt-1.5 text-[14px] leading-relaxed text-text-dark-muted">
               We use strictly-necessary storage to run the site. With your consent we also enable
               analytics and marketing. You can change this any time.{' '}
               <a href="/privacy" className="text-violet-bright underline-offset-4 hover:underline">Privacy Policy</a>.

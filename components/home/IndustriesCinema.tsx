@@ -85,7 +85,7 @@ export function IndustriesCinema() {
                     <h3 className="mt-2 font-heading text-[clamp(2rem,5vw,3.5rem)] font-semibold uppercase tracking-tight text-white">
                       {active.name}
                     </h3>{' '}
-                    <p className="mt-3 max-w-lg text-[15.5px] leading-relaxed text-white/85">
+                    <p className="mt-3 max-w-lg text-[16px] leading-relaxed text-white/85">
                       {active.description}
                     </p>
                     <TextGap />

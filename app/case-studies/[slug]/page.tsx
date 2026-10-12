@@ -134,7 +134,7 @@ function Block({ title, body }: { title: string; body: string }) {
     <div>
       <h2 className="font-heading text-xl font-semibold">{title}</h2>
       <TextGap />
-      <p className="mt-2 text-[15.5px] leading-relaxed text-text-dark-muted">{body}</p>
+      <p className="mt-2 text-[16px] leading-relaxed text-text-dark-muted">{body}</p>
     </div>
   );
 }

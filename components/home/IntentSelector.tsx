@@ -75,7 +75,7 @@ export function IntentSelector() {
                   aria-pressed={active?.id === intent.id}
                   data-active={active?.id === intent.id}
                   className={cn(
-                    'neu flex w-full items-center gap-3 rounded-control px-4 py-3.5 text-left text-[14.5px] font-medium transition-colors min-h-[52px]',
+                    'neu flex w-full items-center gap-3 rounded-control px-4 py-3.5 text-left text-[15px] font-medium transition-colors min-h-[52px]',
                     active?.id === intent.id ? 'text-text-dark' : 'text-text-dark-muted hover:text-text-dark',
                   )}
                 >

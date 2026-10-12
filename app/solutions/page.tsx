@@ -105,8 +105,8 @@ export default function SolutionsIndex() {
                 >
                   <d.icon className="mt-0.5 h-5 w-5 shrink-0 text-violet-bright" aria-hidden />
                   <span>
-                    <span className="block text-[15.5px] font-semibold text-text-dark">{d.label}</span>
-                    <span className="mt-1 block text-[13.5px] leading-relaxed text-text-dark-muted">
+                    <span className="block text-[16px] font-semibold text-text-dark">{d.label}</span>
+                    <span className="mt-1 block text-[14px] leading-relaxed text-text-dark-muted">
                       {d.summary}
                     </span>
                   </span>

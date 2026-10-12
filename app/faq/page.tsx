@@ -62,7 +62,7 @@ export default function FaqPage() {
       <section className="theme-light bay-sm">
         <div className="shell max-w-4xl">
           <Accordion items={faqs} allowMultiple />{' '}
-          <p className="mt-10 text-[15.5px] text-ink-muted">
+          <p className="mt-10 text-[16px] text-ink-muted">
             Question not here? See{' '}
             <Link href="/company/pricing" className="text-violet underline-offset-4 hover:underline">
               how we price

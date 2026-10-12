@@ -176,7 +176,7 @@ export default function GlobalDeliveryPage() {
                   {p.title}
                 </h3>
                 <TextGap />
-                <p className="mt-3 text-[15.5px] leading-relaxed text-ink-muted">{p.body}</p>
+                <p className="mt-3 text-[16px] leading-relaxed text-ink-muted">{p.body}</p>
               </article>
             ))}
           </div>
@@ -228,7 +228,7 @@ export default function GlobalDeliveryPage() {
                 &#9662;
               </span>
             </summary>
-            <ul className="mt-5 columns-2 gap-x-8 text-[14.5px] leading-[1.9] text-ink-muted sm:columns-3 lg:columns-4">
+            <ul className="mt-5 columns-2 gap-x-8 text-[15px] leading-[1.9] text-ink-muted sm:columns-3 lg:columns-4">
               {countries.map((c) => (
                 <li key={c.code} className="break-inside-avoid">
                   <span className="mr-2" aria-hidden>{flagEmoji(c.code)}</span>

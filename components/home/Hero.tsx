@@ -68,12 +68,12 @@ export function Hero() {
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Magnetic>
-              <ButtonLink href="/contact#form" className="min-h-[54px] text-[15.5px]">
+              <ButtonLink href="/contact#form" className="min-h-[54px] text-[16px]">
                 Tell Us What You Need
                 <ArrowNudge />
               </ButtonLink>
             </Magnetic>{' '}
-            <ButtonLink href="/case-studies" variant="secondary" className="min-h-[54px] text-[15.5px] border-[rgba(170,110,255,0.4)]">
+            <ButtonLink href="/case-studies" variant="secondary" className="min-h-[54px] text-[16px] border-[rgba(170,110,255,0.4)]">
               Explore Our Work
               <ArrowNudge className="h-[18px] w-[18px]" />
             </ButtonLink>
@@ -96,8 +96,8 @@ export function Hero() {
                   <c.icon className="h-[18px] w-[18px]" aria-hidden />
                 </span>
                 <span className="leading-tight">
-                  <span className="block text-[13.5px] font-semibold text-text-dark">{c.label}</span>{' '}
-                  <span className="mt-0.5 block text-[11.5px] leading-tight text-text-dark-muted">{c.sub}</span>
+                  <span className="block text-[14px] font-semibold text-text-dark">{c.label}</span>{' '}
+                  <span className="mt-0.5 block text-[12px] leading-tight text-text-dark-muted">{c.sub}</span>
                 </span>
                 </Link>
               </li>

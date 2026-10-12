@@ -39,7 +39,7 @@ export function Footer() {
         <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1.1fr_1fr_1.2fr]">
           <div className="max-w-xs">
             <Logo />{' '}
-            <p className="mt-5 text-[14.5px] leading-relaxed text-text-dark-muted">
+            <p className="mt-5 text-[15px] leading-relaxed text-text-dark-muted">
               {company.positioningSupport}
             </p>{' '}
             <p className="mt-3 text-[13px] leading-relaxed text-text-dark-muted/80">
@@ -67,7 +67,7 @@ export function Footer() {
 
           <div>
             <h3 className="mb-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-text-dark-muted">Contact</h3>{' '}
-            <ul className="flex flex-col gap-3 text-[14.5px]">
+            <ul className="flex flex-col gap-3 text-[15px]">
               <li>
                 <a href={company.phoneHref} className="inline-flex min-h-[44px] items-center gap-2.5 text-text-dark-muted hover:text-text-dark sm:min-h-0">
                   <Phone className="h-4 w-4 text-violet-bright" aria-hidden />{' '}
@@ -111,7 +111,7 @@ function FooterCol({ title, links }: { title: string; links: { label: string; hr
   return (
     <div>
       <h3 className="mb-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-text-dark-muted">{title}</h3>{' '}
-      <ul className="flex flex-col gap-0.5 text-[14.5px] sm:gap-2.5">
+      <ul className="flex flex-col gap-0.5 text-[15px] sm:gap-2.5">
         {links.map((link) => (
           <li key={link.href}>
             <Link

@@ -143,11 +143,11 @@ export default function PricingPage() {
                 <TextGap />
                 <p className="mt-3 text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-muted">Fits</p>
                 <TextGap />
-                <p className="mt-1 text-[15.5px] leading-relaxed text-ink-muted">{m.fits}</p>
+                <p className="mt-1 text-[16px] leading-relaxed text-ink-muted">{m.fits}</p>
                 <TextGap />
                 <p className="mt-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-ink-muted">How it works</p>
                 <TextGap />
-                <p className="mt-1 text-[15.5px] leading-relaxed text-ink-muted">{m.how}</p>
+                <p className="mt-1 text-[16px] leading-relaxed text-ink-muted">{m.how}</p>
               </article>
             ))}
           </div>
@@ -161,7 +161,7 @@ export default function PricingPage() {
             <TextGap />
             <ul className="mt-8 space-y-3">
               {drivers.map((d) => (
-                <li key={d} className="flex items-start gap-3 text-[16.5px] leading-relaxed text-text-dark-muted">
+                <li key={d} className="flex items-start gap-3 text-[17px] leading-relaxed text-text-dark-muted">
                   <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-violet-bright" aria-hidden />
                   {d}
                 </li>

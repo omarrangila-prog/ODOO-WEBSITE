@@ -97,7 +97,7 @@ export function JourneyRoute() {
                       <span className={cn('block font-heading text-[17px] font-medium transition-colors', on ? 'text-text-dark' : 'text-text-dark-muted group-hover:text-text-dark')}>
                         {s.title}
                       </span>{' '}
-                      <span className="mt-0.5 flex items-center gap-1.5 text-[12.5px] text-text-dark-muted">
+                      <span className="mt-0.5 flex items-center gap-1.5 text-[13px] text-text-dark-muted">
                         <span className={cn('h-1 w-1 rounded-full', on ? 'bg-violet-bright' : 'bg-text-dark-muted/40')} aria-hidden />
                         {s.deliverable}
                       </span>

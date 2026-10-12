@@ -79,7 +79,7 @@ export default function ClientsPage() {
                   {sector.industryHref && (
                     <Link
                       href={sector.industryHref}
-                      className="inline-flex min-h-[44px] shrink-0 items-center gap-1 text-[13.5px] font-medium text-violet sm:min-h-0"
+                      className="inline-flex min-h-[44px] shrink-0 items-center gap-1 text-[14px] font-medium text-violet sm:min-h-0"
                     >
                       Sector page
                       <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
@@ -94,7 +94,7 @@ export default function ClientsPage() {
                   ))}
                 </ul>
                 {sector.note && (
-                  <p className="mt-3 text-[14.5px] italic text-ink-muted/80">{sector.note}</p>
+                  <p className="mt-3 text-[15px] italic text-ink-muted/80">{sector.note}</p>
                 )}
               </section>
             ))}

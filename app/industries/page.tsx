@@ -96,7 +96,7 @@ export default function IndustriesIndex() {
 
                   <ol className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-2">
                     {ind.workflow.map((step, idx) => (
-                      <li key={step} className="flex items-center gap-2 text-[13.5px] font-medium text-ink">
+                      <li key={step} className="flex items-center gap-2 text-[14px] font-medium text-ink">
                         <span className="rounded-lg border border-line-light bg-ivory-soft px-3 py-1.5">{step}</span>
                         {idx < ind.workflow.length - 1 && <span className="text-violet" aria-hidden>→</span>}
                       </li>

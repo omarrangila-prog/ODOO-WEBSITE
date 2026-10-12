@@ -70,7 +70,7 @@ export function Header() {
                           aria-haspopup="true"
                           onClick={() => setOpenDropdown((p) => (p === item.label ? null : item.label))}
                           className={cn(
-                            'flex items-center gap-1 whitespace-nowrap px-2 py-2 text-[14px] font-medium transition-colors hd:px-3 hd:text-[14.5px]',
+                            'flex items-center gap-1 whitespace-nowrap px-2 py-2 text-[14px] font-medium transition-colors hd:px-3 hd:text-[15px]',
                             active ? 'text-text-dark' : 'text-text-dark-muted hover:text-text-dark',
                           )}
                         >
@@ -105,7 +105,7 @@ export function Header() {
                                   {child.description && (
                                     <>
                                       {' '}
-                                      <span className="mt-0.5 block text-[12.5px] leading-snug text-text-dark-muted">{child.description}</span>
+                                      <span className="mt-0.5 block text-[13px] leading-snug text-text-dark-muted">{child.description}</span>
                                     </>
                                   )}
                                 </Link>
@@ -118,7 +118,7 @@ export function Header() {
                       <Link
                         href={item.href}
                         className={cn(
-                          'relative whitespace-nowrap px-2 py-2 text-[14px] font-medium transition-colors hd:px-3 hd:text-[14.5px]',
+                          'relative whitespace-nowrap px-2 py-2 text-[14px] font-medium transition-colors hd:px-3 hd:text-[15px]',
                           active ? 'text-text-dark' : 'text-text-dark-muted hover:text-text-dark',
                         )}
                       >

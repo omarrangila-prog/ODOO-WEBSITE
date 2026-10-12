@@ -76,7 +76,7 @@ export function Tabs({
                 setFocusIndex(i);
               }}
               className={cn(
-                'whitespace-nowrap rounded-control px-4 py-3 text-left text-[14.5px] font-semibold transition-colors duration-200 min-h-[44px]',
+                'whitespace-nowrap rounded-control px-4 py-3 text-left text-[15px] font-semibold transition-colors duration-200 min-h-[44px]',
                 orientation === 'vertical' && 'w-full',
                 selected
                   ? 'bg-white/[0.06] text-text-dark [.theme-light_&]:bg-black/[0.05] [.theme-light_&]:text-ink'

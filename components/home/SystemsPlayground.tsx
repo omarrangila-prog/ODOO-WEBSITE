@@ -119,7 +119,7 @@ export function SystemsPlayground() {
                 <h3 className="font-heading text-[clamp(20px,2.3vw,28px)] font-semibold leading-snug tracking-[-0.02em] text-text-dark">
                   {flow.title}
                 </h3>{' '}
-                <p className="mt-4 max-w-[var(--reading-width)] text-[16.5px] leading-relaxed text-text-dark-muted">
+                <p className="mt-4 max-w-[var(--reading-width)] text-[17px] leading-relaxed text-text-dark-muted">
                   {flow.summary}
                 </p>
 
@@ -184,7 +184,7 @@ export function SystemsPlayground() {
                         track('playground_played', { flow: flow.id });
                       }
                     }}
-                    className="inline-flex min-h-[44px] items-center gap-2 rounded-control border border-line-strong bg-white/[0.04] px-4 text-[14.5px] font-medium text-text-dark transition-colors hover:bg-white/[0.07]"
+                    className="inline-flex min-h-[44px] items-center gap-2 rounded-control border border-line-strong bg-white/[0.04] px-4 text-[15px] font-medium text-text-dark transition-colors hover:bg-white/[0.07]"
                   >
                     {playing ? <Pause className="h-4 w-4" aria-hidden /> : <Play className="h-4 w-4" aria-hidden />}
                     {playing ? 'Pause' : step >= total - 1 ? 'Replay walkthrough' : 'Play walkthrough'}
@@ -192,12 +192,12 @@ export function SystemsPlayground() {
                   <button
                     type="button"
                     onClick={() => selectStep(0)}
-                    className="inline-flex min-h-[44px] items-center gap-2 rounded-control px-3 text-[14.5px] font-medium text-text-dark-muted transition-colors hover:text-text-dark"
+                    className="inline-flex min-h-[44px] items-center gap-2 rounded-control px-3 text-[15px] font-medium text-text-dark-muted transition-colors hover:text-text-dark"
                   >
                     <RotateCcw className="h-4 w-4" aria-hidden />
                     Reset
                   </button>
-                  <span className="ml-auto text-[13.5px] text-text-dark-muted">
+                  <span className="ml-auto text-[14px] text-text-dark-muted">
                     Step {step + 1} of {total}
                   </span>
                 </div>
@@ -233,7 +233,7 @@ export function SystemsPlayground() {
                 <div className="mt-8 flex flex-col gap-5 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
                   <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
                     {(['system', 'ai', 'human'] as Actor[]).map((a) => (
-                      <li key={a} className="flex items-center gap-2 text-[13.5px] text-text-dark-muted">
+                      <li key={a} className="flex items-center gap-2 text-[14px] text-text-dark-muted">
                         <span className={cn('h-2.5 w-2.5 rounded-full', actorStyle[a].dot)} aria-hidden />
                         {actorLabel[a]}
                       </li>
@@ -251,7 +251,7 @@ export function SystemsPlayground() {
                   </Link>
                 </div>
 
-                <p className="mt-5 text-[13.5px] leading-relaxed text-text-dark-muted/80">
+                <p className="mt-5 text-[14px] leading-relaxed text-text-dark-muted/80">
                   Illustrative workflow patterns, not a recording of one client&rsquo;s system. The
                   steps reflect how we build these integrations; the specific modules and
                   approvals are agreed per project.

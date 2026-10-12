@@ -42,7 +42,7 @@ export function Faq({ items = homepageFaqs, heading = 'The Questions We Hear Mos
         </div>
         <div>
           <Accordion items={items} allowMultiple />{' '}
-          <p className="mt-8 text-[15.5px] text-text-dark-muted">
+          <p className="mt-8 text-[16px] text-text-dark-muted">
             <Link
               href="/faq"
               className="group inline-flex min-h-[44px] items-center gap-2 font-semibold text-violet-bright"

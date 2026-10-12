@@ -228,7 +228,7 @@ export default function BrandPage() {
               {faqs.map((f) => (
                 <div key={f.question} className="border-t border-line pt-5">
                   <dt className="font-heading text-[18px] font-semibold">{f.question}</dt>
-                  <dd className="mt-2 text-[15.5px] leading-relaxed text-text-dark-muted">
+                  <dd className="mt-2 text-[16px] leading-relaxed text-text-dark-muted">
                     {f.answer}
                   </dd>
                 </div>

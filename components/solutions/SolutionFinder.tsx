@@ -87,7 +87,7 @@ export function SolutionFinder() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search: stock, invoicing, POS, landed cost…"
-            className="w-full rounded-control border border-line-light bg-white/70 py-3.5 pl-11 pr-4 text-[15.5px] text-ink placeholder:text-ink/40 focus:border-violet focus:outline-none focus:ring-2 focus:ring-violet/20"
+            className="w-full rounded-control border border-line-light bg-white/70 py-3.5 pl-11 pr-4 text-[16px] text-ink placeholder:text-ink/40 focus:border-violet focus:outline-none focus:ring-2 focus:ring-violet/20"
           />
         </label>
 
@@ -151,7 +151,7 @@ export function SolutionFinder() {
                   <span className="mt-5 block font-heading text-[clamp(20px,2.2vw,25px)] font-semibold leading-[1.18] tracking-[-0.025em] text-ink transition-colors group-hover:text-violet">
                     {s.h1}
                   </span>{' '}
-                  <span className="mt-3 block text-[15.5px] leading-relaxed text-ink-muted">
+                  <span className="mt-3 block text-[16px] leading-relaxed text-ink-muted">
                     {s.forWho}
                   </span>
                   <span className="mt-5 flex flex-wrap gap-1.5">
@@ -162,7 +162,7 @@ export function SolutionFinder() {
                     ))}
                   </span>
                   <span className="mt-auto flex items-center justify-between gap-4 border-t border-line-light pt-5">
-                    <span className="text-[14.5px] font-medium text-ink/70">{s.ctaLabel}</span>
+                    <span className="text-[15px] font-medium text-ink/70">{s.ctaLabel}</span>
                     <ArrowUpRight
                       className="h-5 w-5 shrink-0 text-ink/30 transition-all group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-violet"
                       aria-hidden

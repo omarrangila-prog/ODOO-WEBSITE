@@ -45,7 +45,7 @@ function Row({ ariaHidden }: { ariaHidden?: boolean }) {
           <Link
             href="/services"
             tabIndex={ariaHidden ? -1 : undefined}
-            className="inline-flex min-h-[44px] items-center text-[14.5px] font-medium text-text-dark/60 transition-colors hover:text-text-dark"
+            className="inline-flex min-h-[44px] items-center text-[15px] font-medium text-text-dark/60 transition-colors hover:text-text-dark"
           >
             {c}
           </Link>{' '}

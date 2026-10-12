@@ -62,7 +62,7 @@ export default function ResourcesIndex() {
                     {r.h1}
                   </h2>
                   <TextGap />
-                  <p className="mt-2.5 flex-1 text-[15.5px] leading-relaxed text-ink-muted">{r.summary.split('. ')[0]}.</p>
+                  <p className="mt-2.5 flex-1 text-[16px] leading-relaxed text-ink-muted">{r.summary.split('. ')[0]}.</p>
                   <span className="mt-4 inline-flex items-center gap-1.5 text-[13px] text-ink-muted">
                     <Clock className="h-3.5 w-3.5" aria-hidden />
                     {r.readMinutes} min read

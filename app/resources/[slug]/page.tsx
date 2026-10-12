@@ -157,7 +157,7 @@ function BlockView({ block }: { block: Block }) {
       return (
         <ul className="space-y-2.5">
           {block.items.map((it) => (
-            <li key={it} className="flex items-start gap-3 text-[16.5px] leading-relaxed text-ink-muted">
+            <li key={it} className="flex items-start gap-3 text-[17px] leading-relaxed text-ink-muted">
               <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-violet" aria-hidden />
               {it}
             </li>
@@ -189,7 +189,7 @@ function BlockView({ block }: { block: Block }) {
       );
     case 'note':
       return (
-        <p className="rounded-panel border border-violet/25 bg-violet/[0.06] p-5 text-[15.5px] leading-relaxed text-ink">
+        <p className="rounded-panel border border-violet/25 bg-violet/[0.06] p-5 text-[16px] leading-relaxed text-ink">
           {block.text}
         </p>
       );

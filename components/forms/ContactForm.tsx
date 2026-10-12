@@ -184,7 +184,7 @@ export function ContactForm() {
             Please correct the following:
           </p>
           <TextGap />
-          <ul className="mt-2 list-disc space-y-0.5 pl-8 text-[13.5px] text-[#ff8a8f]/90">
+          <ul className="mt-2 list-disc space-y-0.5 pl-8 text-[14px] text-[#ff8a8f]/90">
             {errorList.map(([key, val]) => (
               <li key={key}>{val?.message as string}</li>
             ))}
@@ -219,7 +219,7 @@ export function ContactForm() {
         name="services"
         render={({ field }) => (
           <fieldset>
-            <legend className="mb-2 block text-[13.5px] font-semibold text-text-dark">
+            <legend className="mb-2 block text-[14px] font-semibold text-text-dark">
               Which area is this?{' '}
               <span className="font-normal text-text-dark-muted">(optional)</span>
             </legend>
@@ -239,7 +239,7 @@ export function ContactForm() {
                       )
                     }
                     className={cn(
-                      'rounded-full border px-3.5 py-2 text-[13.5px] font-medium transition-colors min-h-[44px]',
+                      'rounded-full border px-3.5 py-2 text-[14px] font-medium transition-colors min-h-[44px]',
                       active
                         ? 'border-violet-bright/60 bg-violet/12 text-text-dark'
                         : 'border-line text-text-dark-muted hover:border-white/25 hover:text-text-dark',
@@ -276,7 +276,7 @@ export function ContactForm() {
           </span>
         </summary>
         <div className="border-t border-line/70 px-4 pb-5 pt-5">
-          <p className="mb-5 text-[13.5px] leading-relaxed text-text-dark-muted">
+          <p className="mb-5 text-[14px] leading-relaxed text-text-dark-muted">
             None of this is required. It helps us reach the first call with
             something useful instead of a list of questions.
           </p>
@@ -324,7 +324,7 @@ export function ContactForm() {
 
 
               <fieldset className="mt-5">
-            <legend className="mb-2 block text-[13.5px] font-semibold text-text-dark">
+            <legend className="mb-2 block text-[14px] font-semibold text-text-dark">
               Preferred contact method{' '}
               <span className="font-normal text-text-dark-muted">(optional)</span>
             </legend>
@@ -355,7 +355,7 @@ export function ContactForm() {
 
       {/* Consent */}
       <Field label="" htmlFor="consent" error={errors.consent?.message}>
-        <label htmlFor="consent" className="flex cursor-pointer items-start gap-3 text-[13.5px] leading-relaxed text-text-dark-muted">
+        <label htmlFor="consent" className="flex cursor-pointer items-start gap-3 text-[14px] leading-relaxed text-text-dark-muted">
           <input id="consent" type="checkbox" className="mt-0.5 h-5 w-5 shrink-0 accent-violet-bright" {...register('consent')} />
           <span>
             I agree that ODOOVATIONS may contact me about my enquiry, and I accept the{' '}
@@ -369,7 +369,7 @@ export function ContactForm() {
 
       {/* Marketing opt-in — SEPARATE from the contact permission above. */}
       <Field label="" htmlFor="marketingConsent">
-        <label htmlFor="marketingConsent" className="flex cursor-pointer items-start gap-3 text-[13.5px] leading-relaxed text-text-dark-muted">
+        <label htmlFor="marketingConsent" className="flex cursor-pointer items-start gap-3 text-[14px] leading-relaxed text-text-dark-muted">
           <input id="marketingConsent" type="checkbox" className="mt-0.5 h-5 w-5 shrink-0 accent-violet-bright" {...register('marketingConsent')} />
           <span>Optional: send me occasional Odoo guides and updates. You can unsubscribe any time.</span>
         </label>

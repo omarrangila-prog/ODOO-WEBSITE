@@ -47,7 +47,7 @@ export function GlobalDeliveryBand() {
                 {verifiedCountries.map((c) => (
                   <span
                     key={c.countryCode}
-                    className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1.5 text-[13.5px] text-text-dark"
+                    className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1.5 text-[14px] text-text-dark"
                   >
                     <span aria-hidden>{flagEmoji(c.countryCode)}</span>
                     {c.countryName}
@@ -56,11 +56,11 @@ export function GlobalDeliveryBand() {
               </>
             ) : (
               <>
-                <span className="inline-flex items-center gap-2 rounded-full border border-violet-bright/40 bg-violet/10 px-3.5 py-1.5 text-[13.5px] font-medium text-text-dark">
+                <span className="inline-flex items-center gap-2 rounded-full border border-violet-bright/40 bg-violet/10 px-3.5 py-1.5 text-[14px] font-medium text-text-dark">
                   <span aria-hidden>{flagEmoji('PK')}</span>
                   Karachi, Pakistan &mdash; headquarters
                 </span>
-                <span className="rounded-full border border-line px-3.5 py-1.5 text-[13.5px] text-text-dark-muted">
+                <span className="rounded-full border border-line px-3.5 py-1.5 text-[14px] text-text-dark-muted">
                   Remote delivery worldwide
                 </span>
               </>

@@ -188,7 +188,7 @@ function SolBlockView({ block }: { block: SolBlock }) {
       return (
         <ul className="space-y-2.5">
           {block.items.map((it) => (
-            <li key={it} className="flex items-start gap-3 text-[16.5px] leading-relaxed text-ink-muted">
+            <li key={it} className="flex items-start gap-3 text-[17px] leading-relaxed text-ink-muted">
               <Check className="mt-1 h-4 w-4 shrink-0 text-violet" aria-hidden />
               {it}
             </li>
@@ -199,7 +199,7 @@ function SolBlockView({ block }: { block: SolBlock }) {
       return (
         <ol className="flex flex-wrap items-center gap-x-2 gap-y-2">
           {block.steps.map((s, i) => (
-            <li key={s} className="flex items-center gap-2 text-[13.5px] font-medium text-ink">
+            <li key={s} className="flex items-center gap-2 text-[14px] font-medium text-ink">
               <span className="rounded-lg border border-line-light bg-ivory-soft px-3 py-1.5">{s}</span>
               {i < block.steps.length - 1 && <span className="text-violet" aria-hidden>→</span>}
             </li>

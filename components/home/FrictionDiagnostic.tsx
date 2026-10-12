@@ -95,7 +95,7 @@ export function FrictionDiagnostic() {
               </div>
             </div>
             {result && (
-              <p className="mt-6 border-t border-line pt-4 text-[13.5px] leading-relaxed text-text-dark-muted">
+              <p className="mt-6 border-t border-line pt-4 text-[14px] leading-relaxed text-text-dark-muted">
                 {result.recommendation}
                 <span className="mt-2 block text-text-dark">
                   Recommended start: <span className="text-violet-bright">Operations &amp; Workflow Discovery</span>

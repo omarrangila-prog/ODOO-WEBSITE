@@ -99,7 +99,7 @@ function ServicePanel({ index, service }: { index: number; service: (typeof ecoS
 
       <ul className="mt-6 grid gap-2 sm:grid-cols-2">
         {service.deliverables.map((d) => (
-          <li key={d} className="flex items-start gap-2 text-[13.5px] text-text-dark-muted">
+          <li key={d} className="flex items-start gap-2 text-[14px] text-text-dark-muted">
             <Check className="mt-0.5 h-4 w-4 shrink-0 text-green" aria-hidden />
             {d}
           </li>

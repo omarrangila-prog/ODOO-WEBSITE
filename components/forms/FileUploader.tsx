@@ -55,7 +55,7 @@ export function FileUploader({ file, onChange }: Props) {
 
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block text-[13.5px] font-semibold text-text-dark">
+      <label htmlFor={id} className="mb-2 block text-[14px] font-semibold text-text-dark">
         Upload your workflow{' '}
         <span className="font-normal text-text-dark-muted">(optional)</span>
       </label>

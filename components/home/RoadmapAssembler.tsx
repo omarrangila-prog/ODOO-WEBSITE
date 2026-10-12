@@ -95,7 +95,7 @@ export function RoadmapAssembler() {
 
           {selected.length === 0 ? (
             <div className="mt-6 rounded-control border border-dashed border-line p-6 text-center">
-              <p className="text-[14.5px] leading-relaxed text-text-dark-muted">
+              <p className="text-[15px] leading-relaxed text-text-dark-muted">
                 No friction points selected yet. Choose the challenges in the{' '}
                 <Link href="#friction" className="text-violet-bright underline-offset-4 hover:underline">
                   diagnostic above

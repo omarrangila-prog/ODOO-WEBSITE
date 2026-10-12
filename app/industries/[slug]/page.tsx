@@ -125,7 +125,7 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
               </ul>
               <div className="mt-8 flex flex-wrap gap-2">
                 {ind.modules.map((m) => (
-                  <span key={m} className="rounded-full border border-line-light bg-ivory-soft px-4 py-2 text-[13.5px] text-ink-muted">{m}</span>
+                  <span key={m} className="rounded-full border border-line-light bg-ivory-soft px-4 py-2 text-[14px] text-ink-muted">{m}</span>
                 ))}
               </div>
             </div>
@@ -152,7 +152,7 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
                     {ind.departments.map((d) => (
                       <li
                         key={d}
-                        className="rounded-control border border-line bg-white/[0.02] px-4 py-3 text-[14.5px] font-medium text-text-dark"
+                        className="rounded-control border border-line bg-white/[0.02] px-4 py-3 text-[15px] font-medium text-text-dark"
                       >
                         {d}
                       </li>
@@ -194,7 +194,7 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
                           aria-hidden
                         />
                       </span>
-                      <span className="mt-2 text-[15.5px] leading-relaxed text-ink-muted">{b.body}</span>
+                      <span className="mt-2 text-[16px] leading-relaxed text-ink-muted">{b.body}</span>
                     </Link>
                   </li>
                 ))}
