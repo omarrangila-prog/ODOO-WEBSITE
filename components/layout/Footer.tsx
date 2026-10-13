@@ -58,7 +58,7 @@ export function Footer() {
           <FooterCol title="Company" links={[...footerNav.company, ...footerNav.locations]} />{' '}
 
           <div>
-            <h3 className="mb-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-text-dark-muted">Contact</h3>{' '}
+            <h2 className="mb-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-text-dark-muted">Contact</h2>{' '}
             <ul className="flex flex-col gap-3 text-[15px]">
               <li>
                 <a href={company.phoneHref} className="inline-flex min-h-[44px] items-center gap-2.5 text-text-dark-muted hover:text-text-dark sm:min-h-0">
@@ -102,7 +102,13 @@ export function Footer() {
 function FooterCol({ title, links }: { title: string; links: { label: string; href: string }[] }) {
   return (
     <div>
-      <h3 className="mb-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-text-dark-muted">{title}</h3>{' '}
+      {/*
+        h2, not h3. These label footer navigation groups, so they sit directly
+        under the page h1 — and on pages whose main content has no h2 of its
+        own, such as /contact, an h3 here skipped a level and failed
+        heading-order. The visual size is set by the class, not the tag.
+      */}
+      <h2 className="mb-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-text-dark-muted">{title}</h2>{' '}
       <ul className="flex flex-col gap-0.5 text-[15px] sm:gap-2.5">
         {links.map((link) => (
           <li key={link.href}>
