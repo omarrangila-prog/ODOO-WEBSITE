@@ -3,10 +3,8 @@ import { Linkedin, Facebook, Instagram, Youtube, Mail, Phone, MapPin, MessageCir
 import { footerNav } from '@/data/navigation';
 import { company, PLACEHOLDER } from '@/data/company';
 import { whatsappLink } from '@/lib/utilities';
-import { ButtonLink, ArrowNudge } from '@/components/ui/Button';
 import { Logo } from './Logo';
 import { CookiePrefsLink } from '@/components/leadintel/CookiePrefsLink';
-import { TextGap } from '@/components/ui/TextGap';
 
 const socialIcons = { linkedin: Linkedin, facebook: Facebook, instagram: Instagram, youtube: Youtube };
 
@@ -20,21 +18,15 @@ export function Footer() {
   return (
     <footer className="theme-graphite border-t border-line">
       <div className="shell">
-        {/* Top conversion statement */}
-        <div className="grid gap-8 border-b border-line py-16 sm:py-20 lg:grid-cols-[1.4fr_1fr] lg:items-center">
-          <h2 className="font-heading text-[clamp(34px,4vw,58px)] font-semibold leading-[1.05] tracking-[-0.04em]">
-            Ready to Build a Business System That{' '}
-            <span className="signal-text">Actually Fits?</span>
-          </h2>
-          <TextGap />
-          <div className="lg:justify-self-end">
-            <ButtonLink href="/contact#form">
-              Start the Conversation
-              <ArrowNudge />
-            </ButtonLink>
-          </div>
-        </div>
-
+        {/*
+          The footer carried its own "Ready to Build a Business System"
+          statement with a Start the Conversation button. Every page that
+          reaches it already ends with a call to action — nineteen templates
+          render a CtaBand, and the homepage ends with the roadmap assembler —
+          so it was a second ask immediately below the first, on every page of
+          the site. Removed rather than hidden with CSS: display:none still
+          leaves the text in textContent, which scrapers and AI retrieval read.
+        */}
         {/* Navigation */}
         <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1.1fr_1fr_1.2fr]">
           <div className="max-w-xs">
