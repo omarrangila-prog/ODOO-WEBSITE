@@ -126,5 +126,5 @@ measure it, but the gradient stops give 4.15, 5.31 and 5.79:1 against
    Karachi-based team" and nothing more.
 3. **Project screenshots** — for the six management-confirmed projects. Real
    UI is the most persuasive asset the portfolio could carry.
-4. **What KCCS stands for** — its card currently reads "custom business
-   software for KCCS", which is thin.
+4. **What the KCCI software does** — the client is the Karachi Chamber of
+   Commerce & Industry, but its card still says only "custom business software", which is thin.

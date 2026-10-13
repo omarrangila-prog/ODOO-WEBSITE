@@ -14,7 +14,7 @@ with screenshots and outcomes.
 |---|---|---|---|---|
 | KCCIA Election System | CLIENT_PROJECT | Management confirmation | Election management: eligibility, registration, candidates, polling workflow, results, role-based access | Screenshots, scope document, launch date, client permission on file |
 | Al Jadeed Election System | CLIENT_PROJECT | Management confirmation; "Al Jadeed Properties" in group client roster | Election management: voter DB, eligibility, candidates, vote capture, results, audit | Screenshots, scope document |
-| KCCS Software | CLIENT_PROJECT | Management confirmation | "Custom business software for KCCS" — scope not supplied | **What KCCS stands for and what was built** |
+| KCCI Software | CLIENT_PROJECT | Management confirmation | "Custom business software for the Karachi Chamber of Commerce & Industry (KCCI)" — scope not supplied | **What was built** |
 | Scrabble Tournament Timer | CLIENT_PROJECT | Management confirmation | Timers, pairing, scoring, rankings, check-in, leaderboard | Confirm each feature against the build; screenshots |
 | WhatsApp Karobar OS | INTERNAL_PRODUCT | Management confirmation | Business operating layer on WhatsApp | **Confirm it is a product, not a client build**; feature confirmation |
 | WhatsApp Digital Connection | CLIENT_PROJECT | Management confirmation | Software → queue → document API → WhatsApp delivery | Which client; which document types are live |

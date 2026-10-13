@@ -131,13 +131,13 @@ export const projects: Project[] = [
     summary: 'Election management system for the Al Jadeed group: voter database, eligibility checks, candidate management, vote capture, results and audit reporting.',
   },
   {
-    id: 'kccs-software',
-    name: 'KCCS Software',
+    id: 'kcci-software',
+    name: 'KCCI Software',
     status: 'CLIENT_PROJECT',
     categories: ['Custom Software'],
     countryCode: 'PK',
     evidence: { found: false, screenshots: false, clientApproval: true, countryPublic: true, notes: 'Naming authorised by management, 2026-09-12. Scope description not yet supplied.' },
-    summary: 'Custom business software built for KCCS. Scope details available on request.',
+    summary: 'Custom business software built for the Karachi Chamber of Commerce & Industry (KCCI). Scope details available on request.',
   },
   {
     id: 'scrabble-timer',

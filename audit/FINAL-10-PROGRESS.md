@@ -97,7 +97,7 @@ none of it will be invented:
 - Testimonials with real client names and permission to publish.
 - Team and founder details.
 - Project screenshots.
-- What KCCS stands for.
+- Scope of the KCCI software (client confirmed as the Karachi Chamber of Commerce & Industry).
 
 ### Carried performance item
 
