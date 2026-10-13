@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 import { TrendingUp, Zap, PackageCheck } from 'lucide-react';
 import { OdooDashboard } from './OdooDashboard';
 import { TextGap } from '@/components/ui/TextGap';
@@ -31,13 +31,13 @@ export function HeroDashboardVisual() {
         <div className="absolute bottom-[8%] right-[6%] h-[220px] w-[260px] rounded-full bg-[radial-gradient(circle,rgba(210,58,217,0.18),transparent_70%)]" />
       </div>
 
-      <motion.div
+      <m.div
         initial={reduce ? false : { opacity: 0, x: 60, rotateY: -12, scale: 0.94 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
         style={{ transformPerspective: 1400 }}
       >
-        <motion.div
+        <m.div
           animate={reduce ? undefined : { y: [0, -6, 0] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
           style={{
@@ -104,8 +104,8 @@ export function HeroDashboardVisual() {
               </div>
             </div>
           </FloatPanel>
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
     </div>
   );
 }
@@ -126,7 +126,7 @@ function FloatPanel({
   small?: boolean;
 }) {
   return (
-    <motion.div
+    <m.div
       initial={reduce ? false : { opacity: 0, y: 10, scale: 0.95 }}
       animate={reduce ? { opacity: 1 } : { opacity: 1, y: [0, float, 0], scale: 1 }}
       transition={{
@@ -137,6 +137,6 @@ function FloatPanel({
       className={`absolute z-20 ${small ? 'w-[150px]' : 'w-[190px]'} rounded-[18px] border border-[rgba(173,107,255,0.25)] bg-[rgba(15,18,31,0.86)] p-3.5 shadow-[0_18px_55px_rgba(0,0,0,0.4)] backdrop-blur-xl ${className ?? ''}`}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

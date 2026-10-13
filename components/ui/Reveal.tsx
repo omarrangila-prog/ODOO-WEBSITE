@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 import type { ReactNode } from 'react';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 /** Section-level reveal. Respects reduced motion (renders immediately). */
 export function Reveal({ children, delay = 0, y = 18, className, as = 'div' }: Props) {
   const reduce = useReducedMotion();
-  const MotionTag = motion[as];
+  const MotionTag = m[as];
 
   if (reduce) {
     const Tag = as;

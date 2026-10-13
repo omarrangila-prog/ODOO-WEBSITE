@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, m, useReducedMotion } from 'framer-motion';
 import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { industries as allIndustries } from '@/data/industries';
 import { track } from '@/lib/analytics';
@@ -35,7 +35,7 @@ export function IndustriesCinema() {
       <div className="relative min-h-[92vh] w-full overflow-hidden">
         {/* Full-bleed image with clip-path wipe */}
         <AnimatePresence mode="popLayout">
-          <motion.div
+          <m.div
             key={active.slug}
             className="absolute inset-0"
             initial={reduce ? { opacity: 0 } : { clipPath: 'inset(0 0 100% 0)' }}
@@ -53,7 +53,7 @@ export function IndustriesCinema() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/55 to-midnight/30" aria-hidden />
             <div className="absolute inset-0 bg-gradient-to-r from-midnight/80 via-transparent to-transparent" aria-hidden />
-          </motion.div>
+          </m.div>
         </AnimatePresence>
 
         {/* Content overlay */}
@@ -72,7 +72,7 @@ export function IndustriesCinema() {
               {/* Active detail */}
               <div className="max-w-2xl">
                 <AnimatePresence mode="wait">
-                  <motion.div
+                  <m.div
                     key={active.slug}
                     initial={reduce ? false : { opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -101,7 +101,7 @@ export function IndustriesCinema() {
                       Explore Odoo for {active.name}
                       <ArrowUpRight className="h-4 w-4" aria-hidden />
                     </Link>
-                  </motion.div>
+                  </m.div>
                 </AnimatePresence>
 
                 {/* Mobile controls */}

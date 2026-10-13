@@ -12,6 +12,7 @@ import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
 import { ServicesRail } from '@/components/home/ServicesRail';
 import { CustomStory } from '@/components/home/CustomStory';
 import { JourneyRoute } from '@/components/home/JourneyRoute';
+import { MotionRoot } from '@/components/ui/motion/MotionRoot';
 import { TextGap } from '@/components/ui/TextGap';
 
 const PATH = '/services';
@@ -165,9 +166,11 @@ export default function ServicesIndex() {
       {/* Odoo & ERP depth, moved here from the homepage: the eight-service
           rail, the standard-vs-custom story and the implementation journey.
           This is where someone researching Odoo actually lands. */}
-      <ServicesRail />
-      <CustomStory />
-      <JourneyRoute />
+      <MotionRoot>
+        <ServicesRail />
+        <CustomStory />
+        <JourneyRoute />
+      </MotionRoot>
 
       {/* Every service page, as a plain index */}
       <section className="theme-graphite bay-sm">

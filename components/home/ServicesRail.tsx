@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { m, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { ecoServices } from '@/data/ecosystem';
 import { ButtonLink, ArrowNudge } from '@/components/ui/Button';
@@ -48,14 +48,14 @@ export function ServicesRail() {
           <div className="shell">
             <Header />
           </div>
-          <motion.div style={{ x }} className="mt-10 flex gap-6 pl-[var(--pad)] will-change-transform">
+          <m.div style={{ x }} className="mt-10 flex gap-6 pl-[var(--pad)] will-change-transform">
             {ecoServices.map((s, i) => (
               <div key={s.id} className="w-[80vw] shrink-0 sm:w-[560px]">
                 <ServicePanel index={i} service={s} />
               </div>
             ))}
             <div className="w-[20vw] shrink-0" aria-hidden />
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

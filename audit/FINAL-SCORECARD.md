@@ -146,12 +146,37 @@ clean.
 
 Listed explicitly so nothing unfinished reads as complete.
 
-**Mobile performance** is the real outstanding engineering item. LCP is
-2.8–3.8s, and on the homepage and portfolio the cost is framer-motion
-(~120KB) across the remaining client-rendered sections. Converting them is the
-next lever and would move the weakest score on this card. It is deliberately
-not attempted here: it needs individual visual review per section, and the
-brief's first non-negotiable is not to remove functional animation.
+**Mobile performance** is still the weakest area, and a first pass at it was
+made after this scorecard was written. It helped a little and the rest is not
+a framer-motion problem.
+
+`MaskedReveal` is used in 18 files and was what loaded framer-motion onto
+nearly every route for a single slide-up. It is now a CSS transition with one
+IntersectionObserver, with the same easing, duration, stagger and line
+structure. Pages that used nothing else from the library no longer load it at
+all: portfolio and About each ship about 19 KB less JavaScript (portfolio
+250 → 231 KB, About 245 → 227 KB) and portfolio's script evaluation fell
+from 754 ms to 516 ms. LCP moved only from 3.6 s to 3.5 s on portfolio and
+not at all on About (2.9 s).
+
+The home and services pages genuinely use framer-motion (a scroll-linked rail,
+AnimatePresence swaps), so those components were moved to `LazyMotion` with
+the `m` element and an async feature chunk, behaviour unchanged. The build
+report shows services First Load JS falling from 150 to 125 kB, but a
+five-run A/B under identical conditions showed total JS transferred during
+the page's life fell only from 251 to 243 KB and the score did not improve
+(median 69 before, 63 after, inside the machine's noise). The async chunk
+still loads and evaluates during the page; the change defers the cost without
+removing it. It is kept because it is behaviourally verified and not worse
+beyond noise, but it should not be read as a performance win.
+
+What dominates the rest is not in the animation code. The LCP element on every
+page is an ordinary paragraph that paints in 300 to 1000 ms unthrottled, and
+Lighthouse's CPU throttling stretches that to 3 to 4 s against roughly 230 to
+250 KB of JavaScript, 87 KB of which is the shared React and Next runtime. Total
+blocking time on identical code ranged from 286 ms to 1238 ms between runs, so
+single Lighthouse scores on this machine are not reliable. A further, separate
+finding: the 512px site icon is 96 KB, which is large for a favicon.
 
 **§5 project detail pages** are blocked on screenshots. Published projects
 currently say "Detailed case study available on request", which is accurate.

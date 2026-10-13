@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, m, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { track } from '@/lib/analytics';
 import { cn } from '@/lib/utilities';
@@ -101,7 +101,7 @@ export function IntentSelector() {
             </p>
             <AnimatePresence mode="wait">
               {active ? (
-                <motion.div
+                <m.div
                   key={active.id}
                   initial={reduce ? false : { opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -119,7 +119,7 @@ export function IntentSelector() {
                     {active.cta}
                     <ArrowRight className="h-4 w-4" aria-hidden />
                   </Link>
-                </motion.div>
+                </m.div>
               ) : (
                 <p className="mt-3 text-[15px] leading-relaxed text-text-dark-muted">
                   Select an option and we&rsquo;ll recommend where to start.

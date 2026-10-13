@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, m, useReducedMotion } from 'framer-motion';
 import { Mic, Upload, CalendarClock, X, Sparkles } from 'lucide-react';
 import { frictionItems, computeFriction } from '@/data/calculator';
 import { company, PLACEHOLDER } from '@/data/company';
@@ -119,7 +119,7 @@ export function RoadmapAssembler() {
               <ul className="mt-5 flex flex-wrap gap-2">
                 <AnimatePresence mode="popLayout">
                   {selected.map((item) => (
-                    <motion.li
+                    <m.li
                       key={item.id}
                       layout={!reduce}
                       initial={reduce ? false : { opacity: 0, scale: 0.9 }}
@@ -136,7 +136,7 @@ export function RoadmapAssembler() {
                         {item.label}
                         <X className="h-3.5 w-3.5 text-text-dark-muted transition-colors group-hover:text-text-dark" aria-hidden />
                       </button>
-                    </motion.li>
+                    </m.li>
                   ))}
                 </AnimatePresence>
               </ul>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utilities';
 import { TextGap } from '@/components/ui/TextGap';
 
@@ -110,7 +110,7 @@ export function CustomStory() {
               {active.steps.map((step, i) => {
                 const tag = stateTag[step.state];
                 return (
-                  <motion.li
+                  <m.li
                     key={step.label}
                     initial={false}
                     animate={reduce ? undefined : { scale: step.state === 'custom' && activeIndex === 2 ? 1.02 : 1 }}
@@ -122,7 +122,7 @@ export function CustomStory() {
                       {step.label}
                     </span>
                     <span className={cn('text-[11px] font-semibold', tag.color)}>{tag.label}</span>
-                  </motion.li>
+                  </m.li>
                 );
               })}
             </ol>

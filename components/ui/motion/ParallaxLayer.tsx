@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, type ReactNode } from 'react';
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { m, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utilities';
 
 interface Props {
@@ -19,8 +19,8 @@ export function ParallaxLayer({ children, className, offset = 40 }: Props) {
   const y = useTransform(scrollYProgress, [0, 1], [offset, -offset]);
 
   return (
-    <motion.div ref={ref} style={reduce ? undefined : { y }} className={cn(className)}>
+    <m.div ref={ref} style={reduce ? undefined : { y }} className={cn(className)}>
       {children}
-    </motion.div>
+    </m.div>
   );
 }

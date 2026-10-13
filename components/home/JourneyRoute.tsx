@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { AnimatePresence, motion, useScroll, useTransform, useMotionValueEvent, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, m, useScroll, useTransform, useMotionValueEvent, useReducedMotion } from 'framer-motion';
 import { Check, ArrowRight } from 'lucide-react';
 import { journeyStages } from '@/data/journey';
 import { cn } from '@/lib/utilities';
@@ -59,7 +59,7 @@ export function JourneyRoute() {
             {/* base line — aligned to the circle centre (8px pl + 27px radius) */}
             <span className="absolute left-[35px] top-6 bottom-6 w-px bg-line" aria-hidden />
             {/* progress line */}
-            <motion.span
+            <m.span
               className="absolute left-[35px] top-6 w-px origin-top bg-[linear-gradient(180deg,#7C4DFF,#E947C6)]"
               style={{ bottom: 24, scaleY: reduce ? 1 : lineScale }}
               aria-hidden
@@ -125,7 +125,7 @@ export function JourneyRoute() {
               </div>
 
               <AnimatePresence mode="wait">
-                <motion.div
+                <m.div
                   key={stage.n}
                   initial={reduce ? false : { opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -167,7 +167,7 @@ export function JourneyRoute() {
                       </ul>
                     </div>
                   </div>
-                </motion.div>
+                </m.div>
               </AnimatePresence>
             </div>
           </div>

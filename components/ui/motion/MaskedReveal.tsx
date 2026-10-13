@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 import type { ElementType, ReactNode } from 'react';
 
 interface Props {
@@ -37,6 +36,20 @@ function alreadyPainted(): boolean {
   return performance.getEntriesByType('paint').some((e) => e.name === 'first-contentful-paint');
 }
 
+/**
+ * Implemented with a CSS transition and one IntersectionObserver rather than
+ * framer-motion. This component is used in 18 files, so it was what pulled the
+ * ~120KB animation library onto nearly every route for a single slide-up;
+ * the library stays in the chunks of the few components that genuinely need
+ * springs, gestures or scroll-linked values. Easing, duration, stagger, line
+ * structure and the already-painted guard are unchanged.
+ */
+const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
+
+function prefersReducedMotion(): boolean {
+  return typeof window !== 'undefined' && !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+}
+
 export function MaskedReveal({
   children,
   lines,
@@ -46,12 +59,51 @@ export function MaskedReveal({
   stagger = 0.09,
   immediate = true,
 }: Props) {
-  const reduce = useReducedMotion();
-  const [mode, setMode] = useState<'static' | 'animate'>('static');
+  // static  = text at rest (SSR, no-JS, reduced motion, already-seen hero text)
+  // armed   = lines parked below their mask, waiting to play
+  // shown   = lines transitioned to rest
+  const [mode, setMode] = useState<'static' | 'armed' | 'shown'>('static');
+  const ref = useRef<HTMLElement>(null);
+
   useEffect(() => {
     // Above-the-fold text that has already painted must stay put.
-    setMode(immediate && alreadyPainted() ? 'static' : 'animate');
+    if (prefersReducedMotion() || (immediate && alreadyPainted())) {
+      setMode('static');
+      return;
+    }
+    setMode('armed');
   }, [immediate]);
+
+  useEffect(() => {
+    if (mode !== 'armed') return;
+    if (immediate) {
+      // Two frames so the parked state is painted before the transition runs.
+      let r2 = 0;
+      const r1 = requestAnimationFrame(() => {
+        r2 = requestAnimationFrame(() => setMode('shown'));
+      });
+      return () => {
+        cancelAnimationFrame(r1);
+        cancelAnimationFrame(r2);
+      };
+    }
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setMode('shown');
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setMode('shown');
+          io.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [mode, immediate]);
 
   const content = lines ?? [children];
 
@@ -64,7 +116,7 @@ export function MaskedReveal({
    * textContent reads "Systems That" for scrapers and retrieval systems that
    * do not honour block layout the way innerText does.
    */
-  if (reduce || mode === 'static') {
+  if (mode === 'static') {
     if (!lines) return <Tag className={className}>{children}</Tag>;
     return (
       <Tag className={className}>
@@ -78,22 +130,21 @@ export function MaskedReveal({
     );
   }
 
-  const trigger = immediate
-    ? { initial: { y: '110%' }, animate: { y: '0%' } }
-    : { initial: { y: '110%' }, whileInView: { y: '0%' }, viewport: { once: true, amount: 0.2 } };
-
   return (
-    <Tag className={className}>
+    <Tag ref={ref} className={className}>
       {content.map((line, i) => (
         <span key={i} className="block overflow-hidden pb-[0.12em]">
           {i > 0 && ' '}
-          <motion.span
+          <span
             className="block"
-            {...trigger}
-            transition={{ duration: 0.8, delay: delay + i * stagger, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              transform: mode === 'shown' ? 'translateY(0%)' : 'translateY(110%)',
+              transition: `transform 800ms ${EASE} ${delay + i * stagger}s`,
+              willChange: mode === 'shown' ? undefined : 'transform',
+            }}
           >
             {line}
-          </motion.span>
+          </span>
         </span>
       ))}
     </Tag>
