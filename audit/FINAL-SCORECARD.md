@@ -175,8 +175,9 @@ page is an ordinary paragraph that paints in 300 to 1000 ms unthrottled, and
 Lighthouse's CPU throttling stretches that to 3 to 4 s against roughly 230 to
 250 KB of JavaScript, 87 KB of which is the shared React and Next runtime. Total
 blocking time on identical code ranged from 286 ms to 1238 ms between runs, so
-single Lighthouse scores on this machine are not reliable. A further, separate
-finding: the 512px site icon is 96 KB, which is large for a favicon.
+single Lighthouse scores on this machine are not reliable. The one separate, easy win
+was the site icon: 96 KB at 512px for an image shown at 16 to 48px. It is now
+10 KB at 192px, and the Apple touch icon 9 KB at 180px, visually identical.
 
 **§5 project detail pages** are blocked on screenshots. Published projects
 currently say "Detailed case study available on request", which is accurate.
