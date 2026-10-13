@@ -111,8 +111,8 @@ export const projects: Project[] = [
      for these are available on request until written up with evidence.
      --------------------------------------------------------------------- */
   {
-    id: 'kccia-election',
-    name: 'KCCIA Election System',
+    id: 'kcci-election',
+    name: 'KCCI Election System',
     status: 'CLIENT_PROJECT',
     categories: ['Election', 'Custom Software'],
     industry: 'Associations',

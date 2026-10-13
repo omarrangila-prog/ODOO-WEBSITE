@@ -12,7 +12,7 @@ with screenshots and outcomes.
 
 | Project | Status | Repo evidence | Published description | Still needed for a full case study |
 |---|---|---|---|---|
-| KCCIA Election System | CLIENT_PROJECT | Management confirmation | Election management: eligibility, registration, candidates, polling workflow, results, role-based access | Screenshots, scope document, launch date, client permission on file |
+| KCCI Election System | CLIENT_PROJECT | Management confirmation | Election management: eligibility, registration, candidates, polling workflow, results, role-based access | Screenshots, scope document, launch date, client permission on file |
 | Al Jadeed Election System | CLIENT_PROJECT | Management confirmation; "Al Jadeed Properties" in group client roster | Election management: voter DB, eligibility, candidates, vote capture, results, audit | Screenshots, scope document |
 | KCCI Software | CLIENT_PROJECT | Management confirmation | "Custom business software for the Karachi Chamber of Commerce & Industry (KCCI)" — scope not supplied | **What was built** |
 | Scrabble Tournament Timer | CLIENT_PROJECT | Management confirmation | Timers, pairing, scoring, rankings, check-in, leaderboard | Confirm each feature against the build; screenshots |
