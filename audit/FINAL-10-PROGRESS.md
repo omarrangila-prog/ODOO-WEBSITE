@@ -82,17 +82,12 @@ service values preselect; an invalid `?service=` value is ignored; bare
 
 ## Not done
 
-Listed so nothing unfinished reads as complete.
+Sections 5, 7, 10, 11, 14, 18 and 19 were open when this document was first
+written. All but section 5 are now complete — see
+[FINAL-SCORECARD.md](FINAL-SCORECARD.md) for the measurements.
 
-- **§5 Project detail pages** — blocked on screenshots. Published projects
-  currently say "Detailed case study available on request", which is accurate.
-- **§7 Progressive contact form** — two-stage enquiry (quick enquiry, then an
-  optional "Add Project Details" stage).
-- **§10 Micro-refinements** — typography, spacing, cards, button hierarchy.
-- **§11 Content repetition audit**.
-- **§14 Mobile audit** at 360/390/430/768/1024/1440.
-- **§18 Screenshots** of homepage, about, portfolio, contact; desktop + mobile.
-- **§19 Final scorecard**.
+- **§5 Project detail pages** — still blocked on screenshots. Published
+  projects say "Detailed case study available on request", which is accurate.
 
 ### Owner-blocked
 
@@ -106,9 +101,10 @@ none of it will be invented:
 
 ### Carried performance item
 
-Mobile LCP sits around 3.6–3.7s, inherited from framer-motion (~120KB) across
-eight remaining homepage sections. Converting them is the next performance
-lever; each needs individual visual review, so it is not a bulk change.
+Mobile LCP is 2.8-3.8s, inherited from framer-motion (~120KB) across the
+remaining client-rendered sections on the homepage and portfolio. This is the
+weakest measured area on the site and the next lever worth pulling. Each
+section needs individual visual review, so it is not a bulk change.
 
 ## Deployment
 
