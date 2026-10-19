@@ -13,6 +13,16 @@ import { Logo } from './Logo';
 import { MobileMenu } from './MobileMenu';
 
 export function Header() {
+  /*
+   * Background note. `bg-midnight/[0.92]` and `bg-graphite/95` used to sit here
+   * and compiled to NOTHING: the palette colours are CSS variables holding hex
+   * values, and Tailwind cannot apply an opacity modifier to those, so the
+   * classes are silently dropped. The scrolled header and the dropdown panel
+   * had no background at all, only a blur, and showed whatever section was
+   * underneath. In a dark OS, light nav text over an ivory section was close
+   * to invisible. They now get an opaque colour, made slightly translucent
+   * through color-mix() where the browser supports it.
+   */
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -43,7 +53,7 @@ export function Header() {
         className={cn(
           'fixed inset-x-0 top-0 z-[var(--z-header)] transition-all duration-300 ease-premium',
           scrolled
-            ? 'border-b border-line bg-midnight/[0.92] backdrop-blur-xl shadow-lift'
+            ? 'border-b border-line bg-midnight supports-[background:color-mix(in_srgb,red,blue)]:bg-[color-mix(in_srgb,var(--midnight)_92%,transparent)] backdrop-blur-xl shadow-lift'
             : 'border-b border-white/[0.05] bg-transparent',
         )}
       >
@@ -90,7 +100,7 @@ export function Header() {
                           >
                             <div
                               className={cn(
-                                'animate-fade-up rounded-panel border border-line bg-graphite/95 p-2 shadow-float backdrop-blur-xl',
+                                'animate-fade-up rounded-panel border border-line bg-graphite supports-[background:color-mix(in_srgb,red,blue)]:bg-[color-mix(in_srgb,var(--graphite)_95%,transparent)] p-2 shadow-float backdrop-blur-xl',
                                 item.children.length > 6 && 'grid grid-cols-2 gap-x-1',
                               )}
                             >

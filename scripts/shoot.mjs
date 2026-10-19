@@ -18,6 +18,7 @@ const pages = [
   ['about', '/company/about'],
   ['portfolio', '/case-studies'],
   ['clients', '/company/clients'],
+  ['team', '/company/team'],
 ];
 
 const viewports = [

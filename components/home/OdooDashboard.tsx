@@ -126,11 +126,17 @@ export function OdooDashboard() {
               <TextGap />
               <div className="mt-3 flex h-[86px] items-end gap-1.5">
                 {bars.map((h, i) => (
-                  <div key={i} className="flex flex-1 flex-col items-center gap-1">
-                    <div
-                      className="w-full rounded-t-[3px] bg-[linear-gradient(180deg,#B96BFF,#7C4DFF)]"
-                      style={{ height: `${h}%` }}
-                    />
+                  <div key={i} className="flex h-full flex-1 flex-col items-center gap-1">
+                    {/* A percentage height needs a definite parent. The column used to be
+                        auto-height, so every bar resolved to 0px and only the month labels
+                        showed. h-full on the column and a flex-1 track give the bar a real
+                        height to take its percentage of. */}
+                    <div className="flex w-full flex-1 items-end">
+                      <div
+                        className="w-full rounded-t-[3px] bg-[linear-gradient(180deg,#B96BFF,#7C4DFF)]"
+                        style={{ height: `${h}%` }}
+                      />
+                    </div>
                     <span className="text-[7px] text-white/35">{months[i]}</span>
                   </div>
                 ))}

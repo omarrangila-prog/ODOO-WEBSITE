@@ -19,6 +19,8 @@ const pages = [
   ['solution-new', '/solutions/accounting-software'],
   ['rapid-delivery', '/rapid-delivery'],
   ['global-delivery', '/company/global-delivery'],
+  ['team', '/company/team'],
+  ['about', '/company/about'],
   ['our-work', '/case-studies'],
   ['industry-new', '/industries/healthcare-clinics'],
 ];

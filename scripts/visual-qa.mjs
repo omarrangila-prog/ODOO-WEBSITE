@@ -52,6 +52,7 @@ const pages = [
   ['contact', '/contact'],
   ['about', '/company/about'],
   ['clients', '/company/clients'],
+  ['team', '/company/team'],
 ];
 
 /** Runs inside the page. Returns every layout defect it can see. */

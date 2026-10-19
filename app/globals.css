@@ -99,20 +99,26 @@
   }
 
   /* Utilities that hardcode white-on-dark need to invert on light grounds.
-     These are the common ones used inside themed sections. */
+     These are the common ones used inside themed sections.
+
+     `.keep-dark` marks a picture of a dark interface, such as the hero
+     dashboard: it keeps its own dark panel in every colour scheme, so its
+     white text must stay white. Without the exemption the figures inside it
+     (PKR 8.45M, Total Profit, the Dashboard title) became dark ink on that
+     dark panel and were nearly invisible to every visitor on a light OS. */
   .theme-dark,
   .theme-graphite {
     color: var(--text-dark);
   }
   /* White text inside dark sections → dark ink */
-  .theme-dark .text-white,
-  .theme-graphite .text-white { color: var(--ink) !important; }
+  .theme-dark .text-white:not(.keep-dark *),
+  .theme-graphite .text-white:not(.keep-dark *) { color: var(--ink) !important; }
 
   /* Faint white fills/borders → faint dark equivalents */
-  .theme-dark [class*='bg-white/'],
-  .theme-graphite [class*='bg-white/'] { background-color: rgba(17, 18, 22, 0.035) !important; }
-  .theme-dark [class*='border-white/'],
-  .theme-graphite [class*='border-white/'] { border-color: rgba(17, 18, 22, 0.1) !important; }
+  .theme-dark [class*='bg-white/']:not(.keep-dark *),
+  .theme-graphite [class*='bg-white/']:not(.keep-dark *) { background-color: rgba(17, 18, 22, 0.035) !important; }
+  .theme-dark [class*='border-white/']:not(.keep-dark *),
+  .theme-graphite [class*='border-white/']:not(.keep-dark *) { border-color: rgba(17, 18, 22, 0.1) !important; }
 
   /* Solid dark surfaces used with opacity (bg-graphite/60, bg-midnight/60) →
      white cards so they read as raised panels on the light ground. */

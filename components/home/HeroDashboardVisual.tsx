@@ -24,7 +24,7 @@ export function HeroDashboardVisual() {
   }
 
   return (
-    <div ref={ref} onMouseMove={onMove} onMouseLeave={() => setTilt({ x: 0, y: 0 })} className="relative">
+    <div ref={ref} onMouseMove={onMove} onMouseLeave={() => setTilt({ x: 0, y: 0 })} className="keep-dark relative">
       {/* glow behind */}
       <div className="pointer-events-none absolute -inset-10 -z-10" aria-hidden>
         <div className="absolute right-[10%] top-[20%] h-[380px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(124,77,255,0.28),transparent_72%)]" />
