@@ -7,6 +7,8 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { CtaBand } from '@/components/ui/CtaBand';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
+import { ButtonLink, ArrowNudge } from '@/components/ui/Button';
+import { departmentGroups, groupCountLabel } from '@/data/team';
 import { TextGap } from '@/components/ui/TextGap';
 
 const DESCRIPTION =
@@ -114,6 +116,42 @@ export default function AboutPage() {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* People — department summary, linked through to the full Team page. */}
+      <section className="theme-graphite bay" aria-labelledby="people-h">
+        <div className="shell">
+          <p className="eyebrow mb-5">Our team</p>{' '}
+          <h2 id="people-h" className="display-2 max-w-3xl">
+            Our People <span className="signal-text">&amp; Expertise</span>
+          </h2>{' '}
+          <p className="lede mt-5 max-w-[var(--reading-width)]">
+            Our team combines technical engineering and AI expertise with creative production, business operations and
+            client-facing support. From the first enquiry to implementation and ongoing coordination, different
+            specialists contribute to delivering practical solutions.
+          </p>{' '}
+          <p className="mt-4 max-w-[var(--reading-width)] text-[16px] leading-relaxed text-text-dark-muted">
+            Engineers build the system. Reviewers who understand accounting, inventory and day-to-day operations check
+            that the logic matches how the business works. QA testers verify the behaviour before it is delivered.
+          </p>
+          <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {departmentGroups.map((g) => (
+              <li key={g.id} className="rounded-control border border-line px-4 py-3.5">
+                <p className="font-heading text-[16px] font-semibold leading-snug">{g.label}</p>{' '}
+                <p className="mt-1 text-[13px] text-text-dark-muted">{groupCountLabel(g.id)}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-3 text-[13px] text-text-dark-muted">
+            Role positions reported by management, not a verified headcount.
+          </p>
+          <div className="mt-8">
+            <ButtonLink href="/company/team">
+              Meet the ODOOVATIONS Team
+              <ArrowNudge />
+            </ButtonLink>
           </div>
         </div>
       </section>

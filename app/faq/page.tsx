@@ -54,7 +54,7 @@ export default function FaqPage() {
             ODOOVATIONS is a Karachi-based technology company, part of the Kausar Innovations
             group, building custom software, AI automation, Odoo ERP, websites, apps, marketing
             and creative work for businesses in Pakistan and international clients served
-            remotely. It is an independent Odoo implementation team, not an official partner.
+            remotely. For Odoo work it is an independent implementation team, not an official partner.
           </AnswerCard>
         </div>
       </section>

@@ -3,18 +3,26 @@ import { company } from '@/data/company';
 import { ButtonLink, ArrowNudge } from '@/components/ui/Button';
 import { TextGap } from '@/components/ui/TextGap';
 
-const expertise = [
-  'Odoo implementation & configuration',
-  'Custom module development',
-  'Process automation',
-  'AI-assisted dashboards',
-  'Reporting & analytics',
-  'Third-party & API integrations',
+/**
+ * Department overview. Names the whole multidisciplinary team, not only the
+ * engineers and Odoo implementers the section used to describe. No counts
+ * here: the homepage should not repeat the Team page's numbers, and a number
+ * stated twice is a number that can drift.
+ */
+const teamAreas = [
+  'Software engineering',
+  'Odoo ERP specialists',
+  'AI & automation',
+  'Creative production',
+  'Quality assurance',
+  'Business validation',
+  'Sales & client relations',
+  'Infrastructure & operations',
 ];
 
 /**
- * Team / expertise band. Portrait photo intentionally omitted until a real
- * founder image is supplied via company.founderPhoto.
+ * Team band. Links to /company/team for the full structure. No portrait or
+ * individual cards: those appear only once real, approved photographs exist.
  */
 export function ExpertMoment() {
   const linkedin = company.social.linkedin;
@@ -49,8 +57,8 @@ export function ExpertMoment() {
           <p className="eyebrow mb-6">The People Behind It</p>
           <TextGap />
           <h2 className="display-2">
-            You Are Not Hiring a Software Vendor.{' '}
-            <span className="signal-text">You Are Building a Better Way to Run Your Business.</span>
+            The People Behind{' '}
+            <span className="signal-text">Every Successful System.</span>
           </h2>{' '}
 
           <p className="mt-8 border-l-2 border-violet/40 pl-6 font-heading text-[clamp(18px,2vw,22px)] font-medium leading-relaxed text-ink">
@@ -59,14 +67,14 @@ export function ExpertMoment() {
           </p>{' '}
 
           <p className="mt-6 max-w-xl text-[16px] leading-relaxed text-ink-muted">
-            ODOOVATIONS is a Karachi-based team of software engineers, Odoo implementers,
-            automation specialists and creatives, part of the Kausar Innovations group. We
-            combine local operational understanding with structured, international-standard
-            delivery &mdash; for clients across Pakistan and abroad.
+            Great technology requires more than coding. Our multidisciplinary workforce brings together software
+            engineers, Odoo specialists, AI professionals, designers, quality reviewers, business-domain experts,
+            sales representatives and operational support teams &mdash; based in Karachi and part of the Kausar
+            Innovations group.
           </p>
 
           <ul className="mt-7 grid gap-2.5 sm:grid-cols-2">
-            {expertise.map((e) => (
+            {teamAreas.map((e) => (
               <li key={e} className="flex items-start gap-2 text-[15px] text-ink-muted">
                 <Check className="mt-0.5 h-4 w-4 shrink-0 text-violet" aria-hidden />
                 {e}
@@ -75,8 +83,8 @@ export function ExpertMoment() {
           </ul>
 
           <div className="mt-9 flex flex-wrap items-center gap-5">
-            <ButtonLink href="/contact#form" variant="secondary">
-              Book a Consultation
+            <ButtonLink href="/company/team">
+              Meet the ODOOVATIONS Team
               <ArrowNudge className="h-4 w-4" />
             </ButtonLink>
             {linkedin && (

@@ -32,7 +32,7 @@ const faqs = [
   {
     question: 'What is ODOOVATIONS?',
     answer:
-      'ODOOVATIONS is a Karachi-based Odoo implementation, custom development and business-automation company. We help businesses in Pakistan and international clients connect sales, inventory, accounting, manufacturing, CRM and reporting in one Odoo system.',
+      'ODOOVATIONS is a Karachi-based technology company, part of the Kausar Innovations group. It builds custom software, AI automation, Odoo ERP systems, websites and apps, and provides marketing and creative production, for businesses in Pakistan and international clients served remotely. Odoo is one specialist capability among seven, not the whole company.',
   },
   {
     question: 'Where is ODOOVATIONS located?',
@@ -175,8 +175,8 @@ export default function BrandPage() {
                   management. Its approach starts with the real operational workflow — including
                   the exceptions and workarounds nobody documents — uses standard, proven
                   foundations wherever they fit, and builds custom only for the steps those
-                  foundations genuinely miss. ODOOVATIONS is an independent Odoo implementation and
-                  development team and does not claim official Odoo partner status.
+                  foundations genuinely miss. For Odoo work, ODOOVATIONS is an independent
+                  implementation and development provider and does not claim official Odoo partner status.
                 </p>
               </Section>
 

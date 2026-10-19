@@ -6,6 +6,7 @@ import { caseStudies } from '@/data/caseStudies';
 import { locations } from '@/data/locations';
 import { resources } from '@/data/resources';
 import { solutions } from '@/data/solutions';
+import { publishedCaseStudies } from '@/data/case-study-model';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -20,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/case-studies', priority: 0.8 },
     { path: '/company/about', priority: 0.6 },
     { path: '/company/methodology', priority: 0.6 },
+    { path: '/company/team', priority: 0.6 },
     { path: '/company/global-delivery', priority: 0.6 },
     { path: '/company/clients', priority: 0.7 },
     { path: '/company/pricing', priority: 0.7 },
@@ -36,6 +38,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     path: `/case-studies/${c.slug}`,
     priority: 0.7,
   }));
+  // Real project case studies: empty until one passes every publication check.
+  const projectRoutes = publishedCaseStudies().map((r) => ({ path: `/projects/${r.slug}`, priority: 0.7 }));
   // Local SEO pages are high value.
   const locationRoutes = locations.map((l) => ({ path: l.href, priority: 0.85 }));
   const resourceRoutes = resources.map((r) => ({ path: r.href, priority: 0.6 }));
@@ -47,6 +51,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...serviceRoutes,
     ...industryRoutes,
     ...caseRoutes,
+    ...projectRoutes,
     ...locationRoutes,
     ...resourceRoutes,
     ...solutionRoutes,

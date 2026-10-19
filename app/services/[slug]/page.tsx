@@ -5,6 +5,7 @@ import { Check, CircleAlert } from 'lucide-react';
 import { services, getService } from '@/data/services';
 import { divisions, getDivision } from '@/data/divisions';
 import { ctaForDivision, ctaForService, ctas } from '@/data/ctas';
+import { teamFactForDivision } from '@/data/team';
 import { faqs } from '@/data/faq';
 import { buildMetadata, breadcrumbSchema, serviceSchema, faqSchema } from '@/lib/seo';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
@@ -51,6 +52,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
     (service.division ? ctaForDivision[service.division] : undefined) ??
     ctas.general;
   const division = service.division ? getDivision(service.division) : undefined;
+  const teamFact = service.division ? teamFactForDivision(service.division) : null;
 
   // Link to siblings in the same division rather than dumping every service
   // on every page — that reads as spam to a person and to a crawler.
@@ -197,6 +199,15 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         {/* Internal links */}
         <section className="theme-dark pb-4">
           <div className="shell">
+            {/* Who does the work. Text comes from data/team.ts so these counts
+                cannot disagree with the Team page. */}
+            {teamFact && (
+              <p className="mb-4 text-[15px] leading-relaxed text-text-dark-muted">
+                <span className="font-semibold text-text-dark">Who delivers this: </span>
+                {teamFact.text}{' '}
+                <Link href={teamFact.href} className="text-violet-bright underline underline-offset-4">Meet the team</Link>
+              </p>
+            )}
             <p className="text-[15px] text-text-dark-muted">
               {usingSiblings && division ? `More in ${division.title}: ` : 'Explore other services: '}
               {related.map((s, i, arr) => (

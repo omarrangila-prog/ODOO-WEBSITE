@@ -2,13 +2,15 @@
   "name": "odoovations",
   "version": "1.0.0",
   "private": true,
-  "description": "ODOOVATIONS — custom software, AI automation, Odoo ERP, websites, apps, marketing and creative. Karachi-based, serving Pakistan and international clients.",
+  "description": "ODOOVATIONS \u2014 custom software, AI automation, Odoo ERP, websites, apps, marketing and creative. Karachi-based, serving Pakistan and international clients.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "team:check": "tsx scripts/team-data-check.ts",
+    "case-study:check": "tsx scripts/case-study-check.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -33,6 +35,7 @@
     "playwright": "^1.61.1",
     "postcss": "^8.4.40",
     "tailwindcss": "^3.4.7",
+    "tsx": "^4.23.15",
     "typescript": "^5.5.4"
   }
 }

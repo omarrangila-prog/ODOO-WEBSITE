@@ -131,6 +131,7 @@ export const primaryNav: NavItem[] = [
     children: [
       { label: 'About Us', href: '/company/about', description: 'Who we are and how we work.' },
       { label: 'Our Methodology', href: '/company/methodology', description: 'Discovery to go-live, step by step.' },
+      { label: 'Our Team', href: '/company/team', description: 'The departments behind every project.' },
       { label: 'Global Delivery', href: '/company/global-delivery', description: 'Built in Pakistan, delivered worldwide.' },
       { label: 'Selected Clients', href: '/company/clients', description: 'Businesses the group has worked with.' },
       { label: 'How We Price', href: '/company/pricing', description: 'Scope-based pricing and engagement models.' },
@@ -180,6 +181,7 @@ export const footerNav = {
   company: [
     { label: 'About Us', href: '/company/about' },
     { label: 'Our Methodology', href: '/company/methodology' },
+    { label: 'Our Team', href: '/company/team' },
     { label: 'Global Delivery', href: '/company/global-delivery' },
     { label: 'Selected Clients', href: '/company/clients' },
     { label: 'How We Price', href: '/company/pricing' },

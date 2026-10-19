@@ -6,6 +6,9 @@ interface Props {
   body?: string;
   primaryLabel?: string;
   primaryHref?: string;
+  /** Optional second button, shown beside the primary one. */
+  secondaryLabel?: string;
+  secondaryHref?: string;
 }
 
 export function CtaBand({
@@ -13,6 +16,8 @@ export function CtaBand({
   body = 'Send a voice note, spreadsheet or a plain description of where your business is struggling. We’ll help you find the right next step.',
   primaryLabel = 'Tell Us What You Need',
   primaryHref = '/contact#form',
+  secondaryLabel,
+  secondaryHref,
 }: Props) {
   return (
     <section className="theme-dark grain relative overflow-hidden bay-sm">
@@ -27,6 +32,13 @@ export function CtaBand({
               {primaryLabel}
               <ArrowNudge />
             </ButtonLink>{' '}
+            {secondaryLabel && secondaryHref && (
+              <>
+                <ButtonLink href={secondaryHref} variant="secondary">
+                  {secondaryLabel}
+                </ButtonLink>{' '}
+              </>
+            )}
             <WhatsAppButton />
           </div>
         </div>

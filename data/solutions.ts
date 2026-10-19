@@ -99,7 +99,7 @@ export const solutions: Solution[] = [
       { type: 'note', text: 'This page explains how we help prepare your Odoo system. It is not tax or legal advice and does not guarantee FBR approval or compliance. Always confirm current requirements with FBR or a qualified tax advisor.' },
     ],
     faqs: [
-      { question: 'Can you guarantee FBR compliance?', answer: 'No — and you should be cautious of anyone who does. We are an Odoo implementation company. We help structure and connect your invoicing data so it can meet digital-invoicing requirements, but compliance depends on current FBR rules and your own tax position. Confirm requirements with FBR or a qualified tax advisor.' },
+      { question: 'Can you guarantee FBR compliance?', answer: 'No — and you should be cautious of anyone who does. We are a software and Odoo implementation company. We help structure and connect your invoicing data so it can meet digital-invoicing requirements, but compliance depends on current FBR rules and your own tax position. Confirm requirements with FBR or a qualified tax advisor.' },
       { question: 'Do you work with retail POS as well as billing?', answer: 'Yes. We connect Odoo Point of Sale and standard invoicing so both feed the same structured records, which is important for retailers with multiple tills or locations.' },
       { question: 'We use Excel for invoices today — is that a problem?', answer: 'It is a common starting point. Part of the work is moving that data into one structured system and cleaning it so invoicing becomes consistent and connectable.' },
     ],
