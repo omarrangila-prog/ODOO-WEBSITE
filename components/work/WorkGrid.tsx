@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { ArrowUpRight, Search } from 'lucide-react';
 import { caseStudies } from '@/data/caseStudies';
 import { publishableProjects, statusLabel, type ProjectCategory } from '@/data/projects';
+import { caseStudyHref } from '@/data/case-study-model';
 import { flagEmoji, countries } from '@/data/countries';
 import { track } from '@/lib/analytics';
 import { cn } from '@/lib/utilities';
@@ -67,6 +68,8 @@ function buildItems(): WorkItem[] {
       countryCode: p.evidence.countryPublic ? p.countryCode : undefined,
       badge: statusLabel[p.status],
       badgeTone: p.status === 'INTERNAL_PRODUCT' ? 'product' : 'client',
+      // Present only once a case study has passed every publication check.
+      href: caseStudyHref(p.id),
     }));
 
   const demoItems: WorkItem[] = caseStudies.map((c) => ({
@@ -255,7 +258,9 @@ export function WorkGrid() {
                           <span className="font-semibold text-violet">{it.metric.value}</span> {it.metric.label}
                         </span>
                       ) : (
-                        <span className="text-[14px] text-ink/60">Detailed case study available on request</span>
+                        <span className="text-[14px] text-ink/60">
+                          {it.href ? 'Read the case study' : 'Detailed case study available on request'}
+                        </span>
                       )}
                       {it.href && (
                         <ArrowUpRight className="h-5 w-5 shrink-0 text-ink/30 transition-all group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-violet" aria-hidden />

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { publishableProjects, statusLabel } from '@/data/projects';
 import { ctas } from '@/data/ctas';
+import { caseStudyHref } from '@/data/case-study-model';
 import { cn } from '@/lib/utilities';
 
 /**
@@ -77,7 +78,13 @@ export function RealWork() {
                 <p className="mt-3 text-[16px] leading-relaxed text-ink-muted">{p.summary}</p>{' '}
 
                 <p className="mt-auto border-t border-line-light pt-5 text-[14px] text-ink/60">
-                  Detailed case study available on request
+                  {caseStudyHref(p.id) ? (
+                    <Link href={caseStudyHref(p.id) as string} className="inline-flex min-h-[44px] items-center font-medium text-violet underline-offset-4 hover:underline">
+                      Read the case study
+                    </Link>
+                  ) : (
+                    'Detailed case study available on request'
+                  )}
                 </p>
               </article>
             </li>
