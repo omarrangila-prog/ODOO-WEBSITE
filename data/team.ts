@@ -480,6 +480,13 @@ export const seniorSupervisorExperience = {
   reportedYears: '50+',
   roleId: 'senior-supervisor',
   departmentId: 'business-operations',
+  /**
+   * The experience figure describes one identifiable person, so showing it is
+   * a decision rather than a default. Set to false and every page that shows
+   * it removes it. It is true because the owner reported the figure and asked
+   * for it to be featured; confirm the supervisor has agreed before launch.
+   */
+  approvedForPublication: true,
 };
 
 /* ---------------------------------------------------------------------- *

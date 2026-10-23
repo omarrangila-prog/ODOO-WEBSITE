@@ -183,7 +183,8 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* 7 — Experience */}
+      {/* 7 — Experience: shown only while approvedForPublication is true */}
+      {seniorSupervisorExperience.approvedForPublication && (
       <section className="theme-graphite bay" aria-labelledby="experience-h">
         <div className="shell grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center">
           <div>
@@ -211,6 +212,7 @@ export default function TeamPage() {
           </div>
         </div>
       </section>
+      )}
 
       {/* 8 — Interns */}
       <section className="theme-light bay" aria-labelledby="interns-h">

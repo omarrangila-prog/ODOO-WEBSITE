@@ -23,7 +23,17 @@ type Tier = 'high' | 'medium' | 'low';
  * rate on phones, and if frames run slow it steps down a quality tier and
  * finally stops, falling back to the static image.
  */
-export function VioletRibbonScene({ className }: { className?: string }) {
+export function VioletRibbonScene({
+  className,
+  animated = true,
+  mirrored = false,
+}: {
+  className?: string;
+  /** false: the static image only, with a slow CSS drift. For secondary placements that should cost almost nothing. */
+  animated?: boolean;
+  /** Flip horizontally so a second placement is a variation, not a copy. */
+  mirrored?: boolean;
+}) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [live, setLive] = useState(false);
@@ -31,7 +41,7 @@ export function VioletRibbonScene({ className }: { className?: string }) {
   useEffect(() => {
     const wrap = wrapRef.current;
     const canvas = canvasRef.current;
-    if (!wrap || !canvas) return;
+    if (!animated || !wrap || !canvas) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -144,10 +154,14 @@ export function VioletRibbonScene({ className }: { className?: string }) {
       host.removeEventListener('pointermove', onMove as EventListener);
       host.removeEventListener('pointerleave', onLeave);
     };
-  }, []);
+  }, [animated]);
 
   return (
-    <div ref={wrapRef} aria-hidden="true" className={cn('pointer-events-none absolute inset-0 overflow-hidden', className)}>
+    <div
+      ref={wrapRef}
+      aria-hidden="true"
+      className={cn('pointer-events-none absolute inset-0 overflow-hidden', mirrored && '[&>*]:-scale-x-100', className)}
+    >
       <picture>
         <source media="(max-width: 767px)" srcSet="/art/ribbon-mobile.webp" />
         <Image
@@ -159,14 +173,17 @@ export function VioletRibbonScene({ className }: { className?: string }) {
           sizes="100vw"
           className={cn(
             'ribbon-still object-cover object-right mix-blend-screen transition-opacity duration-700',
+            !animated && 'ribbon-drift',
             live ? 'opacity-0' : 'opacity-100',
           )}
         />
       </picture>
+      {animated && (
       <canvas
         ref={canvasRef}
         className={cn('absolute inset-0 h-full w-full transition-opacity duration-700', live ? 'opacity-100' : 'opacity-0')}
       />
+      )}
     </div>
   );
 }

@@ -1,42 +1,34 @@
 import { CinematicHero } from '@/components/cinema/CinematicHero';
-import { CapabilityStrip } from '@/components/home/CapabilityStrip';
-import { EcosystemGrid } from '@/components/home/EcosystemGrid';
+import { Transformation } from '@/components/cinema/Transformation';
+import { CapabilityIndex } from '@/components/cinema/CapabilityIndex';
+import { SelectedWork } from '@/components/cinema/SelectedWork';
+import { BuildAutomateGrow } from '@/components/cinema/BuildAutomateGrow';
+import { TeamOverview } from '@/components/cinema/TeamOverview';
+import { HowWeWork } from '@/components/cinema/HowWeWork';
+import { WhyOdoovations } from '@/components/cinema/WhyOdoovations';
+import { FinalContact } from '@/components/cinema/FinalContact';
 import { SystemsPlayground } from '@/components/home/SystemsPlayground';
-import { ClientWall } from '@/components/home/ClientWall';
-import { Manifesto } from '@/components/home/Manifesto';
-import { GlobalDeliveryBand } from '@/components/home/GlobalDeliveryBand';
-import { AnythingCustom } from '@/components/home/AnythingCustom';
-import { IntentSelector } from '@/components/home/IntentSelector';
 import { RoadmapProvider } from '@/components/home/RoadmapContext';
 import { FrictionDiagnostic } from '@/components/home/FrictionDiagnostic';
-import { IndustriesCinema } from '@/components/home/IndustriesCinema';
-import { CaseStudiesEditorial } from '@/components/home/CaseStudiesEditorial';
-import { RealWork } from '@/components/home/RealWork';
-import { MotionRoot } from '@/components/ui/motion/MotionRoot';
-import { ExpertMoment } from '@/components/home/ExpertMoment';
-import { Faq } from '@/components/home/Faq';
 import { RoadmapAssembler } from '@/components/home/RoadmapAssembler';
+import { MotionRoot } from '@/components/ui/motion/MotionRoot';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { webPageSchema, localBusinessSchema } from '@/lib/seo';
 
 /**
- * Homepage — a directed story, not a catalogue.
+ * Homepage, ODOOVATIONS 3.0: ten sections, paced as one story.
  *
- * Order: what we do (hero, capabilities, ecosystem) → who trusts us
- * (clients) → what do you need (selector) → how it works (playground,
- * diagnostic) → proof (industries, work) → reassurance (global, custom,
- * people) → questions → start.
+ *  01 hero · 02 transformation · 03 capabilities · 04 selected work ·
+ *  05 build / automate / grow · 06 the people · 07 how we work ·
+ *  08 interactive systems · 09 why ODOOVATIONS · 10 start
  *
- * Deliberately NOT here, and why:
- *  - ServicesRail, CustomStory and JourneyRoute are Odoo-specific depth
- *    (the rail alone was 5,760px, 22% of the page). They live on /services,
- *    the Odoo & ERP hub, where someone researching Odoo actually lands.
- *  - TrendingTopics duplicated the resources hub.
- *  - TestimonialNarrative is held back until named, verified client
- *    testimonials exist; an unattributed testimonial section is worse than
- *    none.
- *  - The FAQ shows six company-level questions and links to /faq, which
- *    owns the FAQPage schema.
+ * Section 08 keeps the working tools from the previous homepage: the connected
+ * workflow playground, and the operational diagnostic that feeds the roadmap and
+ * the contact form. They are a lead path, not decoration, so they stay.
+ *
+ * What moved out, and where it lives: the Industries explorer is on
+ * /industries and in the Expertise menu; the client roster is on
+ * /company/clients; the FAQ is on /faq; Odoo-specific depth is on /services.
  */
 export default function HomePage() {
   return (
@@ -52,24 +44,20 @@ export default function HomePage() {
         ]}
       />
       <MotionRoot>
-      <CinematicHero />
-      <CapabilityStrip />
-      <Manifesto />
-      <EcosystemGrid />
-      <ClientWall />
-      <IntentSelector />
-      <SystemsPlayground />
-      <RoadmapProvider>
-        <FrictionDiagnostic />
-        <IndustriesCinema />
-        <RealWork />
-        <CaseStudiesEditorial />
-        <GlobalDeliveryBand />
-        <AnythingCustom />
-        <ExpertMoment />
-        <Faq />
-        <RoadmapAssembler />
-      </RoadmapProvider>
+        <CinematicHero />
+        <Transformation />
+        <CapabilityIndex />
+        <SelectedWork />
+        <BuildAutomateGrow />
+        <TeamOverview />
+        <HowWeWork />
+        <SystemsPlayground />
+        <RoadmapProvider>
+          <FrictionDiagnostic />
+          <RoadmapAssembler />
+        </RoadmapProvider>
+        <WhyOdoovations />
+        <FinalContact />
       </MotionRoot>
     </>
   );
