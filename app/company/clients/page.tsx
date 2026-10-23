@@ -100,7 +100,7 @@ export default function ClientsPage() {
             ))}
           </div>
 
-          <p className="mt-14 max-w-[var(--reading-width)] rounded-panel border border-line-light bg-white/60 p-6 text-[15px] leading-relaxed text-ink-muted">
+          <p className="mt-14 max-w-[var(--reading-width)] rounded-panel border border-line-light bg-white/[0.035] p-6 text-[15px] leading-relaxed text-ink-muted">
             Additional clients exist across each sector. The legal spelling of every organisation
             is confirmed against source documents prior to publication. Client names on this page
             do not by themselves describe the scope of work delivered &mdash; for that, see{' '}

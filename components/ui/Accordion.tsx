@@ -51,7 +51,7 @@ export function Accordion({ items, allowMultiple = false, className }: Props) {
   }
 
   return (
-    <div className={cn('divide-y divide-line [.theme-light_&]:divide-line-light', className)}>
+    <div className={cn('divide-y divide-line', className)}>
       {items.map((item, i) => {
         const isOpen = open.has(i);
         const btnId = `${baseId}-btn-${i}`;
@@ -79,7 +79,7 @@ export function Accordion({ items, allowMultiple = false, className }: Props) {
                 <span
                   className={cn(
                     'grid h-9 w-9 shrink-0 place-items-center rounded-full border transition-colors',
-                    isOpen ? 'border-violet-bright/50 text-violet-bright' : 'border-line text-text-dark-muted [.theme-light_&]:border-line-light [.theme-light_&]:text-ink-muted',
+                    isOpen ? 'border-violet-bright/50 text-violet-bright' : 'border-line text-text-dark-muted',
                   )}
                   aria-hidden
                 >
@@ -101,7 +101,7 @@ export function Accordion({ items, allowMultiple = false, className }: Props) {
               )}
             >
               <div className="min-h-0 overflow-hidden">
-                <p className="max-w-[44rem] pb-7 text-[16px] leading-[1.7] text-text-dark-muted [.theme-light_&]:text-ink-muted">
+                <p className="max-w-[44rem] pb-7 text-[16px] leading-[1.7] text-text-dark-muted">
                   {item.answer}
                 </p>
               </div>

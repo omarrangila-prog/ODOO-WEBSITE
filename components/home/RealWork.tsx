@@ -47,7 +47,7 @@ export function RealWork() {
         <ul className="mt-12 grid gap-5 md:grid-cols-2">
           {projects.map((p) => (
             <li key={p.id}>
-              <article className="flex h-full flex-col rounded-editorial border border-line-light bg-white/60 p-7 sm:p-8">
+              <article className="flex h-full flex-col rounded-editorial border border-line-light bg-white/[0.035] p-7 sm:p-8">
                 <div className="flex flex-wrap items-center gap-2">
                   <span
                     className={cn(

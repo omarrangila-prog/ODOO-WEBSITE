@@ -3,60 +3,46 @@ import Image from 'next/image';
 import { cn } from '@/lib/utilities';
 
 /**
- * Brand lockup: the real ODOOVATIONS ring mark (cropped from the supplied logo)
- * on a subtle light plate so it reads cleanly on the dark header, paired with a
- * crisp text wordmark that stays sharp at any size.
+ * Brand lockup: the real ODOOVATIONS ring mark, keyed onto a transparent
+ * background so it sits directly on the black canvas as in the approved design
+ * (it used to sit on a white tile), beside a letter-spaced wordmark.
  *
- * No aria-label: the visible wordmark and tagline already form the accessible
- * name, and an aria-label omitting the tagline made the accessible name a
- * mismatch for the visible text (WCAG 2.5.3 — Lighthouse reports this as
- * label-content-name-mismatch). A trailing sr-only "home" states the
- * destination without contradicting what is on screen.
+ * No aria-label: the visible wordmark is the accessible name, and an
+ * aria-label that differed from it would fail WCAG 2.5.3 (label in name). A
+ * trailing sr-only "home" states the destination without contradicting what is
+ * on screen.
  */
 export function Logo({
   className,
   compact = false,
 }: {
   className?: string;
-  /**
-   * Header mode. The tagline roughly doubles the lockup width (252px vs
-   * ~160px), which is the difference between the nav CTA fitting on a 1280px
-   * laptop and being pushed off-screen. In compact mode it appears only on
-   * genuinely wide screens.
-   */
+  /** Header mode: no tagline. The footer lockup keeps it. */
   compact?: boolean;
 }) {
   return (
-    <Link
-      href="/"
-      className={cn('group inline-flex min-h-[44px] items-center gap-2.5', className)}
-    >
-      <span
+    <Link href="/" className={cn('group inline-flex min-h-[44px] items-center gap-3', className)}>
+      <Image
+        src="/images/odoovations-mark-clear.webp"
+        alt=""
         aria-hidden
-        className="relative grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-[11px] border border-line-strong bg-white ring-1 ring-inset ring-black/5"
-      >
-        {/* Clean, pre-cropped ring mark. */}
-        <Image
-          src="/images/odoovations-mark.png"
-          alt=""
-          width={72}
-          height={72}
-          className="h-[26px] w-[26px] object-contain"
-          priority
-        />
-      </span>
+        width={72}
+        height={72}
+        priority
+        className="h-9 w-9 shrink-0 object-contain drop-shadow-[0_0_14px_rgba(130,71,245,0.55)]"
+      />
       <span className="flex flex-col leading-none">
-        <span className="font-heading text-[16px] font-bold tracking-tight text-text-dark [.theme-light_&]:text-ink">
+        <span className="font-heading text-[14px] font-medium uppercase tracking-[0.2em] text-text-dark sm:text-[15px]">
           ODOOVATIONS
-        </span>{' '}
-        <span
-          className={cn(
-            'mt-1 whitespace-nowrap text-[9px] font-semibold uppercase tracking-[0.2em] text-text-dark-muted [.theme-light_&]:text-ink-muted',
-            compact && 'hidden hd:block',
-          )}
-        >
-          Innovate • Automate • Elevate
         </span>
+        {!compact && (
+          <>
+            {' '}
+            <span className="mt-1.5 whitespace-nowrap text-[9px] font-medium uppercase tracking-[0.22em] text-text-dark-muted">
+              Innovate • Automate • Elevate
+            </span>
+          </>
+        )}
       </span>
       <span className="sr-only">home</span>
     </Link>

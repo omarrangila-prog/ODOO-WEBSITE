@@ -43,7 +43,7 @@ export function EcosystemGrid() {
                 key={d.id}
                 href={d.href}
                 className={cn(
-                  'group relative flex flex-col justify-between overflow-hidden rounded-editorial border border-line-light bg-white/60 p-7 transition-all duration-300 ease-premium hover:-translate-y-1 hover:border-violet/30 hover:shadow-panel-light sm:p-8',
+                  'group relative flex flex-col justify-between overflow-hidden rounded-editorial border border-line-light bg-white/[0.035] p-7 transition-all duration-300 ease-premium hover:-translate-y-1 hover:border-violet/30 hover:shadow-panel-light sm:p-8',
                   span[d.weight],
                 )}
               >

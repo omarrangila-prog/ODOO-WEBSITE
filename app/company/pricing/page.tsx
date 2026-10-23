@@ -135,7 +135,7 @@ export default function PricingPage() {
           <TextGap />
           <div className="mt-12 grid gap-5 md:grid-cols-2">
             {models.map((m) => (
-              <article key={m.name} className="rounded-editorial border border-line-light bg-white/60 p-7 sm:p-8">
+              <article key={m.name} className="rounded-editorial border border-line-light bg-white/[0.035] p-7 sm:p-8">
                 <span className="grid h-11 w-11 place-items-center rounded-control bg-[linear-gradient(120deg,#7C4DFF,#E947C6)] text-white">
                   <m.icon className="h-5 w-5" aria-hidden />
                 </span>

@@ -3,139 +3,174 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, ChevronDown, Phone } from 'lucide-react';
-import { primaryNav } from '@/data/navigation';
-import { company } from '@/data/company';
+import { Menu, ChevronDown } from 'lucide-react';
+import { primaryNav, groupChildren, type NavItem } from '@/data/navigation';
 import { cn } from '@/lib/utilities';
 import { track } from '@/lib/analytics';
-import { ButtonLink, ArrowNudge } from '@/components/ui/Button';
 import { Logo } from './Logo';
 import { MobileMenu } from './MobileMenu';
 
+/**
+ * Floating navigation, as in the approved design: the logo at the left and a
+ * centred pill of five items. The pill carries its own translucent surface so
+ * the header needs no full-width bar; a soft fade behind it appears on scroll
+ * to keep the logo legible over page content.
+ */
 export function Header() {
-  /*
-   * Background note. `bg-midnight/[0.92]` and `bg-graphite/95` used to sit here
-   * and compiled to NOTHING: the palette colours are CSS variables holding hex
-   * values, and Tailwind cannot apply an opacity modifier to those, so the
-   * classes are silently dropped. The scrolled header and the dropdown panel
-   * had no background at all, only a blur, and showed whatever section was
-   * underneath. In a dark OS, light nav text over an ivory section was close
-   * to invisible. They now get an opaque colour, made slightly translucent
-   * through color-mix() where the browser supports it.
-   */
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const navRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  // Close an open dropdown on route change and on an outside click.
+  useEffect(() => setOpenDropdown(null), [pathname]);
+  useEffect(() => {
+    if (!openDropdown) return;
+    const onDown = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) setOpenDropdown(null);
+    };
+    document.addEventListener('mousedown', onDown);
+    return () => document.removeEventListener('mousedown', onDown);
+  }, [openDropdown]);
 
   function openMenu(label: string) {
     if (closeTimer.current) clearTimeout(closeTimer.current);
     setOpenDropdown(label);
   }
   function scheduleClose() {
-    closeTimer.current = setTimeout(() => setOpenDropdown(null), 120);
+    closeTimer.current = setTimeout(() => setOpenDropdown(null), 140);
   }
 
-  const isActive = (href: string) =>
-    href === '/' ? pathname === '/' : pathname.startsWith(href.split('#')[0] || href);
+  const isActive = (item: NavItem) => {
+    const prefixes = item.match ?? [item.href];
+    return prefixes.some((p) => (p === '/' ? pathname === '/' : pathname === p || pathname.startsWith(p + '/')));
+  };
 
   return (
     <>
-      <header
-        className={cn(
-          'fixed inset-x-0 top-0 z-[var(--z-header)] transition-all duration-300 ease-premium',
-          scrolled
-            ? 'border-b border-line bg-midnight supports-[background:color-mix(in_srgb,red,blue)]:bg-[color-mix(in_srgb,var(--midnight)_92%,transparent)] backdrop-blur-xl shadow-lift'
-            : 'border-b border-white/[0.05] bg-transparent',
-        )}
-      >
-        <div className="site-header-shell flex h-[76px] items-center justify-between gap-4">
+      <header className="fixed inset-x-0 top-0 z-[var(--z-header)]">
+        {/* Legibility fade behind the floating elements once the page scrolls. */}
+        <div
+          aria-hidden
+          className={cn(
+            'pointer-events-none absolute inset-x-0 top-0 h-[132px] bg-gradient-to-b from-midnight via-midnight/70 to-transparent transition-opacity duration-500',
+            scrolled ? 'opacity-100' : 'opacity-0',
+          )}
+        />
+
+        <div
+          className="relative mx-auto flex items-center justify-between"
+          style={{
+            paddingInline: 'calc(var(--frame-inset) + clamp(16px, 3.6vw, 66px))',
+            paddingTop: 'calc(var(--frame-inset) + clamp(10px, 1.5vw, 20px))',
+          }}
+        >
           <Logo compact className="shrink-0" />
 
-          {/* Desktop nav */}
-          <nav aria-label="Primary" className="hidden h-full min-w-0 xl:block">
-            <ul className="flex h-full items-center">
+          {/* Desktop: centred floating pill */}
+          <nav
+            ref={navRef}
+            aria-label="Primary"
+            className="absolute left-1/2 top-[calc(var(--frame-inset)+clamp(10px,1.5vw,20px))] hidden -translate-x-1/2 lg:block"
+          >
+            <ul className="flex items-center gap-0.5 rounded-full border border-white/[0.13] bg-midnight/55 p-1.5 shadow-[0_18px_60px_-30px_rgba(0,0,0,0.9)] backdrop-blur-md">
               {primaryNav.map((item) => {
-                const active = item.href !== '/' && isActive(item.href);
+                const active = isActive(item);
+                const open = openDropdown === item.label;
+                const itemClass = cn(
+                  'relative flex min-h-[40px] items-center gap-1 whitespace-nowrap rounded-full px-4 text-[14px] font-normal transition-colors',
+                  active ? 'text-white' : 'text-text-dark-muted hover:bg-white/[0.06] hover:text-white',
+                  open && 'bg-white/[0.06] text-white',
+                );
+                const dot = active && (
+                  <span
+                    className="absolute -bottom-[2px] left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-violet-bright shadow-[0_0_8px_rgba(196,168,255,0.9)]"
+                    aria-hidden
+                  />
+                );
                 return (
                   <li
                     key={item.label}
-                    className="relative flex h-full items-center"
+                    className="relative"
                     onMouseEnter={() => item.children && openMenu(item.label)}
                     onMouseLeave={() => item.children && scheduleClose()}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Escape' && open) {
+                        setOpenDropdown(null);
+                        (e.currentTarget.querySelector('button') as HTMLElement | null)?.focus();
+                      }
+                    }}
+                    onBlur={(e) => {
+                      if (open && !e.currentTarget.contains(e.relatedTarget as Node | null)) setOpenDropdown(null);
+                    }}
                   >
                     {item.children ? (
                       <>
                         <button
                           type="button"
-                          aria-expanded={openDropdown === item.label}
+                          aria-expanded={open}
                           aria-haspopup="true"
                           onClick={() => setOpenDropdown((p) => (p === item.label ? null : item.label))}
-                          className={cn(
-                            'flex items-center gap-1 whitespace-nowrap px-2 py-2 text-[14px] font-medium transition-colors hd:px-3 hd:text-[15px]',
-                            active ? 'text-text-dark' : 'text-text-dark-muted hover:text-text-dark',
-                          )}
+                          className={itemClass}
                         >
                           {item.label}
-                          <ChevronDown className={cn('h-3.5 w-3.5 transition-transform', openDropdown === item.label && 'rotate-180')} aria-hidden />
+                          <ChevronDown className={cn('h-3.5 w-3.5 opacity-70 transition-transform', open && 'rotate-180')} aria-hidden />
+                          {dot}
                         </button>
-                        {openDropdown === item.label && (
+                        {open && (
                           <div
-                            className={cn(
-                              'absolute left-1/2 top-full z-[var(--z-dropdown)] -translate-x-1/2 pt-3',
-                              // Long menus (Industries, Solutions) go two-up so
-                              // the panel does not run off the bottom of the screen.
-                              item.children.length > 6 ? 'w-[620px]' : 'w-[340px]',
-                            )}
+                            className="absolute left-1/2 top-full z-[var(--z-dropdown)] -translate-x-1/2 pt-4"
                             onMouseEnter={() => openMenu(item.label)}
                             onMouseLeave={scheduleClose}
                           >
                             <div
                               className={cn(
-                                'animate-fade-up rounded-panel border border-line bg-graphite supports-[background:color-mix(in_srgb,red,blue)]:bg-[color-mix(in_srgb,var(--graphite)_95%,transparent)] p-2 shadow-float backdrop-blur-xl',
-                                item.children.length > 6 && 'grid grid-cols-2 gap-x-1',
+                                'animate-fade-up rounded-[26px] border border-white/[0.12] bg-surface-dark p-3 shadow-float',
+                                item.children.some((c) => c.group) ? 'grid w-[min(900px,calc(100vw-96px))] grid-cols-3 gap-x-2' : 'w-[360px]',
                               )}
                             >
-                              {item.children.map((child) => (
-                                <Link
-                                  key={child.href}
-                                  href={child.href}
-                                  onClick={() => setOpenDropdown(null)}
-                                  className="block rounded-[14px] px-3.5 py-3 transition-colors hover:bg-white/[0.05]"
-                                >
-                                  <span className="block text-[14px] font-medium text-text-dark">{child.label}</span>
-                                  {child.description && (
-                                    <>
-                                      {' '}
-                                      <span className="mt-0.5 block text-[13px] leading-snug text-text-dark-muted">{child.description}</span>
-                                    </>
+                              {groupChildren(item.children).map((g) => (
+                                <div key={g.heading ?? 'all'} className="min-w-0">
+                                  {g.heading && (
+                                    <p className="px-3.5 pb-1.5 pt-2 text-[11px] font-medium uppercase tracking-[0.2em] text-text-dark-muted">
+                                      {g.heading}
+                                    </p>
                                   )}
-                                </Link>
+                                  {g.items.map((child) => (
+                                    <Link
+                                      key={child.href}
+                                      href={child.href}
+                                      onClick={() => setOpenDropdown(null)}
+                                      className="block rounded-[14px] px-3.5 py-2.5 transition-colors hover:bg-white/[0.06]"
+                                    >
+                                      <span className="block text-[14px] font-medium text-text-dark">{child.label}</span>
+                                      {child.description && (
+                                        <>
+                                          {' '}
+                                          <span className="mt-0.5 block text-[12.5px] leading-snug text-text-dark-muted">{child.description}</span>
+                                        </>
+                                      )}
+                                    </Link>
+                                  ))}
+                                </div>
                               ))}
                             </div>
                           </div>
                         )}
                       </>
                     ) : (
-                      <Link
-                        href={item.href}
-                        className={cn(
-                          'relative whitespace-nowrap px-2 py-2 text-[14px] font-medium transition-colors hd:px-3 hd:text-[15px]',
-                          active ? 'text-text-dark' : 'text-text-dark-muted hover:text-text-dark',
-                        )}
-                      >
+                      <Link href={item.href} aria-current={active ? 'page' : undefined} className={itemClass}>
                         {item.label}
-                        {active && (
-                          <span className="absolute inset-x-3.5 -bottom-0.5 h-px bg-[linear-gradient(90deg,#9868FF,#E947C6)]" aria-hidden />
-                        )}
+                        {dot}
                       </Link>
                     )}
                   </li>
@@ -144,25 +179,18 @@ export function Header() {
             </ul>
           </nav>
 
-          {/* Desktop actions — quiet phone + refined CTA */}
-          <div className="hidden shrink-0 items-center gap-4 xl:flex">
-            <a
-              href={company.phoneHref}
-              className="hidden shrink-0 items-center gap-2 whitespace-nowrap text-[14px] font-medium text-text-dark-muted transition-colors hover:text-text-dark hd:inline-flex"
-              aria-label={`Call us at ${company.phoneDisplay}`}
-            >
-              <Phone className="h-4 w-4 text-violet-bright" aria-hidden />
-              {company.phoneDisplay}
-            </a>
-            <ButtonLink href="/contact" size="md" onClick={() => track('hero_cta_click')}>
-              Start a Project
-              <ArrowNudge className="h-4 w-4" />
-            </ButtonLink>
-          </div>
+          {/* Desktop: quiet action in the same fine-border language */}
+          <Link
+            href="/contact"
+            onClick={() => track('hero_cta_click')}
+            className="hidden min-h-[44px] items-center gap-2 rounded-full border border-white/[0.16] px-5 text-[14px] text-text-dark transition-colors hover:border-violet-bright/60 hover:bg-white/[0.05] lg:inline-flex"
+          >
+            Start a project <span aria-hidden className="text-[13px]">↗</span>
+          </Link>
 
           <button
             type="button"
-            className="grid h-11 w-11 place-items-center rounded-full border border-line text-text-dark xl:hidden"
+            className="grid h-11 w-11 place-items-center rounded-full border border-white/[0.16] bg-midnight/55 text-text-dark backdrop-blur-md lg:hidden"
             aria-label="Open menu"
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen(true)}

@@ -167,7 +167,7 @@ export default function GlobalDeliveryPage() {
             {practices.map((p) => (
               <article
                 key={p.title}
-                className="rounded-editorial border border-line-light bg-white/60 p-7"
+                className="rounded-editorial border border-line-light bg-white/[0.035] p-7"
               >
                 <span className="grid h-11 w-11 place-items-center rounded-control bg-[linear-gradient(120deg,#7C4DFF,#E947C6)] text-white">
                   <p.icon className="h-5 w-5" aria-hidden />
@@ -209,7 +209,7 @@ export default function GlobalDeliveryPage() {
                 return c ? (
                   <li
                     key={c.code}
-                    className="inline-flex items-center gap-2 rounded-full border border-line-light bg-white/60 px-3.5 py-1.5 text-[14px] text-ink"
+                    className="inline-flex items-center gap-2 rounded-full border border-line-light bg-white/[0.035] px-3.5 py-1.5 text-[14px] text-ink"
                   >
                     <span aria-hidden>{flagEmoji(c.code)}</span>
                     {c.name}
@@ -221,7 +221,7 @@ export default function GlobalDeliveryPage() {
 
           {/* Native disclosure: no JavaScript, keyboard-accessible, and the
               full list stays in the HTML for anyone who wants to search it. */}
-          <details className="group mt-8 rounded-editorial border border-line-light bg-white/60 p-6">
+          <details className="group mt-8 rounded-editorial border border-line-light bg-white/[0.035] p-6">
             <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 text-[16px] font-semibold text-ink [&::-webkit-details-marker]:hidden">
               All {countries.length} countries we accept projects from
               <span className="text-[13px] font-medium text-ink-muted transition-transform group-open:rotate-180" aria-hidden>

@@ -87,7 +87,7 @@ export function SolutionFinder() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search: stock, invoicing, POS, landed cost…"
-            className="w-full rounded-control border border-line-light bg-white/70 py-3.5 pl-11 pr-4 text-[16px] text-ink placeholder:text-ink/40 focus:border-violet focus:outline-none focus:ring-2 focus:ring-violet/20"
+            className="w-full rounded-control border border-line-light bg-white/[0.035] py-3.5 pl-11 pr-4 text-[16px] text-ink placeholder:text-ink/40 focus:border-violet focus:outline-none focus:ring-2 focus:ring-violet/20"
           />
         </label>
 
@@ -123,7 +123,7 @@ export function SolutionFinder() {
         </p>
 
         {shown.length === 0 ? (
-          <p className="mt-8 rounded-panel border border-line-light bg-white/60 p-6 text-[16px] text-ink-muted">
+          <p className="mt-8 rounded-panel border border-line-light bg-white/[0.035] p-6 text-[16px] text-ink-muted">
             Nothing matches that term. Plenty of what we build has no product name &mdash;{' '}
             <Link href="/contact#form" className="text-violet underline-offset-4 hover:underline">
               describe the problem instead
@@ -136,7 +136,7 @@ export function SolutionFinder() {
               <li key={s.slug}>
                 <Link
                   href={s.href}
-                  className="group flex h-full flex-col rounded-editorial border border-line-light bg-white/60 p-7 transition-all duration-300 ease-premium hover:-translate-y-1 hover:border-violet/30 hover:shadow-panel-light sm:p-8"
+                  className="group flex h-full flex-col rounded-editorial border border-line-light bg-white/[0.035] p-7 transition-all duration-300 ease-premium hover:-translate-y-1 hover:border-violet/30 hover:shadow-panel-light sm:p-8"
                 >
                   <span className="flex flex-wrap items-center gap-2">
                     {s.categories.map((c) => (

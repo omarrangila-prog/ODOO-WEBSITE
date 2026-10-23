@@ -9,13 +9,13 @@ export interface Crumb {
 export function Breadcrumbs({ items }: { items: Crumb[] }) {
   return (
     <nav aria-label="Breadcrumb" className="mb-10">
-      <ol className="flex flex-wrap items-center gap-1.5 text-sm text-text-dark-muted [.theme-light_&]:text-ink-muted">
+      <ol className="flex flex-wrap items-center gap-1.5 text-sm text-text-dark-muted">
         {items.map((item, i) => {
           const last = i === items.length - 1;
           return (
             <li key={item.path} className="flex items-center gap-1.5">
               {last ? (
-                <span aria-current="page" className="text-text-dark [.theme-light_&]:text-ink">
+                <span aria-current="page" className="text-text-dark">
                   {item.name}
                 </span>
               ) : (

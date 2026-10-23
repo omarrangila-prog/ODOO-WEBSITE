@@ -1,8 +1,9 @@
 import { Suspense } from 'react';
 import type { Metadata, Viewport } from 'next';
-import { Space_Grotesk, Manrope } from 'next/font/google';
+import { Inter, Inter_Tight, Instrument_Serif } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
+import { CinemaFrame } from '@/components/layout/CinemaFrame';
 import { Footer } from '@/components/layout/Footer';
 import { MobileCtaBar } from '@/components/layout/MobileCtaBar';
 import { Analytics } from '@/components/seo/Analytics';
@@ -17,25 +18,35 @@ import {
 } from '@/lib/seo';
 import { company } from '@/data/company';
 
-const spaceGrotesk = Space_Grotesk({
+/*
+ * Three faces, each with one job. Inter Tight sets the monumental headlines,
+ * Inter sets running text, and Instrument Serif Italic is reserved for the
+ * single expressive phrase per view ("by design."). Inter and Inter Tight are
+ * variable fonts, so no weight list is needed and each is one file.
+ */
+const interTight = Inter_Tight({
   subsets: ['latin'],
-  weight: ['500', '600', '700'],
-  variable: '--font-space-grotesk',
+  variable: '--font-display',
   display: 'swap',
 });
 
-const manrope = Manrope({
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-manrope',
+  variable: '--font-body',
+  display: 'swap',
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  weight: '400',
+  style: 'italic',
+  variable: '--font-serif',
   display: 'swap',
 });
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: dark)', color: '#07070b' },
-    { media: '(prefers-color-scheme: light)', color: '#f3f1ea' },
-  ],
+  themeColor: '#030307',
+  colorScheme: 'dark',
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
@@ -87,7 +98,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-PK" className={`${spaceGrotesk.variable} ${manrope.variable}`}>
+    <html lang="en-PK" className={`${interTight.variable} ${inter.variable} ${instrumentSerif.variable}`}>
       <body>
         {/* Global entity graph: Organization + WebSite only. LocalBusiness /
             ProfessionalService is scoped to the homepage, contact and Karachi
@@ -99,6 +110,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
+        <CinemaFrame />
         <Header />
         <main id="main">{children}</main>
         <Footer />

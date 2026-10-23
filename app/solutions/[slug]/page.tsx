@@ -100,7 +100,7 @@ export default function SolutionPage({ params }: { params: { slug: string } }) {
                 <TextGap />
                 <div className="mt-3 flex flex-wrap gap-2">
                   {sol.modules.map((m) => (
-                    <span key={m} className="rounded-full border border-line-light bg-white px-3 py-1 text-[13px] text-ink">{m}</span>
+                    <span key={m} className="rounded-full border border-line-light bg-white/[0.05] px-3 py-1 text-[13px] text-ink">{m}</span>
                   ))}
                 </div>
 

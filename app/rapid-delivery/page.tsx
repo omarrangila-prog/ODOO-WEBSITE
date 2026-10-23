@@ -189,7 +189,7 @@ export default function RapidDeliveryPage() {
             {tracks.map((t) => (
               <article
                 key={t.name}
-                className="flex flex-col rounded-editorial border border-line-light bg-white/60 p-7 sm:p-8"
+                className="flex flex-col rounded-editorial border border-line-light bg-white/[0.035] p-7 sm:p-8"
               >
                 <div className="flex items-center gap-3">
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-control bg-[linear-gradient(120deg,#7C4DFF,#E947C6)] text-white">
@@ -228,7 +228,7 @@ export default function RapidDeliveryPage() {
             ))}
           </div>
 
-          <p className="mt-10 max-w-[var(--reading-width)] rounded-panel border border-line-light bg-white/60 p-6 text-[16px] leading-relaxed text-ink-muted">
+          <p className="mt-10 max-w-[var(--reading-width)] rounded-panel border border-line-light bg-white/[0.035] p-6 text-[16px] leading-relaxed text-ink-muted">
             <strong className="font-semibold text-ink">How delivery dates are set.</strong>{' '}
             Delivery times depend on scope, access, integrations, approvals and testing
             requirements. A final delivery commitment is confirmed after we review the project

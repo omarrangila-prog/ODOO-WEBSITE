@@ -16,37 +16,42 @@ const config: Config = {
            never pushed off-screen. */
         hd: '1700px',
       },
+      /* RGB-channel colours: `rgb(var(--x-rgb) / <alpha-value>)` is what lets
+         Tailwind apply opacity (border-violet/40, bg-ink/10). With plain
+         var(--x) hex values those modifiers generated no CSS at all. */
       colors: {
-        midnight: 'var(--midnight)',
-        graphite: 'var(--graphite)',
+        midnight: 'rgb(var(--midnight-rgb) / <alpha-value>)',
+        graphite: 'rgb(var(--graphite-rgb) / <alpha-value>)',
         surface: {
           dark: 'var(--surface-dark)',
           'dark-2': 'var(--surface-dark-2)',
         },
         ivory: {
-          DEFAULT: 'var(--ivory)',
-          soft: 'var(--ivory-soft)',
+          DEFAULT: 'rgb(var(--ivory-rgb) / <alpha-value>)',
+          soft: 'rgb(var(--ivory-soft-rgb) / <alpha-value>)',
         },
         ink: {
-          DEFAULT: 'var(--ink)',
-          muted: 'var(--ink-muted)',
+          DEFAULT: 'rgb(var(--ink-rgb) / <alpha-value>)',
+          muted: 'rgb(var(--ink-muted-rgb) / <alpha-value>)',
         },
         text: {
-          dark: 'var(--text-dark)',
-          'dark-muted': 'var(--text-dark-muted)',
+          dark: 'rgb(var(--text-dark-rgb) / <alpha-value>)',
+          'dark-muted': 'rgb(var(--text-dark-muted-rgb) / <alpha-value>)',
         },
         violet: {
-          DEFAULT: 'var(--violet)',
-          bright: 'var(--violet-bright)',
+          DEFAULT: 'rgb(var(--violet-rgb) / <alpha-value>)',
+          bright: 'rgb(var(--violet-bright-rgb) / <alpha-value>)',
         },
-        magenta: 'var(--magenta)',
-        green: 'var(--green)',
-        cyan: 'var(--cyan)',
-        amber: 'var(--amber)',
+        ultraviolet: 'rgb(var(--ultraviolet-rgb) / <alpha-value>)',
+        magenta: 'rgb(var(--magenta-rgb) / <alpha-value>)',
+        green: 'rgb(var(--green-rgb) / <alpha-value>)',
+        cyan: 'rgb(var(--cyan-rgb) / <alpha-value>)',
+        amber: 'rgb(var(--amber-rgb) / <alpha-value>)',
       },
       fontFamily: {
-        heading: ['var(--font-space-grotesk)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        sans: ['var(--font-manrope)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        heading: ['var(--font-display)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-serif)', 'Times New Roman', 'serif'],
+        sans: ['var(--font-body)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       maxWidth: {
         shell: 'var(--content-max)',
@@ -64,9 +69,9 @@ const config: Config = {
         control: '14px',
       },
       boxShadow: {
-        cta: '0 12px 34px -14px rgba(124, 77, 255, 0.6), inset 0 1px 0 rgba(255,255,255,0.22)',
+        cta: '0 12px 34px -14px rgba(130, 71, 245, 0.6), inset 0 1px 0 rgba(255,255,255,0.22)',
         float: '0 30px 80px -40px rgba(0,0,0,0.8)',
-        'panel-light': '0 1px 2px rgba(17,18,22,0.04), 0 24px 60px -34px rgba(17,18,22,0.24)',
+        'panel-light': '0 1px 0 rgba(255,255,255,0.03) inset, 0 24px 60px -34px rgba(0,0,0,0.9), 0 0 0 1px rgba(190,175,230,0.05)',
         lift: '0 20px 50px -28px rgba(0,0,0,0.6)',
       },
       transitionTimingFunction: {

@@ -10,7 +10,7 @@ export function AnythingCustom() {
   return (
     <section className="theme-light bay-sm">
       <div className="shell">
-        <div className="rounded-editorial border border-line-light bg-white/60 p-8 sm:p-12 lg:p-16">
+        <div className="rounded-editorial border border-line-light bg-white/[0.035] p-8 sm:p-12 lg:p-16">
           <p className="eyebrow mb-5">Can&rsquo;t find the software you need?</p>
           <TextGap />
           <h2 className="display-2 max-w-4xl">

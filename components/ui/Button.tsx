@@ -20,9 +20,9 @@ const variants: Record<Variant, string> = {
   primary:
     'text-white bg-[linear-gradient(100deg,#7C4DFF,#9868FF_45%,#E947C6)] shadow-cta hover:brightness-[1.06] hover:-translate-y-0.5 hover:shadow-[0_16px_40px_-14px_rgba(124,77,255,0.7),inset_0_1px_0_rgba(255,255,255,0.24)] active:translate-y-0 active:brightness-100 motion-reduce:hover:translate-y-0',
   secondary:
-    'text-text-dark border border-line-strong bg-white/[0.03] hover:bg-white/[0.07] hover:border-line-strong hover:-translate-y-0.5 active:translate-y-0 motion-reduce:hover:translate-y-0 [.theme-light_&]:text-ink [.theme-light_&]:border-line-light [.theme-light_&]:bg-transparent [.theme-light_&]:hover:bg-black/[0.04]',
+    'text-text-dark border border-line-strong bg-white/[0.03] hover:bg-white/[0.07] hover:border-line-strong hover:-translate-y-0.5 active:translate-y-0 motion-reduce:hover:translate-y-0',
   ghost:
-    'text-text-dark hover:bg-white/5 [.theme-light_&]:text-ink [.theme-light_&]:hover:bg-black/[0.04]',
+    'text-text-dark hover:bg-white/5',
 };
 
 interface CommonProps {

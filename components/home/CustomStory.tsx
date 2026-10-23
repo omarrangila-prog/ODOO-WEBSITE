@@ -54,7 +54,7 @@ const stages: Stage[] = [
 // This section is always on the ivory (theme-light) ground, so rows use
 // ink-based text/backgrounds that stay AA-legible in both OS themes.
 const stateStyle = {
-  yours: 'border-line-light bg-black/[0.03] text-ink',
+  yours: 'border-line-light bg-white/[0.05] text-ink',
   standard: 'border-cyan/40 bg-cyan/[0.1] text-ink',
   custom: 'border-violet/50 bg-violet/[0.12] text-ink',
 };
@@ -115,7 +115,7 @@ export function CustomStory() {
                     initial={false}
                     animate={reduce ? undefined : { scale: step.state === 'custom' && activeIndex === 2 ? 1.02 : 1 }}
                     transition={{ duration: 0.3 }}
-                    className={cn('flex items-center justify-between gap-3 rounded-control border px-4 py-3 text-[14px] transition-colors duration-500', stateStyle[step.state], '[.theme-light_&]:text-ink')}
+                    className={cn('flex items-center justify-between gap-3 rounded-control border px-4 py-3 text-[14px] transition-colors duration-500', stateStyle[step.state], '')}
                   >
                     <span className="flex items-center gap-2">
                       <span className="text-[11px] font-semibold text-ink" aria-hidden>{i + 1}</span>{' '}

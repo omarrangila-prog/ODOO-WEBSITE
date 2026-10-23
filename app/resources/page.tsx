@@ -53,7 +53,7 @@ export default function ResourcesIndex() {
           <ol className="grid gap-px overflow-hidden rounded-editorial border border-line-light bg-line-light sm:grid-cols-2">
             {resources.map((r) => (
               <li key={r.slug}>
-                <Link href={r.href} className="group flex h-full flex-col bg-ivory-soft p-7 transition-colors hover:bg-white sm:p-8">
+                <Link href={r.href} className="group flex h-full flex-col bg-ivory-soft p-7 transition-colors hover:bg-white/[0.05] sm:p-8">
                   <div className="flex items-center justify-between gap-3">
                     <span className="text-[12px] font-semibold uppercase tracking-[0.1em] text-violet">{r.eyebrow}</span>
                     <ArrowUpRight className="h-5 w-5 text-ink-muted transition-all group-hover:text-violet group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />

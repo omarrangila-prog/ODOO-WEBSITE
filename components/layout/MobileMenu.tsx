@@ -3,10 +3,9 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { X, ChevronDown, MessageCircle } from 'lucide-react';
-import { primaryNav } from '@/data/navigation';
+import { primaryNav, groupChildren } from '@/data/navigation';
 import { company, PLACEHOLDER } from '@/data/company';
 import { whatsappLink, cn } from '@/lib/utilities';
-import { ButtonLink } from '@/components/ui/Button';
 
 interface Props {
   open: boolean;
@@ -94,12 +93,12 @@ export function MobileMenu({ open, onClose }: Props) {
 
   return (
     <div
-      className={cn('fixed inset-0 z-[var(--z-modal)] xl:hidden', open ? 'pointer-events-auto' : 'pointer-events-none')}
+      className={cn('fixed inset-0 z-[var(--z-modal)] lg:hidden', open ? 'pointer-events-auto' : 'pointer-events-none')}
       aria-hidden={!open}
       {...inertWhenClosed(open)}
     >
       <div
-        className={cn('absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-300', open ? 'opacity-100' : 'opacity-0')}
+        className={cn('absolute inset-0 bg-black/80 transition-opacity duration-300', open ? 'opacity-100' : 'opacity-0')}
         onClick={onClose}
       />
       <div
@@ -108,46 +107,59 @@ export function MobileMenu({ open, onClose }: Props) {
         aria-modal="true"
         aria-label="Main menu"
         className={cn(
-          'absolute inset-x-0 top-0 max-h-[100dvh] overflow-y-auto border-b border-line bg-graphite shadow-2xl transition-transform duration-300 ease-premium safe-b',
+          'absolute inset-0 overflow-y-auto bg-midnight transition-transform duration-500 ease-premium safe-b',
           open ? 'translate-y-0' : '-translate-y-full',
         )}
       >
-        <div className="flex items-center justify-between px-6 pt-5 pb-3">
-          <span className="eyebrow">Menu</span>
-          <button type="button" onClick={onClose} aria-label="Close menu" className="grid h-11 w-11 place-items-center rounded-full border border-line text-text-dark hover:bg-white/5">
+        <div aria-hidden className="pointer-events-none absolute -right-28 top-24 h-[420px] w-[420px] radial-core" />
+        <div
+          className="relative flex items-center justify-between"
+          style={{ padding: 'calc(var(--frame-inset) + 14px) calc(var(--frame-inset) + 18px) 8px' }}
+        >
+          <span className="hero-eyebrow">Menu</span>
+          <button type="button" onClick={onClose} aria-label="Close menu" className="grid h-11 w-11 place-items-center rounded-full border border-white/[0.16] text-text-dark hover:bg-white/5">
             <X className="h-5 w-5" aria-hidden />
           </button>
         </div>
 
-        <nav className="px-4 pb-4">
+        <nav className="relative px-[calc(var(--frame-inset)+14px)] pb-10 pt-4">
           <ul className="flex flex-col">
             {primaryNav.map((item) => (
-              <li key={item.label} className="border-b border-line/60">
+              <li key={item.label} className="border-b border-white/[0.1]">
                 {item.children ? (
                   <>
                     <button
                       type="button"
                       aria-expanded={expanded === item.label}
                       onClick={() => setExpanded((p) => (p === item.label ? null : item.label))}
-                      className="flex w-full items-center justify-between px-2 py-4 text-left"
+                      className="flex min-h-[64px] w-full items-center justify-between px-1 py-3 text-left"
                     >
-                      <span className="font-heading text-lg font-medium">{item.label}</span>
-                      <ChevronDown className={cn('h-5 w-5 text-violet-bright transition-transform', expanded === item.label && 'rotate-180')} aria-hidden />
+                      <span className="font-heading text-[clamp(30px,9.4vw,46px)] font-semibold leading-tight tracking-tight">{item.label}</span>
+                      <ChevronDown className={cn('h-6 w-6 text-violet-bright transition-transform', expanded === item.label && 'rotate-180')} aria-hidden />
                     </button>
                     {expanded === item.label && (
-                      <ul className="pb-3 pl-4">
-                        {item.children.map((child) => (
-                          <li key={child.href}>
-                            <Link href={child.href} onClick={onClose} className="block rounded-lg px-2 py-3 text-[15px] text-text-dark-muted hover:bg-white/5 hover:text-text-dark">
-                              {child.label}
-                            </Link>
-                          </li>
+                      <div className="pb-4 pl-1">
+                        {groupChildren(item.children).map((g) => (
+                          <div key={g.heading ?? 'all'}>
+                            {g.heading && (
+                              <p className="px-1 pb-1 pt-4 text-[11px] font-medium uppercase tracking-[0.2em] text-text-dark-muted">{g.heading}</p>
+                            )}
+                            <ul>
+                              {g.items.map((child) => (
+                                <li key={child.href}>
+                                  <Link href={child.href} onClick={onClose} className="flex min-h-[44px] items-center rounded-lg px-1 py-2 text-[16px] text-text-dark-muted hover:text-white">
+                                    {child.label}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                         ))}
-                      </ul>
+                      </div>
                     )}
                   </>
                 ) : (
-                  <Link href={item.href} onClick={onClose} className="block px-2 py-4 font-heading text-lg font-medium hover:text-violet-bright">
+                  <Link href={item.href} onClick={onClose} className="flex min-h-[64px] items-center px-1 py-3 font-heading text-[clamp(30px,9.4vw,46px)] font-semibold leading-tight tracking-tight hover:text-violet-bright">
                     {item.label}
                   </Link>
                 )}
@@ -155,14 +167,14 @@ export function MobileMenu({ open, onClose }: Props) {
             ))}
           </ul>
 
-          <div className="mt-6 flex flex-col gap-3 px-2">
-            <ButtonLink href="/contact" onClick={onClose} fullWidth>
-              Tell Us What You Need
-            </ButtonLink>
-            <ButtonLink href={waHref} external={waConfigured} variant="secondary" fullWidth>
+          <div className="mt-8 flex flex-col items-start gap-1 px-1">
+            <Link href="/contact" onClick={onClose} className="link-editorial">
+              Start a conversation <span aria-hidden className="arrow">↗</span>
+            </Link>
+            <a href={waHref} {...(waConfigured ? { target: '_blank', rel: 'noopener noreferrer' } : {})} className="link-editorial">
               <MessageCircle className="h-[18px] w-[18px]" aria-hidden />
-              Talk on WhatsApp
-            </ButtonLink>
+              Talk on WhatsApp <span aria-hidden className="arrow">↗</span>
+            </a>
           </div>
         </nav>
       </div>

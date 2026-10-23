@@ -79,8 +79,8 @@ export function Tabs({
                 'whitespace-nowrap rounded-control px-4 py-3 text-left text-[15px] font-semibold transition-colors duration-200 min-h-[44px]',
                 orientation === 'vertical' && 'w-full',
                 selected
-                  ? 'bg-white/[0.06] text-text-dark [.theme-light_&]:bg-black/[0.05] [.theme-light_&]:text-ink'
-                  : 'text-text-dark-muted hover:text-text-dark [.theme-light_&]:text-ink-muted [.theme-light_&]:hover:text-ink',
+                  ? 'bg-white/[0.06] text-text-dark'
+                  : 'text-text-dark-muted hover:text-text-dark',
               )}
             >
               {tab.label}

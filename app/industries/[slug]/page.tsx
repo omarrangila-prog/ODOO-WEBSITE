@@ -183,7 +183,7 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
                   <li key={b.href}>
                     <Link
                       href={b.href}
-                      className="group flex h-full flex-col rounded-editorial border border-line-light bg-white/60 p-6 transition-all duration-300 ease-premium hover:-translate-y-0.5 hover:border-violet/30 hover:shadow-panel-light"
+                      className="group flex h-full flex-col rounded-editorial border border-line-light bg-white/[0.035] p-6 transition-all duration-300 ease-premium hover:-translate-y-0.5 hover:border-violet/30 hover:shadow-panel-light"
                     >
                       <span className="flex items-center justify-between gap-3">
                         <span className="font-heading text-[19px] font-semibold tracking-[-0.02em] text-ink">

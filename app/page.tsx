@@ -1,4 +1,4 @@
-import { Hero } from '@/components/home/Hero';
+import { CinematicHero } from '@/components/cinema/CinematicHero';
 import { CapabilityStrip } from '@/components/home/CapabilityStrip';
 import { EcosystemGrid } from '@/components/home/EcosystemGrid';
 import { SystemsPlayground } from '@/components/home/SystemsPlayground';
@@ -52,7 +52,7 @@ export default function HomePage() {
         ]}
       />
       <MotionRoot>
-      <Hero />
+      <CinematicHero />
       <CapabilityStrip />
       <Manifesto />
       <EcosystemGrid />

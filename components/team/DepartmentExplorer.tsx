@@ -70,7 +70,7 @@ export function DepartmentExplorer() {
               className={cn(
                 'min-h-[44px] rounded-full border px-4 py-2 text-[14px] font-medium transition-colors',
                 active
-                  ? 'border-violet bg-violet text-white'
+                  ? 'border-ultraviolet bg-ultraviolet text-white'
                   : 'border-line-light bg-ivory-soft text-ink hover:border-violet',
               )}
             >

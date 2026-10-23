@@ -12,7 +12,7 @@ export function Pill({
 }) {
   const tones = {
     neutral:
-      'bg-white/[0.04] text-text-dark-muted border-line [.theme-light_&]:bg-black/[0.04] [.theme-light_&]:text-ink-muted [.theme-light_&]:border-line-light',
+      'bg-white/[0.04] text-text-dark-muted border-line',
     violet: 'bg-violet/12 text-violet-bright border-violet/25',
     green: 'bg-green/12 text-green border-green/25',
     amber: 'bg-amber/12 text-amber border-amber/30',
