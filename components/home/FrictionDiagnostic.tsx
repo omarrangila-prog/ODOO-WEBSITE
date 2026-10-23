@@ -29,8 +29,8 @@ export function FrictionDiagnostic() {
       <div className="shell relative grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
         <div className="lg:sticky lg:top-28 lg:h-fit lg:self-start">
           <SectionHead
-            index="08"
-            label="Operational diagnostic"
+            index="01"
+            label="Operational check"
             title={
               <>
                 Where is your business <Accent>losing control?</Accent>
@@ -40,7 +40,7 @@ export function FrictionDiagnostic() {
           />{' '}
           <p className="lede mt-6 max-w-md">
             Switch on the friction your team feels every week. We&rsquo;ll read the signal&mdash;and
-            carry your selections down to a personalised roadmap request at the end of the page.
+            carry your selections down to a roadmap request at the end of the page.
           </p>
           <TextGap />
           <p className="mt-8 text-[12px] leading-relaxed text-text-dark-muted">

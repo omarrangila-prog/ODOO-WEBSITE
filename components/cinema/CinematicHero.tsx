@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { ctas } from '@/data/ctas';
+import { company } from '@/data/company';
+import { HeroActions } from './HeroActions';
 import { VioletRibbonScene } from './VioletRibbonScene';
 import { HeroMarkers } from './HeroMarkers';
 
@@ -8,9 +8,11 @@ import { HeroMarkers } from './HeroMarkers';
  * oversized sans headline with its expressive lavender italic phrase, quiet
  * editorial links, and the sculptural violet ribbon behind everything.
  *
- * Deliberately no dashboard, no card grid and no buttons. The headline is one
- * real <h1> of real text; the prefix is visually hidden but keeps the brand
- * name in the page's primary heading for search and assistive technology.
+ * Deliberately no dashboard and no card grid. The headline is one real <h1>
+ * of real text; the prefix is visually hidden but keeps the brand name in the
+ * page's primary heading for search and assistive technology. The two actions
+ * are real buttons: the primary one is a solid white pill so the enquiry is the
+ * most prominent thing on the screen after the headline.
  */
 export function CinematicHero() {
   return (
@@ -28,7 +30,7 @@ export function CinematicHero() {
         }}
       />
       {/* Phones: the artwork owns the lower half and fades in toward the top, so it never sits behind the copy. */}
-      <VioletRibbonScene className="-z-10 !inset-x-0 !top-auto bottom-0 h-[54%] [mask-image:linear-gradient(to_bottom,transparent,#000_36%)] lg:!inset-0 lg:h-auto lg:[mask-image:none]" />
+      <VioletRibbonScene className="-z-10 !inset-x-0 !top-auto bottom-0 h-[46%] [mask-image:linear-gradient(to_bottom,transparent,#000_46%)] lg:!inset-0 lg:h-auto lg:[mask-image:none]" />
 
       <div
         className="relative flex flex-1 flex-col"
@@ -51,22 +53,18 @@ export function CinematicHero() {
           </h1>
 
           <p
-            className="hero-sub cin-rise mt-[clamp(18px,3.2vh,36px)] max-w-[34ch] sm:max-w-[40ch]"
+            className="hero-sub cin-rise mt-[clamp(18px,3.2vh,36px)] max-w-[36ch] sm:max-w-[44ch]"
             style={{ '--d': '560ms' } as React.CSSProperties}
           >
-            We build software, ERP, and intelligent systems for the way business actually works.
+            Custom software, ERP, AI automation and digital experiences built around the way your business works.
           </p>
 
-          <div
-            className="cin-rise mt-[clamp(22px,4.4vh,52px)] flex flex-wrap items-center gap-x-[clamp(24px,3.2vw,56px)] gap-y-1"
-            style={{ '--d': '700ms' } as React.CSSProperties}
-          >
-            <Link href="/case-studies" className="link-editorial">
-              Discover our work <span aria-hidden className="arrow text-[0.85em]">↗</span>
-            </Link>
-            <Link href={ctas.general.href} className="link-editorial">
-              Start a conversation <span aria-hidden className="arrow text-[0.85em]">↗</span>
-            </Link>
+          <div className="cin-rise mt-[clamp(22px,4vh,44px)]" style={{ '--d': '700ms' } as React.CSSProperties}>
+            <HeroActions />
+            <p className="mt-5 text-[13px] leading-snug text-text-dark-muted sm:text-[14px]">
+              {company.address.city}, {company.address.country} <span aria-hidden className="mx-1.5 opacity-50">·</span>
+              serving Pakistan and international clients remotely
+            </p>
           </div>
         </div>
 

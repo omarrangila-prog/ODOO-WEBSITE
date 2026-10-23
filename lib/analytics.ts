@@ -24,7 +24,15 @@ export type AnalyticsEvent =
   | 'solution_filter_used'
   | 'workflow_file_uploaded'
   | 'consultation_form_submitted'
-  | 'scheduling_link_clicked';
+  | 'scheduling_link_clicked'
+  | 'form_started'
+  | 'service_card_click'
+  | 'featured_work_click'
+  | 'platform_card_click'
+  | 'playground_paused'
+  | 'playground_reset'
+  | 'faq_opened'
+  | 'email_click';
 
 type Props = Record<string, string | number | boolean>;
 

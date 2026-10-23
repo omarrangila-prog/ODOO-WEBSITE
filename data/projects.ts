@@ -84,6 +84,14 @@ export interface Project {
   evidence: ProjectEvidence;
   /** Short public description. Empty until verified for unverified entries. */
   summary?: string;
+  /**
+   * What the system is for, in one sentence, taken from management's own
+   * description. It states the job the system does, never a claim about the
+   * client's situation before or after it.
+   */
+  purpose?: string;
+  /** Functions management has confirmed the system performs. Same source as `summary`. */
+  capabilities?: string[];
   /** Verified-only fields. */
   timeline?: { value: string; verified: boolean };
   outcome?: { value: string; verified: boolean };
@@ -119,6 +127,8 @@ export const projects: Project[] = [
     countryCode: 'PK',
     evidence: { found: false, screenshots: false, clientApproval: true, countryPublic: true, notes: 'Client naming authorised by ODOOVATIONS management, 2026-09-12. Screenshots and scope document still to be supplied for a full case study.' },
     summary: 'Digital election management system built for an association election: member eligibility and registration, candidate management, polling-day workflow and results reporting with role-based access.',
+    purpose: 'Manage an association election from member registration to reported results.',
+    capabilities: ['Member eligibility and registration', 'Candidate management', 'Polling-day workflow', 'Results reporting', 'Role-based access'],
   },
   {
     id: 'al-jadeed-election',
@@ -129,6 +139,8 @@ export const projects: Project[] = [
     countryCode: 'PK',
     evidence: { found: true, screenshots: false, clientApproval: true, countryPublic: true, notes: 'Al Jadeed Properties appears in the Kausar Innovations client roster. Naming authorised by management, 2026-09-12.' },
     summary: 'Election management system for the Al Jadeed group: voter database, eligibility checks, candidate management, vote capture, results and audit reporting.',
+    purpose: 'Manage a group election: who may vote, who is standing, the votes cast and the results.',
+    capabilities: ['Voter database', 'Eligibility checks', 'Candidate management', 'Vote capture', 'Results and audit reporting'],
   },
   {
     id: 'kcci-software',
@@ -148,6 +160,8 @@ export const projects: Project[] = [
     countryCode: 'PK',
     evidence: { found: false, screenshots: false, clientApproval: true, countryPublic: true, notes: 'Confirmed by management, 2026-09-12.' },
     summary: 'Tournament timing and management software for competitive Scrabble events: game and round timers, player pairing, scoring, rankings, check-in and a live leaderboard. An example of the highly specific custom applications we build.',
+    purpose: 'Run a Scrabble tournament from one application: timing, pairing, scoring and rankings.',
+    capabilities: ['Game and round timers', 'Player pairing', 'Scoring and rankings', 'Check-in', 'Live leaderboard'],
   },
   {
     id: 'whatsapp-karobar-os',
@@ -156,6 +170,8 @@ export const projects: Project[] = [
     categories: ['WhatsApp', 'AI', 'Custom Software'],
     evidence: { found: false, screenshots: false, clientApproval: true, countryPublic: false, notes: 'Confirmed by management, 2026-09-12, as an ODOOVATIONS product concept in delivery. Status to be corrected if it is a client build.' },
     summary: 'A business operating layer accessible from WhatsApp: customer messages, orders, invoices, stock, reminders, reports and AI assistance through conversational workflows connected to the business system behind them.',
+    purpose: 'Run day-to-day business tasks from a WhatsApp conversation connected to the system behind it.',
+    capabilities: ['Customer messages', 'Orders and invoices', 'Stock and reminders', 'Reports', 'AI assistance'],
   },
   {
     id: 'whatsapp-digital-connection',
@@ -165,6 +181,8 @@ export const projects: Project[] = [
     countryCode: 'PK',
     evidence: { found: false, screenshots: false, clientApproval: true, countryPublic: true, notes: 'Confirmed by management, 2026-09-12.' },
     summary: 'Document-delivery integration from business software to WhatsApp: a software command enters a job queue, the document API renders it, and the customer receives it on WhatsApp — invoices, statements, receipts, purchase orders, reports, reminders and order confirmations.',
+    purpose: 'Send business documents to customers on WhatsApp straight from the software that produces them.',
+    capabilities: ['Job queue between the software and WhatsApp', 'Document rendering through an API', 'Delivery to the customer on WhatsApp', 'Invoices, statements and receipts', 'Purchase orders and order confirmations', 'Reports and reminders'],
   },
 ];
 

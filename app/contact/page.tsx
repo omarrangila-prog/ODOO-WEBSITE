@@ -11,7 +11,7 @@ import { PageArt } from '@/components/cinema/PageArt';
 export const metadata: Metadata = buildMetadata({
   title: 'Contact ODOOVATIONS | Software, AI & ERP Projects',
   description:
-    'Tell us how your business works and we will help you find the right next step. Send a workflow document, book a discovery call or message us on WhatsApp.',
+    'Tell us how your business works and we will help you find the right next step. Send a workflow document, ask us to arrange a call or message us on WhatsApp.',
   path: '/contact',
 });
 

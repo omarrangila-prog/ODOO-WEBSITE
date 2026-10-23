@@ -126,7 +126,6 @@ export function Header() {
                 return (
                   <li
                     key={item.label}
-                    className="relative"
                     onMouseEnter={() => item.children && openMenu(item.label)}
                     onMouseLeave={() => item.children && scheduleClose()}
                     onBlur={(e) => {
@@ -165,7 +164,9 @@ export function Header() {
                             <div
                               className={cn(
                                 'animate-fade-up rounded-[26px] border border-white/[0.12] bg-surface-dark p-3 shadow-float',
-                                item.children.some((c) => c.group) ? 'grid w-[min(900px,calc(100vw-96px))] grid-cols-3 gap-x-2' : 'w-[360px]',
+                                item.children.some((c) => c.group)
+                                  ? cn('grid gap-x-2', groupChildren(item.children).length >= 4 ? 'w-[min(1120px,calc(100vw-96px))] grid-cols-4' : groupChildren(item.children).length === 3 ? 'w-[min(900px,calc(100vw-96px))] grid-cols-3' : 'w-[min(640px,calc(100vw-96px))] grid-cols-2')
+                                  : 'w-[360px]',
                               )}
                             >
                               {groupChildren(item.children).map((g) => (

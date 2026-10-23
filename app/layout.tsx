@@ -18,6 +18,7 @@ import {
   websiteSchema,
 } from '@/lib/seo';
 import { company } from '@/data/company';
+import { defaultLocale } from '@/lib/i18n';
 
 /*
  * Three faces, each with one job. Inter Tight sets the monumental headlines,
@@ -95,11 +96,17 @@ export const metadata: Metadata = {
     images: [OG_IMAGE.url],
   },
   robots: { index: true, follow: true },
+  // Search Console verification: set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION to the
+  // token Google gives for the property, and the meta tag is emitted. Nothing is
+  // emitted until then, and nothing here proves ownership by itself.
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
+    : {}),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-PK" className={`${interTight.variable} ${inter.variable} ${instrumentSerif.variable}`}>
+    <html lang={defaultLocale.htmlLang} dir={defaultLocale.dir} className={`${interTight.variable} ${inter.variable} ${instrumentSerif.variable}`}>
       <body>
         {/* Global entity graph: Organization + WebSite only. LocalBusiness /
             ProfessionalService is scoped to the homepage, contact and Karachi

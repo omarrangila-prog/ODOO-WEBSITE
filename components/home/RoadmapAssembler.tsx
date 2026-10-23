@@ -26,7 +26,9 @@ export function RoadmapAssembler() {
 
   const waConfigured = company.whatsapp !== PLACEHOLDER.whatsapp;
   const waHref = waConfigured ? whatsappLink(company.whatsapp, company.whatsappMessage) : '/contact#form';
-  const scheduleHref = company.schedulingUrl || waHref;
+  const scheduleHref =
+    company.schedulingUrl ||
+    (waConfigured ? whatsappLink(company.whatsapp, 'Hello ODOOVATIONS, I would like to arrange a call about a project.') : '/contact#form');
 
   const params = new URLSearchParams();
   params.set('issues', [...problems].join(','));
@@ -54,8 +56,8 @@ export function RoadmapAssembler() {
         {/* Left: message */}
         <div>
           <SectionHead
-            index="08"
-            label="Your personalised roadmap"
+            index="02"
+            label="Your roadmap request"
             title={
               <>
                 Bring us the mess. <br />
@@ -81,7 +83,7 @@ export function RoadmapAssembler() {
           <ul className="mt-8 flex flex-wrap gap-3">
             <Pathway icon={Mic} label="WhatsApp voice note" href={waHref} external={waConfigured} onClick={() => track('whatsapp_click')} />
             <Pathway icon={Upload} label="Upload your workflow" href="/contact#form" />
-            <Pathway icon={CalendarClock} label="Schedule a call" href={scheduleHref} external={Boolean(company.schedulingUrl)} onClick={() => track('scheduling_link_clicked')} />
+            <Pathway icon={CalendarClock} label={company.schedulingUrl ? 'Book a discovery call' : 'Ask for a call on WhatsApp'} href={scheduleHref} external={Boolean(company.schedulingUrl) || waConfigured} onClick={() => track('scheduling_link_clicked', { source: 'operations_check' })} />
           </ul>
 
           <p className="mt-8 inline-flex items-center gap-2 text-[13px] text-text-dark-muted">

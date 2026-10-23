@@ -39,6 +39,50 @@ function hasEmailCreds(): boolean {
   return Boolean(process.env.RESEND_API_KEY);
 }
 
+const SITE = 'https://odoovations.com';
+
+/**
+ * Plain-text bodies for the templates that have been written. Until now the live
+ * sender put the template key in the body, so a customer's acknowledgement read
+ * "[enquiry_received]". Only these are sent; anything else is refused above.
+ *
+ * The acknowledgement says only what is true: a person reads the enquiry and
+ * replies in Pakistan business hours; there is no automatic quote.
+ */
+export function renderBody(job: EmailJob): string | null {
+  const sign = ['ODOOVATIONS', 'Karachi, Pakistan', 'hello@odoovations.com'].join('\n');
+  if (job.template === 'enquiry_received') {
+    return [
+      'Hello,',
+      '',
+      'Thank you for contacting ODOOVATIONS. We have received your enquiry.',
+      '',
+      'What happens next:',
+      '1. A member of the team reads it and replies during Pakistan business hours, usually with a few questions or a suggested next step.',
+      '2. If it makes sense, we propose a short call and then a written scope.',
+      '',
+      'There is no automatic quote and no obligation. If it is urgent, message us on WhatsApp: https://wa.me/923347037531',
+      '',
+      sign,
+    ].join('\n');
+  }
+  if (job.template === 'welcome_guide') {
+    return [
+      'Hello,',
+      '',
+      'You asked to receive occasional guides and updates from ODOOVATIONS. Two places to start:',
+      '',
+      `- Odoo Community vs Enterprise: ${SITE}/resources/odoo-community-vs-enterprise`,
+      `- What an Odoo implementation costs in Pakistan: ${SITE}/resources/odoo-implementation-cost-pakistan`,
+      '',
+      `To stop these emails, open ${SITE}/api/unsubscribe?email=${encodeURIComponent(job.to)} or reply to this message and we will remove you.`,
+      '',
+      sign,
+    ].join('\n');
+  }
+  return null;
+}
+
 export async function sendEmail(job: EmailJob, opts: { forceFail?: boolean } = {}): Promise<SendResult> {
   const mode: SendResult['mode'] = hasEmailCreds() ? 'live' : 'mock';
 
@@ -56,11 +100,17 @@ export async function sendEmail(job: EmailJob, opts: { forceFail?: boolean } = {
   }
 
   // LIVE (Resend)
+  const text = renderBody(job);
+  if (text === null) {
+    // Never send a message whose body is a template key. A template with no written
+    // content is not sent at all.
+    return { ok: false, mode, error: `No written content for template "${job.template}"` };
+  }
   try {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: process.env.CONTACT_FROM_EMAIL ?? 'hello@odoovations.com', to: job.to, subject: job.subject, text: `[${job.template}]` }),
+      body: JSON.stringify({ from: process.env.CONTACT_FROM_EMAIL ?? 'hello@odoovations.com', to: job.to, subject: job.subject, text }),
     });
     if (!res.ok) throw new Error(`Resend HTTP ${res.status}`);
     sent.push(job);

@@ -9,7 +9,7 @@ import { CtaBand } from '@/components/ui/CtaBand';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { AnswerCard } from '@/components/ui/AnswerCard';
 import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
-import { ServicesRail } from '@/components/home/ServicesRail';
+import { OdooServiceGrid } from '@/components/home/OdooServiceGrid';
 import { CustomStory } from '@/components/home/CustomStory';
 import { JourneyRoute } from '@/components/home/JourneyRoute';
 import { MotionRoot } from '@/components/ui/motion/MotionRoot';
@@ -164,10 +164,10 @@ export default function ServicesIndex() {
       </section>
 
       {/* Odoo & ERP depth, moved here from the homepage: the eight-service
-          rail, the standard-vs-custom story and the implementation journey.
+          grid, the standard-vs-custom story and the implementation journey.
           This is where someone researching Odoo actually lands. */}
       <MotionRoot>
-        <ServicesRail />
+        <OdooServiceGrid />
         <CustomStory />
         <JourneyRoute />
       </MotionRoot>

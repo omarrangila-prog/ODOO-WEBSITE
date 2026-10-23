@@ -7,6 +7,8 @@ import { locations } from '@/data/locations';
 import { resources } from '@/data/resources';
 import { solutions } from '@/data/solutions';
 import { publishedCaseStudies } from '@/data/case-study-model';
+import { platformPages } from '@/data/platforms';
+import { publishedProducts } from '@/data/products';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -27,6 +29,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/company/pricing', priority: 0.7 },
     { path: '/faq', priority: 0.7 },
     { path: '/company/brand', priority: 0.5 },
+    { path: '/platforms', priority: 0.85 },
+    { path: '/technologies', priority: 0.6 },
+    { path: '/tools/operations-check', priority: 0.6 },
     { path: '/contact', priority: 0.8 },
     { path: '/privacy', priority: 0.3 },
     { path: '/terms', priority: 0.3 },
@@ -42,6 +47,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const projectRoutes = publishedCaseStudies().map((r) => ({ path: `/projects/${r.slug}`, priority: 0.7 }));
   // Local SEO pages are high value.
   const locationRoutes = locations.map((l) => ({ path: l.href, priority: 0.85 }));
+  const platformRoutes = platformPages.map((p) => ({ path: p.href, priority: 0.8 }));
+  // Products appear only once they pass the publication gate (data/products.ts), index page included.
+  const products = publishedProducts();
+  const productRoutes = products.length
+    ? [{ path: '/products', priority: 0.8 }, ...products.map((p) => ({ path: `/products/${p.slug}`, priority: 0.7 }))]
+    : [];
   const resourceRoutes = resources.map((r) => ({ path: r.href, priority: 0.6 }));
   // Exact-intent solution landing pages are high value.
   const solutionRoutes = solutions.map((s) => ({ path: s.href, priority: 0.8 }));
@@ -53,6 +64,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...caseRoutes,
     ...projectRoutes,
     ...locationRoutes,
+    ...platformRoutes,
+    ...productRoutes,
     ...resourceRoutes,
     ...solutionRoutes,
   ].map((r) => ({

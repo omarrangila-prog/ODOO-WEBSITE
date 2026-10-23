@@ -6,6 +6,7 @@ import { services, getService } from '@/data/services';
 import { divisions, getDivision } from '@/data/divisions';
 import { ctaForDivision, ctaForService, ctas } from '@/data/ctas';
 import { teamFactForDivision } from '@/data/team';
+import { serviceExtras } from '@/data/service-extras';
 import { faqs } from '@/data/faq';
 import { buildMetadata, breadcrumbSchema, serviceSchema, faqSchema } from '@/lib/seo';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
@@ -42,6 +43,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
   if (!service) notFound();
 
   const serviceFaq = service.faqs ?? sharedFaq;
+  const extra = serviceExtras[service.slug];
   /*
    * Most specific CTA wins: a per-slug override, else the service's division,
    * else the neutral CTA. The nine Odoo services carry no ctaLabel of their
@@ -90,7 +92,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             <p className="eyebrow mb-6">{division ? division.title : 'Odoo & ERP'}</p>
             <h1 className="display-1 max-w-5xl">{service.title}</h1>{' '}
             <p className="mt-7 max-w-[var(--reading-width)] font-heading text-[clamp(20px,2.4vw,28px)] font-medium leading-[1.25] tracking-[-0.02em] text-text-dark">
-              {service.tagline}
+              {extra?.hook ?? service.tagline}
             </p>{' '}
             <p className="lede mt-5 max-w-[var(--reading-width)]">{service.intro}</p>
             <TextGap />
@@ -128,7 +130,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         <section className="theme-light bay-sm">
           <div className="shell grid gap-14 lg:grid-cols-2 lg:gap-16">
             <div>
-              <h2 className="display-2">Problems this solves</h2>{' '}
+              <h2 className="page-h2">Problems this solves</h2>{' '}
               <ul className="mt-9 divide-y divide-line-light border-t border-line-light">
                 {service.problems.map((p) => (
                   <li key={p} className="flex items-start gap-4 py-5">
@@ -139,7 +141,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               </ul>
             </div>
             <div>
-              <h2 className="display-2">What we do</h2>{' '}
+              <h2 className="page-h2">What we do</h2>{' '}
               <div className="mt-9 space-y-8">
                 {service.whatWeDo.map((w, i) => (
                   <div key={w.title} className="flex gap-5 border-t border-line-light pt-6 first:border-t-0 first:pt-0">
@@ -156,11 +158,38 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           </div>
         </section>
 
+        {extra && (
+          <section className="theme-dark bay-sm">
+            <div className="shell grid gap-14 lg:grid-cols-2 lg:gap-16">
+              <div>
+                <h2 className="page-h2">Who this is for</h2>
+                <ul className="mt-8 space-y-4">
+                  {extra.audience.map((a) => (
+                    <li key={a} className="flex items-start gap-3 text-[17px] leading-relaxed text-text-dark-muted">
+                      <Check className="mt-1 h-5 w-5 shrink-0 text-green" aria-hidden /> {a}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h2 className="page-h2">What it connects to</h2>
+                <ul className="mt-8 space-y-4">
+                  {extra.connects.map((c) => (
+                    <li key={c} className="flex items-start gap-3 text-[16px] leading-relaxed text-text-dark-muted">
+                      <span aria-hidden className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-violet-bright" /> {c}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Process + Outcomes */}
         <section className="theme-graphite bay-sm">
           <div className="shell grid gap-14 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
             <div>
-              <h2 className="display-2">How we work</h2>{' '}
+              <h2 className="page-h2">How we work</h2>{' '}
               <ol className="mt-9 border-t border-line">
                 {service.process.map((step, i) => (
                   <li key={step} className="flex items-center gap-5 border-b border-line py-5">
@@ -171,11 +200,11 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               </ol>
               <p className="mt-5 text-[15px] text-text-dark-muted">
                 See the full{' '}
-                <Link href="/#journey" className="text-violet-bright underline underline-offset-4">implementation journey</Link>.
+                <Link href="/company/methodology" className="text-violet-bright underline underline-offset-4">full method</Link>.
               </p>
             </div>
             <div>
-              <h2 className="display-2">Outcomes</h2>{' '}
+              <h2 className="page-h2">Outcomes</h2>{' '}
               <ul className="mt-9 space-y-4">
                 {service.outcomes.map((o) => (
                   <li key={o} className="flex items-start gap-3 text-[17px] leading-relaxed text-text-dark-muted">
@@ -188,10 +217,46 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           </div>
         </section>
 
+        {extra && (
+          <section className="theme-graphite bay-sm">
+            <div className="shell grid gap-14 lg:grid-cols-3 lg:gap-12">
+              <div>
+                <h2 className="page-h2 !text-[clamp(24px,2.4vw,32px)]">What affects the price</h2>
+                <p className="mt-3 text-[15px] leading-relaxed text-text-dark-muted">We quote against a written scope after a short conversation.</p>
+                <ul className="mt-5 divide-y divide-line border-y border-line">
+                  {extra.priceFactors.map((f) => (
+                    <li key={f} className="py-3 text-[16px] leading-relaxed text-text-dark">{f}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h2 className="page-h2 !text-[clamp(24px,2.4vw,32px)]">What affects the timeline</h2>
+                <p className="mt-3 text-[15px] leading-relaxed text-text-dark-muted">We give a date only after reviewing the scope.</p>
+                <ul className="mt-5 divide-y divide-line border-y border-line">
+                  {extra.timelineFactors.map((f) => (
+                    <li key={f} className="py-3 text-[16px] leading-relaxed text-text-dark">{f}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h2 className="page-h2 !text-[clamp(24px,2.4vw,32px)]">What we can show today</h2>
+                <p className="mt-3 text-[15px] leading-relaxed text-text-dark-muted">Each item is labelled for what it is.</p>
+                <ul className="mt-5 divide-y divide-line border-y border-line">
+                  {extra.evidence.map((e) => (
+                    <li key={e.label} className="py-3 text-[16px] leading-relaxed text-text-dark">
+                      {e.href ? <Link href={e.href}>{e.label}</Link> : e.label}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* FAQ */}
         <section className="theme-dark bay-sm">
           <div className="shell grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-            <h2 className="display-2">Common questions</h2>{' '}
+            <h2 className="page-h2">Common questions</h2>{' '}
             <Accordion items={serviceFaq} allowMultiple />
           </div>
         </section>

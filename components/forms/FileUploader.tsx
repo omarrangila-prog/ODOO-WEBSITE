@@ -28,7 +28,7 @@ export function FileUploader({ file, onChange }: Props) {
   const id = useId();
 
   function validate(f: File): string | null {
-    if (f.size > MAX_FILE_SIZE) return 'File exceeds the 10 MB limit.';
+    if (f.size > MAX_FILE_SIZE) return 'File exceeds the 4 MB limit. Send larger files by WhatsApp or email.';
     if (!isAcceptedUpload(f.name, f.type)) {
       return 'Unsupported file type. Use PDF, Excel, CSV, Word, PNG or JPG.';
     }
@@ -96,7 +96,7 @@ export function FileUploader({ file, onChange }: Props) {
           </button>
           <span className="text-[14px] text-text-dark-muted"> or drag it here</span>
           <p id={`${id}-help`} className="mt-2 text-[12px] text-text-dark-muted">
-            PDF, XLS, XLSX, CSV, DOC, DOCX, PNG, JPG · up to 10 MB
+            PDF, XLS, XLSX, CSV, DOC, DOCX, PNG, JPG · up to 4 MB
           </p>
         </div>
       ) : (

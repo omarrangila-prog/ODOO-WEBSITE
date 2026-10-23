@@ -82,7 +82,7 @@ export const departments: Department[] = [
     name: 'Executive Leadership',
     headline: 'Direction, Technology and Financial Oversight.',
     description:
-      'Three executive roles set the commercial, technical and financial direction of the company. These are general role descriptions, not personal biographies.',
+      'Three executive roles set the commercial, technical and financial direction of the company.',
     roles: [
       { id: 'ceo', title: 'Chief Executive Officer (CEO)', count: 1, note: 'Strategy & business leadership: business direction, client relationships, major projects, commercial decisions and organisational growth.' },
       { id: 'cto', title: 'Chief Technology Officer (CTO)', count: 1, note: 'Technology & engineering leadership: technical strategy, software architecture, engineering standards, technical delivery and infrastructure decisions.' },
@@ -102,7 +102,7 @@ export const departments: Department[] = [
     roles: [
       { id: 'senior-software-dev', title: 'Senior Software Developers', count: 8 },
       { id: 'junior-software-dev', title: 'Junior Software Developers', count: 10 },
-      { id: 'web-software-dev', title: 'Dedicated Website & Software Developers', count: 10, note: 'A separate group from the senior and junior developers above.' },
+      { id: 'web-software-dev', title: 'Dedicated Website & Software Developers', count: 10 },
       { id: 'software-intern', title: 'Software Development Interns', count: 7, intern: true },
     ],
     capabilities: [
@@ -223,7 +223,6 @@ export const departments: Department[] = [
       { label: 'Creative & Media', href: '/services/creative-media' },
       { label: 'Content & Social', href: '/services/content-social' },
     ],
-    caveat: '3D animation is not listed as a capability because it has not been verified.',
   },
   {
     id: 'quality-assurance',
@@ -245,7 +244,7 @@ export const departments: Department[] = [
     ],
     inDelivery: 'Verify system behaviour after development and before deployment.',
     services: [{ label: 'Custom Software', href: '/services/custom-software-development' }],
-    caveat: 'This describes the intended quality workflow. It is not a claim of a formal testing certification.',
+    caveat: 'Testing is part of how we deliver. It is not a formal testing certification.',
   },
   {
     id: 'business-operations',
@@ -296,7 +295,7 @@ export const departments: Department[] = [
     ],
     inDelivery: 'Prepare environments and support deployment.',
     services: [{ label: 'Odoo Support & Maintenance', href: '/services/odoo-support-maintenance' }],
-    caveat: 'No 24/7 monitoring, uptime guarantee, disaster-recovery guarantee or certification is claimed.',
+    caveat: 'Hosting and deployment support are agreed per project. No uptime guarantee is offered.',
   },
   {
     id: 'sales-business-development',
@@ -317,7 +316,6 @@ export const departments: Department[] = [
     ],
     inDelivery: 'Take the first enquiry and carry the requirement to the right technical team.',
     services: [{ label: 'Discuss a project', href: '/contact#form' }],
-    caveat: 'Only the title Sales Executive has been confirmed. No senior sales or business-development titles are used.',
   },
   {
     id: 'reception-front-desk',
@@ -326,7 +324,7 @@ export const departments: Department[] = [
     headline: 'The First Point of Contact Matters.',
     description:
       'Our front desk team supports communication, visitor coordination and the daily administrative experience that keeps office interactions organised and professional.',
-    roles: [{ id: 'receptionist', title: 'Receptionists', count: 2, note: 'One woman and one man, with equal standing. No hierarchy between them has been reported.' }],
+    roles: [{ id: 'receptionist', title: 'Receptionists', count: 2, note: 'One woman and one man, with equal standing.' }],
     capabilities: [
       'Reception duties',
       'Visitor coordination',
@@ -345,7 +343,7 @@ export const departments: Department[] = [
     headline: 'Smooth Interactions Between Clients and Departments.',
     description:
       'Our client-facing teams include both men and women working across communication, enquiries and service coordination, supporting smooth interactions between customers and the relevant departments.',
-    roles: [{ id: 'client-communication-staff', title: 'Client communication & service coordination staff', count: null, note: 'Headcount not yet confirmed. Some of these people may also be counted in the Sales or Reception teams.' }],
+    roles: [{ id: 'client-communication-staff', title: 'Client communication & service coordination staff', count: null }],
     capabilities: [
       'Inbound client communication',
       'Outbound customer follow-ups',
@@ -356,8 +354,6 @@ export const departments: Department[] = [
     ],
     inDelivery: 'Keep clients and the relevant departments in step with each other.',
     services: [{ label: 'Contact', href: '/contact' }],
-    caveat:
-      'This is not described as a call centre, an international calling division or a round-the-clock support service. Not everyone who makes calls is a sales employee.',
   },
   {
     id: 'extended-collaboration',
@@ -366,11 +362,10 @@ export const departments: Department[] = [
     headline: 'Additional Expertise, When a Project Needs It.',
     description:
       'ODOOVATIONS also works with freelance resources when a project calls for them. They are external collaborators, distinct from the core team above.',
-    roles: [{ id: 'freelance-network', title: 'Freelance collaborators', count: null, note: 'Number and specialties not yet confirmed. Not counted as permanent employees.' }],
+    roles: [{ id: 'freelance-network', title: 'Freelance collaborators', count: null, note: 'External collaborators, separate from the core team.' }],
     capabilities: ['Specialist support on suitable projects'],
     inDelivery: 'Add capacity or a specialism alongside the core team.',
     services: [{ label: 'Discuss a project', href: '/contact#form' }],
-    caveat: 'No worldwide employee network or additional offices are implied.',
   },
 ];
 
@@ -405,16 +400,17 @@ export function groupRolePositions(id: DepartmentGroupId): number {
 }
 
 /**
- * Group count for a card. A group containing a department whose headcount is
- * unconfirmed says so instead of presenting a partial sum as the whole.
+ * Group count for a card, or '' when any department in the group has no
+ * supplied number: a partial sum presented as the whole would mislead, and a
+ * "not confirmed" label is an internal note, not something to show a visitor.
+ * The figure counts roles in the team structure, not unique people.
  */
 export function groupCountLabel(id: DepartmentGroupId): string {
   const ds = departmentsInGroup(id);
-  const unconfirmed = ds.some((d) => d.roles.some((r) => r.count === null));
+  if (ds.some((d) => d.roles.some((r) => r.count === null))) return '';
   const n = groupRolePositions(id);
-  if (n === 0) return 'Headcount not confirmed';
-  const base = `${n} reported ${n === 1 ? 'role' : 'roles'}`;
-  return unconfirmed ? `${base}, plus staff not yet counted` : base;
+  if (n === 0) return '';
+  return `${n} ${n === 1 ? 'role' : 'roles'}`;
 }
 
 export function getDepartment(id: string): Department {
@@ -433,12 +429,11 @@ export function departmentsInGroup(id: DepartmentGroupId): Department[] {
   return departments.filter((d) => d.group === id);
 }
 
-/** The count line shown in a department header; says "not confirmed" rather than 0. */
+/** The count line shown in a department header, or '' when any role has no supplied number. */
 export function countLabel(d: Department): string {
-  const known = d.roles.filter((r) => r.count !== null);
-  if (known.length === 0) return 'Headcount not confirmed';
+  if (d.roles.some((r) => r.count === null)) return '';
   const n = departmentRolePositions(d);
-  return `${n} reported ${n === 1 ? 'role' : 'roles'}`;
+  return n === 0 ? '' : `${n} ${n === 1 ? 'role' : 'roles'}`;
 }
 
 /* ---------------------------------------------------------------------- *

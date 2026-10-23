@@ -30,6 +30,7 @@ export function ContactForm() {
   const [serverError, setServerError] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const errorSummaryRef = useRef<HTMLDivElement>(null);
+  const startedRef = useRef(false);
 
   const {
     register,
@@ -160,8 +161,10 @@ export function ContactForm() {
         <h3 className="mt-5 font-heading text-2xl font-[650]">Thank you — message received.</h3>
         <TextGap />
         <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-text-dark-muted">
-          We&rsquo;ll review what you sent and get back to you with a practical next step. If
-          it&rsquo;s urgent, message us on WhatsApp and mention you&rsquo;ve submitted the form.
+          Your enquiry has gone to the ODOOVATIONS team by email. A person reads it and replies
+          during Pakistan business hours with questions or a suggested next step. There is no
+          automatic quote. If it&rsquo;s urgent, message us on WhatsApp and mention that you
+          submitted the form.
         </p>
       </div>
     );
@@ -170,7 +173,17 @@ export function ContactForm() {
   const errorList = Object.entries(errors);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      noValidate
+      className="space-y-5"
+      onFocusCapture={() => {
+        // Counts people who began the form, not who finished it, so drop-off is visible. No field contents are sent.
+        if (startedRef.current) return;
+        startedRef.current = true;
+        track('form_started');
+      }}
+    >
       {/* Error summary for accessibility */}
       {errorList.length > 0 && (
         <div
@@ -213,49 +226,29 @@ export function ContactForm() {
         />
       </Field>
 
-      {/* Services multi-select */}
+      {/* Optional service selector. A single dropdown, not fourteen chips: the chips put every option in front of a visitor before they had said a word. */}
       <Controller
         control={control}
         name="services"
         render={({ field }) => (
-          <fieldset>
-            <legend className="mb-2 block text-[14px] font-semibold text-text-dark">
-              Which area is this?{' '}
-              <span className="font-normal text-text-dark-muted">(optional)</span>
-            </legend>
-            <div className="flex flex-wrap gap-2">
-              {serviceOptions.map((service) => {
-                const active = field.value.includes(service);
-                return (
-                  <button
-                    key={service}
-                    type="button"
-                    aria-pressed={active}
-                    onClick={() =>
-                      field.onChange(
-                        active
-                          ? field.value.filter((s) => s !== service)
-                          : [...field.value, service],
-                      )
-                    }
-                    className={cn(
-                      'rounded-full border px-3.5 py-2 text-[14px] font-medium transition-colors min-h-[44px]',
-                      active
-                        ? 'border-violet-bright/60 bg-violet/12 text-text-dark'
-                        : 'border-line text-text-dark-muted hover:border-white/25 hover:text-text-dark',
-                    )}
-                  >
+          <Field label="Which area is this?" htmlFor="service" hint="Optional. You can describe it in your own words above.">
+            <select
+              id="service"
+              className={inputClass}
+              value={field.value[0] ?? ''}
+              onChange={(e) => field.onChange(e.target.value ? [e.target.value] : [])}
+              onBlur={field.onBlur}
+            >
+              <option value="">Not sure yet</option>
+              {serviceOptions
+                .filter((o) => o !== 'Not sure yet')
+                .map((service) => (
+                  <option key={service} value={service}>
                     {service}
-                  </button>
-                );
-              })}
-            </div>
-            {errors.services && (
-              <p role="alert" className="mt-1.5 text-[13px] text-[#ff8a8f]">
-                {errors.services.message}
-              </p>
-            )}
-          </fieldset>
+                  </option>
+                ))}
+            </select>
+          </Field>
         )}
       />
 
@@ -359,7 +352,7 @@ export function ContactForm() {
           <input id="consent" type="checkbox" className="mt-0.5 h-5 w-5 shrink-0 accent-violet-bright" {...register('consent')} />
           <span>
             I agree that ODOOVATIONS may contact me about my enquiry, and I accept the{' '}
-            <a href="/privacy" className="text-violet-bright underline-offset-2 hover:underline">
+            <a href="/privacy" className="text-violet-bright underline underline-offset-2">
               Privacy Policy
             </a>
             .
@@ -388,7 +381,7 @@ export function ContactForm() {
       </Button>
 
       <p className="text-center text-[12px] text-text-dark-muted">
-        Your workflow documents are handled securely and are not shared publicly.
+        Anything you send is read only by our team and is not shared publicly. Attached files are sent to us by email and are not stored on the website.
       </p>
     </form>
   );

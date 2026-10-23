@@ -96,8 +96,8 @@ export default function TeamPage() {
             Eight areas of expertise, <span className="signal-text">one connected team.</span>
           </h2>{' '}
           <p className="lede mt-5 max-w-[var(--reading-width)]">
-            Counts below are role positions reported by management. They are not a verified headcount: one person may
-            hold more than one role, and the roster is still being confirmed.
+            Figures show the number of roles in each area. The areas are described by what they do, and individual
+            profiles are shown only where the person has agreed.
           </p>
 
           {verifiedUniqueEmployees !== null && (
@@ -110,7 +110,7 @@ export default function TeamPage() {
             {departmentGroups.map((g) => (
               <li key={g.id} className="rounded-editorial border border-line-light bg-ivory-soft p-5">
                 <h3 className="font-heading text-[18px] font-semibold leading-snug text-ink">{g.label}</h3>{' '}
-                <p className="mt-1 text-[14px] font-semibold text-violet">{groupCountLabel(g.id)}</p>{' '}
+                {groupCountLabel(g.id) && <p className="mt-1 text-[14px] font-semibold text-violet">{groupCountLabel(g.id)}</p>}{' '}
                 <p className="mt-2 text-[15px] leading-relaxed text-ink-muted">{g.summary}</p>
               </li>
             ))}
@@ -132,11 +132,11 @@ export default function TeamPage() {
               </li>
             ))}
           </ul>
-          <p className="mt-6 max-w-[var(--reading-width)] text-[14px] leading-relaxed text-text-dark-muted">
-            {people.length === 0
-              ? 'Individual leadership profiles will appear here once names, photographs and permission to publish are confirmed.'
-              : 'Individual profiles shown here have been approved for publication.'}
-          </p>
+          {people.length > 0 && (
+            <p className="mt-6 max-w-[var(--reading-width)] text-[14px] leading-relaxed text-text-dark-muted">
+              Individual profiles shown here have been approved for publication.
+            </p>
+          )}
         </div>
       </section>
 
@@ -238,8 +238,7 @@ export default function TeamPage() {
             </li>
           </ul>
           <p className="mt-5 text-[14px] text-ink-muted">
-            {internPositions()} reported intern positions in total. No formal academy, accreditation or job-placement
-            outcome is claimed.
+            {internPositions()} intern roles in total, within the engineering and AI teams.
           </p>
         </div>
       </section>
@@ -251,7 +250,7 @@ export default function TeamPage() {
           <h2 id="extended-h" className="display-2 max-w-3xl">{extended.headline}</h2>{' '}
           <p className="lede mt-5 max-w-[var(--reading-width)]">{extended.description}</p>{' '}
           <p className="mt-4 max-w-[var(--reading-width)] text-[14px] leading-relaxed text-text-dark-muted">
-            {extended.roles[0]?.note} {extended.caveat}
+            {extended.roles[0]?.note}
           </p>
         </div>
       </section>

@@ -9,12 +9,17 @@ so a number changed there changes everywhere and cannot disagree with itself.
 `count` is the number of **role positions** the owner reported. It is not a
 verified count of unique employees: one person may hold two roles, and the
 roster has not been confirmed. The site therefore never shows an overall
-headcount. Department counts are labelled "reported roles", and the page says
-they are not a verified headcount.
+headcount, and the public pages call the figures "roles", not people.
 
-`count: null` means "not supplied". It shows as "Not confirmed", never as 0,
-and it is excluded from every total. Two roles are null today: client
-communication staff and freelance collaborators. Do not enter a guess.
+`count: null` means "not supplied". It is never shown as 0 and never as a
+"not confirmed" label: a role, department or group with an unsupplied number
+simply shows no figure, and is excluded from every total. Two roles are null
+today: client communication staff and freelance collaborators. Do not enter a
+guess.
+
+Editorial notes (what is unverified, what is not claimed) belong in this
+document and in `audit/MISSING-ASSETS.md`, not in `note` or `caveat`: both of
+those fields are printed on public pages.
 
 ## Common changes
 

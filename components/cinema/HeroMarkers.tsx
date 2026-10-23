@@ -22,16 +22,17 @@ export function HeroMarkers() {
   const [i, setI] = useState(0);
   const [auto, setAuto] = useState(false);
   const [held, setHeld] = useState(false);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
     setAuto(!window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   }, []);
 
   useEffect(() => {
-    if (!auto || held) return;
+    if (!auto || held || paused) return;
     const id = window.setTimeout(() => setI((p) => (p + 1) % marks.length), INTERVAL);
     return () => window.clearTimeout(id);
-  }, [auto, held, i]);
+  }, [auto, held, paused, i]);
 
   const current = marks[i] as (typeof marks)[number];
 
@@ -60,17 +61,18 @@ export function HeroMarkers() {
         <div className="relative h-px w-full bg-white/[0.16]">
           {/* Progress segment under the active marker. */}
           <span
-            key={`${i}-${auto && !held}`}
+            key={`${i}-${auto && !held && !paused}`}
             className="absolute left-0 top-0 h-px bg-violet-bright/90"
             style={{
               width: `${100 / marks.length}%`,
               marginLeft: `${(100 / marks.length) * i}%`,
               transformOrigin: 'left',
-              animation: auto && !held ? `cinema-grow ${INTERVAL}ms linear both` : undefined,
+              animation: auto && !held && !paused ? `cinema-grow ${INTERVAL}ms linear both` : undefined,
             }}
           />
         </div>
-        <ul className="mt-3 grid grid-cols-3 gap-1 sm:flex sm:gap-[clamp(36px,6.6vw,120px)]">
+        <div className="mt-3 flex items-center justify-between gap-3">
+        <ul className="grid flex-1 grid-cols-3 gap-1 sm:flex sm:flex-none sm:gap-[clamp(36px,6.6vw,120px)]">
           {marks.map((m, k) => (
             <li key={m.n}>
               <button
@@ -78,7 +80,7 @@ export function HeroMarkers() {
                 aria-current={k === i ? 'true' : undefined}
                 onClick={() => {
                   setI(k);
-                  setAuto(false);
+                  setPaused(true);
                 }}
                 className={cn(
                   'inline-flex min-h-[44px] items-center whitespace-nowrap text-[clamp(11px,1vw,15px)] transition-colors',
@@ -94,6 +96,24 @@ export function HeroMarkers() {
             </li>
           ))}
         </ul>
+        {auto && (
+          <button
+            type="button"
+            aria-pressed={paused}
+            onClick={() => {
+              const next = !paused;
+              setPaused(next);
+              // One switch for everything in the hero that moves: these captions and the ribbon.
+              document.documentElement.dataset.motion = next ? 'paused' : 'running';
+              window.dispatchEvent(new Event('odv:motion'));
+            }}
+            className="inline-flex min-h-[44px] shrink-0 items-center gap-1.5 whitespace-nowrap px-2 text-[clamp(11px,1vw,14px)] text-text-dark-muted transition-colors hover:text-white"
+          >
+            <span aria-hidden className="grid h-8 w-8 place-items-center rounded-full border border-line text-[9px] sm:h-auto sm:w-auto sm:border-0 sm:text-[10px]">{paused ? '▶' : '❚❚'}</span>
+            <span className="sr-only sm:not-sr-only">{paused ? 'Play motion' : 'Pause motion'}</span>
+          </button>
+        )}
+        </div>
       </div>
     </>
   );

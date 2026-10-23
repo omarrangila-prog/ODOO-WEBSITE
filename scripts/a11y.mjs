@@ -23,6 +23,12 @@ const pages = [
   ['about', '/company/about'],
   ['our-work', '/case-studies'],
   ['industry-new', '/industries/healthcare-clinics'],
+  ['platforms', '/platforms'],
+  ['platform', '/platforms/shopify'],
+  ['platform-qb', '/platforms/quickbooks'],
+  ['technology', '/technologies'],
+  ['ops-check', '/tools/operations-check'],
+  ['service-odoo', '/services/odoo-implementation-pakistan'],
 ];
 
 const browser = await chromium.launch();

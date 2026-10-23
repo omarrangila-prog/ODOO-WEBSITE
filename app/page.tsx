@@ -1,34 +1,32 @@
 import { CinematicHero } from '@/components/cinema/CinematicHero';
-import { Transformation } from '@/components/cinema/Transformation';
-import { CapabilityIndex } from '@/components/cinema/CapabilityIndex';
-import { SelectedWork } from '@/components/cinema/SelectedWork';
-import { BuildAutomateGrow } from '@/components/cinema/BuildAutomateGrow';
-import { TeamOverview } from '@/components/cinema/TeamOverview';
-import { HowWeWork } from '@/components/cinema/HowWeWork';
-import { WhyOdoovations } from '@/components/cinema/WhyOdoovations';
-import { FinalContact } from '@/components/cinema/FinalContact';
-import { SystemsPlayground } from '@/components/home/SystemsPlayground';
-import { RoadmapProvider } from '@/components/home/RoadmapContext';
-import { FrictionDiagnostic } from '@/components/home/FrictionDiagnostic';
-import { RoadmapAssembler } from '@/components/home/RoadmapAssembler';
-import { MotionRoot } from '@/components/ui/motion/MotionRoot';
+import { ProofSection } from '@/components/home/ProofSection';
+import { SectionLabel } from '@/components/home/SectionLabel';
+import { ServiceExplorer } from '@/components/home/ServiceExplorer';
+import { FeaturedWork } from '@/components/home/FeaturedWork';
+import { PlatformsSection } from '@/components/home/PlatformsSection';
+import { WorkflowDemo } from '@/components/home/WorkflowDemo';
+import { DeliveryPeople } from '@/components/home/DeliveryPeople';
+import { EnquirySection, homeFaqs } from '@/components/home/EnquirySection';
 import { JsonLd } from '@/components/ui/JsonLd';
-import { webPageSchema, localBusinessSchema } from '@/lib/seo';
+import { webPageSchema, localBusinessSchema, faqSchema } from '@/lib/seo';
 
 /**
- * Homepage, ODOOVATIONS 3.0: ten sections, paced as one story.
+ * Homepage, eight sections:
  *
- *  01 hero · 02 transformation · 03 capabilities · 04 selected work ·
- *  05 build / automate / grow · 06 the people · 07 how we work ·
- *  08 interactive systems · 09 why ODOOVATIONS · 10 start
+ *  01 hero · 02 evidence · 03 service explorer · 04 featured work ·
+ *  05 platforms & integrations · 06 interactive demonstration ·
+ *  07 delivery & people · 08 project enquiry
  *
- * Section 08 keeps the working tools from the previous homepage: the connected
- * workflow playground, and the operational diagnostic that feeds the roadmap and
- * the contact form. They are a lead path, not decoration, so they stay.
- *
- * What moved out, and where it lives: the Industries explorer is on
- * /industries and in the Expertise menu; the client roster is on
- * /company/clients; the FAQ is on /faq; Odoo-specific depth is on /services.
+ * What the earlier ten-section page held, and where it went:
+ *  - "Transformation", "Build / Automate / Grow", "Why ODOOVATIONS": the claims
+ *    were repeated in the hero, the explorer and the delivery section, so they
+ *    were cut rather than moved.
+ *  - The seven-division index: now the service explorer (section 03).
+ *  - The team overview and "how we work": merged into section 07.
+ *  - The operational diagnostic and roadmap assembler: now an optional tool at
+ *    /tools/operations-check, linked from the enquiry section.
+ *  - Industries, the client roster and the full FAQ: /industries,
+ *    /company/clients and /faq, as before.
  */
 export default function HomePage() {
   return (
@@ -41,24 +39,48 @@ export default function HomePage() {
             'ODOOVATIONS builds custom software, AI automation, Odoo ERP systems, websites, mobile apps, marketing campaigns, video and creative content for businesses in Pakistan and international clients served remotely.',
           ),
           localBusinessSchema(),
+          faqSchema(homeFaqs),
         ]}
       />
-      <MotionRoot>
-        <CinematicHero />
-        <Transformation />
-        <CapabilityIndex />
-        <SelectedWork />
-        <BuildAutomateGrow />
-        <TeamOverview />
-        <HowWeWork />
-        <SystemsPlayground />
-        <RoadmapProvider>
-          <FrictionDiagnostic />
-          <RoadmapAssembler />
-        </RoadmapProvider>
-        <WhyOdoovations />
-        <FinalContact />
-      </MotionRoot>
+
+      <CinematicHero />
+      <ProofSection />
+
+      <section aria-labelledby="services-h" className="band band-alt">
+        <div className="band-inner">
+          <SectionLabel index="03">What we build</SectionLabel>
+          <h2 id="services-h" className="band-title mt-4 max-w-[22ch]">
+            Find the right kind of help.
+          </h2>
+          <p className="mt-4 max-w-[60ch] text-[17px] leading-relaxed text-text-dark-muted">
+            Five areas, one team. Pick the one closest to your problem; each card opens the page that explains it in full.
+          </p>
+          <div className="mt-8">
+            <ServiceExplorer />
+          </div>
+        </div>
+      </section>
+
+      <FeaturedWork />
+      <PlatformsSection />
+
+      <section aria-labelledby="demo-h" className="band band-alt">
+        <div className="band-inner">
+          <SectionLabel index="06">Interactive demonstration</SectionLabel>
+          <h2 id="demo-h" className="band-title mt-4 max-w-[24ch]">
+            See what happens when your systems talk.
+          </h2>
+          <p className="mt-4 max-w-[62ch] text-[17px] leading-relaxed text-text-dark-muted">
+            Choose a workflow and step through it. Notice which steps a machine performs and which still belong to a person.
+          </p>
+          <div className="mt-8">
+            <WorkflowDemo />
+          </div>
+        </div>
+      </section>
+
+      <DeliveryPeople />
+      <EnquirySection />
     </>
   );
 }

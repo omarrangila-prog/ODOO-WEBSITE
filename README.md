@@ -1,148 +1,114 @@
-# AHM International — Odoo Solutions Website
+# ODOOVATIONS website
 
-A production-ready marketing website for **AHM International** (Odoo implementation, custom
-development, integration, consulting, support and training). The creative idea — **From
-Business Chaos to Complete Control** — runs through the whole experience.
+The marketing site for **ODOOVATIONS**, a Karachi technology company (software, ERP, AI
+automation, websites and apps, marketing, creative). Production: https://odoovations.com.
 
-Built with **Next.js 14 (App Router)**, **TypeScript (strict)**, **Tailwind CSS**,
-**Framer Motion** and **Lucide** icons.
-
----
+Next.js 14 (App Router), React 18, TypeScript (strict), Tailwind 3.4. Animation is CSS
+plus a Web Worker for the hero ribbon; `framer-motion` is used on a few inner pages only.
 
 ## Quick start
 
 ```bash
-# 1. Install
 npm install
-
-# 2. Configure environment (copy and fill in)
-cp .env.example .env.local
-
-# 3. Run the dev server
-npm run dev        # http://localhost:3000
-
-# Other scripts
-npm run build      # production build
-npm run start      # serve the production build
-npm run typecheck  # strict TypeScript check
-npm run lint       # ESLint (next/core-web-vitals)
+npm run dev          # http://localhost:3000
+npm run build        # production build
+npx next start -p 3710
+npm run typecheck && npm run lint
 ```
 
-> The build fetches Google Fonts (Space Grotesk, Manrope) via `next/font`. In an offline
-> sandbox this logs a font-fetch warning and falls back to system fonts — it still builds and
-> runs. In any networked environment the real fonts load and self-host automatically.
+To exercise the enquiry form against a production build without sending email, start the
+server with `ODV_DRY_RUN=1`.
 
----
-
-## Project structure
+## Where things live
 
 ```
-app/
-  layout.tsx              Root layout: fonts, header/footer, skip link, org JSON-LD
-  page.tsx                Homepage (composes all home sections)
-  globals.css             Design tokens + base + helpers
-  sitemap.ts / robots.ts  SEO
-  not-found.tsx           404
-  contact/                Contact page (form + direct contact)
-  services/[slug]/        Service page template + 6 routes (SSG)
-  industries/[slug]/      Industry page template + 8 routes (SSG)
-  case-studies/[slug]/    Case study template + index
-  privacy/ · terms/       Legal pages
-  api/contact/route.ts    Server-validated form endpoint (dev adapter + Resend-ready)
-
+app/                    Routes. page.tsx is the eight-section homepage.
+  platforms/            Hub and per-platform pages (Shopify, WooCommerce, WordPress, QuickBooks)
+  services/ solutions/ industries/ locations/ resources/ company/ case-studies/ projects/
+  technologies/         What we build with, each entry stating how that is known
+  tools/                Optional tools (operations check)
+  products/             Product catalogue. 404 until a product passes its gate
+  api/contact/          Enquiry endpoint
 components/
-  layout/   Header, MobileMenu, Footer, Logo
-  home/     Hero + all homepage sections
-  services/ industries/   (page-specific building blocks live inline in templates)
-  forms/    ContactForm, FileUploader, Field
-  ui/       Buttons, SectionHeading, Tabs, Accordion, Reveal, AnimatedNumber, etc.
-  seo/      Analytics loader
-
-data/       company · navigation · services · industries · modules · integrations ·
-            testimonials · caseStudies · faq · journey · calculator · formOptions
-lib/        validation (zod) · seo · analytics · utilities
-public/
-  images/   Desktop WebP assets (from the supplied package)
-  mobile/   Mobile WebP variants
+  cinema/               Hero, ribbon scene (+ worker), scroll reveal, page art
+  home/                 Homepage sections, explorer, workflow demo, micro-illustrations
+  forms/ layout/ ui/ team/ work/ solutions/ leadintel/
+data/                   All content. One source of truth per subject:
+  company · divisions · services · service-extras · solutions · industries · platforms ·
+  technologies · service-explorer · playground (workflow demo) · projects · case-study-model ·
+  team · clients · products · faq · navigation · ctas · formOptions
+lib/                    seo · i18n · analytics · validation · leadintel/ · cinema/ribbon
+scripts/                Audits, QA and data checks (see below)
+docs/                   DESIGN-SYSTEM · TEAM-DATA · CASE-STUDIES · PRODUCTS · LANGUAGES
+audit/                  Checklists, results, missing-assets list (private)
 ```
 
-**All editable business information lives in [`data/company.ts`](data/company.ts).**
+## Content rules
 
----
+The site never publishes an unverified claim. Gates in code enforce it:
+
+- **Projects** (`data/projects.ts`): every project carries a status; only client-approved,
+  correctly classified projects render. Demonstrations are never shown as client work.
+- **Case studies** (`data/case-study-model.ts`): a record is public only when
+  `isPublishable()` passes (approved images with alt text, privacy checklist, outcomes with
+  evidence). `npm run case-study:check`.
+- **Products** (`data/products.ts`): same idea. `npm run products:check`. See `docs/PRODUCTS.md`.
+- **Team** (`data/team.ts`): no aggregate headcount until `verifiedUniqueEmployees` is set;
+  roles with no supplied number show no figure. `npm run team:check`. See `docs/TEAM-DATA.md`.
+- **Technology** (`data/technologies.ts`): every entry needs a stated basis. `npm run tech:check`.
+- Platform names (Shopify, WooCommerce, WordPress, QuickBooks) are plain text and carry a
+  no-partnership notice. QuickBooks is integration work, never bookkeeping or tax.
+
+What is still missing from the owner is in `audit/MISSING-ASSETS.md`.
+
+## Enquiry pipeline
+
+`components/forms/ContactForm.tsx` posts to `app/api/contact/route.ts`: zod validation on
+both sides, a honeypot, a per-IP rate limit, an optional attachment (4 MB, attached to the
+notification email, not stored), then the notification email and the lead pipeline
+(`lib/leadintel`). Without `RESEND_API_KEY` a production build returns an error rather than a
+false success; set `ODV_DRY_RUN=1` locally to validate without sending. The Odoo CRM adapter
+runs as an in-memory mock unless `ODOO_URL`, `ODOO_DB`, `ODOO_USER` and `ODOO_API_KEY` are set.
+`npx tsx scripts/contact-route-test.ts` tests the route with the email provider stubbed.
 
 ## Environment variables
 
-See [`.env.example`](.env.example) for the full list. Highlights:
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Canonical origin (falls back to https://odoovations.com) |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | WhatsApp number, international format, no `+` |
+| `NEXT_PUBLIC_SCHEDULING_URL` | If set, "arrange a call on WhatsApp" becomes "book a discovery call" |
+| `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | Emits the Search Console verification tag |
+| `NEXT_PUBLIC_ANALYTICS_DOMAIN` / `NEXT_PUBLIC_GA_ID` | Analytics (off unless set, and consent-gated) |
+| `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` | Email delivery (server only) |
+| `ODV_DRY_RUN=1` | Local only: validate the form without sending |
 
-| Variable | Scope | Purpose |
-| --- | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | client | Canonical URL for metadata / sitemap |
-| `NEXT_PUBLIC_WHATSAPP_NUMBER` | client | WhatsApp CTA (intl format, no `+`) |
-| `NEXT_PUBLIC_SCHEDULING_URL` | client | Discovery-call scheduling link (optional) |
-| `NEXT_PUBLIC_ANALYTICS_DOMAIN` / `NEXT_PUBLIC_GA_ID` | client | Analytics (off unless set) |
-| `RESEND_API_KEY` | **server** | Enables real email delivery of form submissions |
-| `CONTACT_TO_EMAIL` / `CONTACT_FROM_EMAIL` | **server** | Form delivery addresses |
+## Checks
 
-Secrets are **never** exposed to the client (only `NEXT_PUBLIC_*` reach the browser).
+Run against a server (`ODV_DRY_RUN=1 npx next start -p 3710`):
 
----
+```bash
+node scripts/home-qa.mjs http://localhost:3710        # homepage behaviour, form, nav, demo
+node scripts/ribbon-check.mjs http://localhost:3710   # hero ribbon off the main thread, pause control
+node scripts/visual-qa.mjs http://localhost:3710      # layout at 16 viewports x 20 pages
+node scripts/a11y.mjs http://localhost:3710           # axe, WCAG A/AA
+node scripts/contrast-check.mjs http://localhost:3710 # text contrast axe cannot resolve
+node scripts/seo-audit.mjs http://localhost:3710      # titles, H1, canonical, JSON-LD
+node scripts/link-image-audit.mjs http://localhost:3710
+node scripts/reveal-check.mjs http://localhost:3710   # scroll reveal leaves nothing hidden
+node scripts/lcp.mjs http://localhost:3710/ 4 3       # real-browser LCP under throttling
+```
 
-## Contact form & file uploads
+Lighthouse: `npx lighthouse <url> --only-categories=performance --chrome-flags="--headless=new --no-sandbox"`
+(add `--preset=desktop` for desktop). Mobile scores swing by 10-15 points between identical
+runs on a loaded machine, so quote ranges, not one number.
 
-- **Validation:** shared zod schema, enforced **on both client and server**
-  ([`lib/validation.ts`](lib/validation.ts)).
-- **Spam protection:** hidden honeypot field + per-IP rate limiting in the API route.
-- **File uploads:** PDF / XLS / XLSX / CSV / DOC / DOCX / PNG / JPG, max 10 MB, type + size
-  validated client- and server-side.
-- **Delivery adapter** ([`app/api/contact/route.ts`](app/api/contact/route.ts)):
-  - **Dev adapter (default):** validates and logs a redacted summary, returns success. No
-    email is sent and **uploaded files are not persisted**.
-  - **Resend (opt-in):** set `RESEND_API_KEY` to send real email.
-- **Uploaded documents are never stored or exposed publicly** unless you add a storage
-  strategy (e.g. S3 with signed URLs) in the delivery adapter. This is intentional.
+## Design system
 
----
-
-## Key interactive features (all functional)
-
-- **Hero transformation diagram** — HTML + SVG, animated line-draw, reduced-motion safe.
-- **Operational Friction Calculator** — live scoring; "Get My Odoo Roadmap" prefills the
-  contact form via query params.
-- **Odoo Module Builder** — multi-select modules, related-module highlighting, detail panel.
-- **Industry selector** — accessible tabs, image crossfade, real HTML titles below images.
-- **Implementation journey** — interactive stepper (desktop) / accordion (mobile).
-- **Accessible** accordion, tabs, mobile menu (focus trap, body lock, Escape).
-
----
-
-## Accessibility & performance
-
-- Semantic landmarks, skip link, visible focus, keyboard-operable interactive components,
-  ARIA live regions (calculator + form), WCAG-AA-minded contrast, 44px touch targets.
-- `prefers-reduced-motion` disables decorative motion while keeping all content and function.
-- Server components by default; heavy interactive sections are client components. Images use
-  `next/image` with correct sizes and no layout shift. Analytics load only when configured.
-
----
+`docs/DESIGN-SYSTEM.md`: tokens, headings, bands, the hero ribbon, micro-illustrations,
+motion rules. After changing `lib/cinema/ribbon.ts` run `npm run art:render`.
 
 ## Deployment
 
-Deploys cleanly to **Vercel** (recommended) or any Node host:
-
-1. Set the environment variables from `.env.example` in your host's dashboard.
-2. `npm run build` then `npm run start` (Vercel does this automatically).
-3. Point your domain and set `NEXT_PUBLIC_SITE_URL` to the production URL.
-
-Before going live, complete [`LAUNCH_CHECKLIST.md`](LAUNCH_CHECKLIST.md) and run through
-[`QA_CHECKLIST.md`](QA_CHECKLIST.md).
-
----
-
-## Content honesty policy
-
-This codebase never ships fabricated data. Testimonials, case-study metrics and the founder
-profile render as **clearly-marked placeholders** until you supply verified content. There are
-no fake client logos, statistics, or Odoo partnership/certification claims. Update the flags in
-`data/company.ts`, `data/testimonials.ts` and `data/caseStudies.ts` with real, confirmed
-information.
-# ODOO-WEBSITE
+Vercel project `odoovations`. Production is deployed only on an explicit instruction:
+`git push` to `main`, then `npx vercel --prod --yes`, then verify against the live domain.

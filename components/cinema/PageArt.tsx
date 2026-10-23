@@ -29,15 +29,19 @@ export function PageArt({ variant = 0, className }: { variant?: number; classNam
         className="absolute inset-0"
         style={{ transform: `translate(${v.x}, ${v.y}) rotate(${v.rot}deg) scale(${v.scale}) scaleY(${v.flipY ? -1 : 1})` }}
       >
-        <Image
-          src="/art/ribbon-wide.webp"
-          alt=""
-          fill
-          loading="eager"
-          unoptimized
-          sizes="100vw"
-          className="ribbon-drift object-cover object-right mix-blend-screen"
-        />
+        <picture>
+          {/* Phones get a 16 KB version: the art is dimmed there, and the full image was often the largest thing painted. */}
+          <source media="(max-width: 767px)" srcSet="/art/ribbon-page-mobile.webp" />
+          <Image
+            src="/art/ribbon-wide.webp"
+            alt=""
+            fill
+            loading="eager"
+            unoptimized
+            sizes="100vw"
+            className="ribbon-drift object-cover object-right mix-blend-screen"
+          />
+        </picture>
       </div>
     </div>
   );

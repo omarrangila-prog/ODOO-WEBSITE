@@ -745,3 +745,118 @@ main li > a:hover:not(.no-underline):not(.link-editorial) {
    the body copy and labels stay at full strength so every row remains readable. */
 .stage-row h3 { transition: color 0.5s ease; }
 .stage-row[data-reached='false'] h3 { color: rgba(247, 246, 250, 0.5); }
+
+/* =====================================================================
+   MOTION TOKENS + MICRO VISUALS (v4)
+   Timing and easing for interface motion live here so every component
+   draws from the same set. Small illustrations (components/home/MicroVisual)
+   are paused until their panel is on screen or the card is hovered/focused.
+   ===================================================================== */
+:root {
+  --dur-fast: 160ms;
+  --dur-base: 260ms;
+  --dur-slow: 520ms;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 72px;
+  --radius-control: 14px; --radius-card: 20px; --radius-panel: 28px;
+}
+
+.mv-pulse { animation: mv-pulse 2.4s ease-in-out infinite; animation-delay: calc(var(--i, 0) * 0.28s); }
+.mv-rise  { animation: mv-rise 2.8s var(--ease-premium) infinite; animation-delay: calc(var(--i, 0) * 0.32s); }
+.mv-grow  { animation: mv-grow 3s ease-in-out infinite; animation-delay: calc(var(--i, 0) * 0.22s); }
+.mv-flow  { animation: mv-flow 1.6s linear infinite; }
+.mv-drop  { animation: mv-drop 2.6s ease-in-out infinite; }
+.mv-travel{ animation: mv-travel 2.4s ease-in-out infinite; animation-delay: calc(var(--i, 0) * 0.4s); }
+.mv-draw  { animation: mv-draw 3s ease-in-out infinite; animation-delay: calc(var(--i, 0) * 0.5s); }
+.mv-ring  { animation: mv-ring 3s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.mv-fall  { animation: mv-fall 2.6s ease-in infinite; }
+.mv-blink { animation: mv-blink 1.1s steps(1) infinite; }
+.mv-scrub { animation: mv-scrub 4.5s linear infinite; }
+
+@keyframes mv-pulse { 0%, 100% { opacity: .38; } 50% { opacity: 1; } }
+@keyframes mv-rise  { 0% { opacity: .3; transform: translateY(4px); } 25%, 80% { opacity: 1; transform: none; } 100% { opacity: .3; transform: translateY(-2px); } }
+@keyframes mv-grow  { 0%, 100% { transform: scaleY(.62); } 50% { transform: scaleY(1); } }
+@keyframes mv-flow  { to { stroke-dashoffset: -16; } }
+@keyframes mv-drop  { 0%, 100% { transform: translateY(-5px); opacity: .6; } 50% { transform: none; opacity: 1; } }
+@keyframes mv-travel{ 0% { transform: translateX(0); opacity: .25; } 50% { opacity: 1; } 100% { transform: translateX(44px); opacity: .25; } }
+@keyframes mv-draw  { 0% { stroke-dashoffset: .45; } 55%, 100% { stroke-dashoffset: 0; } }
+@keyframes mv-ring  { 0%, 100% { transform: scale(.92); opacity: .18; } 50% { transform: scale(1.06); opacity: .5; } }
+@keyframes mv-fall  { 0% { transform: translateY(0); opacity: 1; } 65% { transform: translateY(24px); opacity: 1; } 100% { transform: translateY(28px); opacity: .2; } }
+@keyframes mv-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes mv-scrub { from { transform: translateX(0); } to { transform: translateX(84px); } }
+@media (prefers-reduced-motion: reduce) { .mv * { animation: none !important; } }
+
+/* =====================================================================
+   COMPACT BANDS (v4 homepage + hubs)
+   The 3.0 `.stage-section` is built for full-height, staged reveals. These
+   bands keep the same canvas, hairline and gutters at about a third of the
+   height, with a headline scaled to its job instead of to the hero.
+   ===================================================================== */
+.band {
+  position: relative;
+  background: var(--midnight);
+  color: var(--text-dark);
+  border-top: 1px solid var(--line-dark);
+  padding-block: clamp(56px, 6.6vw, 100px);
+  padding-inline: calc(var(--frame-inset) + clamp(20px, 4.6vw, 88px));
+}
+.band-alt { background: var(--graphite); }
+.band-inner { width: 100%; max-width: 1280px; margin-inline: auto; }
+.band-title {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-size: clamp(30px, 3.7vw, 54px);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  color: #fff;
+  text-wrap: balance;
+}
+.band-eyebrow {
+  font-size: clamp(11px, 0.86vw, 13px);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dark-muted);
+}
+
+/* Section heading for inner pages: confident, but a step below the page's H1. */
+.page-h2 {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 690;
+  font-size: clamp(28px, 3.2vw, 44px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  color: #fff;
+  text-wrap: balance;
+}
+
+/* A dashed line whose dashes drift along it. Used as the "path" at the top of each platform group. */
+.mv-path {
+  background-image: linear-gradient(90deg, rgba(196, 168, 255, 0.7) 0 8px, transparent 8px 16px);
+  background-size: 16px 1px;
+  background-repeat: repeat-x;
+  animation: mv-path 1.6s linear infinite;
+}
+@keyframes mv-path { to { background-position: 16px 0; } }
+@media (prefers-reduced-motion: reduce) { .mv-path { animation: none; } }
+
+/*
+ * Pause rules. These must come AFTER every .mv-* animation declaration: the
+ * `animation` shorthand resets animation-play-state to "running", so a pause
+ * rule placed before them is silently overridden at equal specificity and the
+ * animations run whether or not anyone can see them.
+ */
+.mv *, .mv { animation-play-state: paused; }
+[data-live='true'] .mv *,
+.mv[data-live='true'] *,
+.mv-host:hover .mv *,
+.mv-host:focus-within .mv * { animation-play-state: running; }
+
+/* Phones show the still ribbon with a slow CSS drift instead of the live canvas (see VioletRibbonScene). */
+@media (max-width: 767px) {
+  .ribbon-still { animation: ribbon-drift 22s ease-in-out infinite alternate; }
+}
+/* One switch pauses all hero motion (components/cinema/HeroMarkers.tsx). */
+html[data-motion='paused'] .ribbon-still,
+html[data-motion='paused'] .ribbon-drift { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .ribbon-still { animation: none; } }

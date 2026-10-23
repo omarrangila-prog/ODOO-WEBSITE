@@ -19,7 +19,13 @@ const ACCEPTED_EXTENSION_SET = new Set(
   ACCEPTED_FILE_EXTENSIONS.split(',').map((e) => e.trim().toLowerCase()),
 );
 
-export const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+/*
+ * 4 MB, not 10. The file travels inside the form POST, and a Vercel function
+ * rejects any request body over 4.5 MB before our code runs, so a larger limit
+ * promised uploads that could never arrive. The file is attached to the
+ * notification email; it is not stored anywhere else.
+ */
+export const MAX_FILE_SIZE = 4 * 1024 * 1024; // 4 MB
 
 /** True when MIME is accepted, or when MIME is empty and the extension is known (CSV often has type ""). */
 export function isAcceptedUpload(name: string, type: string): boolean {
@@ -98,7 +104,7 @@ export function validateFileMeta(
   size: number,
   type: string,
 ): string | null {
-  if (size > MAX_FILE_SIZE) return 'File exceeds the 10 MB limit.';
+  if (size > MAX_FILE_SIZE) return 'File exceeds the 4 MB limit. Send larger files by WhatsApp or email.';
   if (!isAcceptedUpload(name, type)) {
     return 'This file type is not supported.';
   }

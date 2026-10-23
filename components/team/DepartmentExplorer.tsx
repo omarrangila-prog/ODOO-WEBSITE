@@ -135,9 +135,9 @@ export function DepartmentExplorer() {
                               </span>
                             )}
                           </span>{' '}
-                          <span className="shrink-0 font-heading text-[18px] font-semibold text-ink">
-                            {r.count === null ? 'Not confirmed' : r.count}
-                          </span>
+                          {r.count !== null && (
+                            <span className="shrink-0 font-heading text-[18px] font-semibold text-ink">{r.count}</span>
+                          )}
                         </div>
                         {r.note && <p className="mt-1 text-[14px] leading-relaxed text-ink-muted">{r.note}</p>}
                       </li>

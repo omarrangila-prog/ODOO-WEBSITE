@@ -140,13 +140,10 @@ export default function AboutPage() {
             {departmentGroups.map((g) => (
               <li key={g.id} className="rounded-control border border-line px-4 py-3.5">
                 <p className="font-heading text-[16px] font-semibold leading-snug">{g.label}</p>{' '}
-                <p className="mt-1 text-[13px] text-text-dark-muted">{groupCountLabel(g.id)}</p>
+                {groupCountLabel(g.id) && <p className="mt-1 text-[13px] text-text-dark-muted">{groupCountLabel(g.id)}</p>}
               </li>
             ))}
           </ul>
-          <p className="mt-3 text-[13px] text-text-dark-muted">
-            Role positions reported by management, not a verified headcount.
-          </p>
           <div className="mt-8">
             <ButtonLink href="/company/team">
               Meet the ODOOVATIONS Team

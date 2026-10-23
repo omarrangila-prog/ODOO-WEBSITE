@@ -80,16 +80,20 @@ export async function POST(req: Request) {
 
     // Validate optional file metadata (never trust the client).
     const file = form.get('file');
-    let fileMeta: { name: string; size: number; type: string } | null = null;
+    let fileMeta: FileMeta | null = null;
     if (file && file instanceof File && file.size > 0) {
       const err = validateFileMeta(file.name, file.size, file.type);
       if (err) {
         return NextResponse.json({ ok: false, error: err }, { status: 400 });
       }
-      fileMeta = { name: file.name, size: file.size, type: file.type };
-      // NOTE: No storage strategy is configured. We intentionally DO NOT persist
-      // uploaded files. Wire up secure storage (e.g. S3 with signed URLs) before
-      // enabling file retention. See README + LAUNCH_CHECKLIST.md.
+      // The file is attached to the notification email and goes nowhere else:
+      // no storage is configured, so nothing is retained after delivery.
+      fileMeta = {
+        name: file.name,
+        size: file.size,
+        type: file.type,
+        base64: Buffer.from(await file.arrayBuffer()).toString('base64'),
+      };
     }
 
     // Legacy notification email (unchanged behaviour).
@@ -151,23 +155,29 @@ type ParsedContact = ReturnType<typeof contactSchema.parse>;
  * - Otherwise runs the DEV ADAPTER: validates + logs a redacted summary and
  *   returns success without sending. Sensitive contents are not logged in prod.
  */
-async function deliver(
-  data: ParsedContact,
-  fileMeta: { name: string; size: number; type: string } | null,
-): Promise<void> {
+interface FileMeta {
+  name: string;
+  size: number;
+  type: string;
+  /** Attachment body for the notification email. */
+  base64: string;
+}
+
+async function deliver(data: ParsedContact, fileMeta: FileMeta | null): Promise<void> {
   const resendKey = process.env.RESEND_API_KEY;
 
   if (!resendKey) {
-    if (process.env.NODE_ENV !== 'production') {
-      // Redacted summary only — no full message body or PII beyond what's needed to debug.
-      console.info('[contact] DEV ADAPTER — submission received', {
-        company: data.company,
-        country: data.country,
-        industry: data.industry,
-        services: data.services,
-        hasFile: Boolean(fileMeta),
-      });
+    // A missing key is an error the visitor can see. Returning success would tell
+    // people their enquiry arrived when nothing was sent. Local runs that only want
+    // to exercise the form (a production build without a key) opt out explicitly.
+    if (process.env.NODE_ENV === 'production' && process.env.ODV_DRY_RUN !== '1') {
+      throw new Error('Email delivery is not configured');
     }
+    // Redacted summary only — no message body or personal details.
+    console.info('[contact] DRY RUN — submission validated, nothing sent', {
+      services: data.services,
+      hasFile: Boolean(fileMeta),
+    });
     return;
   }
 
@@ -205,7 +215,7 @@ async function deliver(
     'What they need:',
     data.challenge,
     '',
-    fileMeta ? `Attached file: ${fileMeta.name} (${fileMeta.type}, ${fileMeta.size} bytes)` : 'No file attached.',
+    fileMeta ? `Attached file: ${fileMeta.name} (${fileMeta.type || 'unknown type'}, ${fileMeta.size} bytes)` : 'No file attached.',
     ...(omitted.length ? ['', `Not provided (optional stage skipped): ${omitted.join(', ')}`] : []),
   ].join('\n');
 
@@ -221,6 +231,7 @@ async function deliver(
       reply_to: data.email,
       subject: `New enquiry — ${data.company || data.fullName}`,
       text: lines,
+      ...(fileMeta ? { attachments: [{ filename: fileMeta.name, content: fileMeta.base64 }] } : {}),
     }),
   });
 

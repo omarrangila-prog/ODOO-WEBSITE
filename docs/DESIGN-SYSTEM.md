@@ -1,4 +1,4 @@
-# ODOOVATIONS 3.0 design system
+# ODOOVATIONS design system
 
 One deep-black canvas, violet as a controlled signature, and typography doing
 most of the visual work. The approved reference is the "BUSINESS, REIMAGINED.
@@ -72,3 +72,54 @@ node scripts/section-shots.mjs out/         # every homepage section as scrolled
 node scripts/contrast-check.mjs http://localhost:3700
 node scripts/a11y.mjs http://localhost:3700
 ```
+
+## Tokens added in v4 (`app/globals.css`)
+
+| Token | Value | Use |
+|---|---|---|
+| `--dur-fast` / `--dur-base` / `--dur-slow` | 160 / 260 / 520 ms | interface motion; hover and focus use fast or base, reveals use slow |
+| `--ease-premium`, `--ease-out` | cubic-bezier curves | every transition and keyframe, so motion feels alike |
+| `--space-1` … `--space-8` | 4, 8, 12, 16, 24, 32, 48, 72 px | gaps and padding inside components |
+| `--radius-control` / `--radius-card` / `--radius-panel` | 14 / 20 / 28 px | inputs and buttons / cards / large panels |
+| `--content-max`, `--page-max`, `--reading-width` | 1280 / 1320 / 720 px | container and text widths |
+| `--line-dark`, `--line-dark-strong` | violet-tinted hairlines | every border |
+
+Shadows come from Tailwind's `shadow-float`; buttons are `ButtonLink` / `Button`
+(white pill primary, hairline secondary); form controls are `inputClass` in
+`components/forms/Field.tsx`.
+
+## Headings: three sizes, used for three jobs
+
+- `.hero-title`: the homepage headline only.
+- `.band-title` (30–54 px): a homepage section. `.page-h2` (28–44 px): a section
+  on an inner page. `.display-1` stays for an inner page's single H1.
+- Do not use `.section-title` (up to 92 px) outside the diagnostic tool; it is the
+  3.0 monumental size and made every section shout.
+
+## Bands (`.band`, `.band-alt`, `.band-inner`)
+
+The homepage's compact sections: same canvas, hairline and gutters as the
+staged sections at about a third of the height. Alternate `.band` and
+`.band-alt` so adjacent sections are distinguishable.
+
+## Small illustrations and motion on scroll
+
+`components/home/MicroVisual.tsx` draws one line illustration per kind of
+service. They are decoration (aria-hidden, no numbers, nothing that could pass
+for a client's screen). Animation is CSS only, uses transform, opacity and
+stroke-dashoffset, and is paused until its container is on screen:
+
+- wrap the group in `LiveOnScreen` (or set `data-live` yourself) and give the
+  element `.mv`;
+- the `.mv-host` card also runs them on hover and keyboard focus;
+- the pause rules sit at the END of `globals.css` on purpose. The `animation`
+  shorthand resets `animation-play-state`, so a pause rule placed before an
+  animation class is overridden and the animation runs regardless.
+- reduced motion removes every `.mv` animation.
+
+## Tabs and demonstrations
+
+The service explorer and the workflow demonstration render every panel in the
+HTML (inactive ones are `hidden`), use roving tab focus with arrow keys, Home and
+End, and have no hover-only content. Anything that moves for more than five
+seconds has a visible pause control.

@@ -28,7 +28,7 @@ export function Footer() {
           leaves the text in textContent, which scrapers and AI retrieval read.
         */}
         {/* Navigation */}
-        <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1.1fr_1fr_1.2fr]">
+        <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.1fr_1fr_1fr_1.2fr]">
           <div className="max-w-sm">
             <Logo />{' '}
             <p className="mt-6 font-heading text-[clamp(16px,1.25vw,19px)] font-medium leading-snug tracking-[-0.015em] text-text-dark">
@@ -55,11 +55,12 @@ export function Footer() {
 
           <FooterCol n="01" title="What We Do" links={[...footerNav.capabilities, ...footerNav.odoo.slice(0, 3)]} />{' '}
           <FooterCol n="02" title="Solutions" links={footerNav.solutions} />{' '}
-          <FooterCol n="03" title="Company" links={[...footerNav.company, ...footerNav.locations]} />{' '}
+          <FooterCol n="03" title="Platforms" links={footerNav.platforms} />{' '}
+          <FooterCol n="04" title="Company" links={[...footerNav.company, ...footerNav.locations]} />{' '}
 
           <div>
             <h2 className="hero-eyebrow mb-5 flex items-center gap-3 !text-[11px]">
-              <span aria-hidden className="text-violet/80">04</span>
+              <span aria-hidden className="text-violet/80">05</span>
               <span aria-hidden className="h-px w-5 bg-violet/50" />
               Contact
             </h2>{' '}

@@ -25,7 +25,7 @@ export function TeamStructure() {
               className="flex h-full min-h-[44px] flex-col rounded-control border border-line-light bg-ivory-soft px-4 py-3.5 transition-colors hover:border-violet"
             >
               <span className="font-heading text-[16px] font-semibold leading-snug text-ink">{d.name}</span>{' '}
-              <span className="mt-1 text-[13px] text-ink-muted">{countLabel(d)}</span>
+              {countLabel(d) && <span className="mt-1 text-[13px] text-ink-muted">{countLabel(d)}</span>}
             </a>
           </li>
         ))}

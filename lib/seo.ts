@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { company } from '@/data/company';
 import { verifiedCountries } from '@/data/global-projects';
+import { hreflangAlternates } from './i18n';
 
 /**
  * Canonical production origin.
@@ -44,7 +45,7 @@ export function buildMetadata({
   return {
     title: alreadyBranded ? { absolute: title } : title,
     description,
-    alternates: { canonical: url },
+    alternates: { canonical: url, ...(hreflangAlternates(path, SITE_URL) ? { languages: hreflangAlternates(path, SITE_URL) } : {}) },
     robots: noindex ? { index: false, follow: false } : undefined,
     openGraph: {
       type: 'website',

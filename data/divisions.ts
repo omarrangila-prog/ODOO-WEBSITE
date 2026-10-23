@@ -187,7 +187,9 @@ export const divisions: Division[] = [
     id: 'odoo-erp',
     label: 'Odoo & ERP',
     title: 'Odoo & ERP',
-    href: '/services',
+    // Straight to the Odoo implementation page. This used to point at the
+    // general services hub, so "Odoo ERP" links landed on a page about everything.
+    href: '/services/odoo-implementation-pakistan',
     icon: Boxes,
     summary: 'Put sales, purchases, stock, accounts and reporting in one system.',
     outcome: 'One connected system instead of ten disconnected ones.',

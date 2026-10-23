@@ -13,7 +13,7 @@ function inertWhenHidden(visible: boolean): Record<string, string> {
 }
 
 /**
- * Mobile-only sticky conversion bar: WhatsApp | Call | Free Consultation.
+ * Mobile-only sticky conversion bar: WhatsApp | Call | Enquire.
  * Appears after the user scrolls past the hero and hides near the footer so it
  * never covers legal content or the contact form's submit area.
  */
@@ -72,7 +72,7 @@ export function MobileCtaBar() {
           className="flex min-h-[48px] flex-col items-center justify-center gap-0.5 rounded-xl bg-white text-[#050509]"
         >
           <CalendarCheck className="h-5 w-5" aria-hidden />
-          <span className="text-[11px] font-semibold">Consult</span>
+          <span className="text-[11px] font-semibold">Enquire</span>
         </Link>
       </div>
     </div>

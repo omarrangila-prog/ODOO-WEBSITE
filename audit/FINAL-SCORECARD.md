@@ -130,10 +130,20 @@ Worth recording, because it is a method point rather than a finding.
 The axe suite reported 0 violations throughout. Lighthouse then found a real
 WCAG AA failure: the eyebrow pill above the hero sat at 2.31:1 in OS light
 mode, because `theme-dark` sections render on a light ground by design and the
-violet was tuned for dark. axe runs at desktop width in two site themes, not
-across OS colour schemes, so it could not see it. Lighthouse also found a
-heading-order violation where footer `h3`s skipped a level on pages with no
-`h2` of their own.
+violet was tuned for dark.
+
+An earlier version of this note said axe missed it because it "runs at desktop
+width in two site themes". That explanation was wrong and was disproved by
+experiment. The real cause: where axe cannot work out the background behind
+text (translucent layers, gradients, overlays) it returns the node as
+"incomplete", not as a violation, and `scripts/a11y.mjs` only counted
+violations. On the homepage that left about 236 nodes unchecked. The fix was
+`scripts/contrast-check.mjs`, which composites the paint stack itself and
+reports a ratio for most of those nodes (text over a gradient or image is still
+reported as unverifiable, not as a pass). The 3.0 redesign also removed the OS
+light-mode remap altogether, which was the source of that failure. Lighthouse
+also found a heading-order violation where footer `h3`s skipped a level on pages
+with no `h2` of their own.
 
 Both are fixed and verified. The general point is that a clean automated suite
 is evidence, not proof, and looking at the rendered page still finds things —
@@ -195,5 +205,5 @@ None of this will be invented:
 
 ## Deployment
 
-Not deployed at the time of writing. The brief states production deployment
-requires explicit authorisation.
+Superseded: the 3.0 redesign was deployed on explicit instruction. See
+`audit/V4-RESULTS.md` for the state of the branch that follows it.

@@ -53,6 +53,11 @@ const pages = [
   ['about', '/company/about'],
   ['clients', '/company/clients'],
   ['team', '/company/team'],
+  ['platforms', '/platforms'],
+  ['platform', '/platforms/quickbooks'],
+  ['technology', '/technologies'],
+  ['ops-check', '/tools/operations-check'],
+  ['service-new', '/services/odoo-implementation-pakistan'],
 ];
 
 /** Runs inside the page. Returns every layout defect it can see. */
