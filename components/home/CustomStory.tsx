@@ -89,7 +89,7 @@ export function CustomStory() {
   const active = stages[activeIndex]!;
 
   return (
-    <section className="theme-light bay">
+    <section data-no-reveal className="theme-light bay">
       <div className="shell grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         {/* Sticky left */}
         <div className="lg:sticky lg:top-28 lg:h-fit lg:self-start">

@@ -37,7 +37,7 @@ export function JourneyRoute() {
   const stage = journeyStages[active]!;
 
   return (
-    <section id="journey" className="theme-dark grain relative overflow-hidden bay">
+    <section data-no-reveal id="journey" className="theme-dark grain relative overflow-hidden bay">
       <div className="pointer-events-none absolute inset-0 arch-grid opacity-25" aria-hidden />
       <div className="shell relative">
         <div className="max-w-2xl">

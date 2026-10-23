@@ -73,7 +73,7 @@ function measure() {
     }
     const layers = []; let opacity = 1;
     for (let o = el; o; o = o.parentElement) opacity *= parseFloat(getComputedStyle(o).opacity);
-    if (opacity < 0.05) continue;                              // not yet visible
+    if (opacity < 0.999) { unverifiable++; continue; }       // not at rest (mid-fade): do not score it
     for (let i = start; i < stack.length && !blocked; i++) {
       const t = stack[i], ts = getComputedStyle(t);
       if (ts.backgroundImage !== 'none' || /^(IMG|VIDEO|CANVAS|SVG|PICTURE)$/i.test(t.tagName)) { blocked = true; break; }
@@ -113,12 +113,15 @@ for (const scheme of ['dark']) { // the site no longer has a light scheme
     const page = await ctx.newPage();
     for (const path of paths) {
       await page.goto(BASE + path, { waitUntil: 'networkidle' }).catch(() => {});
+      // Measure text AT REST. Transitions and scroll-in fades hold content at partial opacity,
+      // which is a state nobody reads it in, so turn them off; the reveal then lands instantly.
+      await page.addStyleTag({ content: '*,*::before,*::after{transition-duration:0s !important;transition-delay:0s !important;animation-duration:0s !important;animation-delay:0s !important}' });
       // Measure one viewport-height slice at a time: elementsFromPoint only sees
       // what is on screen, and scroll-in reveals only play once scrolled to.
       const total = await page.evaluate(() => document.documentElement.scrollHeight);
       for (let y = 0; y < total; y += h - 100) {
         await page.evaluate((top) => window.scrollTo(0, top), y);
-        await page.waitForTimeout(900);
+        await page.waitForTimeout(420); // > the 140ms settle that triggers the reveal sweep
         const r = await page.evaluate(measure);
         checked += r.checked; unverifiable += r.unverifiable;
         for (const f of r.failures) all.push({ ...f, where: `${path} (${scheme}, ${vp})` });

@@ -25,7 +25,7 @@ export function ServicesRail() {
   // Static fallback: normal snap rail.
   if (reduce) {
     return (
-      <section id="services" className="theme-dark bay">
+      <section data-no-reveal id="services" className="theme-dark bay">
         <div className="shell">
           <Header />
           <div className="mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto no-scrollbar pb-4">

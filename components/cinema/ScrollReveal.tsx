@@ -26,11 +26,13 @@ export function ScrollReveal() {
     const root = document.documentElement;
     let io: IntersectionObserver | null = null;
     const marked: HTMLElement[] = [];
+    let settle = 0;
+    let onScroll: (() => void) | null = null;
 
     const frame = requestAnimationFrame(() =>
       requestAnimationFrame(() => {
         const nodes = Array.from(document.querySelectorAll<HTMLElement>(SELECTOR)).filter(
-          (el) => !el.closest('.stage-section, [data-no-reveal], header, nav') && !el.classList.contains('reveal'),
+          (el) => !el.closest('.stage-section, [data-no-reveal], header, nav, details') && !el.classList.contains('reveal'),
         );
         const fold = window.innerHeight * 0.92;
         const groups = new Map<Element, number>();
@@ -55,11 +57,40 @@ export function ScrollReveal() {
           io.observe(el);
         }
         root.classList.add('reveal-ready');
+
+        /*
+         * Safety net. IntersectionObserver only reports on rendered frames, so when frames are
+         * slow, or a fast fling jumps past an element, that element can be skipped and would stay
+         * hidden. Once scrolling settles, reveal everything at or above the bottom of the
+         * viewport: it is either on screen or already behind the reader.
+         */
+        const sweep = () => {
+          const line = window.innerHeight * 0.96;
+          for (const el of marked) {
+            if (el.classList.contains('is-in')) continue;
+            if (el.getBoundingClientRect().top < line) {
+              el.classList.add('is-in');
+              io?.unobserve(el);
+            }
+          }
+        };
+        onScroll = () => {
+          window.clearTimeout(settle);
+          settle = window.setTimeout(sweep, 140);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll, { passive: true });
+        sweep();
       }),
     );
 
     return () => {
       cancelAnimationFrame(frame);
+      window.clearTimeout(settle);
+      if (onScroll) {
+        window.removeEventListener('scroll', onScroll);
+        window.removeEventListener('resize', onScroll);
+      }
       io?.disconnect();
       root.classList.remove('reveal-ready');
       for (const el of marked) el.classList.remove('reveal', 'is-in');
