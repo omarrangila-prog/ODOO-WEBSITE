@@ -16,8 +16,8 @@ export function Footer() {
   const socials = (Object.entries(company.social) as [keyof typeof company.social, string][]).filter(([, url]) => Boolean(url));
 
   return (
-    <footer className="theme-graphite border-t border-line">
-      <div className="shell">
+    <footer className="theme-graphite relative overflow-hidden border-t border-line">
+      <div className="shell" style={{ paddingInline: 'calc(var(--frame-inset) + clamp(20px, 4.6vw, 88px))' }}>
         {/*
           The footer carried its own "Ready to Build a Business System"
           statement with a Start the Conversation button. Every page that
@@ -29,9 +29,9 @@ export function Footer() {
         */}
         {/* Navigation */}
         <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1.1fr_1fr_1.2fr]">
-          <div className="max-w-xs">
+          <div className="max-w-sm">
             <Logo />{' '}
-            <p className="mt-5 text-[15px] leading-relaxed text-text-dark-muted">
+            <p className="mt-6 font-heading text-[clamp(16px,1.25vw,19px)] font-medium leading-snug tracking-[-0.015em] text-text-dark">
               {company.positioningSupport}
             </p>{' '}
             <p className="mt-3 text-[13px] leading-relaxed text-text-dark-muted/80">
@@ -53,12 +53,16 @@ export function Footer() {
             )}
           </div>
 
-          <FooterCol title="What We Do" links={[...footerNav.capabilities, ...footerNav.odoo.slice(0, 3)]} />{' '}
-          <FooterCol title="Solutions" links={footerNav.solutions} />{' '}
-          <FooterCol title="Company" links={[...footerNav.company, ...footerNav.locations]} />{' '}
+          <FooterCol n="01" title="What We Do" links={[...footerNav.capabilities, ...footerNav.odoo.slice(0, 3)]} />{' '}
+          <FooterCol n="02" title="Solutions" links={footerNav.solutions} />{' '}
+          <FooterCol n="03" title="Company" links={[...footerNav.company, ...footerNav.locations]} />{' '}
 
           <div>
-            <h2 className="mb-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-text-dark-muted">Contact</h2>{' '}
+            <h2 className="hero-eyebrow mb-5 flex items-center gap-3 !text-[11px]">
+              <span aria-hidden className="text-violet/80">04</span>
+              <span aria-hidden className="h-px w-5 bg-violet/50" />
+              Contact
+            </h2>{' '}
             <ul className="flex flex-col gap-3 text-[15px]">
               <li>
                 <a href={company.phoneHref} className="inline-flex min-h-[44px] items-center gap-2.5 text-text-dark-muted hover:text-text-dark sm:min-h-0">
@@ -95,11 +99,20 @@ export function Footer() {
           </div>
         </div>
       </div>
+
+      {/* The closing wordmark: decorative, soft violet, fading into the wall. */}
+      <div
+        aria-hidden="true"
+        className="footer-wordmark pointer-events-none select-none"
+        style={{ paddingBottom: 'calc(var(--frame-inset) + 4px)' }}
+      >
+        ODOOVATIONS
+      </div>
     </footer>
   );
 }
 
-function FooterCol({ title, links }: { title: string; links: { label: string; href: string }[] }) {
+function FooterCol({ n, title, links }: { n: string; title: string; links: { label: string; href: string }[] }) {
   return (
     <div>
       {/*
@@ -108,13 +121,17 @@ function FooterCol({ title, links }: { title: string; links: { label: string; hr
         own, such as /contact, an h3 here skipped a level and failed
         heading-order. The visual size is set by the class, not the tag.
       */}
-      <h2 className="mb-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-text-dark-muted">{title}</h2>{' '}
+      <h2 className="hero-eyebrow mb-5 flex items-center gap-3 !text-[11px]">
+        <span aria-hidden className="text-violet/80">{n}</span>
+        <span aria-hidden className="h-px w-5 bg-violet/50" />
+        {title}
+      </h2>{' '}
       <ul className="flex flex-col gap-0.5 text-[15px] sm:gap-2.5">
         {links.map((link) => (
           <li key={link.href}>
             <Link
               href={link.href}
-              className="inline-flex min-h-[44px] items-center text-text-dark-muted hover:text-text-dark sm:min-h-0"
+              className="inline-flex min-h-[44px] items-center text-text-dark-muted transition-all duration-300 hover:translate-x-1 hover:text-white sm:min-h-0"
             >
               {link.label}
             </Link>

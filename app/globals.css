@@ -192,7 +192,13 @@ img {
   
   /* Signal text — use sparingly (once or twice per major section) */
   .signal-text {
-    background: linear-gradient(100deg, var(--violet-bright) 0%, var(--ultraviolet) 100%);
+    /* The expressive phrase: Instrument Serif Italic in lavender. */
+    font-family: var(--font-serif), 'Times New Roman', serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    font-size: 1.08em;
+    background: linear-gradient(95deg, #b79cff 0%, #a98efb 45%, #8f66f2 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -221,16 +227,16 @@ img {
   .display-1 {
     font-family: var(--font-display), sans-serif;
     font-size: clamp(44px, 5.8vw, 88px);
-    font-weight: 750;
-    line-height: 0.96;
-    letter-spacing: -0.052em;
+    font-weight: 720;
+    line-height: 0.98;
+    letter-spacing: -0.04em;
   }
   .display-2 {
     font-family: var(--font-display), sans-serif;
     font-size: clamp(38px, 4.6vw, 72px);
-    font-weight: 700;
-    line-height: 0.99;
-    letter-spacing: -0.048em;
+    font-weight: 690;
+    line-height: 1;
+    letter-spacing: -0.038em;
   }
   .display-3 {
     font-family: var(--font-display), sans-serif;
@@ -462,19 +468,20 @@ img {
 
 
 /* =====================================================================
-   A11y: links inside running text (paragraphs, list items) must be
+   A11y: links inside running text of the page content (not the header or footer
+   navigation, whose links are identified by position and context) (paragraphs, list items) must be
    distinguishable without relying on colour alone (WCAG 1.4.1).
    Give them a persistent underline; standalone/nav/button links are exempt.
    ===================================================================== */
-p > a:not(.no-underline):not(.link-editorial),
-li > a:not(.no-underline):not(.link-editorial) {
+:is(main, .consent-surface) p > a:not(.no-underline):not(.link-editorial),
+main li > a:not(.no-underline):not(.link-editorial) {
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
   text-decoration-color: color-mix(in srgb, currentColor 55%, transparent);
 }
-p > a:hover:not(.no-underline):not(.link-editorial),
-li > a:hover:not(.no-underline):not(.link-editorial) {
+:is(main, .consent-surface) p > a:hover:not(.no-underline):not(.link-editorial),
+main li > a:hover:not(.no-underline):not(.link-editorial) {
   text-decoration-color: currentColor;
 }
 
@@ -684,3 +691,57 @@ li > a:hover:not(.no-underline):not(.link-editorial) {
 @keyframes ribbon-drift { from { transform: translate3d(-1.2%, 0.6%, 0) scale(1.02); } to { transform: translate3d(1.2%, -0.6%, 0) scale(1.05); } }
 .ribbon-drift { animation: ribbon-drift 22s ease-in-out infinite alternate; }
 @media (prefers-reduced-motion: reduce) { .ribbon-drift { animation: none; } }
+
+/* Inner-page hero art: clear on the left where the copy sits, fading at the foot,
+   and quieter on phones where there is less room beside the text. */
+.page-art {
+  opacity: 0.62;
+  -webkit-mask-image: linear-gradient(to right, transparent 18%, #000 68%), linear-gradient(to bottom, #000 72%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent 18%, #000 68%), linear-gradient(to bottom, #000 72%, transparent);
+  mask-composite: intersect;
+}
+@media (max-width: 767px) {
+  .page-art {
+    opacity: 0.34;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 6%, #000 55%, transparent 98%);
+    mask-image: linear-gradient(to bottom, transparent 6%, #000 55%, transparent 98%);
+  }
+}
+
+/* Monumental closing wordmark. Soft violet type that fades toward the foot so it
+   reads as an object and not as more text; hidden from assistive technology. */
+.footer-wordmark {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  font-size: clamp(44px, 13.2vw, 232px);
+  line-height: 0.82;
+  letter-spacing: -0.055em;
+  text-align: center;
+  white-space: nowrap;
+  color: transparent;
+  /* A fill, not a text stroke: the variable font has overlapping glyph contours
+     and a stroke draws every one of them as stray lines inside the letters. */
+  background: linear-gradient(to bottom, rgba(167, 123, 255, 0.3), rgba(167, 123, 255, 0.02) 86%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  margin-top: clamp(8px, 2vw, 28px);
+}
+
+/* Scroll reveal (see components/cinema/ScrollReveal.tsx). Only elements the script has
+   marked are ever hidden, and only after hydration, so the server HTML is complete. */
+.reveal-ready .reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.8s ease, transform 0.9s var(--ease-premium);
+  transition-delay: var(--rv, 0ms);
+}
+.reveal-ready .reveal.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal-ready .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* "How we work": rows not yet reached dim their large heading only. Large text needs 3:1;
+   the body copy and labels stay at full strength so every row remains readable. */
+.stage-row h3 { transition: color 0.5s ease; }
+.stage-row[data-reached='false'] h3 { color: rgba(247, 246, 250, 0.5); }

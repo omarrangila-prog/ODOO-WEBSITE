@@ -52,7 +52,7 @@ export const SHEETS: SheetSpec[] = [
   // A — the large sculpture: a narrow left wing that opens into a hill and
   //     sweeps down the right edge, converging at the bottom-right
   {
-    g1: [[740, 318], [890, 304], [1010, 282], [1100, 232], [1190, 198], [1300, 214], [1420, 290], [1520, 420], [1600, 600], [1650, 780], [1672, 930]],
+    g1: [[740, 318], [890, 304], [1010, 282], [1090, 230], [1160, 194], [1230, 184], [1310, 204], [1420, 252], [1540, 318], [1630, 430], [1672, 600], [1676, 930]],
     g2: [[740, 342], [890, 346], [1020, 326], [1140, 378], [1250, 452], [1340, 540], [1430, 650], [1520, 770], [1600, 870], [1665, 945]],
     crowd: 'g2',
     p: 1.75,
@@ -60,8 +60,8 @@ export const SHEETS: SheetSpec[] = [
     density: 1,
     gain: 1,
     wobble: 12,
-    ripple: 0.07,
-    bulge: 0.16,
+    ripple: 0.08,
+    bulge: 0.24,
     fade: [0.3, 0.02],
   },
   // B — the long arcs beneath the ridge

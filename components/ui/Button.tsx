@@ -8,7 +8,7 @@ type Variant = 'primary' | 'secondary' | 'ghost';
 type Size = 'md' | 'lg';
 
 const base =
-  'group/btn relative inline-flex items-center justify-center gap-2 whitespace-nowrap font-heading font-semibold rounded-control transition-all duration-200 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-bright focus-visible:ring-offset-2 focus-visible:ring-offset-transparent disabled:opacity-50 disabled:pointer-events-none select-none tracking-tight';
+  'group/btn relative inline-flex items-center justify-center gap-2 whitespace-nowrap font-heading font-medium rounded-full transition-all duration-200 ease-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-bright focus-visible:ring-offset-2 focus-visible:ring-offset-transparent disabled:opacity-50 disabled:pointer-events-none select-none tracking-tight';
 
 const sizes: Record<Size, string> = {
   md: 'text-[15px] px-5 min-h-[48px]',
@@ -16,11 +16,12 @@ const sizes: Record<Size, string> = {
 };
 
 const variants: Record<Variant, string> = {
-  // Refined violet→magenta with inner highlight; subtle tactile lift on hover.
+  // A clean white pill on the black canvas, as in the approved design's top-right action.
+  // No gradient and no glow: the hairline-and-white language is the point.
   primary:
-    'text-white bg-[linear-gradient(100deg,#7C4DFF,#9868FF_45%,#E947C6)] shadow-cta hover:brightness-[1.06] hover:-translate-y-0.5 hover:shadow-[0_16px_40px_-14px_rgba(124,77,255,0.7),inset_0_1px_0_rgba(255,255,255,0.24)] active:translate-y-0 active:brightness-100 motion-reduce:hover:translate-y-0',
+    'bg-white text-[#050509] hover:bg-violet-bright hover:text-[#050509] active:bg-violet motion-reduce:transition-none',
   secondary:
-    'text-text-dark border border-line-strong bg-white/[0.03] hover:bg-white/[0.07] hover:border-line-strong hover:-translate-y-0.5 active:translate-y-0 motion-reduce:hover:translate-y-0',
+    'text-text-dark border border-white/[0.2] bg-transparent hover:border-violet-bright/70 hover:bg-white/[0.05]',
   ghost:
     'text-text-dark hover:bg-white/5',
 };

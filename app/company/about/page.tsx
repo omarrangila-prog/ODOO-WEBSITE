@@ -10,6 +10,7 @@ import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
 import { ButtonLink, ArrowNudge } from '@/components/ui/Button';
 import { departmentGroups, groupCountLabel } from '@/data/team';
 import { TextGap } from '@/components/ui/TextGap';
+import { PageArt } from '@/components/cinema/PageArt';
 
 const DESCRIPTION =
   'ODOOVATIONS is a Karachi-based technology company building custom software, AI automation, Odoo ERP, websites, apps, marketing and creative work for businesses in Pakistan and abroad.';
@@ -49,8 +50,7 @@ export default function AboutPage() {
       <JsonLd data={[webPageSchema('About ODOOVATIONS', '/company/about', DESCRIPTION), breadcrumbSchema(crumbs)]} />
 
       <section className="theme-dark grain relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-24">
-        <div className="pointer-events-none absolute inset-0 arch-grid opacity-30" aria-hidden />
-        <div className="pointer-events-none absolute right-[8%] top-1/4 h-[440px] w-[440px] radial-core opacity-70" aria-hidden />
+        <PageArt variant={3} />
         <div className="shell relative">
           <Breadcrumbs items={crumbs} />
           <p className="eyebrow mb-6">About {company.name}</p>{' '}

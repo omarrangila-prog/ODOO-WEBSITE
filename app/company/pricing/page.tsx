@@ -10,6 +10,7 @@ import { AnswerCard } from '@/components/ui/AnswerCard';
 import { FlowDiagram } from '@/components/ui/FlowDiagram';
 import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
 import { TextGap } from '@/components/ui/TextGap';
+import { PageArt } from '@/components/cinema/PageArt';
 
 const PATH = '/company/pricing';
 const DESCRIPTION =
@@ -104,7 +105,7 @@ export default function PricingPage() {
       <JsonLd data={[breadcrumbSchema(crumbs), webPageSchema('How We Price', PATH, DESCRIPTION), faqSchema(faqs)]} />
 
       <section className="theme-dark grain relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-24">
-        <div className="pointer-events-none absolute inset-0 arch-grid opacity-30" aria-hidden />
+        <PageArt variant={0} />
         <div className="shell relative">
           <Breadcrumbs items={crumbs} />
           <p className="eyebrow mb-6">Pricing &amp; engagement</p>
@@ -136,7 +137,7 @@ export default function PricingPage() {
           <div className="mt-12 grid gap-5 md:grid-cols-2">
             {models.map((m) => (
               <article key={m.name} className="rounded-editorial border border-line-light bg-white/[0.035] p-7 sm:p-8">
-                <span className="grid h-11 w-11 place-items-center rounded-control bg-[linear-gradient(120deg,#7C4DFF,#E947C6)] text-white">
+                <span className="grid h-11 w-11 place-items-center rounded-control bg-[linear-gradient(120deg,#6a3df0,#8247f5)] text-white">
                   <m.icon className="h-5 w-5" aria-hidden />
                 </span>
                 <h3 className="mt-5 font-heading text-[22px] font-semibold tracking-[-0.02em] text-ink">{m.name}</h3>

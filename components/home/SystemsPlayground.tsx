@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Play, Pause, RotateCcw, ArrowUpRight } from 'lucide-react';
 import { flows, actorLabel, type Actor } from '@/data/playground';
 import { Tabs } from '@/components/ui/Tabs';
+import { SectionHead, Accent } from '@/components/cinema/SectionHead';
 import { track } from '@/lib/analytics';
 import { cn } from '@/lib/utilities';
 
@@ -90,23 +91,23 @@ export function SystemsPlayground() {
 
   return (
     <section id="playground" className="theme-dark grain relative overflow-hidden bay-sm scroll-mt-24">
-      <div className="pointer-events-none absolute inset-0 arch-grid opacity-25" aria-hidden />
       <div
         className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[760px] -translate-x-1/2 radial-core opacity-60"
         aria-hidden
       />
 
       <div className="shell relative">
-        <div className="max-w-3xl">
-          <p className="eyebrow mb-5">Connected systems</p>
-          <h2 className="display-2">
-            See what happens when your <span className="signal-text">systems talk.</span>
-          </h2>
-          <p className="lede mt-5">
-            Four workflows we build, step by step. Notice which steps a machine performs and which
-            still belong to a person &mdash; that line is the whole design.
-          </p>
-        </div>
+        <SectionHead
+          index="08"
+          label="Interactive systems"
+          title={
+            <>
+              See what happens when your <Accent>systems talk.</Accent>
+            </>
+          }
+          lede="Four workflows we build, step by step. Notice which steps a machine performs and which still belong to a person: that line is the whole design."
+          titleClassName="!text-[clamp(34px,4.8vw,78px)]"
+        />
 
         <div className="mt-12">
           <Tabs
@@ -205,7 +206,7 @@ export function SystemsPlayground() {
                 {/* Progress */}
                 <div className="mt-3 h-1 w-full overflow-hidden rounded-full bg-white/[0.07]">
                   <div
-                    className="h-full rounded-full bg-[linear-gradient(90deg,#7C4DFF,#E947C6)] transition-[width] duration-500 ease-premium motion-reduce:transition-none"
+                    className="h-full rounded-full bg-[linear-gradient(90deg,#6a3df0,#8247f5)] transition-[width] duration-500 ease-premium motion-reduce:transition-none"
                     style={{ width: `${((step + 1) / total) * 100}%` }}
                     aria-hidden
                   />

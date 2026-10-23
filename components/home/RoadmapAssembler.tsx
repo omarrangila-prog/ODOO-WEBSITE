@@ -10,6 +10,7 @@ import { track } from '@/lib/analytics';
 import { ButtonLink, ArrowNudge } from '@/components/ui/Button';
 import { Magnetic } from '@/components/ui/motion/Magnetic';
 import { useRoadmap } from './RoadmapContext';
+import { SectionHead, Accent } from '@/components/cinema/SectionHead';
 import { TextGap } from '@/components/ui/TextGap';
 
 /**
@@ -35,13 +36,12 @@ export function RoadmapAssembler() {
   return (
     <section id="roadmap" className="theme-dark grain relative scroll-mt-24 overflow-hidden bay">
       <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <div className="absolute inset-0 arch-grid opacity-25" />
         <svg className="absolute inset-0 h-full w-full opacity-50" preserveAspectRatio="none" viewBox="0 0 100 100">
           <defs>
             <linearGradient id="raSig" x1="0" x2="1">
               <stop offset="0%" stopColor="#7C4DFF" stopOpacity="0" />
               <stop offset="50%" stopColor="#7C4DFF" stopOpacity="0.5" />
-              <stop offset="100%" stopColor="#E947C6" stopOpacity="0" />
+              <stop offset="100%" stopColor="#C4A8FF" stopOpacity="0" />
             </linearGradient>
           </defs>
           {[32, 50, 68].map((y) => (
@@ -53,13 +53,17 @@ export function RoadmapAssembler() {
       <div className="shell relative grid gap-14 lg:grid-cols-[1fr_1fr] lg:gap-16">
         {/* Left: message */}
         <div>
-          <p className="eyebrow mb-6">Your Personalised Roadmap</p>
-          <TextGap />
-          <h2 className="font-heading text-[clamp(2.25rem,5vw,4rem)] font-semibold leading-[1.03] tracking-[-0.04em]">
-            Bring Us the Mess.
-            <br />
-            <span className="signal-text">We&rsquo;ll Assemble the System.</span>
-          </h2>{' '}
+          <SectionHead
+            index="08"
+            label="Your personalised roadmap"
+            title={
+              <>
+                Bring us the mess. <br />
+                We&rsquo;ll assemble the <Accent>system.</Accent>
+              </>
+            }
+            titleClassName="!text-[clamp(34px,4.4vw,70px)]"
+          />{' '}
           <p className="lede mt-6 max-w-md">
             Send a voice note, spreadsheet, screenshot or a plain description of where your business
             is struggling. We&rsquo;ll turn it into a clear next step.

@@ -17,8 +17,9 @@ const BASE = process.argv[2] || 'http://localhost:3000';
 const paths = [
   '/', '/services', '/services/odoo-migration', '/services/ai-automation', '/solutions',
   '/solutions/accounting-software', '/industries', '/industries/manufacturing', '/case-studies',
-  '/company/about', '/company/team', '/company/clients', '/company/methodology',
-  '/contact', '/faq', '/rapid-delivery',
+  '/company/about', '/company/team', '/company/clients', '/company/methodology', '/company/pricing',
+  '/company/global-delivery', '/contact', '/faq', '/rapid-delivery', '/resources',
+  '/locations/odoo-services-karachi',
 ];
 const viewports = [['mobile', 390, 844], ['desktop', 1440, 900]];
 const consent = JSON.stringify({ version: 1, necessary: true, analytics: false, marketing: false, updatedAt: new Date().toISOString(), decided: true });
@@ -105,7 +106,7 @@ function measure() {
 const browser = await chromium.launch();
 let checked = 0, unverifiable = 0;
 const all = [];
-for (const scheme of ['light', 'dark']) {
+for (const scheme of ['dark']) { // the site no longer has a light scheme
   for (const [vp, w, h] of viewports) {
     const ctx = await browser.newContext({ viewport: { width: w, height: h }, colorScheme: scheme });
     await ctx.addInitScript((c) => localStorage.setItem('odv_consent', c), consent);

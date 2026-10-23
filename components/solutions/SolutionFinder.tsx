@@ -79,7 +79,7 @@ export function SolutionFinder() {
         <label className="relative block max-w-xl">
           <span className="sr-only">Search solutions by name, system or business need</span>
           <Search
-            className="pointer-events-none absolute left-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-ink/40"
+            className="pointer-events-none absolute left-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-ink/55"
             aria-hidden
           />
           <input
@@ -87,7 +87,7 @@ export function SolutionFinder() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search: stock, invoicing, POS, landed cost…"
-            className="w-full rounded-control border border-line-light bg-white/[0.035] py-3.5 pl-11 pr-4 text-[16px] text-ink placeholder:text-ink/40 focus:border-violet focus:outline-none focus:ring-2 focus:ring-violet/20"
+            className="w-full rounded-control border border-line-light bg-white/[0.035] py-3.5 pl-11 pr-4 text-[16px] text-ink placeholder:text-ink/55 focus:border-violet focus:outline-none focus:ring-2 focus:ring-violet/20"
           />
         </label>
 
@@ -109,7 +109,7 @@ export function SolutionFinder() {
                 )}
               >
                 {c}
-                <span className={cn('text-[12px]', active === c ? 'text-violet/70' : 'text-ink/40')}>
+                <span className={cn('text-[12px]', active === c ? 'text-violet/80' : 'text-ink/55')}>
                   {counts[c] ?? 0}
                 </span>
               </button>
@@ -164,7 +164,7 @@ export function SolutionFinder() {
                   <span className="mt-auto flex items-center justify-between gap-4 border-t border-line-light pt-5">
                     <span className="text-[15px] font-medium text-ink/70">{s.ctaLabel}</span>
                     <ArrowUpRight
-                      className="h-5 w-5 shrink-0 text-ink/30 transition-all group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-violet"
+                      className="h-5 w-5 shrink-0 text-ink/55 transition-all group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-violet"
                       aria-hidden
                     />
                   </span>

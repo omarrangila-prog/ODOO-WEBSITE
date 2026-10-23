@@ -7,6 +7,7 @@ import { CtaBand } from '@/components/ui/CtaBand';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
 import { TextGap } from '@/components/ui/TextGap';
+import { PageArt } from '@/components/cinema/PageArt';
 
 const DESCRIPTION =
   'How ODOOVATIONS delivers Odoo projects — a structured, stage-by-stage methodology from discovery and blueprint through build, migration, training, go-live and support.';
@@ -29,7 +30,7 @@ export default function MethodologyPage() {
       <JsonLd data={[webPageSchema('Our Odoo Implementation Methodology', '/company/methodology', DESCRIPTION), breadcrumbSchema(crumbs)]} />
 
       <section className="theme-dark grain relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-24">
-        <div className="pointer-events-none absolute inset-0 arch-grid opacity-30" aria-hidden />
+        <PageArt variant={5} />
         <div className="shell relative">
           <Breadcrumbs items={crumbs} />
           <p className="eyebrow mb-6">Our Methodology</p>
@@ -51,7 +52,7 @@ export default function MethodologyPage() {
           <ol className="space-y-0">
             {journeyStages.map((s) => (
               <li key={s.n} className="grid gap-6 border-t border-line-light py-10 first:border-t-0 sm:grid-cols-[120px_1fr] sm:gap-10">
-                <span className="font-heading text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-none tracking-[-0.045em] text-ink/15">
+                <span className="font-heading text-[clamp(2.5rem,5vw,4rem)] font-semibold leading-none tracking-[-0.045em] text-ink/55">
                   {String(s.n).padStart(2, '0')}
                 </span>
                 <div>

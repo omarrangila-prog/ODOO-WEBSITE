@@ -6,6 +6,7 @@ import { whatsappLink } from '@/lib/utilities';
 import { ContactForm } from '@/components/forms/ContactForm';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { JsonLd } from '@/components/ui/JsonLd';
+import { PageArt } from '@/components/cinema/PageArt';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Contact ODOOVATIONS | Software, AI & ERP Projects',
@@ -36,8 +37,7 @@ export default function ContactPage() {
       />
 
       <section className="theme-dark grain relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-24">
-        <div className="pointer-events-none absolute inset-0 arch-grid opacity-30" aria-hidden />
-        <div className="pointer-events-none absolute right-0 top-20 h-[460px] w-[460px] radial-core opacity-70" aria-hidden />
+        <PageArt variant={1} />
         <div className="shell relative">
           <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }]} />
 
@@ -65,7 +65,8 @@ export default function ContactPage() {
               </ul>
             </div>
 
-            <div id="form" className="scroll-mt-28 rounded-editorial border border-line bg-graphite/60 p-6 shadow-float sm:p-8">
+            <div id="form" className="scroll-mt-28 rounded-editorial border border-line bg-midnight/[0.94] p-6 shadow-float backdrop-blur-md sm:p-8">
+              {/* Near-opaque on purpose: a form needs a calm surface, so the hero artwork does not run behind the inputs. */}
               <ContactForm />
             </div>
           </div>

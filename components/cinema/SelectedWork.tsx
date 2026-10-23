@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { publishableProjects, statusLabel } from '@/data/projects';
 import { caseStudyHref } from '@/data/case-study-model';
 import { countries, flagEmoji } from '@/data/countries';
@@ -14,29 +15,25 @@ import { SectionHead, Accent } from './SectionHead';
  */
 const featured = ['kcci-election', 'al-jadeed-election', 'scrabble-timer', 'whatsapp-digital-connection'];
 
-function Lines({ seed }: { seed: number }) {
-  const paths = Array.from({ length: 16 }, (_, i) => {
-    const t = i / 15;
-    const y = 90 - t * 64;
-    const k = seed * 1.3;
-    return (
-      <path
-        key={i}
-        d={`M0 ${y.toFixed(1)} C 80 ${(y - 30 - Math.sin(k) * 14 - t * 10).toFixed(1)}, 190 ${(y + 26 + Math.cos(k) * 12 - t * 22).toFixed(1)}, 300 ${(y - 14 - t * 18 + seed * 3).toFixed(1)}`}
-        strokeOpacity={0.12 + t * 0.55}
-      />
-    );
-  });
+/**
+ * Each project panel is a different zoomed crop of the signature artwork: the
+ * peak, the long sweep, the lower arcs, the corner arc. It is one image the
+ * homepage has already loaded, so it costs nothing extra, and it reads as brand
+ * material and not as a picture of the system.
+ */
+const crops = [
+  { scale: 2.1, origin: '74% 28%' },
+  { scale: 1.7, origin: '92% 72%' },
+  { scale: 2.7, origin: '60% 64%' },
+  { scale: 2.2, origin: '96% 14%' },
+] as const;
+
+function Crop({ index }: { index: number }) {
+  const c = crops[index % crops.length] as (typeof crops)[number];
   return (
-    <svg viewBox="0 0 300 120" aria-hidden className="h-full w-full" fill="none" stroke="url(#work-grad)" strokeWidth="0.7" preserveAspectRatio="none">
-      <defs>
-        <linearGradient id="work-grad" x1="0" x2="1">
-          <stop offset="0" stopColor="#6b3df0" />
-          <stop offset="1" stopColor="#d8c8ff" />
-        </linearGradient>
-      </defs>
-      {paths}
-    </svg>
+    <span className="absolute inset-0 block" style={{ transform: `scale(${c.scale})`, transformOrigin: c.origin }}>
+      <Image src="/art/ribbon-wide.webp" alt="" fill unoptimized sizes="(min-width: 768px) 50vw, 100vw" className="object-cover object-right mix-blend-screen" />
+    </span>
   );
 }
 
@@ -65,11 +62,11 @@ export function SelectedWork() {
             const country = p.evidence.countryPublic && p.countryCode ? countries.find((c) => c.code === p.countryCode) : undefined;
             const inner = (
               <>
-                <span className="relative block aspect-[5/2] overflow-hidden rounded-[22px] border border-line bg-[radial-gradient(ellipse_at_70%_30%,rgba(100,60,230,0.28),transparent_70%)]">
-                  <span className="absolute inset-0 opacity-90 transition-transform duration-[1200ms] ease-premium group-hover:scale-[1.04] motion-reduce:transform-none">
-                    <Lines seed={i + 1} />
+                <span className="relative block aspect-[5/2] overflow-hidden rounded-[22px] border border-line bg-midnight">
+                  <span aria-hidden className="absolute inset-0 block transition-transform duration-[1400ms] ease-premium group-hover:scale-[1.06] motion-reduce:transform-none">
+                    <Crop index={i} />
                   </span>
-                  <span className="absolute left-5 top-4 text-[12px] tracking-[0.18em] text-violet/90">
+                  <span className="absolute left-5 top-4 z-10 text-[12px] tracking-[0.18em] text-violet-bright">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                 </span>

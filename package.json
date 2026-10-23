@@ -10,7 +10,8 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "team:check": "tsx scripts/team-data-check.ts",
-    "case-study:check": "tsx scripts/case-study-check.ts"
+    "case-study:check": "tsx scripts/case-study-check.ts",
+    "art:render": "RIBBON_Q=74 node scripts/render-ribbon.mjs public/art/ribbon-wide.webp 1920 1080 0 high && RIBBON_Q=74 node scripts/render-ribbon.mjs public/art/ribbon-mobile.webp 760 860 0 medium"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

@@ -64,7 +64,8 @@ export function Transformation() {
     root.querySelectorAll<HTMLElement>('[data-problem]').forEach((li, i) => {
       // Problems recede as the system comes together, staggered.
       const t = smoothstep(0.2 + i * 0.06, 0.55 + i * 0.06, raw);
-      li.style.opacity = String(prefersReducedMotion() ? 0.9 : 1 - 0.55 * t);
+      // Floor of 0.78: muted body text drops to 4.5:1 at 0.70, so 0.78 keeps a margin.
+      li.style.opacity = String(prefersReducedMotion() ? 0.9 : 1 - 0.22 * t);
     });
   }, []);
 

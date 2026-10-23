@@ -160,13 +160,13 @@ export function WorkGrid() {
         {/* Search */}
         <label className="relative block max-w-xl">
           <span className="sr-only">Search projects, systems or industries</span>
-          <Search className="pointer-events-none absolute left-4 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-ink/40" aria-hidden />
+          <Search className="pointer-events-none absolute left-4 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-ink/55" aria-hidden />
           <input
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search projects, systems or industries…"
-            className="w-full rounded-control border border-line-light bg-white/[0.035] py-3.5 pl-11 pr-4 text-[16px] text-ink placeholder:text-ink/40 focus:border-violet focus:outline-none focus:ring-2 focus:ring-violet/20"
+            className="w-full rounded-control border border-line-light bg-white/[0.035] py-3.5 pl-11 pr-4 text-[16px] text-ink placeholder:text-ink/55 focus:border-violet focus:outline-none focus:ring-2 focus:ring-violet/20"
           />
         </label>
 
@@ -189,7 +189,7 @@ export function WorkGrid() {
                 )}
               >
                 {f}
-                <span className={cn('text-[12px]', active === f ? 'text-violet/70' : 'text-ink/40')}>
+                <span className={cn('text-[12px]', active === f ? 'text-violet/80' : 'text-ink/55')}>
                   {counts[f]}
                 </span>
               </button>
@@ -263,7 +263,7 @@ export function WorkGrid() {
                         </span>
                       )}
                       {it.href && (
-                        <ArrowUpRight className="h-5 w-5 shrink-0 text-ink/30 transition-all group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-violet" aria-hidden />
+                        <ArrowUpRight className="h-5 w-5 shrink-0 text-ink/55 transition-all group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-violet" aria-hidden />
                       )}
                     </div>
                   </Card>

@@ -15,6 +15,7 @@ import { JsonLd } from '@/components/ui/JsonLd';
 import { AnswerCard } from '@/components/ui/AnswerCard';
 import { FlowDiagram } from '@/components/ui/FlowDiagram';
 import { TextGap } from '@/components/ui/TextGap';
+import { PageArt } from '@/components/cinema/PageArt';
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -83,8 +84,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       <article>
         {/* Hero */}
         <section className="theme-dark grain relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-24">
-          <div className="pointer-events-none absolute inset-0 arch-grid opacity-30" aria-hidden />
-          <div className="pointer-events-none absolute right-0 top-16 h-[460px] w-[460px] radial-core opacity-70" aria-hidden />
+          <PageArt variant={2} />
           <div className="shell relative">
             <Breadcrumbs items={crumbs} />
             <p className="eyebrow mb-6">{division ? division.title : 'Odoo & ERP'}</p>
@@ -144,7 +144,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                 {service.whatWeDo.map((w, i) => (
                   <div key={w.title} className="flex gap-5 border-t border-line-light pt-6 first:border-t-0 first:pt-0">
                     {i > 0 && ' '}
-                    <span className="font-heading text-[22px] font-semibold leading-none text-ink/20" aria-hidden>{String(i + 1).padStart(2, '0')}</span>{' '}
+                    <span className="font-heading text-[22px] font-semibold leading-none text-ink/55" aria-hidden>{String(i + 1).padStart(2, '0')}</span>{' '}
                     <div>
                       <h3 className="display-3 text-[clamp(20px,2vw,26px)] font-semibold">{w.title}</h3>{' '}
                       <p className="mt-2 text-[16px] leading-relaxed text-ink-muted">{w.body}</p>
@@ -164,7 +164,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               <ol className="mt-9 border-t border-line">
                 {service.process.map((step, i) => (
                   <li key={step} className="flex items-center gap-5 border-b border-line py-5">
-                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[linear-gradient(120deg,#7C4DFF,#E947C6)] text-[15px] font-bold text-white" aria-hidden>{i + 1}</span>{' '}
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[linear-gradient(120deg,#6a3df0,#8247f5)] text-[15px] font-bold text-white" aria-hidden>{i + 1}</span>{' '}
                     <span className="text-[17px] font-medium text-text-dark">{step}</span>
                   </li>
                 ))}

@@ -9,6 +9,7 @@ import { CtaBand } from '@/components/ui/CtaBand';
 import { DevPlaceholder } from '@/components/ui/DevPlaceholder';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { TextGap } from '@/components/ui/TextGap';
+import { PageArt } from '@/components/cinema/PageArt';
 
 export function generateStaticParams() {
   return caseStudies.map((c) => ({ slug: c.slug }));
@@ -38,7 +39,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
     <>
       <JsonLd data={[webPageSchema(`${cs.label} — Odoo Case Study`, `/case-studies/${cs.slug}`, cs.challenge), breadcrumbSchema(crumbs)]} />
       <article className="theme-dark grain relative overflow-hidden bay-sm pt-32 sm:pt-36">
-        <div className="pointer-events-none absolute inset-0 arch-grid opacity-25" aria-hidden />
+        <PageArt variant={0} />
         <div className="shell relative">
           <Breadcrumbs items={crumbs} />
           <p className="eyebrow mb-6">{cs.industry}</p>

@@ -10,6 +10,7 @@ import { Accordion } from '@/components/ui/Accordion';
 import { CtaBand } from '@/components/ui/CtaBand';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { TextGap } from '@/components/ui/TextGap';
+import { PageArt } from '@/components/cinema/PageArt';
 
 export function generateStaticParams() {
   return resources.map((r) => ({ slug: r.slug }));
@@ -61,7 +62,7 @@ export default function ResourcePage({ params }: { params: { slug: string } }) {
       <article>
         {/* Header */}
         <section className="theme-dark grain relative overflow-hidden pt-32 pb-14 sm:pt-40 sm:pb-20">
-          <div className="pointer-events-none absolute inset-0 arch-grid opacity-30" aria-hidden />
+          <PageArt variant={5} />
           <div className="shell relative">
             <Breadcrumbs items={crumbs} />
             <p className="eyebrow mb-6">{r.eyebrow}</p>

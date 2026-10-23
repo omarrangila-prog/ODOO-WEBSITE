@@ -85,7 +85,11 @@ export function HeroMarkers() {
                   k === i ? 'text-white' : 'text-text-dark-muted hover:text-white',
                 )}
               >
-                {m.n}{' '}<span aria-hidden className="hidden sm:inline">/ </span>{m.label}
+                {/* One span so it flows as text: whitespace between flex items is discarded. */}
+                <span>
+                  {m.n} <span aria-hidden className="hidden sm:inline">/ </span>
+                  {m.label}
+                </span>
               </button>
             </li>
           ))}

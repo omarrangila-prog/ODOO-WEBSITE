@@ -190,7 +190,7 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
                           {b.label}
                         </span>
                         <ArrowUpRight
-                          className="h-4 w-4 shrink-0 text-ink/30 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-violet"
+                          className="h-4 w-4 shrink-0 text-ink/55 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-violet"
                           aria-hidden
                         />
                       </span>

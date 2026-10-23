@@ -140,7 +140,7 @@ export function CustomStory() {
               }}
               className="flex min-h-[70vh] flex-col justify-center border-t border-line-light py-10 first:border-t-0 lg:min-h-[80vh]"
             >
-              <span className="font-heading text-[clamp(3rem,8vw,6rem)] font-semibold leading-none tracking-[-0.04em] text-ink/10" aria-hidden>
+              <span className="font-heading text-[clamp(3rem,8vw,6rem)] font-semibold leading-none tracking-[-0.04em] text-ink/55" aria-hidden>
                 {stage.n}
               </span>{' '}
               <h3 className="mt-4 font-heading text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold tracking-[-0.035em]">

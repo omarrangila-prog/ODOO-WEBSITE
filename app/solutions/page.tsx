@@ -11,6 +11,7 @@ import { AnswerCard } from '@/components/ui/AnswerCard';
 import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
 import { SolutionFinder } from '@/components/solutions/SolutionFinder';
 import { TextGap } from '@/components/ui/TextGap';
+import { PageArt } from '@/components/cinema/PageArt';
 
 const PATH = '/solutions';
 const DESCRIPTION =
@@ -49,8 +50,7 @@ export default function SolutionsIndex() {
       />
 
       <section className="theme-dark grain relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-24">
-        <div className="pointer-events-none absolute inset-0 arch-grid opacity-30" aria-hidden />
-        <div className="pointer-events-none absolute right-[6%] top-1/4 h-[460px] w-[460px] radial-core opacity-70" aria-hidden />
+        <PageArt variant={1} />
         <div className="shell relative">
           <Breadcrumbs items={crumbs} />
           <p className="eyebrow mb-6">Solutions</p>

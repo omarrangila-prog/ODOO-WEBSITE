@@ -124,7 +124,7 @@ export function BuildAutomateGrow() {
               <ol className="flex items-center gap-3 text-[13px] tracking-[0.16em]" aria-hidden>
                 {words.map((w, i) => (
                   <li key={w.word} className="flex items-center gap-3">
-                    <span className={cn('transition-colors duration-500', i === active ? 'text-white' : 'text-text-dark-muted/60')}>
+                    <span className={cn('transition-colors duration-500', i === active ? 'text-white' : 'text-text-dark-muted/80')}>
                       0{i + 1}
                     </span>
                     {i < words.length - 1 && <span className="h-px w-8 bg-white/20" />}

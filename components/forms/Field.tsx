@@ -33,7 +33,7 @@ export function Field({ label, htmlFor, error, required, children, className, hi
 }
 
 export const inputClass =
-  'w-full rounded-control border border-line bg-white/[0.03] px-4 py-3 text-[15px] text-text-dark placeholder:text-text-dark-muted/55 transition-[border-color,box-shadow,background-color] duration-200 hover:border-line-strong focus:border-violet-bright/70 focus:bg-white/[0.05] focus:outline-none focus:ring-[3px] focus:ring-violet/20 min-h-[48px] aria-[invalid=true]:border-[#ff8a8f]/60 aria-[invalid=true]:focus:ring-[#ff8a8f]/20';
+  'w-full rounded-control border border-line bg-white/[0.03] px-4 py-3 text-[15px] text-text-dark placeholder:text-text-dark-muted/80 transition-[border-color,box-shadow,background-color] duration-200 hover:border-line-strong focus:border-violet-bright/70 focus:bg-white/[0.05] focus:outline-none focus:ring-[3px] focus:ring-violet/20 min-h-[48px] aria-[invalid=true]:border-[#ff8a8f]/60 aria-[invalid=true]:focus:ring-[#ff8a8f]/20';
 
 export function fieldInvalid(error?: string) {
   return error ? { 'aria-invalid': true as const } : {};

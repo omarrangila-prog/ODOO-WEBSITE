@@ -60,7 +60,7 @@ export function JourneyRoute() {
             <span className="absolute left-[35px] top-6 bottom-6 w-px bg-line" aria-hidden />
             {/* progress line */}
             <m.span
-              className="absolute left-[35px] top-6 w-px origin-top bg-[linear-gradient(180deg,#7C4DFF,#E947C6)]"
+              className="absolute left-[35px] top-6 w-px origin-top bg-[linear-gradient(180deg,#6a3df0,#8247f5)]"
               style={{ bottom: 24, scaleY: reduce ? 1 : lineScale }}
               aria-hidden
             />
@@ -84,7 +84,7 @@ export function JourneyRoute() {
                       className={cn(
                         'relative z-10 grid h-[54px] w-[54px] shrink-0 place-items-center rounded-full border font-heading text-[15px] font-semibold transition-all duration-300',
                         on
-                          ? 'border-violet-bright bg-[linear-gradient(120deg,#7C4DFF,#E947C6)] text-white shadow-cta scale-105'
+                          ? 'border-violet-bright bg-[linear-gradient(120deg,#6a3df0,#8247f5)] text-white shadow-cta scale-105'
                           : done
                             ? 'border-green/40 bg-green/10 text-green'
                             : 'border-line bg-graphite text-text-dark-muted group-hover:border-line-strong group-hover:text-text-dark',
@@ -133,7 +133,7 @@ export function JourneyRoute() {
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   className="relative"
                 >
-                  <span className="mt-4 block font-heading text-[clamp(4rem,9vw,7rem)] font-semibold leading-none tracking-[-0.05em] text-text-dark/10">
+                  <span className="mt-4 block font-heading text-[clamp(4rem,9vw,7rem)] font-semibold leading-none tracking-[-0.05em] text-text-dark/70">
                     {String(stage.n).padStart(2, '0')}
                   </span>
                   <h3 className="mt-2 font-heading text-[clamp(1.75rem,4vw,2.75rem)] font-semibold tracking-[-0.035em]">

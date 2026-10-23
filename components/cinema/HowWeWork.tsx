@@ -31,7 +31,8 @@ export function HowWeWork() {
     el.style.setProperty('--fill', String(reduced ? 1 : p));
     el.querySelectorAll<HTMLElement>('[data-stage]').forEach((li, i) => {
       const reached = reduced || p >= (i + 0.35) / stages.length;
-      li.style.opacity = reached ? '1' : '0.38';
+      // Unreached stages dim only their large heading (see .stage-row in globals.css): dimming
+      // the whole row with opacity cannot keep body text at 4.5:1 at any useful level.
       li.dataset.reached = reached ? 'true' : 'false';
     });
   }, []);
@@ -63,7 +64,7 @@ export function HowWeWork() {
           />
           <ol className="grid gap-[clamp(28px,4vw,56px)]">
             {stages.map(([name, body, who], i) => (
-              <li key={name} data-stage className="relative grid gap-x-10 gap-y-2 transition-opacity duration-500 md:grid-cols-[1fr_1.3fr]">
+              <li key={name} data-stage className="stage-row relative grid gap-x-10 gap-y-2 md:grid-cols-[1fr_1.3fr]">
                 <span
                   aria-hidden
                   className="absolute -left-8 top-[0.9rem] h-[15px] w-[15px] rounded-full border border-violet-bright/70 bg-midnight md:-left-14 md:h-[31px] md:w-[31px]"
@@ -74,7 +75,7 @@ export function HowWeWork() {
                   style={{ opacity: 'var(--fill)' as unknown as number }}
                 />
                 <h3 className="font-heading text-[clamp(30px,4vw,64px)] font-semibold leading-none tracking-[-0.04em] text-white">
-                  <span aria-hidden className="mr-4 align-middle text-[13px] font-normal tracking-[0.18em] text-violet/80">
+                  <span aria-hidden className="mr-4 align-middle text-[13px] font-normal tracking-[0.18em] text-violet">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   {name}

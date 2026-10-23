@@ -47,7 +47,7 @@ export function MobileCtaBar() {
       aria-hidden={!visible}
       {...inertWhenHidden(visible)}
     >
-      <div className="glass mx-auto grid max-w-md grid-cols-3 gap-1.5 rounded-2xl p-1.5">
+      <div className="glass mx-auto grid max-w-md grid-cols-3 gap-1.5 rounded-[22px] p-1.5">
         <a
           href={waHref}
           target={waConfigured ? '_blank' : undefined}
@@ -69,7 +69,7 @@ export function MobileCtaBar() {
         <Link
           href="/contact#form"
           onClick={() => track('hero_primary_cta_click', { source: 'mobile_bar' })}
-          className="flex min-h-[48px] flex-col items-center justify-center gap-0.5 rounded-xl bg-[linear-gradient(100deg,#7C4DFF,#E947C6)] text-white"
+          className="flex min-h-[48px] flex-col items-center justify-center gap-0.5 rounded-xl bg-white text-[#050509]"
         >
           <CalendarCheck className="h-5 w-5" aria-hidden />
           <span className="text-[11px] font-semibold">Consult</span>

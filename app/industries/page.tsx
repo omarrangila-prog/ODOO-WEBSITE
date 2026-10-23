@@ -11,6 +11,7 @@ import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
 import { ClipReveal } from '@/components/ui/motion/ClipReveal';
 import { cn } from '@/lib/utilities';
 import { TextGap } from '@/components/ui/TextGap';
+import { PageArt } from '@/components/cinema/PageArt';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Odoo Solutions by Industry',
@@ -30,8 +31,7 @@ export default function IndustriesIndex() {
       <JsonLd data={breadcrumbSchema(crumbs)} />
 
       <section className="theme-dark grain relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-24">
-        <div className="pointer-events-none absolute inset-0 arch-grid opacity-30" aria-hidden />
-        <div className="pointer-events-none absolute left-[55%] top-1/3 h-[460px] w-[520px] radial-core opacity-70" aria-hidden />
+        <PageArt variant={5} />
         <div className="shell relative">
           <Breadcrumbs items={crumbs} />
           <p className="eyebrow mb-6">Industries</p>
@@ -85,7 +85,7 @@ export default function IndustriesIndex() {
                 </div>
 
                 <div className={cn(reversed && 'lg:order-1')}>
-                  <span className="font-heading text-[clamp(2rem,3vw,2.75rem)] font-semibold leading-none tracking-[-0.045em] text-ink/15">
+                  <span className="font-heading text-[clamp(2rem,3vw,2.75rem)] font-semibold leading-none tracking-[-0.045em] text-ink/55">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <h2 className="display-3 mt-3 font-semibold">{ind.name}</h2>

@@ -47,7 +47,7 @@ export default function AdminPage() {
             className="flex-1 rounded-control border border-line bg-white/[0.03] px-4 py-3 text-[15px] text-text-dark min-h-[48px]"
             aria-label="Admin token"
           />
-          <button type="button" onClick={load} disabled={loading || !token} className="rounded-control bg-[linear-gradient(100deg,#7C4DFF,#E947C6)] px-6 py-3 font-semibold text-white min-h-[48px] disabled:opacity-50">
+          <button type="button" onClick={load} disabled={loading || !token} className="rounded-control bg-[linear-gradient(100deg,#6a3df0,#8247f5)] px-6 py-3 font-semibold text-white min-h-[48px] disabled:opacity-50">
             {loading ? 'Loading…' : 'Load'}
           </button>
         </div>

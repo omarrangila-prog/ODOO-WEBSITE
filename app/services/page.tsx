@@ -14,6 +14,7 @@ import { CustomStory } from '@/components/home/CustomStory';
 import { JourneyRoute } from '@/components/home/JourneyRoute';
 import { MotionRoot } from '@/components/ui/motion/MotionRoot';
 import { TextGap } from '@/components/ui/TextGap';
+import { PageArt } from '@/components/cinema/PageArt';
 
 const PATH = '/services';
 const DESCRIPTION =
@@ -53,8 +54,7 @@ export default function ServicesIndex() {
 
       {/* Editorial header */}
       <section className="theme-dark grain relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-24">
-        <div className="pointer-events-none absolute inset-0 arch-grid opacity-30" aria-hidden />
-        <div className="pointer-events-none absolute right-[6%] top-1/4 h-[460px] w-[460px] radial-core opacity-70" aria-hidden />
+        <PageArt variant={0} />
         <div className="shell relative">
           <Breadcrumbs items={crumbs} />
           <p className="eyebrow mb-6">What we do</p>
@@ -96,10 +96,10 @@ export default function ServicesIndex() {
               <div className="grid gap-10 lg:grid-cols-[1fr_1.45fr] lg:gap-16">
                 <div className="lg:sticky lg:top-28 lg:h-fit lg:self-start">
                   <div className="flex items-center gap-3">
-                    <span className="font-heading text-[14px] font-semibold text-ink/25">
+                    <span className="font-heading text-[14px] font-semibold text-ink/55">
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <span className="grid h-11 w-11 place-items-center rounded-control bg-[linear-gradient(120deg,#7C4DFF,#E947C6)] text-white">
+                    <span className="grid h-11 w-11 place-items-center rounded-control bg-[linear-gradient(120deg,#6a3df0,#8247f5)] text-white">
                       <d.icon className="h-5 w-5" aria-hidden />
                     </span>
                   </div>

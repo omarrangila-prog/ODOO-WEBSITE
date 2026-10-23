@@ -85,7 +85,7 @@ export function ConsentBanner() {
             )}
 
             <div className="mt-4 flex flex-wrap gap-2.5">
-              <button type="button" onClick={() => apply(acceptAll())} className="rounded-control bg-[linear-gradient(100deg,#7C4DFF,#E947C6)] px-4 py-2.5 text-[14px] font-semibold text-white min-h-[44px]">
+              <button type="button" onClick={() => apply(acceptAll())} className="rounded-control bg-[linear-gradient(100deg,#6a3df0,#8247f5)] px-4 py-2.5 text-[14px] font-semibold text-white min-h-[44px]">
                 Accept all
               </button>
               <button type="button" onClick={() => apply(rejectAll())} className="rounded-control border border-line-strong px-4 py-2.5 text-[14px] font-semibold text-text-dark min-h-[44px] hover:bg-white/5">
@@ -126,7 +126,7 @@ function ToggleRow({ label, desc, checked, onChange, disabled }: { label: string
         aria-label={label}
         disabled={disabled}
         onClick={() => onChange?.(!checked)}
-        className={`relative h-6 w-11 shrink-0 rounded-full border transition-colors ${checked ? 'border-violet-bright/60 bg-[linear-gradient(100deg,#7C4DFF,#E947C6)]' : 'border-line-strong bg-white/5'} ${disabled ? 'opacity-60' : ''}`}
+        className={`relative h-6 w-11 shrink-0 rounded-full border transition-colors ${checked ? 'border-violet-bright/60 bg-[linear-gradient(100deg,#6a3df0,#8247f5)]' : 'border-line-strong bg-white/5'} ${disabled ? 'opacity-60' : ''}`}
       >
         <span className={`absolute top-0.5 h-4.5 w-4.5 rounded-full bg-white transition-all ${checked ? 'left-[22px]' : 'left-0.5'}`} style={{ height: 18, width: 18 }} />
       </button>

@@ -46,6 +46,7 @@ export const primaryNav: NavItem[] = [
     href: '/services',
     match: ['/services', '/solutions', '/industries', '/locations'],
     children: [
+      { label: 'All services', href: '/services', description: 'The full list of what each capability covers.', group: 'Capabilities' },
       ...divisions.map((d) => ({ label: d.label, href: d.href, description: d.summary, group: 'Capabilities' })),
       { label: 'All solutions', href: '/solutions', group: 'Solutions' },
       { label: 'Accounting Software', href: '/solutions/accounting-software', group: 'Solutions' },

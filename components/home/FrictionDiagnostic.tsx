@@ -3,6 +3,7 @@
 import { useMemo } from 'react';
 import { frictionItems, computeFriction, type FrictionStatus } from '@/data/calculator';
 import { useRoadmap } from './RoadmapContext';
+import { SectionHead, Accent } from '@/components/cinema/SectionHead';
 import { formatHourRange, cn } from '@/lib/utilities';
 import { TextGap } from '@/components/ui/TextGap';
 
@@ -10,7 +11,7 @@ const statusMap: Record<FrictionStatus, { label: string; tone: string; bar: stri
   Low: { label: 'Controlled', tone: 'text-green', bar: '#38D39F' },
   Moderate: { label: 'Under Pressure', tone: 'text-cyan', bar: '#56C7E8' },
   High: { label: 'Fragmented', tone: 'text-amber', bar: '#F1A44B' },
-  Critical: { label: 'Critical', tone: 'text-magenta', bar: '#E947C6' },
+  Critical: { label: 'Critical', tone: 'text-[#ff8a8f]', bar: '#FF8A8F' },
 };
 
 const SEGMENTS = 12;
@@ -27,12 +28,16 @@ export function FrictionDiagnostic() {
       <div className="pointer-events-none absolute right-0 top-1/2 h-[420px] w-[420px] -translate-y-1/2 radial-core opacity-70" aria-hidden />
       <div className="shell relative grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
         <div className="lg:sticky lg:top-28 lg:h-fit lg:self-start">
-          <p className="eyebrow mb-6">Operational Diagnostic</p>
-          <TextGap />
-          <h2 className="display-2">
-            Where Is Your Business{' '}
-            <span className="signal-text">Losing Control?</span>
-          </h2>{' '}
+          <SectionHead
+            index="08"
+            label="Operational diagnostic"
+            title={
+              <>
+                Where is your business <Accent>losing control?</Accent>
+              </>
+            }
+            titleClassName="!text-[clamp(34px,4vw,64px)]"
+          />{' '}
           <p className="lede mt-6 max-w-md">
             Switch on the friction your team feels every week. We&rsquo;ll read the signal&mdash;and
             carry your selections down to a personalised roadmap request at the end of the page.
@@ -63,7 +68,7 @@ export function FrictionDiagnostic() {
                       )}
                     >
                       <span className="leading-snug">{item.label}</span>
-                      <span className={cn('relative h-5 w-9 shrink-0 rounded-full border transition-colors', on ? 'border-violet-bright/60 bg-[linear-gradient(100deg,#7C4DFF,#E947C6)]' : 'border-line-strong bg-white/5')} aria-hidden>
+                      <span className={cn('relative h-5 w-9 shrink-0 rounded-full border transition-colors', on ? 'border-violet-bright/60 bg-[linear-gradient(100deg,#6a3df0,#8247f5)]' : 'border-line-strong bg-white/5')} aria-hidden>
                         <span className={cn('absolute top-0.5 h-3.5 w-3.5 rounded-full bg-white transition-all', on ? 'left-[18px]' : 'left-0.5')} />
                       </span>
                     </button>

@@ -29,12 +29,22 @@ const browser = await chromium.launch();
 const all = [];
 let totalViolations = 0;
 
-for (const scheme of ['dark', 'light']) {
+// One scheme: the site has no light mode any more, so scanning two just repeats the result.
+for (const scheme of ['dark']) {
   for (const [name, path] of pages) {
     const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, colorScheme: scheme });
     const page = await ctx.newPage();
     await page.goto(`${BASE}${path}`, { waitUntil: 'networkidle' }).catch(() => {});
-    await page.waitForTimeout(500);
+    // Scroll the whole page first, as a reader does. Scroll-in reveals hold content at partial
+    // opacity until it is reached, and axe measures contrast at that opacity, so an unscrolled
+    // scan reports text that is only mid-fade, not what anyone actually sees.
+    const total = await page.evaluate(() => document.documentElement.scrollHeight);
+    for (let y = 0; y < total; y += 500) {
+      await page.evaluate((v) => window.scrollTo(0, v), y);
+      await page.waitForTimeout(60);
+    }
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.waitForTimeout(1300);
     const res = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
       .analyze()
@@ -56,7 +66,7 @@ for (const scheme of ['dark', 'light']) {
 }
 
 writeFileSync('reports/accessibility-audit.json', JSON.stringify({ base: BASE, totalViolations, violations: all }, null, 2));
-console.log(`axe scanned ${pages.length} pages × 2 themes`);
+console.log(`axe scanned ${pages.length} pages (dark, the only scheme)`);
 console.log(`Total violations: ${totalViolations}`);
 if (all.length) {
   const byId = {};

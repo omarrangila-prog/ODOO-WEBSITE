@@ -4,6 +4,7 @@ import { Inter, Inter_Tight, Instrument_Serif } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { CinemaFrame } from '@/components/layout/CinemaFrame';
+import { ScrollReveal } from '@/components/cinema/ScrollReveal';
 import { Footer } from '@/components/layout/Footer';
 import { MobileCtaBar } from '@/components/layout/MobileCtaBar';
 import { Analytics } from '@/components/seo/Analytics';
@@ -106,11 +107,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-control focus:bg-[linear-gradient(100deg,#7C4DFF,#E947C6)] focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-control focus:bg-[linear-gradient(100deg,#6a3df0,#8247f5)] focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
         >
           Skip to content
         </a>
         <CinemaFrame />
+        <ScrollReveal />
         <Header />
         <main id="main">{children}</main>
         <Footer />

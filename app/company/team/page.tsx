@@ -20,6 +20,7 @@ import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
 import { DepartmentExplorer } from '@/components/team/DepartmentExplorer';
 import { TeamStructure } from '@/components/team/TeamStructure';
 import { TeamWorkflow } from '@/components/team/TeamWorkflow';
+import { PageArt } from '@/components/cinema/PageArt';
 
 // Kept under the audit's 65-character limit, which it measures on the HTML-encoded
 // title (each "&" counts as "&amp;"). The brief's "Our Team | …" version measured 66.
@@ -55,8 +56,7 @@ export default function TeamPage() {
 
       {/* 1 — Hero */}
       <section className="theme-dark grain relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-24">
-        <div className="pointer-events-none absolute inset-0 arch-grid opacity-30" aria-hidden />
-        <div className="pointer-events-none absolute right-[8%] top-1/4 h-[440px] w-[440px] radial-core opacity-70" aria-hidden />
+        <PageArt variant={4} />
         <div className="shell relative">
           <Breadcrumbs items={crumbs} />
           <p className="eyebrow mb-6">The people behind ODOOVATIONS</p>{' '}

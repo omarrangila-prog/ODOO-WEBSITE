@@ -22,6 +22,8 @@ export function Header() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navRef = useRef<HTMLElement>(null);
+  /** The item whose menu was opened by a click or key press, as opposed to by hover. */
+  const clickOpened = useRef<string | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -31,23 +33,47 @@ export function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Close an open dropdown on route change and on an outside click.
+  // Close an open dropdown on route change, on an outside click and on Escape.
   useEffect(() => setOpenDropdown(null), [pathname]);
+  // Whatever closed it, the next open starts fresh.
+  useEffect(() => {
+    if (!openDropdown) clickOpened.current = null;
+  }, [openDropdown]);
   useEffect(() => {
     if (!openDropdown) return;
     const onDown = (e: MouseEvent) => {
       if (navRef.current && !navRef.current.contains(e.target as Node)) setOpenDropdown(null);
     };
+    // Escape dismisses from anywhere: a menu opened by hover has no focus inside it,
+    // and WCAG 1.4.13 asks for a way to dismiss without moving the pointer.
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      const inside = navRef.current?.contains(document.activeElement);
+      const trigger = navRef.current?.querySelector<HTMLElement>(`[data-nav="${openDropdown}"]`);
+      setOpenDropdown(null);
+      clickOpened.current = null;
+      if (inside) trigger?.focus();
+    };
     document.addEventListener('mousedown', onDown);
-    return () => document.removeEventListener('mousedown', onDown);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onDown);
+      document.removeEventListener('keydown', onKey);
+    };
   }, [openDropdown]);
 
   function openMenu(label: string) {
     if (closeTimer.current) clearTimeout(closeTimer.current);
+    // Moving to a different menu releases a click-held one.
+    if (clickOpened.current && clickOpened.current !== label) clickOpened.current = null;
     setOpenDropdown(label);
   }
   function scheduleClose() {
-    closeTimer.current = setTimeout(() => setOpenDropdown(null), 140);
+    closeTimer.current = setTimeout(() => {
+      // A menu the visitor opened by click stays open until dismissed.
+      if (clickOpened.current) return;
+      setOpenDropdown(null);
+    }, 140);
   }
 
   const isActive = (item: NavItem) => {
@@ -103,12 +129,6 @@ export function Header() {
                     className="relative"
                     onMouseEnter={() => item.children && openMenu(item.label)}
                     onMouseLeave={() => item.children && scheduleClose()}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Escape' && open) {
-                        setOpenDropdown(null);
-                        (e.currentTarget.querySelector('button') as HTMLElement | null)?.focus();
-                      }
-                    }}
                     onBlur={(e) => {
                       if (open && !e.currentTarget.contains(e.relatedTarget as Node | null)) setOpenDropdown(null);
                     }}
@@ -119,7 +139,17 @@ export function Header() {
                           type="button"
                           aria-expanded={open}
                           aria-haspopup="true"
-                          onClick={() => setOpenDropdown((p) => (p === item.label ? null : item.label))}
+                          data-nav={item.label}
+                          onClick={() => {
+                            if (open && clickOpened.current === item.label) {
+                              setOpenDropdown(null);
+                              clickOpened.current = null;
+                            } else {
+                              // Opened by hover already? Keep it open instead of toggling it shut.
+                              clickOpened.current = item.label;
+                              openMenu(item.label);
+                            }
+                          }}
                           className={itemClass}
                         >
                           {item.label}
