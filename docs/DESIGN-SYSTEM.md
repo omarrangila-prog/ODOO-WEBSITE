@@ -137,6 +137,31 @@ would, and they are never to be mistaken for one:
 - on the homepage a phone opens a demonstration on request ("Open the working
   demonstration"), so the section stays short.
 
+## The "one system" diagram (`components/ui/OneSystemDiagram.tsx`)
+
+Eight parts of a business (sales, team, inventory, accounting, customers, website,
+WhatsApp, reports) joined to a hub. It replaced the old homepage figure, whose
+spokes ran through the hub to its centre, whose nodes were uneven text pills and
+which had no depth. It is shown beside the hero of the Odoo implementation page
+(`visual: 'one-system'` in `data/service-extras.ts`); any service can opt in.
+
+- **Geometry is computed**, in one 600 x 600 space: nodes at 45 degree steps on one
+  ring, every spoke from the hub edge to the node edge, labels on the outer side of
+  their node. `node scripts/one-system-check.mjs` asserts all of it.
+- **Arrival**, once, when a quarter of it is on screen: scattered nodes glide into the
+  ring, the spokes draw in (`pathLength` dash), the hub lights. CSS transitions keyed
+  on `data-in`.
+- **Idle**: dashes and SVG packets travel along the spokes in both directions, a bright
+  arc circles the hub rim, a dotted ring creeps round the outside, nodes drift 2.5px,
+  hovering a node lights its spoke.
+- **Rules it keeps**: the finished drawing is in the HTML (the hidden starting state only
+  exists after `OneSystemStage` arms it); everything pauses off screen, under reduced
+  motion, under `html[data-motion=paused]`, and from its own visible Pause button
+  (SVG packets are held with `pauseAnimations()`, which CSS cannot reach); its CSS
+  animations sit before the pause rules at the end of `globals.css`.
+- It is a picture of an idea with a text alternative and makes no claim about a client
+  or a result.
+
 ## Tabs and demonstrations
 
 The service explorer and the featured-work tabs render every panel in the

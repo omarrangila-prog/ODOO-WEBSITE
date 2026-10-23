@@ -30,6 +30,8 @@ export interface ServiceExtra {
   /** Systems it commonly connects to and what to watch for. */
   connects: string[];
   evidence: EvidenceItem[];
+  /** A drawing shown beside the hero text on large screens. */
+  visual?: 'one-system';
 }
 
 const noClientCaseStudy = (what: string): EvidenceItem => ({
@@ -39,6 +41,7 @@ const noClientCaseStudy = (what: string): EvidenceItem => ({
 
 export const serviceExtras: Record<string, ServiceExtra> = {
   'odoo-implementation-pakistan': {
+    visual: 'one-system',
     hook: 'Sales, stock and accounts, working from the same numbers.',
     audience: [
       'Businesses running on spreadsheets and disconnected tools.',

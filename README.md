@@ -100,6 +100,7 @@ Run against a server (`ODV_DRY_RUN=1 npx next start -p 3710`):
 node scripts/home-qa.mjs http://localhost:3710        # homepage behaviour, demonstrations, form paths, nav
 node scripts/ribbon-check.mjs http://localhost:3710   # hero ribbon off the main thread, pause control
 node scripts/demo-layout.mjs http://localhost:3710    # the three demonstrations at 360 to 1440px
+node scripts/one-system-check.mjs http://localhost:3710 # the one-system diagram: geometry, arrival, pause, reduced motion
 node scripts/visual-qa.mjs http://localhost:3710      # layout at 16 viewports x 20 pages
 node scripts/a11y.mjs http://localhost:3710           # axe, WCAG A/AA
 node scripts/contrast-check.mjs http://localhost:3710 # text contrast axe cannot resolve

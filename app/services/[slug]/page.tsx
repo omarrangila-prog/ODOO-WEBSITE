@@ -17,6 +17,7 @@ import { AnswerCard } from '@/components/ui/AnswerCard';
 import { FlowDiagram } from '@/components/ui/FlowDiagram';
 import { TextGap } from '@/components/ui/TextGap';
 import { PageArt } from '@/components/cinema/PageArt';
+import { OneSystemDiagram } from '@/components/ui/OneSystemDiagram';
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -89,6 +90,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           <PageArt variant={2} />
           <div className="shell relative">
             <Breadcrumbs items={crumbs} />
+            <div className={extra?.visual ? 'grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10' : ''}>
+            <div>
             <p className="eyebrow mb-6">{division ? division.title : 'Odoo & ERP'}</p>
             <h1 className="display-1 max-w-5xl">{service.title}</h1>{' '}
             <p className="mt-7 max-w-[var(--reading-width)] font-heading text-[clamp(20px,2.4vw,28px)] font-medium leading-[1.25] tracking-[-0.02em] text-text-dark">
@@ -110,6 +113,9 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                 {service.answer}
               </AnswerCard>
             )}
+            </div>
+            {extra?.visual === 'one-system' && <OneSystemDiagram />}
+            </div>
           </div>
         </section>
 

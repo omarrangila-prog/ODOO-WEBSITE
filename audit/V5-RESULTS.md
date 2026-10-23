@@ -73,3 +73,28 @@ runs. These are lab figures from Chromium on one machine, not what visitors see.
 - Real devices, Safari, Firefox, screen readers. The demonstrations are keyboard-operable and use native
   controls, but they have not been used with a screen reader.
 - Anything on the live domain: this pass is not deployed.
+
+## Addendum, 24 October 2026: the "one system" diagram (local preview, not deployed)
+
+The figure with eight business functions around "One system" was removed from the homepage when it was
+halved, and was redrawn after it was called cheap. What was wrong with the old one: the spokes ran through the
+hub to its centre and under its label, the nodes were plain text pills at uneven positions, and it had no depth
+or motion.
+
+The new `components/ui/OneSystemDiagram.tsx` computes its geometry (eight nodes at 45 degree steps, every spoke
+from the hub edge to the node edge, labels on the outer side) and adds motion: scattered nodes gather into the
+ring on arrival and the spokes draw in; then packets and dashes travel along the spokes both ways, a bright arc
+circles the hub, a ring of dots creeps round the outside, nodes drift slightly and hovering a node lights its
+spoke. It pauses off screen, under reduced motion, under the site-wide pause switch and from its own Pause
+button; without scripts the HTML is the finished drawing. It is placed beside the hero of
+`/services/odoo-implementation-pakistan`.
+
+| Check | Result |
+|---|---|
+| `one-system-check.mjs` (geometry, label clashes, arrival, idle, Pause, site switch, off screen, reduced motion, no scripts, 360px) | 20 of 20 pass |
+| `a11y.mjs` (26 pages) | 0 violations |
+| `contrast-check.mjs` | 0 below AA |
+| Lighthouse, that page, mobile | 89 and 93 (LCP 3.2 s, TBT 90 to 220 ms, CLS 0) |
+| Lighthouse, that page, desktop | 99 (LCP 0.9 s, CLS 0.021) |
+
+A short recording of the arrival, the idle motion and the hover state is `audit/v5/one-system-motion.webm`; stills are `audit/v5/one-system-desktop.jpg` and `one-system-mobile.jpg`.
