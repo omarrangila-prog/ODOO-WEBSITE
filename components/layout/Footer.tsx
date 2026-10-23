@@ -5,6 +5,7 @@ import { company, PLACEHOLDER } from '@/data/company';
 import { whatsappLink } from '@/lib/utilities';
 import { Logo } from './Logo';
 import { CookiePrefsLink } from '@/components/leadintel/CookiePrefsLink';
+import { FooterColumns } from './FooterColumns';
 
 const socialIcons = { linkedin: Linkedin, facebook: Facebook, instagram: Instagram, youtube: Youtube };
 
@@ -28,8 +29,8 @@ export function Footer() {
           leaves the text in textContent, which scrapers and AI retrieval read.
         */}
         {/* Navigation */}
-        <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.1fr_1fr_1fr_1.2fr]">
-          <div className="max-w-sm">
+        <div className="grid gap-x-8 gap-y-6 py-10 md:grid-cols-2 md:gap-y-10 md:py-12 lg:grid-cols-3 xl:grid-cols-[minmax(240px,1.2fr)_repeat(4,minmax(0,1fr))_minmax(190px,1fr)]">
+          <div className="order-1 max-w-sm md:order-none">
             <Logo />{' '}
             <p className="mt-6 font-heading text-[clamp(16px,1.25vw,19px)] font-medium leading-snug tracking-[-0.015em] text-text-dark">
               {company.positioningSupport}
@@ -53,18 +54,20 @@ export function Footer() {
             )}
           </div>
 
-          <FooterCol n="01" title="What We Do" links={[...footerNav.capabilities, ...footerNav.odoo.slice(0, 3)]} />{' '}
-          <FooterCol n="02" title="Solutions" links={footerNav.solutions} />{' '}
-          <FooterCol n="03" title="Platforms" links={footerNav.platforms} />{' '}
-          <FooterCol n="04" title="Company" links={[...footerNav.company, ...footerNav.locations]} />{' '}
+          <FooterColumns>
+            <FooterCol n="01" title="What We Do" links={[...footerNav.capabilities, ...footerNav.odoo.slice(0, 3)]} />{' '}
+            <FooterCol n="02" title="Solutions" links={footerNav.solutions} />{' '}
+            <FooterCol n="03" title="Platforms" links={footerNav.platforms} />{' '}
+            <FooterCol n="04" title="Company" links={[...footerNav.company, ...footerNav.locations]} />{' '}
+          </FooterColumns>
 
-          <div>
+          <div className="order-2 md:order-none">
             <h2 className="hero-eyebrow mb-5 flex items-center gap-3 !text-[11px]">
               <span aria-hidden className="text-violet/80">05</span>
               <span aria-hidden className="h-px w-5 bg-violet/50" />
               Contact
             </h2>{' '}
-            <ul className="flex flex-col gap-3 text-[15px]">
+            <ul className="flex flex-wrap gap-x-5 gap-y-1 text-[15px] md:flex-col md:gap-3">
               <li>
                 <a href={company.phoneHref} className="inline-flex min-h-[44px] items-center gap-2.5 text-text-dark-muted hover:text-text-dark sm:min-h-0">
                   <Phone className="h-4 w-4 text-violet-bright" aria-hidden />{' '}
@@ -92,7 +95,7 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col items-start justify-between gap-4 border-t border-line py-8 sm:flex-row sm:items-center">
-          <p className="text-sm text-text-dark-muted">© {year} {company.name}. Serving Pakistan and international clients.</p>{' '}
+          <p className="text-sm text-text-dark-muted">© {year} {company.name}. All rights reserved.</p>{' '}
           <div className="flex items-center gap-5 text-sm">
             <Link href="/privacy" className="inline-flex min-h-[44px] items-center text-text-dark-muted hover:text-text-dark sm:min-h-0">Privacy Policy</Link>{' '}
             <Link href="/terms" className="inline-flex min-h-[44px] items-center text-text-dark-muted hover:text-text-dark sm:min-h-0">Terms</Link>{' '}
@@ -115,30 +118,33 @@ export function Footer() {
 
 function FooterCol({ n, title, links }: { n: string; title: string; links: { label: string; href: string }[] }) {
   return (
-    <div>
+    <details open className="group order-3 border-b border-line md:order-none md:border-0">
       {/*
-        h2, not h3. These label footer navigation groups, so they sit directly
-        under the page h1 — and on pages whose main content has no h2 of its
-        own, such as /contact, an h3 here skipped a level and failed
-        heading-order. The visual size is set by the class, not the tag.
+        The heading is an h2 inside the summary. These label footer navigation groups, so they
+        sit directly under the page h1, and on pages whose main content has no h2 of its own,
+        such as /contact, an h3 here skipped a level and failed heading-order. FooterColumns
+        folds the group on a phone and keeps it open (and inert) on a desktop.
       */}
-      <h2 className="hero-eyebrow mb-5 flex items-center gap-3 !text-[11px]">
-        <span aria-hidden className="text-violet/80">{n}</span>
-        <span aria-hidden className="h-px w-5 bg-violet/50" />
-        {title}
-      </h2>{' '}
-      <ul className="flex flex-col gap-0.5 text-[15px] sm:gap-2.5">
+      <summary className="flex min-h-[48px] cursor-pointer list-none items-center justify-between gap-3 md:pointer-events-none md:min-h-0 md:cursor-default [&::-webkit-details-marker]:hidden">
+        <h2 className="hero-eyebrow flex items-center gap-3 !text-[11px] md:mb-5">
+          <span aria-hidden className="text-violet/80">{n}</span>
+          <span aria-hidden className="h-px w-5 bg-violet/50" />
+          {title}
+        </h2>
+        <span aria-hidden className="text-text-dark-muted transition-transform group-open:rotate-180 md:hidden">&#9662;</span>
+      </summary>
+      <ul className="flex flex-col gap-0.5 pb-3 text-[15px] md:gap-1.5 md:pb-0 xl:text-[14.5px]">
         {links.map((link) => (
           <li key={link.href}>
             <Link
               href={link.href}
-              className="inline-flex min-h-[44px] items-center text-text-dark-muted transition-all duration-300 hover:translate-x-1 hover:text-white sm:min-h-0"
+              className="inline-flex min-h-[44px] items-center text-text-dark-muted transition-all duration-300 hover:translate-x-1 hover:text-white md:min-h-0"
             >
               {link.label}
             </Link>
           </li>
         ))}
       </ul>
-    </div>
+    </details>
   );
 }

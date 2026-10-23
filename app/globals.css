@@ -801,6 +801,8 @@ main li > a:hover:not(.no-underline):not(.link-editorial) {
   padding-inline: calc(var(--frame-inset) + clamp(20px, 4.6vw, 88px));
 }
 .band-alt { background: var(--graphite); }
+/* Tighter vertical rhythm for the homepage, where the whole page is about five screens. */
+.band-tight { padding-block: clamp(36px, 4vw, 56px); }
 .band-inner { width: 100%; max-width: 1280px; margin-inline: auto; }
 .band-title {
   font-family: var(--font-display), sans-serif;

@@ -92,6 +92,10 @@ export const contactSchema = z.object({
   marketingConsent: z.union([z.boolean(), z.literal('true'), z.literal('false'), z.literal('')]).optional(),
   // Anonymous session snapshot (JSON string) attached on voluntary identification.
   sessionData: z.string().max(4000).optional().or(z.literal('')),
+  // The enquiry path chosen at the top of the form (data/enquiry-paths.ts) and its answers as a
+  // small JSON string. The server re-reads both against the path's own definition.
+  pathId: z.string().max(40).optional().or(z.literal('')),
+  pathAnswers: z.string().max(1200).optional().or(z.literal('')),
   // Honeypot — must stay empty. Bots tend to fill every field.
   website: z.string().max(0).optional().or(z.literal('')),
 });

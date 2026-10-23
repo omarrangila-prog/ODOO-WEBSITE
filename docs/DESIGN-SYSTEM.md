@@ -96,11 +96,13 @@ Shadows come from Tailwind's `shadow-float`; buttons are `ButtonLink` / `Button`
 - Do not use `.section-title` (up to 92 px) outside the diagnostic tool; it is the
   3.0 monumental size and made every section shout.
 
-## Bands (`.band`, `.band-alt`, `.band-inner`)
+## Bands (`.band`, `.band-alt`, `.band-inner`, `.band-tight`)
 
 The homepage's compact sections: same canvas, hairline and gutters as the
 staged sections at about a third of the height. Alternate `.band` and
-`.band-alt` so adjacent sections are distinguishable.
+`.band-alt` so adjacent sections are distinguishable. `.band-tight` trims the
+vertical padding again (36 to 56px); the homepage uses it throughout because the
+whole page is meant to run to about five screens.
 
 ## Small illustrations and motion on scroll
 
@@ -117,9 +119,27 @@ stroke-dashoffset, and is paused until its container is on screen:
   animation class is overridden and the animation runs regardless.
 - reduced motion removes every `.mv` animation.
 
+## Working demonstrations (`components/work/demos/`)
+
+The election console, the tournament desk and the document-delivery flow are
+real, interactive components with invented data. They stand where a screenshot
+would, and they are never to be mistaken for one:
+
+- every one sits in `DemoFrame`, which prints "Demonstration · sample data" in the
+  title bar and a note that it is not a screenshot of the client's system. Do not
+  build a demonstration outside the frame;
+- `LazyDemo` mounts one only when it is near the screen and reserves the height it
+  will take (measured at 320 to 1440px), so mounting does not move the page.
+  After changing a demonstration's layout run `node scripts/demo-layout.mjs` and
+  update the three heights in `LazyDemo.tsx`;
+- all state is local (no network, nothing stored), every control is a native
+  button, radio, checkbox or select, and a reset is always in the frame;
+- on the homepage a phone opens a demonstration on request ("Open the working
+  demonstration"), so the section stays short.
+
 ## Tabs and demonstrations
 
-The service explorer and the workflow demonstration render every panel in the
+The service explorer and the featured-work tabs render every panel in the
 HTML (inactive ones are `hidden`), use roving tab focus with arrow keys, Home and
 End, and have no hover-only content. Anything that moves for more than five
 seconds has a visible pause control.

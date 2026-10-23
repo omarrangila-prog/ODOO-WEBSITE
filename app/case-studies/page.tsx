@@ -75,11 +75,11 @@ export default function CaseStudiesIndex() {
           >
             Every card carries a status badge. <strong>Client Project</strong> and{' '}
             <strong>Internal Product</strong> entries are delivered work, published on the
-            confirmation of ODOOVATIONS management; their descriptions state what the system does
-            and nothing more, because we do not publish outcomes or figures we have not
-            evidenced. <strong>Demonstration</strong> entries are worked scenarios showing how we
-            approach a class of problem. Detailed case studies and client references are
-            available on request.
+            confirmation of ODOOVATIONS management. Their pages state what the system does, show a
+            working demonstration built with invented data and labelled as one, and say what is not
+            published yet: we add screenshots and results only with the client&rsquo;s approval and
+            the evidence behind them. <strong>Demonstration</strong> entries are worked scenarios
+            showing how we approach a class of problem, not client projects.
           </AnswerCard>
         </div>
       </section>

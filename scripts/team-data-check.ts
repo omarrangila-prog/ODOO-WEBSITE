@@ -15,6 +15,8 @@ import {
   internPositions,
   verifiedUniqueEmployees,
   profiles,
+  teamTotals,
+  countLabel,
 } from '../data/team';
 
 const reported: [string, string, number][] = [
@@ -49,6 +51,22 @@ expect(departments.length === 12, `expected 12 departments, found ${departments.
 expect(departmentRolePositions(getDepartment('odoo-engineering')) === 13, 'Odoo engineering must total 13 role positions');
 expect(internPositions() === 12, `expected 12 intern positions (7 + 5), found ${internPositions()}`);
 expect(reportedRolePositions() === 83, `expected 83 reported role positions (79 + 2 sales + 2 reception), found ${reportedRolePositions()}`);
+
+// The figures the public pages print.
+const t = teamTotals();
+expect(t.positions === 83, `teamTotals().positions should be 83, found ${t.positions}`);
+expect(t.interns === 12 && t.staff === 71, `expected 12 interns and 71 others, found ${t.interns} and ${t.staff}`);
+expect(t.roleTypes === 25, `expected 25 role titles with a reported number, found ${t.roleTypes}`);
+expect(t.departments === 10, `expected 10 departments with every role counted, found ${t.departments}`);
+expect(t.notCounted.length === 2, `exactly two titles should be left out of the total, found ${t.notCounted.join(', ')}`);
+expect(
+  verifiedUniqueEmployees === null ? t.noun === 'team positions' && !t.confirmedUnique : t.noun === 'team members' && t.total === verifiedUniqueEmployees,
+  'the headline must say "team positions" until unique people are confirmed, and "team members" after',
+);
+expect(countLabel(getDepartment('odoo-engineering')) === '13 positions', 'a department count must read as positions');
+expect(countLabel(getDepartment('client-communication')) === '', 'a department with an unsupplied number must show no figure');
+// No gender statements about groups small enough to identify people: they need each person's consent.
+expect(!/\b(held by women|one woman|one man)\b/i.test(JSON.stringify(departments)), 'team notes must not state the gender of individuals in small groups');
 
 // Honesty guards.
 expect(verifiedUniqueEmployees === null || Number.isInteger(verifiedUniqueEmployees), 'verifiedUniqueEmployees must be null or a whole number');

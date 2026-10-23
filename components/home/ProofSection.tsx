@@ -1,72 +1,56 @@
 import Link from 'next/link';
-import { publishableProjects, statusLabel } from '@/data/projects';
-import { featuredClients, clientSource } from '@/data/clients';
+import { teamTotals, seniorSupervisorExperience } from '@/data/team';
 import { SectionLabel } from './SectionLabel';
 
 /**
- * Homepage section 2: why trust us.
+ * Homepage section 2: who is behind the work, in numbers.
  *
- * Only evidence that exists is shown, and each kind is labelled for what it is:
- *  - projects management has confirmed, with the status on record;
- *  - organisations the wider Kausar Innovations group has worked with, named
- *    in text (no logos: none are held with permission) and kept visibly apart
- *    from ODOOVATIONS' own projects;
- *  - plain statements about how we describe ourselves, each of which is a
- *    policy of this site rather than a claim about results.
+ * Every figure comes from data/team.ts and nothing else. The headline number is
+ * labelled for what it is: role positions management reported, shown as "team
+ * positions" until the owner confirms unique people, and as "team members" after.
+ * Roles with no supplied number (client communication, freelancers) are left out
+ * of the total and the caption says so. The experience figure belongs to one
+ * person and is labelled that way; it is not the company's age.
  *
- * There are no counters, ratings, awards or testimonials, because none have
- * been verified. When a named, approved testimonial exists it belongs in the
- * third column.
+ * Projects are not repeated here: the next sections show them.
  */
 export function ProofSection() {
-  const projects = publishableProjects().filter((p) => p.status === 'CLIENT_PROJECT');
+  const t = teamTotals();
+  const exp = seniorSupervisorExperience;
+
+  const stats: { n: string; label: string }[] = [
+    { n: String(t.total), label: `${t.noun}${t.confirmedUnique ? '' : ' reported across the company'}` },
+    { n: String(t.roleTypes), label: 'role titles, from leadership to server operations' },
+    { n: String(t.departments), label: 'departments working on the same projects' },
+  ];
+  if (exp.approvedForPublication) stats.push({ n: exp.reportedYears, label: 'years of experience held by our senior supervisor' });
 
   return (
-    <section aria-labelledby="proof-h" className="band">
+    <section aria-labelledby="proof-h" className="band band-tight">
       <div className="band-inner">
-        <SectionLabel index="02">Evidence</SectionLabel>
-        <h2 id="proof-h" className="band-title mt-4 max-w-[22ch]">
-          Evidence, stated plainly.
+        <SectionLabel index="02">The team</SectionLabel>
+        <h2 id="proof-h" className="sr-only">
+          The ODOOVATIONS team in numbers
         </h2>
 
-        <div className="mt-10 grid gap-10 lg:grid-cols-[1.15fr_1fr_1fr] lg:gap-12">
-          <div>
-            <h3 className="font-heading text-[18px] font-semibold tracking-[-0.02em] text-white">Projects management has confirmed</h3>
-            <ul className="mt-4 divide-y divide-line border-y border-line">
-              {projects.map((p) => (
-                <li key={p.id} className="flex items-baseline justify-between gap-4 py-3">
-                  <span className="text-[16px] text-text-dark">{p.name}</span>
-                  <span className="shrink-0 text-[13px] text-violet-bright">{statusLabel[p.status]}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-4 text-[14px] leading-relaxed text-text-dark-muted">
-              Detailed case studies with screenshots are published when the client has approved them.{' '}
-              <Link href="/case-studies">See all work, including labelled demonstrations</Link>.
-            </p>
-          </div>
+        <ul className="mt-6 grid grid-cols-2 gap-x-6 gap-y-8 lg:grid-cols-4 lg:gap-x-0">
+          {stats.map((s, i) => (
+            <li key={s.label} className={i > 0 ? 'lg:border-l lg:border-line lg:pl-8' : ''}>
+              <span className="block font-heading text-[clamp(44px,5.4vw,76px)] font-semibold leading-[0.95] tracking-[-0.045em] text-white">{s.n}</span>
+              <span className="mt-3 block max-w-[24ch] text-[14.5px] leading-snug text-text-dark-muted sm:text-[15px]">{s.label}</span>
+            </li>
+          ))}
+        </ul>
 
-          <div>
-            <h3 className="font-heading text-[18px] font-semibold tracking-[-0.02em] text-white">Clients of the wider group</h3>
-            <p className="mt-4 text-[15px] leading-relaxed text-text-dark">
-              {featuredClients.slice(0, 8).join(' · ')}
-            </p>
-            <p className="mt-4 text-[14px] leading-relaxed text-text-dark-muted">
-              Organisations that {clientSource.parentCompany}, the group ODOOVATIONS belongs to, has worked with. Not every
-              engagement was delivered under the ODOOVATIONS name.{' '}
-              <Link href="/company/clients">Read the full roster and how it is verified</Link>.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="font-heading text-[18px] font-semibold tracking-[-0.02em] text-white">How we describe ourselves</h3>
-            <ul className="mt-4 space-y-3 text-[15px] leading-relaxed text-text-dark">
-              <li>An independent Odoo implementation team. We do not claim official partner status.</li>
-              <li>Every project on this site carries its status: client project, prototype or demonstration.</li>
-              <li>No invented figures, ratings or testimonials. Results appear only with evidence behind them.</li>
-            </ul>
-          </div>
-        </div>
+        <p className="mt-8 flex flex-wrap items-baseline gap-x-5 gap-y-2 text-[14px] leading-relaxed text-text-dark-muted">
+          <span className="max-w-[78ch]">
+            Positions are as reported by management and include {t.interns} interns. Client-communication staff and freelance collaborators are not counted.
+            Based in Karachi, Pakistan, serving clients in Pakistan and abroad remotely.
+          </span>
+          <Link href="/company/team" className="link-editorial whitespace-nowrap text-[15px]">
+            Every role and department <span aria-hidden className="arrow">↗</span>
+          </Link>
+        </p>
       </div>
     </section>
   );

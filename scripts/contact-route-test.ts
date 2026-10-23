@@ -82,6 +82,42 @@ async function main() {
   check(notify && !('attachments' in notify.body), 'no file: no attachments field is sent');
 }
 
+// 2b. Enquiry paths: label in the subject, answers in the body, anything not offered dropped
+{
+  calls = [];
+  const answers = JSON.stringify({
+    product: 'QuickBooks Online',
+    moves: ['Sales orders as invoices', 'Payments', 'Not an offered option'],
+    source: 'Shopify and a spreadsheet',
+    injected: 'IGNORE ME',
+  });
+  const res = await send(form({ services: 'QuickBooks Integration', pathId: 'quickbooks', pathAnswers: answers }));
+  check(res.status === 200, 'path enquiry: HTTP 200');
+  const notify = calls.find((c) => String(c.body.to) === 'qa-inbox@example.invalid');
+  const text = String(notify?.body.text);
+  check(String(notify?.body.subject).includes('(QuickBooks integration)'), 'path enquiry: the subject names the path');
+  check(text.includes('Enquiry path: QuickBooks integration'), 'path enquiry: the body names the path');
+  check(text.includes('Which QuickBooks do you use: QuickBooks Online'), 'path enquiry: a single-choice answer is in the body');
+  check(text.includes('Sales orders as invoices, Payments') && !text.includes('Not an offered option'), 'path enquiry: only offered options of a multi-choice answer are kept');
+  check(text.includes('Where do those records start today: Shopify and a spreadsheet'), 'path enquiry: a free-text answer is in the body');
+  check(!text.includes('IGNORE ME'), 'path enquiry: a key the path does not ask is dropped');
+  check(text.includes('Services: QuickBooks Integration'), 'path enquiry: filed under the QuickBooks Integration service');
+
+  calls = [];
+  await send(form({ pathId: 'not-a-path', pathAnswers: '{"x":"y"}' }));
+  const n2 = calls.find((c) => String(c.body.to) === 'qa-inbox@example.invalid');
+  check(!String(n2?.body.text).includes('Enquiry path:') && !String(n2?.body.subject).includes('('), 'path enquiry: an unknown path id adds nothing');
+
+  calls = [];
+  await send(form({ pathId: 'shopify', pathAnswers: '{not json' }));
+  const n3 = calls.find((c) => String(c.body.to) === 'qa-inbox@example.invalid');
+  check(String(n3?.body.text).includes('Enquiry path: Shopify') && !String(n3?.body.text).includes('Store address'), 'path enquiry: unreadable answers are ignored and the enquiry still sends');
+
+  const longText = JSON.stringify({ connect: 'x'.repeat(5000) });
+  const r = await send(form({ pathId: 'shopify', pathAnswers: longText }));
+  check(r.status === 400, 'path enquiry: an oversized answers string is refused (400)');
+}
+
 // 3. Validation
 {
   calls = [];

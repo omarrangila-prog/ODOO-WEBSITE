@@ -29,6 +29,11 @@ const pages = [
   ['technology', '/technologies'],
   ['ops-check', '/tools/operations-check'],
   ['service-odoo', '/services/odoo-implementation-pakistan'],
+  ['project-election', '/projects/kcci-election'],
+  ['project-delivery', '/projects/whatsapp-digital-connection'],
+  ['project-timer', '/projects/scrabble-timer'],
+  ['scenario', '/case-studies/textile-manufacturer'],
+  ['contact-quickbooks', '/contact?path=quickbooks'],
 ];
 
 const browser = await chromium.launch();

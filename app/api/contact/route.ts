@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { contactSchema, validateFileMeta } from '@/lib/validation';
 import { processLead } from '@/lib/leadintel/pipeline';
+import { describePathAnswers, getPath } from '@/data/enquiry-paths';
 import type { SessionData } from '@/lib/leadintel/session';
 
 export const runtime = 'nodejs';
@@ -61,6 +62,8 @@ export async function POST(req: Request) {
       consent: form.get('consent') === 'true',
       marketingConsent: String(form.get('marketingConsent') ?? ''),
       sessionData: String(form.get('sessionData') ?? ''),
+      pathId: String(form.get('pathId') ?? ''),
+      pathAnswers: String(form.get('pathAnswers') ?? ''),
       website: String(form.get('website') ?? ''),
     };
 
@@ -96,8 +99,13 @@ export async function POST(req: Request) {
       };
     }
 
+    // What the visitor chose and answered on the enquiry path, re-read against the path's own
+    // definition so only offered questions and options reach the email and the CRM.
+    const path = getPath(parsed.data.pathId);
+    const pathLines = describePathAnswers(parsed.data.pathId, parsed.data.pathAnswers);
+
     // Legacy notification email (unchanged behaviour).
-    await deliver(parsed.data, fileMeta);
+    await deliver(parsed.data, fileMeta, path?.label, pathLines);
 
     // Lead-intelligence pipeline: attach anonymous session, score, route to a
     // sales queue, create/update the Odoo CRM lead, and run consent-aware email
@@ -125,7 +133,7 @@ export async function POST(req: Request) {
           currentSystems: parsed.data.currentSystems,
           timeline: parsed.data.timeline,
           budget: parsed.data.budget,
-          challenge: parsed.data.challenge,
+          challenge: pathLines.length ? `${parsed.data.challenge}\n\n${path?.label ?? 'Enquiry path'}:\n- ${pathLines.join('\n- ')}` : parsed.data.challenge,
           services: parsed.data.services,
           preferredContact: parsed.data.preferredContact,
           contactPermission: parsed.data.consent, // asked us to contact them
@@ -163,7 +171,7 @@ interface FileMeta {
   base64: string;
 }
 
-async function deliver(data: ParsedContact, fileMeta: FileMeta | null): Promise<void> {
+async function deliver(data: ParsedContact, fileMeta: FileMeta | null, pathLabel: string | undefined, pathLines: string[]): Promise<void> {
   const resendKey = process.env.RESEND_API_KEY;
 
   if (!resendKey) {
@@ -176,6 +184,7 @@ async function deliver(data: ParsedContact, fileMeta: FileMeta | null): Promise<
     // Redacted summary only — no message body or personal details.
     console.info('[contact] DRY RUN — submission validated, nothing sent', {
       services: data.services,
+      path: pathLabel ?? null,
       hasFile: Boolean(fileMeta),
     });
     return;
@@ -212,6 +221,7 @@ async function deliver(data: ParsedContact, fileMeta: FileMeta | null): Promise<
     `Email: ${data.email}`,
     ...provided.map(([k, v]) => `${k}: ${v}`),
     '',
+    ...(pathLabel ? [`Enquiry path: ${pathLabel}`, ...pathLines.map((l) => `  ${l}`), ''] : []),
     'What they need:',
     data.challenge,
     '',
@@ -229,7 +239,7 @@ async function deliver(data: ParsedContact, fileMeta: FileMeta | null): Promise<
       from,
       to,
       reply_to: data.email,
-      subject: `New enquiry — ${data.company || data.fullName}`,
+      subject: `New enquiry${pathLabel ? ` (${pathLabel})` : ''} — ${data.company || data.fullName}`,
       text: lines,
       ...(fileMeta ? { attachments: [{ filename: fileMeta.name, content: fileMeta.base64 }] } : {}),
     }),

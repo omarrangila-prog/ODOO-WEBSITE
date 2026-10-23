@@ -95,7 +95,7 @@ export interface PlatformPage {
   /** Printed under the hero when the page needs a boundary stated (QuickBooks). */
   boundary?: string;
   related: { label: string; href: string }[];
-  /** Service preselected in the enquiry form. Must match data/formOptions.ts serviceOptions. */
+  /** Service preselected in the enquiry form. Must match data/formOptions.ts serviceOptions; data/enquiry-paths.ts maps it to the path whose questions the form then asks. */
   formService: string;
   ctaLabel: string;
 }
@@ -201,7 +201,7 @@ export const platformPages: PlatformPage[] = [
       { label: 'Websites and web applications', href: '/services/web-development' },
       { label: 'Retail and e-commerce', href: '/industries/retail-ecommerce' },
     ],
-    formService: 'Website',
+    formService: 'Shopify Integration',
     ctaLabel: 'Discuss a Shopify project',
   },
 
@@ -303,7 +303,7 @@ export const platformPages: PlatformPage[] = [
       { label: 'Odoo integration', href: '/services/odoo-integration' },
       { label: 'Retail and e-commerce', href: '/industries/retail-ecommerce' },
     ],
-    formService: 'Website',
+    formService: 'WooCommerce Integration',
     ctaLabel: 'Discuss a WooCommerce project',
   },
 
@@ -506,7 +506,7 @@ export const platformPages: PlatformPage[] = [
       { label: 'Shopify', href: '/platforms/shopify' },
       { label: 'Custom software', href: '/services/custom-software-development' },
     ],
-    formService: 'Business System',
+    formService: 'QuickBooks Integration',
     ctaLabel: 'Discuss a QuickBooks integration',
   },
 ];

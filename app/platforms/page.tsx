@@ -7,6 +7,7 @@ import { CtaBand } from '@/components/ui/CtaBand';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { AnswerCard } from '@/components/ui/AnswerCard';
 import { PageArt } from '@/components/cinema/PageArt';
+import { getPath, pathHref } from '@/data/enquiry-paths';
 
 const PATH = '/platforms';
 const DESCRIPTION =
@@ -89,6 +90,32 @@ export default function PlatformsIndex() {
             );
           })}
           <p className="max-w-[80ch] text-[13px] leading-relaxed text-text-dark-muted">{platformNotice}</p>
+        </div>
+      </section>
+
+      <section className="theme-dark bay-sm" aria-labelledby="start-h">
+        <div className="shell">
+          <h2 id="start-h" className="page-h2 max-w-3xl">Start with the platform you use.</h2>
+          <p className="mt-3 max-w-[60ch] text-[17px] leading-relaxed text-text-dark-muted">
+            Each link opens the enquiry form on that platform&rsquo;s own path, with the few questions that matter for it
+            already waiting.
+          </p>
+          <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {['shopify', 'woocommerce', 'quickbooks', 'odoo'].map((id) => {
+              const path = getPath(id)!;
+              return (
+                <li key={id}>
+                  <Link
+                    href={pathHref(id, 'platforms-hub')}
+                    className="no-underline group flex h-full min-h-[88px] flex-col justify-between rounded-[18px] border border-line bg-white/[0.02] p-4 transition-colors hover:border-violet-bright/45 hover:bg-white/[0.04]"
+                  >
+                    <span className="font-heading text-[19px] font-semibold tracking-[-0.02em] text-white">{path.label}</span>
+                    <span className="mt-1 text-[14px] leading-snug text-text-dark-muted">{path.blurb}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </section>
 

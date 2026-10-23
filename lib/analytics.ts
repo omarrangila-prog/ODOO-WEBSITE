@@ -32,7 +32,10 @@ export type AnalyticsEvent =
   | 'playground_paused'
   | 'playground_reset'
   | 'faq_opened'
-  | 'email_click';
+  | 'email_click'
+  | 'enquiry_path_selected'
+  | 'demo_interacted'
+  | 'demo_reset';
 
 type Props = Record<string, string | number | boolean>;
 

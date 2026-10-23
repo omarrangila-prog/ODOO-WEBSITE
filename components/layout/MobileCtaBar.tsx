@@ -47,7 +47,8 @@ export function MobileCtaBar() {
       aria-hidden={!visible}
       {...inertWhenHidden(visible)}
     >
-      <div className="glass mx-auto grid max-w-md grid-cols-3 gap-1.5 rounded-[22px] p-1.5">
+      {/* Near-opaque: the bar rides over whatever is scrolling beneath it, white buttons included, and its small labels must stay readable. */}
+      <div className="glass mx-auto grid max-w-md grid-cols-3 gap-1.5 rounded-[22px] p-1.5 !bg-[rgb(14_12_24/0.96)]">
         <a
           href={waHref}
           target={waConfigured ? '_blank' : undefined}

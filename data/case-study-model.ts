@@ -2,9 +2,10 @@
  * CASE STUDY MODEL
  *
  * The structure a real case study must satisfy before it is published, and
- * the gate that enforces it. No case study content exists yet: every record
- * below is generated from data/projects.ts as `awaiting-assets` and renders
- * nothing. See docs/CASE-STUDIES.md for the owner workflow.
+ * the gate that enforces it. Every record below is generated from
+ * data/projects.ts and starts as `awaiting-assets`; the words for the three that
+ * are published live in data/case-study-content.ts. See docs/CASE-STUDIES.md for
+ * the owner workflow.
  *
  * HOW THE PIECES FIT
  *  - data/projects.ts stays the registry of which projects exist and what may
@@ -18,6 +19,7 @@
  * undefined, never a placeholder sentence.
  */
 import { publishableProjects, type Project, type ProjectStatus } from './projects';
+import { caseStudyContentRecords } from './case-study-content';
 
 export type PublishStatus =
   | 'draft'
@@ -80,6 +82,9 @@ export interface CaseStudyOutcome {
   measuredOver?: string;
 }
 
+/** The working demonstrations in components/work/demos. Each is built with invented data and labelled as such. */
+export type DemoKind = 'election' | 'timer' | 'delivery';
+
 export interface CaseStudyContent {
   status?: PublishStatus;
   serviceCategory?: string;
@@ -103,6 +108,24 @@ export interface CaseStudyContent {
   testimonial?: { quote: string; attribution: string; approved: boolean };
   privacy?: Partial<PrivacyChecklist>;
   seo?: { title?: string; description?: string };
+  /**
+   * A working demonstration standing in for screenshots that do not exist. It is a different
+   * thing from a screenshot and is always labelled "Demonstration · sample data". It never
+   * counts as evidence that the delivered system looks or behaves a particular way.
+   */
+  demonstration?: { kind: DemoKind; heading: string; intro: string };
+  /** What the system covers, one line each, in plain words. Same source as `capabilities`. */
+  scope?: { title: string; detail: string }[];
+  /**
+   * Questions a buyer of this kind of system should settle first. They are advice about the
+   * class of system, not statements about the client's project.
+   */
+  briefing?: { heading: string; intro: string; questions: string[] };
+  /** Enquiry path (data/enquiry-paths.ts) the closing call to action opens. */
+  enquiryPath?: string;
+  relatedServices?: { label: string; href: string }[];
+  /** Where the facts on this page came from. */
+  factsSource?: string;
 }
 
 export interface CaseStudyRecord extends Omit<CaseStudyContent, 'privacy' | 'status'> {
@@ -113,6 +136,9 @@ export interface CaseStudyRecord extends Omit<CaseStudyContent, 'privacy' | 'sta
   name: string;
   classification: ProjectStatus;
   industry?: string;
+  /** From data/projects.ts: what the system is for, in management's words. */
+  purpose?: string;
+  countryCode?: string;
   /** The client has agreed to be named. */
   clientNamingPermission: boolean;
   status: PublishStatus;
@@ -137,7 +163,7 @@ const emptyPrivacy: PrivacyChecklist = {
  * `npm run case-study:check`. Only when that reports no blockers should the
  * status be moved to 'published'.
  */
-export const caseStudyContent: Record<string, CaseStudyContent> = {};
+export const caseStudyContent: Record<string, CaseStudyContent> = caseStudyContentRecords;
 
 /** Real work only. Demonstrations, concepts and unverified names have no case study. */
 const REAL_WORK: ProjectStatus[] = ['CLIENT_PROJECT', 'ANONYMISED_PROJECT', 'INTERNAL_PRODUCT', 'PROTOTYPE'];
@@ -153,6 +179,8 @@ function toRecord(p: Project): CaseStudyRecord {
     name: p.name,
     classification: p.status,
     industry: p.industry,
+    purpose: p.purpose,
+    countryCode: p.evidence.countryPublic ? p.countryCode : undefined,
     clientNamingPermission: p.evidence.clientApproval,
     status: status ?? 'awaiting-assets',
     privacy: { ...emptyPrivacy, ...privacy },
@@ -172,14 +200,24 @@ export function blockers(r: CaseStudyRecord): string[] {
 
   need(r.status === 'published', `status is "${r.status}", not "published"`);
   need(r.clientNamingPermission, 'client naming permission not recorded in data/projects.ts');
-  for (const [k, v] of Object.entries(r.privacy)) need(v, `privacy check not confirmed: ${k}`);
 
   need(r.overview, 'overview missing');
-  need(r.problem, 'problem statement missing');
-  need(r.solution, 'solution missing');
+  need(r.problem || r.purpose, 'neither a problem statement nor a purpose');
+  need(r.solution || (r.scope && r.scope.length > 0), 'neither a solution nor a scope');
 
   const images = [r.cover, ...(r.screenshots ?? [])].filter((i): i is CaseStudyImage => Boolean(i));
-  need(images.length > 0, 'no screenshots supplied');
+  const hasRealMedia = images.length > 0 || Boolean(r.video);
+  /*
+   * Screenshots and video show the real delivered system, so each of the seven checks guards a
+   * way they could leak something. With no real media there is nothing to redact, and only the
+   * client's approval still applies. A demonstration is not real media: it is built here, with
+   * invented data, and says so on the page.
+   */
+  for (const [k, v] of Object.entries(r.privacy)) {
+    if (!hasRealMedia && k !== 'clientApproved') continue;
+    need(v, `privacy check not confirmed: ${k}`);
+  }
+  need(hasRealMedia || r.demonstration, 'no screenshots and no demonstration supplied');
   for (const img of images) {
     need(img.alt.trim(), `image ${img.src} has no alt text`);
     need(img.approved, `image ${img.src} not approved`);

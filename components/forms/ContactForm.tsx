@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CheckCircle2, AlertTriangle, Send } from 'lucide-react';
 import { contactSchema, type ContactFormValues } from '@/lib/validation';
@@ -19,6 +19,8 @@ import { frictionItems } from '@/data/calculator';
 import { Button } from '@/components/ui/Button';
 import { Field, inputClass, fieldInvalid } from './Field';
 import { FileUploader } from './FileUploader';
+import { PathChooser } from './PathChooser';
+import { getPath, pathForService, type PathAnswers } from '@/data/enquiry-paths';
 import { track } from '@/lib/analytics';
 import { cn } from '@/lib/utilities';
 import { TextGap } from '@/components/ui/TextGap';
@@ -29,6 +31,8 @@ export function ContactForm() {
   const [status, setStatus] = useState<Status>('idle');
   const [serverError, setServerError] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
+  const [pathId, setPathId] = useState('');
+  const [answers, setAnswers] = useState<PathAnswers>({});
   const errorSummaryRef = useRef<HTMLDivElement>(null);
   const startedRef = useRef(false);
 
@@ -37,6 +41,7 @@ export function ContactForm() {
     handleSubmit,
     control,
     setValue,
+    getValues,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
@@ -82,7 +87,18 @@ export function ContactForm() {
      * on submit while looking selected to the visitor.
      */
     const svc = sp.get('service');
-    if (svc && serviceOptions.includes(svc)) setValue('services', [svc]);
+    const pathParam = getPath(sp.get('path'));
+    if (pathParam) {
+      setPathId(pathParam.id);
+      setValue('services', [pathParam.service]);
+    } else if (svc && serviceOptions.includes(svc)) {
+      setValue('services', [svc]);
+      const hit = pathForService(svc);
+      if (hit) {
+        setPathId(hit.path.id);
+        setAnswers(hit.answers);
+      }
+    }
 
     const issues = sp.get('issues');
     const friction = sp.get('friction');
@@ -121,6 +137,10 @@ export function ContactForm() {
         if (Array.isArray(val)) formData.append(key, val.join(','));
         else formData.append(key, String(val));
       });
+      if (pathId) {
+        formData.set('pathId', pathId);
+        formData.set('pathAnswers', JSON.stringify(answers));
+      }
       if (file) formData.append('file', file);
 
       // Attach anonymous session (first-party attribution) on voluntary identify.
@@ -138,7 +158,7 @@ export function ContactForm() {
         throw new Error(data.error ?? 'Something went wrong. Please try again.');
       }
 
-      track('consultation_form_submitted', { services: values.services.length });
+      track('consultation_form_submitted', { services: values.services.length, ...(pathId ? { path: pathId } : {}) });
       if (file) track('workflow_file_uploaded');
       setStatus('success');
     } catch (err) {
@@ -205,6 +225,23 @@ export function ContactForm() {
         </div>
       )}
 
+      {/* Stage 0: what is this about. Choosing a path files the enquiry under that service and asks its few questions. */}
+      <PathChooser
+        pathId={pathId}
+        answers={answers}
+        onPath={(id) => {
+          const p = getPath(id);
+          if (!p) return;
+          const fromLink = pathForService(getValues('services')[0] ?? '');
+          setPathId(id);
+          // Keep the link's own answers (e.g. "Digital marketing") only if the visitor stays on that path.
+          setAnswers(fromLink && fromLink.path.id === id ? fromLink.answers : {});
+          setValue('services', fromLink && fromLink.path.id === id ? getValues('services') : [p.service]);
+          track('enquiry_path_selected', { path: id });
+        }}
+        onAnswers={setAnswers}
+      />
+
       {/* ---- Stage 1: everything we actually need to reply ---- */}
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Full name" htmlFor="fullName" required error={errors.fullName?.message}>
@@ -215,42 +252,16 @@ export function ContactForm() {
         </Field>
       </div>
 
-      <Field label="What do you need?" htmlFor="challenge" required error={errors.challenge?.message}>
+      <Field label="Describe your project" htmlFor="challenge" required error={errors.challenge?.message}>
         <textarea
           id="challenge"
           rows={5}
           className={cn(inputClass, 'min-h-[120px] resize-y py-3')}
-          placeholder="Tell us where your team is struggling — orders, stock, reporting, approvals…"
+          placeholder="Tell us where your team is struggling: orders, stock, reporting, approvals…"
           {...fieldInvalid(errors.challenge?.message)}
           {...register('challenge')}
         />
       </Field>
-
-      {/* Optional service selector. A single dropdown, not fourteen chips: the chips put every option in front of a visitor before they had said a word. */}
-      <Controller
-        control={control}
-        name="services"
-        render={({ field }) => (
-          <Field label="Which area is this?" htmlFor="service" hint="Optional. You can describe it in your own words above.">
-            <select
-              id="service"
-              className={inputClass}
-              value={field.value[0] ?? ''}
-              onChange={(e) => field.onChange(e.target.value ? [e.target.value] : [])}
-              onBlur={field.onBlur}
-            >
-              <option value="">Not sure yet</option>
-              {serviceOptions
-                .filter((o) => o !== 'Not sure yet')
-                .map((service) => (
-                  <option key={service} value={service}>
-                    {service}
-                  </option>
-                ))}
-            </select>
-          </Field>
-        )}
-      />
 
       {/*
         Stage 2 is optional. A <details> element keeps every input in the

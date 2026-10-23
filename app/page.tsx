@@ -1,33 +1,63 @@
+import Link from 'next/link';
 import { CinematicHero } from '@/components/cinema/CinematicHero';
 import { ProofSection } from '@/components/home/ProofSection';
 import { SectionLabel } from '@/components/home/SectionLabel';
 import { ServiceExplorer } from '@/components/home/ServiceExplorer';
-import { FeaturedWork } from '@/components/home/FeaturedWork';
-import { PlatformsSection } from '@/components/home/PlatformsSection';
-import { WorkflowDemo } from '@/components/home/WorkflowDemo';
+import { FeaturedWork, type ShowcaseItem } from '@/components/home/FeaturedWork';
 import { DeliveryPeople } from '@/components/home/DeliveryPeople';
-import { EnquirySection, homeFaqs } from '@/components/home/EnquirySection';
+import { EnquirySection } from '@/components/home/EnquirySection';
 import { JsonLd } from '@/components/ui/JsonLd';
-import { webPageSchema, localBusinessSchema, faqSchema } from '@/lib/seo';
+import { publishableProjects } from '@/data/projects';
+import { caseStudyHref } from '@/data/case-study-model';
+import { webPageSchema, localBusinessSchema } from '@/lib/seo';
 
 /**
- * Homepage, eight sections:
+ * Homepage, six sections and about five screens:
  *
- *  01 hero · 02 evidence · 03 service explorer · 04 featured work ·
- *  05 platforms & integrations · 06 interactive demonstration ·
- *  07 delivery & people · 08 project enquiry
+ *  01 hero · 02 the team in numbers · 03 service explorer ·
+ *  04 featured work, each with a working demonstration ·
+ *  05 how a project runs · 06 project enquiry (with its service paths)
  *
- * What the earlier ten-section page held, and where it went:
- *  - "Transformation", "Build / Automate / Grow", "Why ODOOVATIONS": the claims
- *    were repeated in the hero, the explorer and the delivery section, so they
- *    were cut rather than moved.
- *  - The seven-division index: now the service explorer (section 03).
- *  - The team overview and "how we work": merged into section 07.
- *  - The operational diagnostic and roadmap assembler: now an optional tool at
- *    /tools/operations-check, linked from the enquiry section.
- *  - Industries, the client roster and the full FAQ: /industries,
- *    /company/clients and /faq, as before.
+ * It was eight sections and ten screens. What was cut, and where it went:
+ *  - The platforms section: Shopify, WooCommerce, WordPress and QuickBooks are
+ *    cards in the service explorer and paths in the enquiry form, and each has
+ *    its own page under /platforms. Saying it a third time added height only.
+ *  - The standalone workflow demonstration: the three projects now carry their
+ *    own working demonstrations, which replaced both it and the project artwork.
+ *  - The home FAQ and its FAQ schema: /faq holds the questions. FAQ markup is
+ *    only valid for questions visible on the page.
+ *  - The project list and client roster in the evidence band: the featured work
+ *    shows the projects, /company/clients shows the roster.
  */
+const featured: { id: string; demo: ShowcaseItem['demo'] }[] = [
+  { id: 'kcci-election', demo: 'election' },
+  { id: 'whatsapp-digital-connection', demo: 'delivery' },
+  { id: 'scrabble-timer', demo: 'timer' },
+];
+
+function showcaseItems(): ShowcaseItem[] {
+  const all = publishableProjects();
+  return featured.flatMap(({ id, demo }) => {
+    const p = all.find((x) => x.id === id);
+    if (!p) return [];
+    return [
+      {
+        demo,
+        href: caseStudyHref(p.id),
+        project: {
+          id: p.id,
+          name: p.name,
+          status: p.status,
+          industry: p.industry,
+          inPakistan: Boolean(p.evidence.countryPublic && p.countryCode === 'PK'),
+          purpose: p.purpose,
+          capabilities: p.capabilities,
+        },
+      },
+    ];
+  });
+}
+
 export default function HomePage() {
   return (
     <>
@@ -39,42 +69,37 @@ export default function HomePage() {
             'ODOOVATIONS builds custom software, AI automation, Odoo ERP systems, websites, mobile apps, marketing campaigns, video and creative content for businesses in Pakistan and international clients served remotely.',
           ),
           localBusinessSchema(),
-          faqSchema(homeFaqs),
         ]}
       />
 
       <CinematicHero />
       <ProofSection />
 
-      <section aria-labelledby="services-h" className="band band-alt">
+      <section aria-labelledby="services-h" className="band band-alt band-tight">
         <div className="band-inner">
           <SectionLabel index="03">What we build</SectionLabel>
-          <h2 id="services-h" className="band-title mt-4 max-w-[22ch]">
+          <h2 id="services-h" className="band-title mt-4 max-w-[34ch]">
             Find the right kind of help.
           </h2>
-          <p className="mt-4 max-w-[60ch] text-[17px] leading-relaxed text-text-dark-muted">
-            Five areas, one team. Pick the one closest to your problem; each card opens the page that explains it in full.
-          </p>
-          <div className="mt-8">
+          <div className="mt-6">
             <ServiceExplorer />
           </div>
         </div>
       </section>
 
-      <FeaturedWork />
-      <PlatformsSection />
-
-      <section aria-labelledby="demo-h" className="band band-alt">
+      <section aria-labelledby="work-h" className="band band-tight">
         <div className="band-inner">
-          <SectionLabel index="06">Interactive demonstration</SectionLabel>
-          <h2 id="demo-h" className="band-title mt-4 max-w-[24ch]">
-            See what happens when your systems talk.
-          </h2>
-          <p className="mt-4 max-w-[62ch] text-[17px] leading-relaxed text-text-dark-muted">
-            Choose a workflow and step through it. Notice which steps a machine performs and which still belong to a person.
-          </p>
-          <div className="mt-8">
-            <WorkflowDemo />
+          <SectionLabel index="04">Featured work</SectionLabel>
+          <div className="mt-4 flex flex-wrap items-end justify-between gap-x-10 gap-y-3">
+            <h2 id="work-h" className="band-title max-w-[34ch]">
+              Systems built for real organisations.
+            </h2>
+            <Link href="/case-studies" className="link-editorial text-[15px]">
+              All work, including labelled demonstrations <span aria-hidden className="arrow">↗</span>
+            </Link>
+          </div>
+          <div className="mt-6">
+            <FeaturedWork items={showcaseItems()} />
           </div>
         </div>
       </section>

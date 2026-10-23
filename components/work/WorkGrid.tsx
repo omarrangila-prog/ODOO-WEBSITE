@@ -23,8 +23,6 @@ interface WorkItem {
   badge: string;
   badgeTone: 'demo' | 'client' | 'product';
   href?: string;
-  /** Extra line on demo cards. */
-  metric?: { value: string; label: string };
 }
 
 /** Filter set from the brief (§39). Order is the display order. */
@@ -81,7 +79,6 @@ function buildItems(): WorkItem[] {
     badge: c.isDemonstration ? 'Demonstration' : 'Client Project',
     badgeTone: c.isDemonstration ? 'demo' : 'client',
     href: `/case-studies/${c.slug}`,
-    metric: c.highlightMetric,
   }));
 
   // Client work first — it is the stronger proof — then the worked scenarios.
@@ -253,15 +250,9 @@ export function WorkGrid() {
                     <p className="mt-3 text-[16px] leading-relaxed text-ink-muted">{it.summary}</p>
 
                     <div className="mt-auto flex items-end justify-between gap-4 border-t border-line-light pt-5">
-                      {it.metric ? (
-                        <span className="text-[15px] font-medium text-ink/70">
-                          <span className="font-semibold text-violet">{it.metric.value}</span> {it.metric.label}
-                        </span>
-                      ) : (
-                        <span className="text-[14px] text-ink/60">
-                          {it.href ? 'Read the case study' : 'Detailed case study available on request'}
-                        </span>
-                      )}
+                      <span className="text-[14px] text-ink/60">
+                        {it.href ? (it.badgeTone === 'demo' ? 'Read the scenario' : 'Read the project page') : 'Detailed case study available on request'}
+                      </span>
                       {it.href && (
                         <ArrowUpRight className="h-5 w-5 shrink-0 text-ink/55 transition-all group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-violet" aria-hidden />
                       )}

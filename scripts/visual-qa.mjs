@@ -58,6 +58,11 @@ const pages = [
   ['technology', '/technologies'],
   ['ops-check', '/tools/operations-check'],
   ['service-new', '/services/odoo-implementation-pakistan'],
+  ['project-election', '/projects/kcci-election'],
+  ['project-delivery', '/projects/whatsapp-digital-connection'],
+  ['project-timer', '/projects/scrabble-timer'],
+  ['scenario', '/case-studies/textile-manufacturer'],
+  ['platform-shopify', '/platforms/shopify'],
 ];
 
 /** Runs inside the page. Returns every layout defect it can see. */

@@ -22,6 +22,8 @@ const paths = [
   '/locations/odoo-services-karachi',
   '/platforms', '/platforms/shopify', '/platforms/quickbooks', '/technologies', '/tools/operations-check',
   '/services/odoo-implementation-pakistan',
+  '/projects/kcci-election', '/projects/whatsapp-digital-connection', '/projects/scrabble-timer',
+  '/case-studies/textile-manufacturer', '/contact?path=quickbooks',
 ];
 const viewports = [['mobile', 390, 844], ['desktop', 1440, 900]];
 const consent = JSON.stringify({ version: 1, necessary: true, analytics: false, marketing: false, updatedAt: new Date().toISOString(), decided: true });
@@ -54,6 +56,13 @@ function measure() {
     if (cs.visibility === 'hidden' || cs.display === 'none') continue;
     if (el.closest('[aria-hidden="true"], [hidden], script, style, noscript')) continue;
     if (el.closest('[disabled]')) continue;
+    // The header carries a dark fade (pointer-events: none) behind its floating logo once the page
+    // scrolls. elementsFromPoint cannot see pointer-events:none layers, so a white button passing
+    // under the logo would be scored as white-on-white. Text in the header is unverifiable then.
+    if (el.closest('header')) {
+      const fade = document.querySelector('header [aria-hidden].bg-gradient-to-b');
+      if (fade && parseFloat(getComputedStyle(fade).opacity) > 0.5) { unverifiable++; continue; }
+    }
 
     // Resolve the background from the PAINT STACK at the text's centre rather
     // than from its ancestors: a photo or an overlay that is a sibling, not an

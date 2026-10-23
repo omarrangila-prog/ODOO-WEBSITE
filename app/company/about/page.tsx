@@ -8,7 +8,7 @@ import { CtaBand } from '@/components/ui/CtaBand';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
 import { ButtonLink, ArrowNudge } from '@/components/ui/Button';
-import { departmentGroups, groupCountLabel } from '@/data/team';
+import { departmentGroups, groupCountLabel, teamTotals } from '@/data/team';
 import { TextGap } from '@/components/ui/TextGap';
 import { PageArt } from '@/components/cinema/PageArt';
 
@@ -136,7 +136,13 @@ export default function AboutPage() {
             Engineers build the system. Reviewers who understand accounting, inventory and day-to-day operations check
             that the logic matches how the business works. QA testers verify the behaviour before it is delivered.
           </p>
-          <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <p className="mt-8 font-heading text-[clamp(30px,4vw,48px)] font-semibold leading-none tracking-[-0.035em]">
+            {teamTotals().total}{' '}
+            <span className="text-[16px] font-medium tracking-normal text-text-dark-muted">
+              {teamTotals().noun}, across {teamTotals().roleTypes} role titles
+            </span>
+          </p>
+          <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {departmentGroups.map((g) => (
               <li key={g.id} className="rounded-control border border-line px-4 py-3.5">
                 <p className="font-heading text-[16px] font-semibold leading-snug">{g.label}</p>{' '}

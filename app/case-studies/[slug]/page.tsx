@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
 import { Check } from 'lucide-react';
 import { caseStudies, getCaseStudy } from '@/data/caseStudies';
 import { buildMetadata, breadcrumbSchema, webPageSchema } from '@/lib/seo';
@@ -10,6 +9,7 @@ import { DevPlaceholder } from '@/components/ui/DevPlaceholder';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { TextGap } from '@/components/ui/TextGap';
 import { PageArt } from '@/components/cinema/PageArt';
+import { ScenarioScreen } from '@/components/work/ScenarioScreen';
 
 export function generateStaticParams() {
   return caseStudies.map((c) => ({ slug: c.slug }));
@@ -57,13 +57,9 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
             </p>
           )}
 
-          {cs.image && (
-            <div className="mt-10 overflow-hidden rounded-editorial border border-line shadow-float">
-              <div className="relative aspect-[3/2] sm:aspect-[2/1]">
-                <Image src={cs.image} alt={`${cs.label} — ${cs.industry}`} fill priority sizes="(max-width: 1320px) 100vw, 1320px" className="object-cover" />
-              </div>
-            </div>
-          )}
+          <div className="mt-10">
+            <ScenarioScreen title={cs.label} modules={cs.modules} />
+          </div>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
             <div className="rounded-panel border border-line bg-white/[0.02] p-5">
@@ -83,7 +79,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
               <Block title="The challenge" body={cs.challenge} />
               <Block title="Existing workflow" body={cs.existingWorkflow} />
               <Block title="Solution implemented" body={cs.solution} />
-              <Block title="Operational outcome" body={cs.outcome} />
+              <Block title="Illustrative outcome" body={cs.outcome} />
             </div>
             <aside className="lg:sticky lg:top-28 lg:self-start">
               <div className="rounded-editorial border border-line bg-graphite/60 p-6">

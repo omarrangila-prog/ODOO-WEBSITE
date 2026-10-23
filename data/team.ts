@@ -14,9 +14,11 @@
  *    rather than contractors.
  *  - `count: null` means the number has NOT been supplied. It is never
  *    rendered as zero and never guessed.
- *  - The aggregate is computed by reportedRolePositions() for internal checks
- *    only. The public pages show it only if `verifiedUniqueEmployees` below is
- *    set to a number the owner has confirmed.
+ *  - The aggregate, from reportedRolePositions(), is shown publicly as "team
+ *    positions" (the owner asked for the total and the role counts to be
+ *    visible, 2026-10-23). It becomes "team members" only when
+ *    `verifiedUniqueEmployees` below is set to a number the owner has confirmed
+ *    as unique people. See teamTotals().
  */
 
 export type DepartmentGroupId =
@@ -304,7 +306,7 @@ export const departments: Department[] = [
     headline: 'Connecting Businesses With the Right Technology.',
     description:
       'Our sales and business development team serves as an important point of connection between prospective clients and our technical specialists, helping businesses explore relevant technology services and communicate their requirements.',
-    roles: [{ id: 'sales-executive', title: 'Sales Executives', count: 2, note: 'Both Sales Executive roles are held by women.' }],
+    roles: [{ id: 'sales-executive', title: 'Sales Executives', count: 2 }],
     capabilities: [
       'Client enquiries',
       'Sales communication',
@@ -324,7 +326,7 @@ export const departments: Department[] = [
     headline: 'The First Point of Contact Matters.',
     description:
       'Our front desk team supports communication, visitor coordination and the daily administrative experience that keeps office interactions organised and professional.',
-    roles: [{ id: 'receptionist', title: 'Receptionists', count: 2, note: 'One woman and one man, with equal standing.' }],
+    roles: [{ id: 'receptionist', title: 'Receptionists', count: 2 }],
     capabilities: [
       'Reception duties',
       'Visitor coordination',
@@ -342,7 +344,7 @@ export const departments: Department[] = [
     name: 'Client Communication & Service Coordination',
     headline: 'Smooth Interactions Between Clients and Departments.',
     description:
-      'Our client-facing teams include both men and women working across communication, enquiries and service coordination, supporting smooth interactions between customers and the relevant departments.',
+      'Our client-facing team works across communication, enquiries and service coordination, supporting smooth interactions between customers and the relevant departments.',
     roles: [{ id: 'client-communication-staff', title: 'Client communication & service coordination staff', count: null }],
     capabilities: [
       'Inbound client communication',
@@ -410,7 +412,56 @@ export function groupCountLabel(id: DepartmentGroupId): string {
   if (ds.some((d) => d.roles.some((r) => r.count === null))) return '';
   const n = groupRolePositions(id);
   if (n === 0) return '';
-  return `${n} ${n === 1 ? 'role' : 'roles'}`;
+  return `${n} ${n === 1 ? 'position' : 'positions'}`;
+}
+
+/**
+ * The numbers the public pages show.
+ *
+ * `positions` is the sum of the role counts management reported. It is a
+ * count of ROLE POSITIONS in the team structure, so the pages call it "team
+ * positions" unless `verifiedUniqueEmployees` has been set, in which case they
+ * show that confirmed number as "team members". Roles with no supplied number
+ * (client communication, freelance collaborators) add nothing and are named as
+ * not counted, rather than shown as zero or estimated.
+ */
+export interface TeamTotals {
+  /** What the headline figure is: 'team members' once confirmed, 'team positions' until then. */
+  noun: 'team members' | 'team positions';
+  /** The headline figure. */
+  total: number;
+  /** Role positions reported, whichever label the headline carries. */
+  positions: number;
+  /** Positions held by interns. */
+  interns: number;
+  /** Positions that are not intern positions. */
+  staff: number;
+  /** Distinct role titles that have a reported number. */
+  roleTypes: number;
+  /** Departments whose every role has a reported number. */
+  departments: number;
+  /** Titles left out of the total because no number was supplied. */
+  notCounted: string[];
+  /** True once the owner has confirmed a unique-people figure. */
+  confirmedUnique: boolean;
+}
+
+export function teamTotals(): TeamTotals {
+  const roles = departments.flatMap((d) => d.roles);
+  const counted = roles.filter((r) => r.count !== null);
+  const positions = reportedRolePositions();
+  const interns = internPositions();
+  return {
+    noun: verifiedUniqueEmployees !== null ? 'team members' : 'team positions',
+    total: verifiedUniqueEmployees ?? positions,
+    positions,
+    interns,
+    staff: positions - interns,
+    roleTypes: counted.length,
+    departments: departments.filter((d) => d.roles.every((r) => r.count !== null)).length,
+    notCounted: roles.filter((r) => r.count === null).map((r) => r.title),
+    confirmedUnique: verifiedUniqueEmployees !== null,
+  };
 }
 
 export function getDepartment(id: string): Department {
@@ -433,7 +484,7 @@ export function departmentsInGroup(id: DepartmentGroupId): Department[] {
 export function countLabel(d: Department): string {
   if (d.roles.some((r) => r.count === null)) return '';
   const n = departmentRolePositions(d);
-  return n === 0 ? '' : `${n} ${n === 1 ? 'role' : 'roles'}`;
+  return n === 0 ? '' : `${n} ${n === 1 ? 'position' : 'positions'}`;
 }
 
 /* ---------------------------------------------------------------------- *

@@ -9,7 +9,8 @@ import {
   groupCountLabel,
   internPositions,
   seniorSupervisorExperience,
-  verifiedUniqueEmployees,
+  teamTotals,
+  departmentRolePositions,
   approvedProfiles,
 } from '@/data/team';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
@@ -49,6 +50,7 @@ export default function TeamPage() {
   const swInterns = getDepartment('software-engineering').roles.find((r) => r.intern);
   const aiInterns = getDepartment('ai-data').roles.find((r) => r.intern);
   const extended = getDepartment('extended-collaboration');
+  const totals = teamTotals();
 
   return (
     <>
@@ -96,15 +98,29 @@ export default function TeamPage() {
             Eight areas of expertise, <span className="signal-text">one connected team.</span>
           </h2>{' '}
           <p className="lede mt-5 max-w-[var(--reading-width)]">
-            Figures show the number of roles in each area. The areas are described by what they do, and individual
-            profiles are shown only where the person has agreed.
+            The numbers below come from one source and are the same everywhere on this site. The areas are described by
+            what they do, and individual profiles are shown only where the person has agreed.
           </p>
 
-          {verifiedUniqueEmployees !== null && (
-            <p className="mt-6 font-heading text-[clamp(28px,4vw,44px)] font-semibold text-ink">
-              {verifiedUniqueEmployees} <span className="text-[18px] font-medium text-ink-muted">confirmed team members</span>
-            </p>
-          )}
+          <ul className="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 border-y border-line-light py-8 lg:grid-cols-4">
+            {[
+              { n: String(totals.total), l: totals.noun === 'team members' ? 'team members' : 'team positions' },
+              { n: String(totals.roleTypes), l: 'role titles' },
+              { n: String(totals.departments), l: 'departments with a reported count' },
+              { n: String(totals.interns), l: 'of those positions are interns' },
+            ].map((x) => (
+              <li key={x.l}>
+                <span className="block font-heading text-[clamp(40px,5.4vw,68px)] font-semibold leading-none tracking-[-0.04em] text-ink">{x.n}</span>
+                <span className="mt-2 block text-[15px] text-ink-muted">{x.l}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 max-w-[var(--reading-width)] text-[14.5px] leading-relaxed text-ink-muted">
+            {totals.confirmedUnique
+              ? `${totals.total} is the number of people management has confirmed. `
+              : `${totals.total} is the number of role positions management reported, including ${totals.interns} intern positions (${totals.staff} others). A person who holds two roles would appear twice, so read it as positions, not as a headcount. `}
+            {totals.notCounted.length > 0 && <>Not counted because no number has been supplied: {totals.notCounted.join(' and ').toLowerCase()}.</>}
+          </p>
 
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {departmentGroups.map((g) => (
@@ -115,6 +131,55 @@ export default function TeamPage() {
               </li>
             ))}
           </ul>
+
+          <h3 className="mt-14 font-heading text-[clamp(22px,2.6vw,30px)] font-semibold tracking-[-0.02em] text-ink">Every role and its count</h3>
+          <div className="mt-5 overflow-x-auto rounded-editorial border border-line-light">
+            <table className="w-full min-w-[520px] border-collapse text-left text-[15.5px]">
+              <caption className="sr-only">Reported positions for every role, grouped by department, with department subtotals and a total</caption>
+              <thead>
+                <tr className="bg-ivory-soft text-[13px] uppercase tracking-[0.1em] text-ink-muted">
+                  <th scope="col" className="px-4 py-3 font-semibold">Role</th>
+                  <th scope="col" className="px-4 py-3 text-right font-semibold">Positions</th>
+                </tr>
+              </thead>
+              {departments
+                .filter((d) => d.roles.some((r) => r.count !== null))
+                .map((d) => (
+                  <tbody key={d.id} className="border-t border-line-light">
+                    <tr className="bg-ivory-soft/60">
+                      <th scope="colgroup" colSpan={2} className="px-4 pb-1.5 pt-3 text-left font-heading text-[16px] font-semibold text-ink">
+                        {d.name}
+                      </th>
+                    </tr>
+                    {d.roles
+                      .filter((r) => r.count !== null)
+                      .map((r) => (
+                        <tr key={r.id} className="border-t border-line-light/60">
+                          <th scope="row" className="px-4 py-2 font-normal text-ink-muted">
+                            {r.title}
+                            {r.intern && <span className="ml-2 rounded-full border border-line-light px-2 py-0.5 text-[11.5px] font-semibold uppercase tracking-[0.06em]">Intern</span>}
+                          </th>
+                          <td className="px-4 py-2 text-right font-semibold tabular-nums text-ink">{r.count}</td>
+                        </tr>
+                      ))}
+                    {d.roles.filter((r) => r.count !== null).length > 1 && (
+                      <tr className="border-t border-line-light/60">
+                        <th scope="row" className="px-4 py-2 text-[14px] font-medium text-ink-muted">Department total</th>
+                        <td className="px-4 py-2 text-right font-semibold tabular-nums text-violet">{departmentRolePositions(d)}</td>
+                      </tr>
+                    )}
+                  </tbody>
+                ))}
+              <tfoot>
+                <tr className="border-t-2 border-line-light bg-ivory-soft">
+                  <th scope="row" className="px-4 py-3.5 font-heading text-[17px] font-semibold text-ink">
+                    {totals.confirmedUnique ? 'Team members' : 'Total reported positions'}
+                  </th>
+                  <td className="px-4 py-3.5 text-right font-heading text-[20px] font-semibold tabular-nums text-ink">{totals.total}</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
         </div>
       </section>
 

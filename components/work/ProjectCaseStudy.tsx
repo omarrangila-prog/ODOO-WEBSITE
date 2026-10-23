@@ -3,8 +3,12 @@ import Link from 'next/link';
 import { Check } from 'lucide-react';
 import { statusLabel } from '@/data/projects';
 import { publishedCaseStudies, type CaseStudyRecord } from '@/data/case-study-model';
+import { countries } from '@/data/countries';
+import { getPath, pathHref } from '@/data/enquiry-paths';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
+import { ButtonLink } from '@/components/ui/Button';
 import { MaskedReveal } from '@/components/ui/motion/MaskedReveal';
+import { LazyDemo } from './demos/LazyDemo';
 
 /**
  * Reusable detail page for a real project. Every section renders only when
@@ -22,6 +26,22 @@ export function ProjectCaseStudy({ record: r }: { record: CaseStudyRecord }) {
   const related = publishedCaseStudies().filter((x) => x.slug !== r.slug).slice(0, 3);
   const features = [...(r.modules ?? []), ...(r.capabilities ?? [])];
   const tech = [...(r.stack ?? []), ...(r.integrations ?? [])];
+  const path = getPath(r.enquiryPath);
+  const unpublished = [
+    shots.length === 0 && !r.video ? 'screenshots of the delivered system' : null,
+    !r.outcomes?.length ? 'measured results' : null,
+    !r.testimonial?.approved ? 'a client testimonial' : null,
+  ].filter((x): x is string => Boolean(x));
+  const country = r.countryCode ? countries.find((c) => c.code === r.countryCode)?.name : undefined;
+  const facts = (
+    [
+      ['Status', statusLabel[r.classification]],
+      ['Client', r.clientDisplayName],
+      ['Sector', r.industry],
+      ['Country', country],
+      ['Type', r.serviceCategory],
+    ] as [string, string | undefined][]
+  ).filter((f): f is [string, string] => Boolean(f[1]));
 
   return (
     <article>
@@ -49,6 +69,131 @@ export function ProjectCaseStudy({ record: r }: { record: CaseStudyRecord }) {
           )}
         </div>
       </section>
+
+      {/* 1b — At a glance + what the system does */}
+      {(r.scope?.length ?? 0) > 0 && (
+        <section className="theme-light bay-sm" aria-labelledby="does-h">
+          <div className="shell">
+            <dl className="grid gap-x-8 gap-y-4 border-y border-line-light py-5 sm:grid-cols-2 lg:grid-cols-4">
+              {facts.map(([k, v]) => (
+                <div key={k}>
+                  <dt className="text-[12px] font-semibold uppercase tracking-[0.14em] text-ink-muted">{k}</dt>
+                  <dd className="mt-1 text-[16px] text-ink">{v}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <div className="mt-12 grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+              <div>
+                <h2 id="does-h" className="display-2">What the system does</h2>
+                {r.purpose && <p className="mt-5 text-[18px] leading-relaxed text-ink">{r.purpose}</p>}
+                <p className="mt-4 text-[15px] leading-relaxed text-ink-muted">
+                  Each line below is a function management has confirmed the system performs.
+                </p>
+              </div>
+              <ol className="divide-y divide-line-light border-y border-line-light">
+                {r.scope!.map((s, i) => (
+                  <li key={s.title} className="grid grid-cols-[2.25rem_1fr] gap-x-3 py-4">
+                    <span aria-hidden className="pt-1 text-[12px] tracking-[0.14em] text-violet">{String(i + 1).padStart(2, '0')}</span>
+                    <span>
+                      <span className="block font-heading text-[18px] font-semibold tracking-[-0.015em] text-ink">{s.title}</span>
+                      <span className="mt-1 block text-[15.5px] leading-relaxed text-ink-muted">{s.detail}</span>
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 1c — A working demonstration, labelled as one */}
+      {r.demonstration && (
+        <section className="theme-graphite bay-sm" aria-labelledby="demo-h">
+          <div className="shell">
+            <p className="eyebrow mb-4">Working demonstration</p>
+            <h2 id="demo-h" className="display-2 max-w-3xl">{r.demonstration.heading}</h2>
+            <p className="mt-4 max-w-[var(--reading-width)] text-[16.5px] leading-relaxed text-text-dark-muted">{r.demonstration.intro}</p>
+            <div className="mt-8">
+              <LazyDemo id={r.demonstration.kind} />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 1d — What this page rests on */}
+      {r.scope && (
+        <section className="theme-light bay-sm" aria-labelledby="basis-h">
+          <div className="shell">
+            <h2 id="basis-h" className="display-2 max-w-3xl">What this page rests on</h2>
+            <div className="mt-8 grid gap-4 md:grid-cols-3">
+              <div className="rounded-editorial border border-line-light bg-ivory-soft p-6">
+                <h3 className="font-heading text-[18px] font-semibold text-ink">Confirmed</h3>
+                <p className="mt-2 text-[15.5px] leading-relaxed text-ink-muted">
+                  What the system does, as listed above. {r.factsSource}
+                </p>
+              </div>
+              {r.demonstration && (
+                <div className="rounded-editorial border border-line-light bg-ivory-soft p-6">
+                  <h3 className="font-heading text-[18px] font-semibold text-ink">Built for this page</h3>
+                  <p className="mt-2 text-[15.5px] leading-relaxed text-ink-muted">
+                    The demonstration above, made by ODOOVATIONS with invented data. It illustrates the kind of workflow involved. It is not a screen from the delivered system.
+                  </p>
+                </div>
+              )}
+              {unpublished.length > 0 && (
+                <div className="rounded-editorial border border-line-light bg-ivory-soft p-6">
+                  <h3 className="font-heading text-[18px] font-semibold text-ink">Not published yet</h3>
+                  <p className="mt-2 text-[15.5px] leading-relaxed text-ink-muted">
+                    {new Intl.ListFormat('en', { style: 'long', type: 'conjunction' }).format(unpublished).replace(/^./, (c) => c.toUpperCase())}.
+                    {' '}We publish these only with the client&rsquo;s approval and the evidence behind them.{' '}
+                    <Link href={pathHref(r.enquiryPath ?? 'other', `project-${r.slug}`)} className="text-violet underline underline-offset-4">
+                      Ask what can be shared
+                    </Link>
+                    .
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 1e — Questions to settle first */}
+      {r.briefing && (
+        <section className="theme-graphite bay-sm" aria-labelledby="brief-h">
+          <div className="shell grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+            <div>
+              <h2 id="brief-h" className="display-2">{r.briefing.heading}</h2>
+              <p className="mt-5 text-[16.5px] leading-relaxed text-text-dark-muted">{r.briefing.intro}</p>
+              {path && (
+                <div className="mt-8">
+                  <ButtonLink href={pathHref(path.id, `project-${r.slug}`)}>Discuss a project like this</ButtonLink>
+                </div>
+              )}
+              {(r.relatedServices?.length ?? 0) > 0 && (
+                <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-1 text-[15px]">
+                  {r.relatedServices!.map((s) => (
+                    <li key={s.href}>
+                      <Link href={s.href} className="inline-flex min-h-[44px] items-center font-medium text-violet underline-offset-4 hover:underline">
+                        {s.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <ol className="divide-y divide-line border-y border-line">
+              {r.briefing.questions.map((q, i) => (
+                <li key={q} className="grid grid-cols-[2.25rem_1fr] gap-x-3 py-3.5 text-[16px] leading-relaxed text-text-dark">
+                  <span aria-hidden className="pt-0.5 text-[12px] tracking-[0.14em] text-violet/80">{String(i + 1).padStart(2, '0')}</span>
+                  {q}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      )}
 
       {/* 2-4 — Problem, solution, features */}
       {(r.problem || r.solution || features.length > 0) && (

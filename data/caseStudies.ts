@@ -25,11 +25,6 @@ export interface CaseStudy {
   category: WorkCategory;
   /** Short meta description. Falls back to industry + challenge when absent. */
   metaDescription?: string;
-  /** Optional — scenarios added later have no commissioned photography. */
-  image?: string;
-  imageMobile?: string;
-  imageWidth?: number;
-  imageHeight?: number;
   /**
    * These are DEMONSTRATION scenarios illustrating how Odoo maps to an industry
    * — not real client projects. The UI labels them "Demonstration". Replace with
@@ -44,8 +39,6 @@ export interface CaseStudy {
   outcome: string;
   before: string;
   after: string;
-  /** Qualitative outcome shown on the card — never a fabricated percentage. */
-  highlightMetric: { value: string; label: string };
   resultLine: string;
   /** Real numbers only, with verified:true. Empty until a client confirms them. */
   metrics: CaseStudyMetric[];
@@ -57,10 +50,6 @@ export const caseStudies: CaseStudy[] = [
     label: 'Odoo for a Textile Manufacturer',
     industry: 'Textile & Apparel',
     category: 'Odoo',
-    image: '/images/case-study-textile-manufacturer.webp',
-    imageMobile: '/mobile/case-study-textile-manufacturer-mobile.webp',
-    imageWidth: 1800,
-    imageHeight: 1200,
     isDemonstration: true,
     challenge:
       'Production, subcontracting and stock were tracked across separate spreadsheets, with order status chased manually.',
@@ -73,7 +62,6 @@ export const caseStudies: CaseStudy[] = [
       'One connected view from raw material to finished goods, with live order status and accurate stock.',
     before: 'Disconnected reporting, manual visibility and repetitive coordination.',
     after: 'Connected operations, live information and controlled workflows.',
-    highlightMetric: { value: 'Faster', label: 'reporting & order visibility' },
     resultLine:
       'Illustrative outcome: manual reporting replaced by live dashboards, with order status visible end to end.',
     metrics: [],
@@ -83,10 +71,6 @@ export const caseStudies: CaseStudy[] = [
     label: 'Odoo for a Distribution Business',
     industry: 'Distribution',
     category: 'Odoo',
-    image: '/images/case-study-distribution-company.webp',
-    imageMobile: '/mobile/case-study-distribution-company-mobile.webp',
-    imageWidth: 1800,
-    imageHeight: 1200,
     isDemonstration: true,
     challenge:
       'Multi-warehouse stock never matched records, customer pricing was inconsistent, and receivables were hard to track.',
@@ -99,7 +83,6 @@ export const caseStudies: CaseStudy[] = [
       'Accurate multi-warehouse stock, controlled pricing and a live view of receivables.',
     before: 'Disconnected reporting, manual visibility and repetitive coordination.',
     after: 'Connected operations, live information and controlled workflows.',
-    highlightMetric: { value: 'Accurate', label: 'multi-warehouse stock' },
     resultLine:
       'Illustrative outcome: multi-warehouse stock kept accurate, customer pricing controlled and receivables visible live.',
     metrics: [],
@@ -123,7 +106,6 @@ export const caseStudies: CaseStudy[] = [
       'Every enquiry answered within seconds regardless of hour, with qualified leads reaching a named salesperson and the conversation recorded against the customer rather than a personal phone.',
     before: 'Leads answered hours late, tracked informally, and owned by one handset.',
     after: 'Immediate response, qualification before a salesperson is involved, and a CRM record for every enquiry.',
-    highlightMetric: { value: 'Seconds', label: 'to first response, any hour' },
     resultLine:
       'Illustrative outcome: first response moves from hours to seconds, and no enquiry depends on one person watching a phone.',
     metrics: [],
@@ -147,7 +129,6 @@ export const caseStudies: CaseStudy[] = [
       'Stock that reconciles branch by branch, customer pricing applied automatically instead of remembered, and a head-office view that does not wait for anyone to send a number.',
     before: 'Four stock sheets, informal pricing, and a yearly reconciliation surprise.',
     after: 'One catalogue, enforced pricing and credit limits, and live consolidated reporting.',
-    highlightMetric: { value: 'One', label: 'catalogue across four branches' },
     resultLine:
       'Illustrative outcome: branch stock and pricing brought onto one record, with cycle counting replacing the annual shutdown.',
     metrics: [],
@@ -171,7 +152,6 @@ export const caseStudies: CaseStudy[] = [
       'A site that can be found for the products it sells rather than only its own name, with every enquiry attributed to the page and source that produced it.',
     before: 'Visible only to people who already knew the company name.',
     after: 'Structured around buyer search intent, with measurable enquiry attribution.',
-    highlightMetric: { value: 'Measured', label: 'enquiries, by source and page' },
     resultLine:
       'Illustrative outcome: content structured for category search, and enquiries traced to the page that generated them.',
     metrics: [],
@@ -195,7 +175,6 @@ export const caseStudies: CaseStudy[] = [
       'Spend decisions based on which campaigns produce qualified leads and revenue, rather than which produce the cheapest clicks.',
     before: 'Rising spend, flat enquiries, and no link between campaign and customer.',
     after: 'Attribution from ad through to closed business, with unqualified enquiries filtered early.',
-    highlightMetric: { value: 'Traceable', label: 'ad spend to closed business' },
     resultLine:
       'Illustrative outcome: every enquiry carries its source, so budget follows evidence rather than impressions.',
     metrics: [],
