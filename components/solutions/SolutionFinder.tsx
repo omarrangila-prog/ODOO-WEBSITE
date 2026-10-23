@@ -109,7 +109,7 @@ export function SolutionFinder() {
                 )}
               >
                 {c}
-                <span className={cn('text-[12px]', active === c ? 'text-violet/80' : 'text-ink/55')}>
+                <span className={cn('text-[12px]', active === c ? 'text-violet-bright' : 'text-ink/55')}>
                   {counts[c] ?? 0}
                 </span>
               </button>

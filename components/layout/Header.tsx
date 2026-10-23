@@ -108,7 +108,7 @@ export function Header() {
             aria-label="Primary"
             className="absolute left-1/2 top-[calc(var(--frame-inset)+clamp(10px,1.5vw,20px))] hidden -translate-x-1/2 lg:block"
           >
-            <ul className="flex items-center gap-0.5 rounded-full border border-white/[0.13] bg-midnight/55 p-1.5 shadow-[0_18px_60px_-30px_rgba(0,0,0,0.9)] backdrop-blur-md">
+            <ul className="flex items-center gap-0.5 rounded-full border border-white/[0.13] bg-midnight/85 p-1.5 shadow-[0_18px_60px_-30px_rgba(0,0,0,0.9)] backdrop-blur-md">
               {primaryNav.map((item) => {
                 const active = isActive(item);
                 const open = openDropdown === item.label;

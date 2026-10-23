@@ -61,7 +61,8 @@ const stateStyle = {
 
 const stateTag = {
   yours: { label: 'Your step', color: 'text-ink-muted' },
-  standard: { label: 'Standard Odoo', color: 'text-[#0e7490]' },
+  // Was a dark teal chosen for the old light theme (3.1:1 on the dark panel); cyan holds 8:1.
+  standard: { label: 'Standard Odoo', color: 'text-cyan' },
   custom: { label: 'We build this', color: 'text-violet' },
 };
 

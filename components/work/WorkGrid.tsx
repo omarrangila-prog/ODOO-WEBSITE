@@ -189,7 +189,7 @@ export function WorkGrid() {
                 )}
               >
                 {f}
-                <span className={cn('text-[12px]', active === f ? 'text-violet/80' : 'text-ink/55')}>
+                <span className={cn('text-[12px]', active === f ? 'text-violet-bright' : 'text-ink/55')}>
                   {counts[f]}
                 </span>
               </button>
