@@ -56,7 +56,7 @@ async function run(label, width, height, init = () => {}) {
   });
   await grab();
   await p.getByRole('button', { name: /Pause motion/ }).click();
-  await p.waitForTimeout(600); // let a frame already in flight finish
+  await p.waitForTimeout(1500); // let a frame already in flight finish (a remote server needs longer than localhost)
   check((await p.evaluate(() => document.documentElement.dataset.motion)) === 'paused', 'desktop: pause sets html[data-motion=paused]');
   const a = await p.screenshot({ clip: { x: 700, y: 120, width: 600, height: 600 } });
   await p.waitForTimeout(1500);
