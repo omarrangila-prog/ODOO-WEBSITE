@@ -6,6 +6,8 @@
  * Content blocks render generically so every guide stays unique in substance.
  */
 
+import { techGuides } from './resources-tech';
+
 export type Block =
   | { type: 'p'; text: string }
   | { type: 'h2'; text: string }
@@ -30,7 +32,7 @@ export interface Resource {
   relatedResources: string[]; // slugs
 }
 
-export const resources: Resource[] = [
+const coreResources: Resource[] = [
   {
     slug: 'odoo-implementation-cost-pakistan',
     href: '/resources/odoo-implementation-cost-pakistan',
@@ -652,6 +654,9 @@ export const resources: Resource[] = [
     relatedResources: ['custom-software-cost-pakistan', 'whatsapp-automation-guide'],
   },
 ];
+
+// Guides for the wider technology questions people search (apps, ERP, platforms, AI, AEO/GEO).
+export const resources: Resource[] = [...coreResources, ...techGuides];
 
 export function getResource(slug: string) {
   return resources.find((r) => r.slug === slug);
