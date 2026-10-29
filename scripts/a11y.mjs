@@ -29,6 +29,7 @@ const pages = [
   ['technology', '/technologies'],
   ['ops-check', '/tools/operations-check'],
   ['service-odoo', '/services/odoo-implementation-pakistan'],
+  ['service-aeo', '/services/aeo-geo-ai-search-optimisation'],
   ['project-election', '/projects/kcci-election'],
   ['project-delivery', '/projects/whatsapp-digital-connection'],
   ['project-timer', '/projects/scrabble-timer'],

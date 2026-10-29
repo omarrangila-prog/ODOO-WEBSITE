@@ -49,6 +49,7 @@ export const serviceOptions = [
   'Website',
   'Mobile App',
   'Marketing',
+  'AEO / GEO',
   'Advertising',
   'Video',
   'Graphic Design',

@@ -186,6 +186,14 @@ export const serviceExtras: Record<string, ServiceExtra> = {
     connects: ['Campaign enquiries can be recorded in a CRM so leads can be traced to their source. Rankings and results are not guaranteed.'],
     evidence: [{ label: 'Demonstration: Campaign-to-CRM System', href: '/case-studies/campaign-to-crm-system', kind: 'demonstration' }, noClientCaseStudy('a marketing campaign')],
   },
+  'aeo-geo-ai-search-optimisation': {
+    hook: 'When a buyer asks an AI assistant, be the business it can describe.',
+    audience: ['Businesses that AI assistants cannot find or describe correctly.', 'Firms losing AI-answer mentions to competitors.', 'Companies whose website, profiles and listings disagree with each other.'],
+    priceFactors: ['Number of pages to rewrite answer-first.', 'State of the site’s structured data and technical health.', 'How many profiles and directories need correcting.', 'How many assistants and questions are tested, and how often.'],
+    timelineFactors: ['Access to the site and profiles.', 'Time for search engines and assistants to recrawl.', 'Building reviews and mentions, which takes months.'],
+    connects: ['Works alongside SEO and the website itself; content changes can be made on WordPress, custom sites or Odoo websites.', 'No ranking or recommendation by any AI assistant is guaranteed.'],
+    evidence: [{ label: 'Applied to odoovations.com in October 2026; results not yet measured.', href: '/llms.txt', kind: 'none' }],
+  },
   'creative-media': {
     hook: 'Make the complicated part easy to see.',
     audience: ['Companies whose product or software is hard to explain.', 'Teams needing demonstration videos or explainers.', 'Brands that need consistent visuals across channels.'],

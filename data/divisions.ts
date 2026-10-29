@@ -365,6 +365,7 @@ export const divisions: Division[] = [
     ctaLabel: 'Plan My Campaign',
     pages: [
       { label: 'Digital Marketing', href: '/services/digital-marketing' },
+      { label: 'AEO & GEO (AI search)', href: '/services/aeo-geo-ai-search-optimisation' },
       { label: 'Creative & Media', href: '/services/creative-media' },
     ],
     weight: 'md',

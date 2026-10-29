@@ -1024,6 +1024,58 @@ export const services: Service[] = [
     ],
   },
   {
+    slug: 'aeo-geo-ai-search-optimisation',
+    href: '/services/aeo-geo-ai-search-optimisation',
+    division: 'marketing',
+    title: 'AEO & GEO: Getting Your Business Into AI Answers',
+    navLabel: 'AEO & GEO (AI Search)',
+    tagline: 'Be the business ChatGPT, Gemini, Claude and Perplexity can describe correctly.',
+    metaTitle: 'AEO & GEO Services: AI Search Optimisation',
+    metaDescription:
+      'Answer engine optimisation (AEO) and generative engine optimisation (GEO): make your business findable, quotable and correctly described by ChatGPT, Gemini, Claude, Perplexity and Google AI answers.',
+    answer:
+      'ODOOVATIONS provides answer engine optimisation (AEO) and generative engine optimisation (GEO): the work that helps AI assistants such as ChatGPT, Gemini, Claude, Perplexity and Google’s AI answers find a business, understand what it does and describe it correctly. It covers a single fact sheet for the business, answer-first page content, structured data, an llms.txt file, crawler access, directory and profile consistency, and repeated testing of what the assistants actually say. No one can guarantee that an AI assistant will name or recommend a business, and we do not.',
+    intro:
+      'More buyers now ask an assistant before they search. The assistant answers from what it can read and trust: your own site, directories, reviews, press and profiles. If those sources are thin, inconsistent or hard for a machine to parse, the answer names someone else, or gets you wrong. AEO and GEO fix the parts you control and build the parts you do not yet have.',
+    problems: [
+      'Ask ChatGPT or Perplexity about your business and it finds nothing, or confuses you with someone else.',
+      'Competitors are named in AI answers for searches you should win.',
+      'Your site says different things on different pages, so no single fact is safe to quote.',
+      'Your services are described in marketing language that answers no question.',
+      'Directory listings, social profiles and your website disagree on your name, address or services.',
+    ],
+    whatWeDo: [
+      { title: 'Entity and fact sheet', body: 'One checked list of facts about the business (name, location, services, what you do not do) published on the site and reused everywhere, so every source says the same thing.' },
+      { title: 'Answer-first content', body: 'Each important page opens with a direct, quotable answer to the question a buyer would ask, followed by the detail. Questions people actually ask become visible FAQs.' },
+      { title: 'Structured data and llms.txt', body: 'An Organization, Service and FAQ graph that links together, and llms.txt files that summarise the site for language models in their own format.' },
+      { title: 'Crawler access and technical health', body: 'Search and AI crawlers allowed and able to read every public page, sitemaps with honest dates, fast pages, share images, Bing and Google verification, and recrawl requests after changes.' },
+      { title: 'Off-site signals', body: 'Consistent Google Business Profile, directory listings and social profiles, plus a plan for the reviews and mentions that assistants weigh when they choose whom to name.' },
+      { title: 'AI visibility testing', body: 'A fixed set of buyer questions asked of the main assistants on a schedule, with the answers recorded, so changes are measured against what the assistants really say rather than assumed.' },
+    ],
+    modules: ['AEO', 'GEO', 'Structured Data', 'llms.txt', 'Technical SEO', 'Entity SEO', 'Local SEO', 'AI Visibility Testing'],
+    flow: {
+      label: 'From invisible to quotable',
+      steps: ['Baseline AI answers', 'Fact sheet', 'Answer-first pages', 'Structured data & llms.txt', 'Crawler access', 'Profiles & directories', 'Retest & report'],
+      note: 'The baseline is recorded first, so every later test is compared with what the assistants said before any change.',
+    },
+    outcomes: [
+      'A record of what the main AI assistants say about the business, before and after',
+      'One consistent set of facts across the site, profiles and directories',
+      'Pages that answer buyer questions directly and can be quoted',
+      'A site that search and AI crawlers can read in full',
+    ],
+    process: ['Baseline test', 'Fact sheet', 'Content & schema', 'Technical & crawler access', 'Off-site profiles', 'Retest & report'],
+    ctaLabel: 'Check My AI Visibility',
+    faqs: [
+      { question: 'What is AEO?', answer: 'Answer engine optimisation is the work of making a business’s information easy for answer engines (Google’s AI answers, voice assistants and chat assistants) to find and quote: direct answers to real questions, clear structure and structured data.' },
+      { question: 'What is GEO?', answer: 'Generative engine optimisation focuses on large language model assistants such as ChatGPT, Gemini, Claude and Perplexity: making sure they can read your site, find consistent facts about you across the web, and describe your business correctly when someone asks.' },
+      { question: 'How is this different from SEO?', answer: 'It builds on SEO rather than replacing it. SEO aims for a ranked link; AEO and GEO aim for your business to be the answer, or to be named and described correctly inside one. Consistent facts, direct answers and off-site reputation matter more than they do for classic rankings.' },
+      { question: 'Can you guarantee ChatGPT or Google will recommend us?', answer: 'No. Nobody controls what an AI assistant says, and anyone who guarantees it is not being straight with you. We improve what assistants can read and trust, and we measure what they actually say over time.' },
+      { question: 'How long does it take?', answer: 'Changes to your own site can be made in weeks. Search engines and assistants then need time to recrawl, and off-site signals such as reviews and directory profiles build over months. We report against the recorded baseline so you can see what has moved.' },
+      { question: 'Have you done this for anyone?', answer: 'We applied it to odoovations.com in October 2026: a published fact sheet, answer-first service pages, a linked structured-data graph, llms.txt files, named crawler access and IndexNow submission. Results are still being measured and will be published only with evidence.' },
+    ],
+  },
+  {
     slug: 'digital-marketing',
     href: '/services/digital-marketing',
     division: 'marketing',

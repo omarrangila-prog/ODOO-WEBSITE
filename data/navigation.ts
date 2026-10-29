@@ -50,6 +50,7 @@ export const primaryNav: NavItem[] = [
     children: [
       { label: 'All services', href: '/services', description: 'The full list of what each capability covers.', group: 'Services' },
       ...divisions.map((d) => ({ label: d.label, href: d.href, description: d.summary, group: 'Services' })),
+      { label: 'AEO & GEO (AI search)', href: '/services/aeo-geo-ai-search-optimisation', description: 'Be found and described correctly by AI assistants.', group: 'Services' },
       { label: 'All solutions', href: '/solutions', group: 'Solutions' },
       { label: 'Accounting Software', href: '/solutions/accounting-software', group: 'Solutions' },
       { label: 'POS Software', href: '/solutions/pos-software', group: 'Solutions' },
@@ -79,7 +80,7 @@ export const primaryNav: NavItem[] = [
 ];
 
 export const footerNav = {
-  capabilities: divisions.map((d) => ({ label: d.label, href: d.href })),
+  capabilities: [...divisions.map((d) => ({ label: d.label, href: d.href })), { label: 'AEO & GEO', href: '/services/aeo-geo-ai-search-optimisation' }],
   solutions: [
     { label: 'Accounting Software', href: '/solutions/accounting-software' },
     { label: 'Sales & Purchase Software', href: '/solutions/sales-purchase-software' },
