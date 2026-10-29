@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { company } from '@/data/company';
-import { buildMetadata, breadcrumbSchema, webPageSchema, faqSchema } from '@/lib/seo';
+import { buildMetadata, breadcrumbSchema, webPageSchema, faqSchema, SITE_URL } from '@/lib/seo';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { CtaBand } from '@/components/ui/CtaBand';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { TextGap } from '@/components/ui/TextGap';
+import { companyFacts, notClaimed } from '@/lib/facts';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Official ODOOVATIONS Company and Brand Information',
@@ -54,11 +55,15 @@ export default function BrandPage() {
     <>
       <JsonLd
         data={[
-          webPageSchema(
-            'Official ODOOVATIONS Company and Brand Information',
-            '/company/brand',
-            'Official brand, spelling, contact and logo-usage information for ODOOVATIONS.',
-          ),
+          {
+            ...webPageSchema(
+              'Official ODOOVATIONS Company and Brand Information',
+              '/company/brand',
+              'Official brand, spelling, contact and logo-usage information for ODOOVATIONS, with the key facts about the company.',
+            ),
+            '@type': 'AboutPage',
+            mainEntity: { '@id': `${SITE_URL}/#organization` },
+          },
           breadcrumbSchema(crumbs),
           faqSchema(faqs),
         ]}
@@ -78,6 +83,37 @@ export default function BrandPage() {
 
           <div className="mt-14 grid gap-10 lg:grid-cols-[1.5fr_1fr]">
             <div className="space-y-10">
+              <Section title="Key facts">
+                <p>
+                  The same facts power this page, the structured data on every page and the{' '}
+                  <a href="/llms.txt">plain-text summary for AI assistants</a>, so they cannot disagree.
+                </p>
+                <dl className="mt-5 divide-y divide-line border-y border-line">
+                  {companyFacts().map((f) => (
+                    <div key={f.label} className="grid gap-1 py-3 sm:grid-cols-[11rem_1fr] sm:gap-6">
+                      <dt className="text-[13px] font-semibold uppercase tracking-wide text-text-dark-muted">{f.label}</dt>
+                      <dd className="text-[15.5px] leading-relaxed text-text-dark">
+                        {f.value}
+                        {f.href && (
+                          <>
+                            {' '}
+                            <Link href={f.href} className="whitespace-nowrap">
+                              More
+                            </Link>
+                          </>
+                        )}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+                <h3 className="mt-8 font-heading text-[18px] font-semibold">What ODOOVATIONS does not claim</h3>
+                <ul className="mt-3 list-disc space-y-1.5 pl-5">
+                  {notClaimed.map((n) => (
+                    <li key={n}>{n}</li>
+                  ))}
+                </ul>
+              </Section>
+
               <Section title="What is ODOOVATIONS?">
                 <p>
                   ODOOVATIONS is a technology company based in Karachi, Pakistan, building custom

@@ -13,7 +13,7 @@ import { ConsentBanner } from '@/components/leadintel/ConsentBanner';
 import { JsonLd } from '@/components/ui/JsonLd';
 import {
   SITE_URL,
-  OG_IMAGE,
+  ogImage,
   organizationSchema,
   websiteSchema,
 } from '@/lib/seo';
@@ -77,7 +77,6 @@ export const metadata: Metadata = {
     'digital marketing Pakistan',
     'video production and creative studio',
   ],
-  alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
     url: SITE_URL,
@@ -85,7 +84,7 @@ export const metadata: Metadata = {
     title: 'ODOOVATIONS | Software, AI Automation, Odoo & Digital',
     description:
       'One team for technology, automation, software, creative and growth. Karachi-based, serving Pakistan and international clients remotely.',
-    images: [OG_IMAGE],
+    images: [ogImage('Custom software, ERP, AI automation and digital, built around how your business works.')],
     locale: 'en_PK',
   },
   twitter: {
@@ -93,15 +92,20 @@ export const metadata: Metadata = {
     title: 'ODOOVATIONS | Software, AI Automation, Odoo & Digital',
     description:
       'We build, automate and grow businesses. Software, AI, Odoo, web, marketing and creative under one team.',
-    images: [OG_IMAGE.url],
+    images: [ogImage('Custom software, ERP, AI automation and digital, built around how your business works.').url],
   },
   robots: { index: true, follow: true },
   // Search Console verification: set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION to the
   // token Google gives for the property, and the meta tag is emitted. Nothing is
   // emitted until then, and nothing here proves ownership by itself.
-  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
-    ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
-    : {}),
+  // Bing Webmaster Tools works the same way with NEXT_PUBLIC_BING_SITE_VERIFICATION (msvalidate.01).
+  // Bing matters beyond Bing: its index also feeds ChatGPT search and Copilot answers.
+  verification: {
+    ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } : {}),
+    ...(process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION ? { other: { 'msvalidate.01': process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION } } : {}),
+  },
+  // The plain-text index for language models (llmstxt.org).
+  alternates: { canonical: '/', types: { 'text/plain': '/llms.txt' } },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

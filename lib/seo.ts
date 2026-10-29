@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { company } from '@/data/company';
 import { verifiedCountries } from '@/data/global-projects';
+import { services } from '@/data/services';
 import { hreflangAlternates } from './i18n';
 
 /**
@@ -15,12 +16,29 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') ||
   'https://odoovations.com';
 
+/**
+ * The date the site's content was last revised, for the sitemap's lastmod. Bump it in a
+ * release that changes page content. A lastmod that changes on every build (the old
+ * `new Date()`) tells search engines nothing, so they learn to ignore it.
+ */
+export const CONTENT_REVISED = '2026-10-29';
+
+/** IndexNow key (Bing, Yandex, Seznam, Naver). The same value is served at /<key>.txt. */
+export const INDEXNOW_KEY = 'ab1171d1534e0cc4a07f1c2fe01d1e40';
+
 export const OG_IMAGE = {
   url: '/images/odoovations-og-image.webp',
   width: 1200,
   height: 630,
   alt: 'ODOOVATIONS — Odoo implementation and custom development in Pakistan',
 };
+
+/** A per-page share image: the page title drawn on the brand canvas by app/og (PNG). */
+export function ogImage(title: string, kicker?: string) {
+  const sp = new URLSearchParams({ title });
+  if (kicker) sp.set('kicker', kicker);
+  return { url: `/og?${sp.toString()}`, width: 1200, height: 630, alt: title.replace(/\s*[|—–-]\s*ODOOVATIONS\s*$/i, '') };
+}
 
 /** Dedicated square company logo for structured data (publisher/Organization). */
 export const LOGO_URL = '/images/odoovations-logo.png';
@@ -53,14 +71,14 @@ export function buildMetadata({
       siteName: company.name,
       title,
       description,
-      images: [OG_IMAGE],
+      images: [ogImage(title)],
       locale: 'en_PK',
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: [OG_IMAGE.url],
+      images: [ogImage(title).url],
     },
   };
 }
@@ -102,6 +120,26 @@ export function organizationSchema() {
     parentOrganization: { '@type': 'Organization', name: 'Kausar Innovations' },
     areaServed: verifiedCountries.map((c) => ({ '@type': 'Country', name: c.countryName })),
     ...(socials.length ? { sameAs: socials } : {}),
+    // What the company works on, for entity understanding. Drawn from the service list, plus the
+    // platforms it builds on; no certification or partnership is implied by naming them.
+    knowsAbout: [
+      ...services.map((s) => s.navLabel),
+      'Odoo ERP',
+      'Shopify',
+      'WooCommerce',
+      'WordPress',
+      'QuickBooks integration',
+      'WhatsApp Business Platform',
+      'AI agents',
+    ],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Services',
+      itemListElement: services.map((s) => ({
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', '@id': `${SITE_URL}${s.href}#service`, name: s.title, url: `${SITE_URL}${s.href}` },
+      })),
+    },
     address: {
       '@type': 'PostalAddress',
       streetAddress: company.address.street,
@@ -179,12 +217,17 @@ export function serviceSchema(name: string, description: string, path: string) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
+    '@id': `${SITE_URL}${path}#service`,
     serviceType: name,
     name,
     description,
     url: `${SITE_URL}${path}`,
-    provider: { '@type': 'Organization', name: company.name, url: SITE_URL },
-    areaServed: ['Pakistan', 'Worldwide'],
+    // By reference, so every service page attaches to the one Organization node in the layout.
+    provider: { '@id': `${SITE_URL}/#organization` },
+    areaServed: [
+      { '@type': 'Country', name: 'Pakistan' },
+      { '@type': 'Place', name: 'Worldwide (remote delivery)' },
+    ],
   };
 }
 

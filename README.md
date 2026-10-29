@@ -88,6 +88,7 @@ runs as an in-memory mock unless `ODOO_URL`, `ODOO_DB`, `ODOO_USER` and `ODOO_AP
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | WhatsApp number, international format, no `+` |
 | `NEXT_PUBLIC_SCHEDULING_URL` | If set, "arrange a call on WhatsApp" becomes "book a discovery call" |
 | `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | Emits the Search Console verification tag |
+| `NEXT_PUBLIC_BING_SITE_VERIFICATION` | Emits the Bing Webmaster Tools tag (`msvalidate.01`) |
 | `NEXT_PUBLIC_ANALYTICS_DOMAIN` / `NEXT_PUBLIC_GA_ID` | Analytics (off unless set, and consent-gated) |
 | `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` | Email delivery (server only) |
 | `ODV_DRY_RUN=1` | Local only: validate the form without sending |
@@ -113,6 +114,19 @@ node scripts/lcp.mjs http://localhost:3710/ 4 3       # real-browser LCP under t
 Lighthouse: `npx lighthouse <url> --only-categories=performance --chrome-flags="--headless=new --no-sandbox"`
 (add `--preset=desktop` for desktop). Mobile scores swing by 10-15 points between identical
 runs on a loaded machine, so quote ranges, not one number.
+
+## Search, answer engines and AI assistants
+
+- `/llms.txt` and `/llms-full.txt` (`lib/llms.ts`): the site summarised for language models, generated from
+  the same data as the pages. `lib/facts.ts` is the company fact sheet shared by the brand page, these files
+  and the structured data.
+- `app/robots.ts` names every major search and AI crawler; `app/og/route.tsx` draws a PNG share image per page.
+- Structured data: one Organization node (with `knowsAbout` and the service catalogue); every Service links to
+  it by `@id`; every service page opens with an answer-first paragraph (`answer` in `data/services.ts`).
+- Sitemap `lastmod`: guides use their own `updated` date; everything else uses `CONTENT_REVISED` in
+  `lib/seo.ts`. Bump it in a release that changes page content.
+- After a production deploy: `node scripts/indexnow.mjs https://odoovations.com` tells Bing (and so ChatGPT search
+  and Copilot) to recrawl. `node scripts/geo-check.mjs <url>` verifies all of the above.
 
 ## Design system
 

@@ -68,6 +68,8 @@ export const services: Service[] = [
     metaTitle: 'Odoo Implementation in Pakistan | ODOOVATIONS',
     metaDescription:
       'End-to-end Odoo implementation for businesses in Pakistan and worldwide. We map your real workflow, configure the right modules and deliver a working system.',
+    answer:
+      'ODOOVATIONS is an independent Odoo implementation team based in Karachi, Pakistan. It configures Odoo around how a business already works, covering sales, purchase, inventory, accounting, CRM and reporting, then migrates the existing data, sets user permissions and trains staff on their real workflows. Module scope is agreed in writing before configuration starts. ODOOVATIONS does not claim official Odoo partner status.',
     intro:
       'We implement Odoo around your real operations — not a generic template. From sales and inventory to accounting and manufacturing, we connect your departments into one system your team will actually use.',
     problems: [
@@ -138,6 +140,8 @@ export const services: Service[] = [
     metaTitle: 'Custom Odoo Development & Module Building | ODOOVATIONS',
     metaDescription:
       'Custom Odoo module development for Pakistani and international businesses. Approval flows, industry forms, pricing rules, custom reports and integrations — no unnecessary complexity.',
+    answer:
+      'ODOOVATIONS builds custom Odoo modules when standard Odoo does not match a process: approval flows, pricing rules, industry-specific forms, reports and integrations. Modules follow Odoo’s development conventions so they can be maintained through upgrades, and each one is scoped against what standard Odoo already does, so nothing is built that configuration could handle.',
     intro:
       'When standard Odoo does not fully match your process, we build precise custom modules — approval flows, industry-specific forms, pricing logic, reports and integrations — without over-engineering.',
     problems: [
@@ -208,6 +212,8 @@ export const services: Service[] = [
     metaTitle: 'Odoo Integration Services | ODOOVATIONS',
     metaDescription:
       'Connect Odoo with Shopify, WooCommerce, WhatsApp, payment gateways, couriers, banking and custom APIs. One reliable flow of information across your systems.',
+    answer:
+      'ODOOVATIONS connects Odoo to the other systems a business runs: online stores such as Shopify and WooCommerce, WhatsApp, payment gateways, couriers, banks and custom software through their APIs. What each integration can do depends on the other platform’s API and plan, so the direction of each sync and the records involved are agreed in writing before building.',
     intro:
       'We connect Odoo with the tools you already use so information flows in one direction of truth. Integration availability depends on the platform, API access and scope — we scope this clearly before we build.',
     problems: [
@@ -278,6 +284,8 @@ export const services: Service[] = [
     metaTitle: 'Odoo Consulting & Advisory | ODOOVATIONS',
     metaDescription:
       'Odoo consulting for businesses in Pakistan and abroad. We assess your workflow, define a clear scope and prevent unnecessary customisation before implementation begins.',
+    answer:
+      'ODOOVATIONS offers independent Odoo consulting: an assessment of how the business operates, a written scope and roadmap, and a second opinion on an existing or failing setup. The output says what to build, what to configure from standard Odoo and what not to build at all, so a business can decide before committing to an implementation.',
     intro:
       'Not sure where to start, or whether a previous setup went wrong? We assess your operations objectively and give you a clear, honest scope — including what you should not build.',
     problems: [
@@ -341,6 +349,8 @@ export const services: Service[] = [
     metaTitle: 'Odoo Support & Maintenance in Pakistan | ODOOVATIONS',
     metaDescription:
       'Ongoing Odoo support and maintenance for businesses in Pakistan and worldwide. Issue resolution, performance, upgrades and continuous improvement after go-live.',
+    answer:
+      'ODOOVATIONS supports Odoo systems after go-live: fixing issues, stabilising and tuning performance, planning version upgrades and adding capability as the business grows. The support arrangement, including what is covered and how requests are raised, is agreed in advance. Support is provided by people during Pakistan business hours; no round-the-clock cover is offered.',
     intro:
       'Going live is the start, not the end. We keep your Odoo system stable and continuously improved — resolving issues, tuning performance and adding capability as you grow.',
     problems: [
@@ -404,6 +414,8 @@ export const services: Service[] = [
     metaTitle: 'Odoo Training for Teams | ODOOVATIONS',
     metaDescription:
       'Practical Odoo training for your team in English or Urdu. Role-based sessions on real workflows so adoption sticks and your investment pays off.',
+    answer:
+      'ODOOVATIONS trains each team on its own day-to-day Odoo workflows rather than on a generic demo, in English or Urdu. Sessions are organised by role, so sales, warehouse and accounts staff each practise the steps they will actually perform, and teams receive reference material to keep after the sessions.',
     intro:
       'A system is only as good as its adoption. We train your team on their real day-to-day workflows — in English or Urdu — so people are confident and the system actually gets used.',
     problems: [
@@ -467,6 +479,8 @@ export const services: Service[] = [
     metaTitle: 'Odoo Migration Services (Excel & Legacy ERP) | ODOOVATIONS',
     metaDescription:
       'Migrate to Odoo from Excel or another ERP with prepared, mapped and validated data. We move master data, open items and stock so your new system starts accurate.',
+    answer:
+      'ODOOVATIONS migrates business data into Odoo from Excel or a legacy ERP. The work is mostly data discipline: mapping the old records to Odoo fields, cleaning duplicates and errors, loading them in the right order (contacts, products, opening stock, balances, open orders) and validating the totals with the business before sign-off, so the new system starts with numbers people trust.',
     intro:
       'Migrating to Odoo is mostly about data discipline, not just software. We prepare, map and validate your existing records — from Excel or a legacy ERP — so your new system starts with numbers your team can trust from day one.',
     problems: [
@@ -521,6 +535,8 @@ export const services: Service[] = [
     metaTitle: 'Odoo AI Dashboards & Reporting Analytics | ODOOVATIONS',
     metaDescription:
       'AI-assisted Odoo dashboards and reporting that surface trends, anomalies and next actions from your operational data — built on one source of truth.',
+    answer:
+      'ODOOVATIONS builds live dashboards and AI-assisted reporting on top of Odoo data: KPI views for sales, stock and finance, reports shaped to how the business is managed, and assistance that highlights trends and anomalies. Everything reads from the same Odoo records, so figures agree across departments.',
     intro:
       'Once your operations run on Odoo, the data to run the business better is already there. We build live dashboards and AI-assisted reporting that highlight trends, flag anomalies and point to the next action — drawn from a single source of truth.',
     problems: [
@@ -575,6 +591,8 @@ export const services: Service[] = [
     metaTitle: 'Odoo Business Process Automation | ODOOVATIONS',
     metaDescription:
       'Automate approvals, reordering, notifications and routine data entry in Odoo so your team focuses on decisions, not admin. Rule-based workflows built around your process.',
+    answer:
+      'ODOOVATIONS automates repetitive work inside Odoo with rule-based workflows: approval chains, reorder rules and stock alerts, reminders, and notifications that would otherwise be sent by hand. Rules are agreed with the people who own each process, and decisions that carry financial or customer risk keep a person approving them.',
     intro:
       'Much of the work that slows teams down is repetitive — chasing approvals, re-entering data, sending the same notifications. We automate those steps inside Odoo with reliable, rule-based workflows so your people spend their time on decisions, not admin.',
     problems: [

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { SITE_URL } from '@/lib/seo';
+import { SITE_URL, CONTENT_REVISED } from '@/lib/seo';
 import { services } from '@/data/services';
 import { industries } from '@/data/industries';
 import { caseStudies } from '@/data/caseStudies';
@@ -11,7 +11,6 @@ import { platformPages } from '@/data/platforms';
 import { publishedProducts } from '@/data/products';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
 
   const staticRoutes = [
     { path: '/', priority: 1 },
@@ -53,7 +52,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const productRoutes = products.length
     ? [{ path: '/products', priority: 0.8 }, ...products.map((p) => ({ path: `/products/${p.slug}`, priority: 0.7 }))]
     : [];
-  const resourceRoutes = resources.map((r) => ({ path: r.href, priority: 0.6 }));
+  const resourceRoutes = resources.map((r) => ({ path: r.href, priority: 0.6, updated: r.updated }));
   // Exact-intent solution landing pages are high value.
   const solutionRoutes = solutions.map((s) => ({ path: s.href, priority: 0.8 }));
 
@@ -68,9 +67,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...productRoutes,
     ...resourceRoutes,
     ...solutionRoutes,
-  ].map((r) => ({
+  ].map((r: { path: string; priority: number; updated?: string }) => ({
     url: `${SITE_URL}${r.path}`,
-    lastModified: now,
+    // Guides carry their own reviewed date; everything else the date of the last content release.
+    lastModified: r.updated ?? CONTENT_REVISED,
     changeFrequency: 'monthly',
     priority: r.priority,
   }));

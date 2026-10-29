@@ -30,7 +30,9 @@ Last updated 23 October 2026 (homepage cut to six sections, project pages, team 
 | Staff gender statements | Removed from the public team copy on 23 October 2026 (sales executives, receptionists, and the client-communication description): each described a group small enough to identify people. Restore only with each person's agreement |
 | Client-communication and freelance headcounts | Both are `null`, so neither is counted in the total and the Team page says so |
 | Scheduling tool | There is no booking system. "Arrange a call" opens WhatsApp and is labelled that way. If you adopt a booking tool, set `NEXT_PUBLIC_SCHEDULING_URL` and the label becomes "Book a discovery call" automatically |
-| Social profile URLs | `company.social` is empty, so no social links render |
+| Social profile URLs | `company.social` is empty, so no social links render and the Organization schema has no `sameAs`. Real LinkedIn, Facebook, Instagram and YouTube URLs are among the strongest signals that tie the name ODOOVATIONS to one entity in search and AI answers |
+| Google Business Profile | Not linked from the site. A verified profile at Office 604, Landmark Plaza, with the same name, phone and address, is the main local-search signal for Karachi |
+| Search Console and Bing Webmaster verification | Set `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` and `NEXT_PUBLIC_BING_SITE_VERIFICATION` on Vercel, redeploy, verify, then submit the sitemap in both |
 
 ## Product catalogue
 
