@@ -7,6 +7,7 @@
  * the honest answer even when it is "you may not need us".
  */
 import type { Resource } from './resources';
+import { AI_SEARCH_UPDATED, references as ref } from './ai-search';
 
 const UPDATED = '2026-10-29';
 
@@ -237,66 +238,272 @@ export const techGuides: Resource[] = [
     relatedResources: ['business-website-cost-pakistan', 'odoo-vs-sap-vs-quickbooks'],
   },
   {
-    slug: 'what-are-aeo-and-geo',
-    href: '/resources/what-are-aeo-and-geo',
-    metaTitle: 'What Are AEO and GEO? Getting Into AI Answers | ODOOVATIONS',
+    slug: 'aeo-vs-geo-vs-seo',
+    href: '/resources/aeo-vs-geo-vs-seo',
+    metaTitle: 'AEO vs GEO vs SEO: The Differences and the Overlap',
     metaDescription:
-      'AEO (answer engine optimisation) and GEO (generative engine optimisation) explained: how ChatGPT, Gemini, Claude and Perplexity choose which businesses to mention, and what you can do about it.',
-    h1: 'What Are AEO and GEO? How Businesses Get Into AI Answers',
+      'AEO, GEO and SEO explained plainly: what each term means, where they overlap, what Google says about AI Overviews and AI Mode, and what to do first.',
+    h1: 'AEO vs GEO vs SEO: What Is the Difference?',
     eyebrow: 'AI search',
     summary:
-      'AEO (answer engine optimisation) makes your information easy for answer engines to quote: direct answers, clear structure and structured data. GEO (generative engine optimisation) focuses on AI assistants such as ChatGPT, Gemini, Claude and Perplexity: making sure they can read your site, find the same facts about you across the web, and describe you correctly. Both build on SEO. The assistants mostly name businesses that are indexed, consistent, and talked about by other trusted sites such as directories, reviews and press.',
-    updated: UPDATED,
-    readMinutes: 7,
-    primaryKeyword: 'what is AEO and GEO',
+      'SEO (search engine optimization) helps people find the right page on your site. AEO (answer engine optimization) makes the answer on that page easy to find, trust and quote. GEO (generative engine optimization) improves how generative AI systems retrieve, describe and cite your business. They overlap heavily: a page that cannot be crawled cannot be quoted, and an answer nobody trusts is not cited. Google says that its AI Overviews and AI Mode need no special optimizations beyond the SEO fundamentals, so most of the work is the same work, measured differently.',
+    updated: AI_SEARCH_UPDATED,
+    readMinutes: 8,
+    primaryKeyword: 'AEO vs GEO vs SEO',
     blocks: [
-      { type: 'h2', text: 'How AI assistants decide who to mention' },
+      { type: 'h2', text: 'The three terms, in one table' },
       {
-        type: 'list',
-        items: [
-          'They search: assistants with web search read pages from search indexes such as Google and Bing. A site that is not indexed cannot be found.',
-          'They look for agreement: the same name, address and services on your site, Google Business Profile, LinkedIn and directories.',
-          'They look for others vouching for you: reviews, directory listings, press and articles.',
-          'They quote clear text: pages that answer a question directly in the first lines are easier to use.',
+        type: 'table',
+        head: ['', 'SEO', 'AEO', 'GEO'],
+        rows: [
+          ['Stands for', 'Search engine optimization', 'Answer engine optimization', 'Generative engine optimization'],
+          ['The question', 'Can people find the right page?', 'Is the answer easy to find, trust and quote?', 'Do generative systems describe us accurately and cite us?'],
+          ['Where it shows', 'Ranked links', 'Featured answers, snippets, voice and AI answers', 'Written answers from AI assistants and AI search'],
+          ['Mostly works through', 'Crawlable, fast, useful pages and links', 'Direct answers, structure, visible evidence', 'Consistent facts across the web, useful content, independent mentions'],
+          ['Progress is seen in', 'Rankings, impressions, clicks', 'Whether the answer is shown or quoted', 'Mentions, citations and accuracy'],
         ],
       },
-      { type: 'h2', text: 'What to do on your own website' },
-      {
-        type: 'list',
-        items: [
-          'Publish one fact sheet about the business and keep every page consistent with it.',
-          'Open each service page with a direct, quotable answer to the buyer’s question.',
-          'Add structured data (Organization, Service, FAQ) that links together.',
-          'Publish an llms.txt file that summarises the site for language models.',
-          'Let search and AI crawlers read every public page, and verify the site in Google Search Console and Bing Webmaster Tools.',
-        ],
-      },
-      { type: 'h2', text: 'What to do off your website' },
-      {
-        type: 'list',
-        items: [
-          'Create and verify a Google Business Profile, and ask real clients for reviews.',
-          'Create consistent profiles on LinkedIn and on directories your buyers use.',
-          'Earn mentions in industry press and articles.',
-        ],
-      },
-      { type: 'h2', text: 'How to measure it' },
+      { type: 'h2', text: 'What GEO stands for' },
       {
         type: 'p',
-        text: 'Write down the questions your buyers ask, ask them of the main assistants in a fresh chat, and record the answers. Repeat every few weeks. Rankings tools do not show AI answers yet, so a recorded baseline is the honest measure.',
+        text: 'GEO is generative engine optimization. The phrase was popularised by a 2023 research paper, “GEO: Generative Engine Optimization”, which used “generative engines” for search systems that gather information and condense it into a written answer. Today people use it for the practical work of being accurately described and cited by assistants such as ChatGPT search, Perplexity, Microsoft Copilot and Google’s AI features.',
       },
-      { type: 'note', text: 'No one can guarantee that an AI assistant will name or recommend a business. Be wary of anyone who does.' },
+      { type: 'h2', text: 'Where they overlap' },
+      {
+        type: 'list',
+        items: [
+          'All three need pages that can be crawled, indexed and read as text.',
+          'All three reward clear, accurate, helpful content over clever tricks.',
+          'All three depend on people and systems trusting what you say, which is shown by evidence, authorship and other sites agreeing with you.',
+        ],
+      },
+      { type: 'h2', text: 'What Google says' },
+      {
+        type: 'p',
+        text: 'Google’s guidance on AI features says a page can be shown as a supporting link in AI Overviews or AI Mode if it is indexed and eligible to be shown in Search with a snippet, and that there are no additional requirements to appear, nor other special optimizations necessary. It also says you do not need new machine-readable files, AI text files or markup, and that structured data should match the visible text. Indexing and serving are never guaranteed.',
+      },
+      {
+        type: 'note',
+        text: 'This is why we do not sell a special file or secret markup as the key to AI search. The work is good SEO, plainer answers, consistent facts and honest measurement.',
+      },
+      { type: 'h2', text: 'What to do first' },
+      {
+        type: 'list',
+        items: [
+          'Make sure the pages that matter are crawlable, indexed and available as text (SEO).',
+          'Open your service and guide pages with a direct answer, and show the evidence (AEO).',
+          'Make your name, address, services and description identical on your site and your verified profiles, then earn independent mentions (GEO).',
+          'Write down the questions your buyers ask, record what the assistants say today, and repeat it on a schedule (measurement).',
+        ],
+      },
+      { type: 'h2', text: 'What not to do' },
+      {
+        type: 'list',
+        items: [
+          'Hide text or instructions for machines. Google’s spam policies cover hidden text, cloaking and keyword stuffing.',
+          'Buy links or write reviews. Link spam and fake reviews are treated as spam, and assistants learn to distrust such sources.',
+          'Mass-produce near-identical pages. Google’s policies cover scaled content abuse.',
+          'Promise a result. Nobody controls what an assistant says.',
+        ],
+      },
     ],
     faqs: [
-      { question: 'Is GEO replacing SEO?', answer: 'No. AI assistants with search rely on search indexes, so SEO is the foundation. AEO and GEO add consistency, direct answers and off-site reputation on top.' },
-      { question: 'What is llms.txt?', answer: 'A plain-text file at the root of a website that summarises the site and links its key pages for language models. It is a proposed standard; it helps machines read a site but does not by itself make an assistant mention you.' },
-      { question: 'How long until ChatGPT mentions my business?', answer: 'Questions about your own name can change within weeks of being indexed. Broad "best company" questions depend on reviews and mentions that build over months.' },
+      { question: 'Is GEO replacing SEO?', answer: 'No. AI search systems that use the web rely on search indexes, so SEO is the foundation. AEO and GEO add direct answers, consistent facts and independent sources on top, and measure different things.' },
+      { question: 'Do I need structured data for AI Overviews?', answer: 'Google says no special markup is required. Use structured data where it is accurate and matches the visible page, because it helps systems understand the page, not because it is a requirement.' },
+      { question: 'Do I need an llms.txt file?', answer: 'It is not required, and Google says AI text files are unnecessary to appear in its AI features. A plain-text summary of a site can help some tools read it, so some sites publish one, but it does not make an assistant mention you.' },
+      { question: 'Which one should a small business start with?', answer: 'SEO fundamentals first, because the others depend on them, then answer-first pages for the questions that bring buyers. GEO work such as profiles, listings and independent mentions grows alongside.' },
     ],
     relatedServices: [
-      { label: 'AEO & GEO (AI search optimisation)', href: '/services/aeo-geo-ai-search-optimisation' },
-      { label: 'Digital marketing and SEO', href: '/services/digital-marketing' },
+      { label: 'AI Search (AEO & GEO)', href: '/services/ai-search-optimization' },
+      { label: 'AI Search Audit', href: '/services/ai-search-audit' },
     ],
-    relatedResources: ['business-website-cost-pakistan', 'how-to-choose-a-software-company-pakistan'],
+    relatedResources: ['how-to-measure-ai-search-visibility', 'ai-search-optimization-checklist'],
+    cta: { title: 'Want this done for your business?', body: 'Ask for a free suitability review, or start with a paid audit. Asking is free and commits you to nothing.', label: 'Request an AI Search Review', href: '/services/ai-search-optimization#enquiry' },
+    references: [ref.googleAi, ref.googleBasics, ref.googleSpam, ref.gerPaper],
+  },
+  {
+    slug: 'how-to-measure-ai-search-visibility',
+    href: '/resources/how-to-measure-ai-search-visibility',
+    metaTitle: 'How to Measure AI Search Visibility',
+    metaDescription:
+      'How to measure AI search visibility: the questions, the records to keep, mention rate, citation rate, referral traffic and the limits of each method.',
+    h1: 'How to Measure AI Search Visibility',
+    eyebrow: 'Measurement',
+    summary:
+      'Measure AI search visibility by asking a fixed list of buyer questions in each search experience, saving every answer with its date, locale and mode, and counting how often the brand is named and the domain is cited. Mention rate is answers naming the brand divided by valid recorded answers; citation rate is answers citing the domain divided by valid recorded answers. Report referral traffic and qualified enquiries separately, record failed runs separately, and state how many answers each percentage rests on, because the same question can get different answers on different days.',
+    updated: AI_SEARCH_UPDATED,
+    readMinutes: 8,
+    primaryKeyword: 'how to measure AI search visibility',
+    blocks: [
+      { type: 'h2', text: 'Why rank tracking does not fit' },
+      {
+        type: 'p',
+        text: 'A classic ranking is a position in a list. An AI answer is a piece of writing that may name some businesses, link some pages and differ from one run to the next. So the useful questions change: was the business named, was its domain cited, was the description right, and which sources were used.',
+      },
+      { type: 'h2', text: 'The definitions' },
+      {
+        type: 'table',
+        head: ['Term', 'Definition'],
+        rows: [
+          ['Brand mention', 'A valid recorded answer that names the brand, as the business itself and not as a similarly named organisation.'],
+          ['Valid domain citation', 'A valid recorded answer that links to or cites a page on your own domain.'],
+          ['Mention rate', 'Answers naming the brand ÷ valid recorded answers.'],
+          ['Citation rate', 'Answers citing the domain ÷ valid recorded answers.'],
+          ['Referral traffic', 'Visits that arrive from an AI search experience, as recorded in your analytics. Reported on its own.'],
+          ['Qualified enquiry', 'An enquiry your team judges to be a real prospect. Reported on its own; a mention is not a lead.'],
+        ],
+      },
+      { type: 'h2', text: 'The method' },
+      {
+        type: 'list',
+        items: [
+          'Write 20 to 80 buyer questions in the words buyers use, in each language you serve, and agree them before testing.',
+          'Choose the search experiences, for example ChatGPT search, Google AI Overviews and AI Mode, Perplexity and Microsoft Copilot.',
+          'Ask each question in a fresh session, signed out where possible, with the same locale settings every time.',
+          'Save the answer text and the cited URLs. Record the question, the product, the model where shown, the date, the locale, the search mode and whether the run was valid.',
+          'Repeat on a schedule. One run proves little; the same question run several times shows the spread.',
+          'Count mentions and citations only from valid runs. Keep failed or incomplete runs in a separate list.',
+          'Read the answers, not just the counts: note anything wrong or outdated, and which sources produced it.',
+        ],
+      },
+      { type: 'h2', text: 'Referral traffic and enquiries' },
+      {
+        type: 'p',
+        text: 'Some assistants send identifiable referrals and others do not, so analytics referrer and landing-page reports give a floor, not a total. Google states that traffic from AI Overviews and AI Mode is included in the Web search type of the Search Console Performance report; it is not separated out. Match enquiries to their source by asking how people found you, and never count a mention as a lead.',
+      },
+      { type: 'h2', text: 'Limits to state every time' },
+      {
+        type: 'list',
+        items: [
+          'Variability: the same question can produce different answers from run to run and day to day.',
+          'Sample size: say how many valid answers a percentage rests on. 6 of 10 and 60 of 100 are both 60%, and they are not equally reliable.',
+          'API versus product: results from a developer API are not the same as what people see in the consumer product, so they are not interchangeable.',
+          'Personalisation and location can change what a person sees.',
+          'Volume is not demand: search volumes are not customers.',
+        ],
+      },
+      { type: 'note', text: 'Arithmetic example, not a result: if 12 of 20 valid recorded answers name the brand, the mention rate is 12 ÷ 20 = 60%, resting on 20 answers.' },
+    ],
+    faqs: [
+      { question: 'Can a tool measure this automatically?', answer: 'Some tools run prompts at scale. Check what they actually measure (consumer product or API), how often, in which locale, and what they store, and treat their numbers with the same limits. Manual recording by a person is slower but transparent.' },
+      { question: 'How many questions are enough?', answer: 'Enough to cover the buyer journey without making the report unreadable. Twenty well-chosen questions are more useful than 200 near-duplicates.' },
+      { question: 'How often should we measure?', answer: 'Often enough to see a trend and rarely enough to be able to read the answers: weekly snapshots for an active programme and monthly reporting are common.' },
+      { question: 'What if we are never mentioned?', answer: 'Then the baseline says so, and the answers show which sources are used instead. That tells you what to build.' },
+    ],
+    relatedServices: [
+      { label: 'AI Search Audit', href: '/services/ai-search-audit' },
+      { label: 'AI Search packages', href: '/services/ai-search-pricing' },
+    ],
+    relatedResources: ['aeo-vs-geo-vs-seo', 'ai-search-optimization-checklist'],
+    cta: { title: 'Want this done for your business?', body: 'Ask for a free suitability review, or start with a paid audit. Asking is free and commits you to nothing.', label: 'Request an AI Search Review', href: '/services/ai-search-optimization#enquiry' },
+    references: [ref.googleAi, ref.openai, ref.perplexity],
+  },
+  {
+    slug: 'ai-search-optimization-checklist',
+    href: '/resources/ai-search-optimization-checklist',
+    metaTitle: 'AI Search Optimization Checklist',
+    metaDescription:
+      'A practical AI search optimization checklist: crawl and index access, readable text, structured data, crawler settings, answer-first content and measurement.',
+    h1: 'AI Search Optimization Checklist',
+    eyebrow: 'Checklist',
+    summary:
+      'Start with access: the pages that matter must be crawlable, indexed and readable as text. Then make each important page state its answer plainly, show evidence and authorship, and keep structured data consistent with what is visible. Make your name, address and services identical across your site and verified profiles, earn genuine reviews and mentions, review crawler settings against each provider’s documentation, and record what AI search says before and after changes. Nothing on this list is a guarantee, and none of it needs special files.',
+    updated: AI_SEARCH_UPDATED,
+    readMinutes: 9,
+    primaryKeyword: 'AI search optimization checklist',
+    blocks: [
+      { type: 'h2', text: 'Technical: can it be found and read?' },
+      {
+        type: 'list',
+        items: [
+          'Every page that should be found returns a 200 status, is not blocked by robots.txt or a noindex tag, and has one canonical URL.',
+          'Retired pages redirect permanently to their closest replacement, and there are no redirect chains.',
+          'Important pages are linked from other pages on the site with descriptive link text.',
+          'A sitemap lists the canonical URLs, and its last-modified dates change only when the content does.',
+          'The content that answers questions is present in the HTML a crawler receives, not only after scripts run, and not only in images.',
+          'Pages load quickly on a phone and the layout does not jump.',
+          'Structured data (for example Organization, Service, Article, FAQ) is accurate, matches the visible text and uses the same name and URLs everywhere.',
+          'The site is verified in Google Search Console and Bing Webmaster Tools, and the sitemap is submitted to both.',
+          'Your CDN, firewall and bot protection do not block search crawlers by accident. Check the logs, not just the settings.',
+        ],
+      },
+      { type: 'h2', text: 'Crawler settings: search and training are separate decisions' },
+      {
+        type: 'table',
+        head: ['Provider', 'Crawler', 'What the provider says it is for'],
+        rows: [
+          ['OpenAI', 'OAI-SearchBot', 'Surfacing sites in ChatGPT search. A site that opts out will not be shown in ChatGPT search answers.'],
+          ['OpenAI', 'GPTBot', 'Content that may be used to train generative AI models. Blocking it does not by itself remove a site from search.'],
+          ['OpenAI', 'ChatGPT-User', 'Actions a user asks ChatGPT to take. OpenAI says robots.txt rules may not apply.'],
+          ['Anthropic', 'Claude-SearchBot', 'Improving the quality of search results.'],
+          ['Anthropic', 'Claude-User', 'Fetching pages when a user asks a question that needs the web.'],
+          ['Anthropic', 'ClaudeBot', 'Collecting content that may be used for model training.'],
+          ['Perplexity', 'PerplexityBot', 'Surfacing and linking sites in Perplexity search. Perplexity says it is not used for training foundation models.'],
+          ['Perplexity', 'Perplexity-User', 'User-initiated fetches. Perplexity says it generally ignores robots.txt because a user requested the fetch.'],
+          ['Google', 'Googlebot', 'Search, including AI Overviews and AI Mode. Limit what is shown with nosnippet, max-snippet or noindex.'],
+          ['Google', 'Google-Extended', 'Limits use of content for AI training and grounding in some other Google systems.'],
+        ],
+      },
+      {
+        type: 'p',
+        text: 'This table summarises each provider’s documentation as read on 30 October 2026. Providers change their crawlers and wording, so check the sources below before changing robots.txt, and keep the choices you have already made about training.',
+      },
+      { type: 'h2', text: 'Content: does each page answer?' },
+      {
+        type: 'list',
+        items: [
+          'Each service, product and guide page opens with a direct statement of the answer, then the detail.',
+          'Claims are backed by something a reader can check: a source, a method, a real example. Nothing is invented.',
+          'Real authorship is shown, and the update date is honest.',
+          'Comparisons are fair and say when the alternative is the better choice.',
+          'FAQs are questions buyers actually ask, answered honestly, and visible on the page.',
+          'Prices, terms and limits are stated plainly, in text.',
+        ],
+      },
+      { type: 'h2', text: 'Brand and entity: does everything agree?' },
+      {
+        type: 'list',
+        items: [
+          'One fact sheet: legal name, trading name, address, phone, email, services, what you do not do.',
+          'Your site, Google Business Profile, LinkedIn page and directory listings all match it.',
+          'Similar names are disambiguated with a clear description and your own domain.',
+          'You ask real customers for reviews and never write or buy them.',
+        ],
+      },
+      { type: 'h2', text: 'Measurement: do you know what changed?' },
+      {
+        type: 'list',
+        items: [
+          'A written list of buyer questions and the search experiences that matter.',
+          'A dated baseline recorded before changes are made.',
+          'The same questions repeated on a schedule, with every answer saved.',
+          'Mentions, citations, referral traffic and enquiries reported separately.',
+        ],
+      },
+      { type: 'h2', text: 'Not required, and not to be done' },
+      {
+        type: 'list',
+        items: [
+          'A special file, special markup or an “AI schema”. Google says none is needed to appear in its AI features. A plain-text site summary is optional.',
+          'Hidden text or hidden instructions for machines, and text shown only to crawlers.',
+          'Keyword stuffing, mass-produced near-identical pages, purchased links and invented reviews.',
+          'Any promise that an assistant will mention you.',
+        ],
+      },
+    ],
+    faqs: [
+      { question: 'Where should I start?', answer: 'With access: confirm in Search Console that your key pages are indexed, then read what the assistants say about you today. Everything else is prioritised from those two facts.' },
+      { question: 'Should I block AI training crawlers?', answer: 'That is a business decision and independent from search. The providers publish separate crawlers for search and for training and say each setting stands alone. Decide on training for your own reasons and keep search access if you want to be found.' },
+      { question: 'Do I need a developer?', answer: 'Content, profiles and measurement need none. Redirects, rendering, performance and structured data usually do.' },
+      { question: 'How often should I review the list?', answer: 'Quarterly, and whenever a provider changes its documentation or you redesign the site.' },
+    ],
+    relatedServices: [
+      { label: 'AI Search (AEO & GEO)', href: '/services/ai-search-optimization' },
+      { label: 'AI Search Audit', href: '/services/ai-search-audit' },
+    ],
+    relatedResources: ['aeo-vs-geo-vs-seo', 'how-to-measure-ai-search-visibility'],
+    cta: { title: 'Want this done for your business?', body: 'Ask for a free suitability review, or start with a paid audit. Asking is free and commits you to nothing.', label: 'Request an AI Search Review', href: '/services/ai-search-optimization#enquiry' },
+    references: [ref.googleAi, ref.googleSpam, ref.googleOrg, ref.openai, ref.anthropic, ref.perplexity],
   },
   {
     slug: 'how-to-choose-a-software-company-pakistan',
@@ -615,9 +822,9 @@ export const techGuides: Resource[] = [
     ],
     relatedServices: [
       { label: 'Digital marketing', href: '/services/digital-marketing' },
-      { label: 'AEO & GEO', href: '/services/aeo-geo-ai-search-optimisation' },
+      { label: 'AI Search (AEO & GEO)', href: '/services/ai-search-optimization' },
     ],
-    relatedResources: ['what-are-aeo-and-geo', 'business-website-cost-pakistan'],
+    relatedResources: ['aeo-vs-geo-vs-seo', 'business-website-cost-pakistan'],
   },
   {
     slug: 'what-is-api-integration',

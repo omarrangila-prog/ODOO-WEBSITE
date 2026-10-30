@@ -1,3 +1,4 @@
+import { pkrNote } from '@/data/currency';
 /**
  * /llms.txt and /llms-full.txt, following the llms.txt proposal (llmstxt.org):
  * a short Markdown index of the site for language models, and a longer file that
@@ -14,6 +15,7 @@ import { resources } from '@/data/resources';
 import { faqs } from '@/data/faq';
 import { publishedCaseStudies } from '@/data/case-study-model';
 import { locations } from '@/data/locations';
+import { plans, formatPrice, terms, contentUnit, outcomeNotice } from '@/data/ai-search-pricing';
 import { companyFacts, notClaimed } from './facts';
 import { SITE_URL } from './seo';
 
@@ -45,6 +47,7 @@ export function llmsTxt(): string {
 
   L.push('## Services');
   for (const s of services) L.push(`- [${s.title}](${u(s.href)}): ${first(s.answer ?? s.intro)}`);
+  L.push(`- [AI Search packages and pricing](${u('/services/ai-search-pricing')}): ${plans.filter((p) => p.price !== null).map((p) => `${p.name} ${formatPrice(p)}`).join('; ')}; Enterprise by quote. Prices in USD before taxes.`);
   L.push('', '## Platforms');
   for (const p of platformPages) L.push(`- [${p.title}](${u(p.href)}): ${first(p.answer)}`);
   L.push(`- [All platforms](${u('/platforms')}): ${platformNotice}`);
@@ -81,6 +84,10 @@ export function llmsFullTxt(): string {
     L.push(`### ${s.title}`, `URL: ${u(s.href)}`, '', s.answer ?? s.intro, '');
     if (s.whatWeDo.length) L.push(...s.whatWeDo.map((w) => `- ${w.title}: ${w.body}`), '');
   }
+
+  L.push('### AI Search packages and pricing', `URL: ${u('/services/ai-search-pricing')}`, '', 'Prices are in USD, before taxes. ' + pkrNote + ' ' + outcomeNotice, '');
+  for (const p of plans) L.push(`#### ${p.name}: ${formatPrice(p)}`, '', ...p.includes.map((i) => `- ${i}`), '');
+  L.push(contentUnit, '', ...terms.map((t) => `- ${t.title}: ${t.body}`), '');
 
   L.push('## Platforms', '', platformNotice, '');
   for (const p of platformPages) {

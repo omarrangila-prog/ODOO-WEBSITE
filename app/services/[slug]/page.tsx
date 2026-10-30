@@ -18,14 +18,32 @@ import { FlowDiagram } from '@/components/ui/FlowDiagram';
 import { TextGap } from '@/components/ui/TextGap';
 import { PageArt } from '@/components/cinema/PageArt';
 import { OneSystemDiagram } from '@/components/ui/OneSystemDiagram';
+import { LeafPage } from '@/components/catalogue/LeafPage';
+import { MergedPackages } from '@/components/catalogue/MergedPackages';
+import { buildableLeaves, getLeafBySlug } from '@/lib/catalogue/leaf';
+import { FamilyHubPage, familyByHub } from '@/components/catalogue/HubPage';
+import { families as catalogueFamilies } from '@/data/catalogue/manifest';
+import { familyIntro } from '@/data/catalogue/hubs';
+
+/** Family hubs served from this route; a hub that coincides with an existing page (AI Search) is that page. */
+const familyHubSlugs = () =>
+  catalogueFamilies
+    .filter((f) => f.hub.startsWith('/services/') && !services.some((s) => s.href === f.hub))
+    .map((f) => ({ slug: f.hub.replace('/services/', '') }));
 
 export function generateStaticParams() {
-  return services.map((s) => ({ slug: s.slug }));
+  // Catalogue leaf pages share this route; only leaves with written content are built (lib/catalogue/leaf.ts).
+  return [...services.filter((s) => !s.bespoke).map((s) => ({ slug: s.slug })), ...buildableLeaves().map((l) => ({ slug: l.slug })), ...familyHubSlugs()];
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const service = getService(params.slug);
-  if (!service) return {};
+  if (!service) {
+    const leaf = getLeafBySlug(params.slug);
+    if (leaf) return buildMetadata({ title: `${leaf.brief.title} | ODOOVATIONS`, description: leaf.content.metaDescription, path: leaf.route });
+    const fam = familyByHub(`/services/${params.slug}`);
+    return fam ? buildMetadata({ title: `${fam.name} services | ODOOVATIONS`, description: `${familyIntro[fam.code]!.lede} Services and starting prices in USD. ${familyIntro[fam.code]!.boundary}`, path: fam.hub }) : {};
+  }
   return buildMetadata({ title: service.metaTitle, description: service.metaDescription, path: service.href });
 }
 
@@ -41,7 +59,13 @@ const sharedFaq = faqs.filter((f) =>
 
 export default function ServicePage({ params }: { params: { slug: string } }) {
   const service = getService(params.slug);
-  if (!service) notFound();
+  if (!service) {
+    const leaf = getLeafBySlug(params.slug);
+    if (leaf) return <LeafPage leaf={leaf} />;
+    const fam = familyByHub(`/services/${params.slug}`);
+    if (!fam) notFound();
+    return <FamilyHubPage family={fam} />;
+  }
 
   const serviceFaq = service.faqs ?? sharedFaq;
   const extra = serviceExtras[service.slug];
@@ -301,6 +325,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             </p>
           </div>
         </section>
+
+        <MergedPackages route={service.href} />
 
         {/* CTA follows the division, so an AI page asks about automation and
             an Odoo page asks about an Odoo roadmap — and the enquiry form

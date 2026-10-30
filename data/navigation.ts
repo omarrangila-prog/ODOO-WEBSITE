@@ -50,7 +50,10 @@ export const primaryNav: NavItem[] = [
     children: [
       { label: 'All services', href: '/services', description: 'The full list of what each capability covers.', group: 'Services' },
       ...divisions.map((d) => ({ label: d.label, href: d.href, description: d.summary, group: 'Services' })),
-      { label: 'AEO & GEO (AI search)', href: '/services/aeo-geo-ai-search-optimisation', description: 'Be found and described correctly by AI assistants.', group: 'Services' },
+      { label: 'AI Search (AEO & GEO)', href: '/services/ai-search-optimization', description: 'Be easier to find, understand and cite in AI answers.', group: 'Services' },
+      { label: 'AI Search packages', href: '/services/ai-search-pricing', description: 'Audit, Foundation, Growth, Authority and Enterprise.', group: 'Services' },
+      { label: 'Packages and pricing', href: '/pricing', description: 'Published packages, with price, unit and scope.', group: 'Services' },
+      { label: 'Combined programmes', href: '/programmes', description: 'Eight goal-based combinations, priced line by line.', group: 'Services' },
       { label: 'All solutions', href: '/solutions', group: 'Solutions' },
       { label: 'Accounting Software', href: '/solutions/accounting-software', group: 'Solutions' },
       { label: 'POS Software', href: '/solutions/pos-software', group: 'Solutions' },
@@ -74,13 +77,13 @@ export const primaryNav: NavItem[] = [
       { label: 'Import & Export', href: '/industries/import-export', group: 'Industries' },
     ],
   },
-  { label: 'Work', href: '/case-studies', match: ['/case-studies', '/projects'] },
+  { label: 'Work', href: '/case-studies', match: ['/case-studies', '/projects', '/demonstrations'] },
   { label: 'Team', href: '/company/team' },
   { label: 'Contact', href: '/contact' },
 ];
 
 export const footerNav = {
-  capabilities: [...divisions.map((d) => ({ label: d.label, href: d.href })), { label: 'AEO & GEO', href: '/services/aeo-geo-ai-search-optimisation' }],
+  capabilities: [...divisions.map((d) => ({ label: d.label, href: d.href })), { label: 'AI Search (AEO & GEO)', href: '/services/ai-search-optimization' }, { label: 'AI Search packages', href: '/services/ai-search-pricing' }, { label: 'Packages and pricing', href: '/pricing' }],
   solutions: [
     { label: 'Accounting Software', href: '/solutions/accounting-software' },
     { label: 'Sales & Purchase Software', href: '/solutions/sales-purchase-software' },
@@ -136,6 +139,7 @@ export const footerNav = {
     { label: 'Brand Information', href: '/company/brand' },
     { label: 'Resources', href: '/resources' },
     { label: 'Our Work', href: '/case-studies' },
+    { label: 'Sample work', href: '/demonstrations' },
   ],
   locations: [
     { label: 'Odoo Services in Karachi', href: '/locations/odoo-services-karachi' },

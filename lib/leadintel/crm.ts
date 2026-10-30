@@ -12,6 +12,7 @@
 
 import type { ScoreResult, RoutingResult } from './leadScore';
 import type { SessionData } from './session';
+import { odooExecute, hasOdooCreds } from './odoo-rpc';
 
 export interface LeadInput {
   /*
@@ -107,9 +108,7 @@ const mockLeads = new Map<string, { id: number; fields: Record<string, unknown>;
 let mockSeq = 1000;
 export function _resetMockCrm() { mockLeads.clear(); mockSeq = 1000; }
 
-function hasCreds(): boolean {
-  return Boolean(process.env.ODOO_URL && process.env.ODOO_DB && process.env.ODOO_USER && process.env.ODOO_API_KEY);
-}
+const hasCreds = hasOdooCreds;
 
 /**
  * Create or update an Odoo lead. `forceFail` lets tests exercise CRM failure.
@@ -139,35 +138,16 @@ export async function createOrUpdateLead(
 
   // LIVE path (Odoo JSON-RPC). Only runs when creds exist.
   try {
-    const url = `${process.env.ODOO_URL}/jsonrpc`;
     const email = String(fields.email_from ?? '').toLowerCase();
-    // 1) search existing open lead by email
-    const existing = await odooCall(url, 'search', ['crm.lead', [['email_from', '=', email], ['type', '=', 'lead']]]);
+    // An existing open lead with the same email is updated, not duplicated.
+    const existing = await odooExecute('crm.lead', 'search', [[['email_from', '=ilike', email], ['type', '=', 'lead']]], { limit: 1 });
     if (Array.isArray(existing) && existing.length > 0) {
-      await odooCall(url, 'write', ['crm.lead', existing, fields]);
-      return { ok: true, mode, action: 'updated', leadId: existing[0] };
+      await odooExecute('crm.lead', 'write', [existing, fields]);
+      return { ok: true, mode, action: 'updated', leadId: existing[0] as number };
     }
-    const id = await odooCall(url, 'create', ['crm.lead', fields]);
+    const id = await odooExecute('crm.lead', 'create', [fields]);
     return { ok: true, mode, action: 'created', leadId: id as number };
   } catch (e) {
     return { ok: false, mode, action: 'failed', error: e instanceof Error ? e.message : 'CRM error' };
   }
-}
-
-/** Minimal Odoo JSON-RPC call (execute_kw). Live path only. */
-async function odooCall(url: string, method: string, args: unknown[]): Promise<unknown> {
-  const body = {
-    jsonrpc: '2.0',
-    method: 'call',
-    params: {
-      service: 'object',
-      method: 'execute_kw',
-      args: [process.env.ODOO_DB, Number(process.env.ODOO_UID ?? 2), process.env.ODOO_API_KEY, args[0], method, [args[1]], args[2] ?? {}],
-    },
-  };
-  const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-  if (!res.ok) throw new Error(`Odoo HTTP ${res.status}`);
-  const json = (await res.json()) as { result?: unknown; error?: { message?: string } };
-  if (json.error) throw new Error(json.error.message ?? 'Odoo RPC error');
-  return json.result;
 }

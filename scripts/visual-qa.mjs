@@ -63,6 +63,15 @@ const pages = [
   ['project-timer', '/projects/scrabble-timer'],
   ['scenario', '/case-studies/textile-manufacturer'],
   ['platform-shopify', '/platforms/shopify'],
+  ['ai-search-hub', '/services/ai-search-optimization'],
+  ['ai-search-aeo', '/services/answer-engine-optimization'],
+  ['ai-search-geo', '/services/generative-engine-optimization'],
+  ['ai-search-audit', '/services/ai-search-audit'],
+  ['ai-search-pricing', '/services/ai-search-pricing'],
+  ['ai-search-location', '/locations/aeo-geo-services-pakistan'],
+  ['ai-search-guide-1', '/resources/aeo-vs-geo-vs-seo'],
+  ['ai-search-guide-2', '/resources/how-to-measure-ai-search-visibility'],
+  ['ai-search-guide-3', '/resources/ai-search-optimization-checklist'],
 ];
 
 /** Runs inside the page. Returns every layout defect it can see. */

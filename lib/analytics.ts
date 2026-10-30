@@ -35,7 +35,11 @@ export type AnalyticsEvent =
   | 'email_click'
   | 'enquiry_path_selected'
   | 'demo_interacted'
-  | 'demo_reset';
+  | 'demo_reset'
+  | 'ai_plan_selected'
+  | 'ai_review_requested'
+  | 'ai_audit_requested'
+  | 'ai_contact_click';
 
 type Props = Record<string, string | number | boolean>;
 

@@ -6,6 +6,7 @@ import { ServiceExplorer } from '@/components/home/ServiceExplorer';
 import { FeaturedWork, type ShowcaseItem } from '@/components/home/FeaturedWork';
 import { DeliveryPeople } from '@/components/home/DeliveryPeople';
 import { EnquirySection } from '@/components/home/EnquirySection';
+import { BuyerGoals } from '@/components/home/BuyerGoals';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { publishableProjects } from '@/data/projects';
 import { caseStudyHref } from '@/data/case-study-model';
@@ -74,10 +75,11 @@ export default function HomePage() {
 
       <CinematicHero />
       <ProofSection />
+      <BuyerGoals />
 
       <section aria-labelledby="services-h" className="band band-alt band-tight">
         <div className="band-inner">
-          <SectionLabel index="03">What we build</SectionLabel>
+          <SectionLabel index="04">What we build</SectionLabel>
           <h2 id="services-h" className="band-title mt-4 max-w-[34ch]">
             Find the right kind of help.
           </h2>
@@ -89,7 +91,7 @@ export default function HomePage() {
 
       <section aria-labelledby="work-h" className="band band-tight">
         <div className="band-inner">
-          <SectionLabel index="04">Featured work</SectionLabel>
+          <SectionLabel index="05">Featured work</SectionLabel>
           <div className="mt-4 flex flex-wrap items-end justify-between gap-x-10 gap-y-3">
             <h2 id="work-h" className="band-title max-w-[34ch]">
               Systems built for real organisations.

@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
+    "catalogue:check": "tsx scripts/catalogue-check.ts",
     "team:check": "tsx scripts/team-data-check.ts",
     "case-study:check": "tsx scripts/case-study-check.ts",
     "products:check": "tsx scripts/products-check.ts",

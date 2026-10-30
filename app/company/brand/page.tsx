@@ -206,7 +206,7 @@ export default function BrandPage() {
                   AI agents; custom software and product development, including accounting, POS,
                   inventory, hospital and factory systems; Odoo ERP implementation, customisation,
                   integration and support; websites, web applications and mobile apps; digital
-                  marketing, Meta and Google advertising, SEO and lead generation; creative, video,
+                  marketing, Meta and Google advertising, SEO, AI search optimisation (AEO and GEO) and lead generation; creative, video,
                   animation and copywriting; and content, social media and creator campaign
                   management. Its approach starts with the real operational workflow — including
                   the exceptions and workarounds nobody documents — uses standard, proven

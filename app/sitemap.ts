@@ -9,6 +9,8 @@ import { solutions } from '@/data/solutions';
 import { publishedCaseStudies } from '@/data/case-study-model';
 import { platformPages } from '@/data/platforms';
 import { publishedProducts } from '@/data/products';
+import { allLeaves } from '@/lib/catalogue/leaf';
+import { families as catalogueFamilies, divisions as catalogueDivisions } from '@/data/catalogue/manifest';
 
 export default function sitemap(): MetadataRoute.Sitemap {
 
@@ -28,6 +30,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/company/pricing', priority: 0.7 },
     { path: '/faq', priority: 0.7 },
     { path: '/company/brand', priority: 0.5 },
+    { path: '/services/ai-search-pricing', priority: 0.8 },
+    { path: '/pricing', priority: 0.8 },
     { path: '/platforms', priority: 0.85 },
     { path: '/technologies', priority: 0.6 },
     { path: '/tools/operations-check', priority: 0.6 },
@@ -36,7 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/terms', priority: 0.3 },
   ];
 
-  const serviceRoutes = services.map((s) => ({ path: s.href, priority: 0.8 }));
+  const serviceRoutes = [...services.map((s) => ({ path: s.href, priority: 0.8 })), ...allLeaves().map((l) => ({ path: l.route, priority: 0.7 })), ...catalogueFamilies.filter((f) => !services.some((s) => s.href === f.hub)).map((f) => ({ path: f.hub, priority: 0.75 })), ...catalogueDivisions.map((d) => ({ path: d.route, priority: 0.75 })), { path: '/demonstrations', priority: 0.6 }, { path: '/programmes', priority: 0.7 }, ...catalogueFamilies.map((f) => ({ path: f.demo.route, priority: 0.5 }))];
   const industryRoutes = industries.map((i) => ({ path: i.href, priority: 0.8 }));
   const caseRoutes = caseStudies.map((c) => ({
     path: `/case-studies/${c.slug}`,

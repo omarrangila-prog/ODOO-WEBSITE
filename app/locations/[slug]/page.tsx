@@ -75,14 +75,14 @@ export default function LocationPage({ params }: { params: { slug: string } }) {
                 <MapPin className="h-4 w-4 text-magenta" aria-hidden />
                 {company.address.full}
               </span>
-              <a href={company.phoneHref} className="inline-flex items-center gap-2 text-text-dark-muted hover:text-text-dark">
+              <a href={company.phoneHref} className="inline-flex min-h-[44px] items-center gap-2 sm:min-h-0 text-text-dark-muted hover:text-text-dark">
                 <Phone className="h-4 w-4 text-violet-bright" aria-hidden />
                 {company.phoneDisplay}
               </a>
             </div>
 
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href="/contact#form">
+              <ButtonLink href={loc.ctaHref ?? '/contact#form'}>
                 {loc.ctaLabel}
                 <ArrowNudge />
               </ButtonLink>

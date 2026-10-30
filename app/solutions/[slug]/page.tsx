@@ -3,6 +3,12 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Check, CircleAlert, ArrowUpRight, ExternalLink, Clock, Wallet, MessageCircle, Phone } from 'lucide-react';
 import { solutions, getSolution, type SolBlock } from '@/data/solutions';
+import { FamilyHubPage } from '@/components/catalogue/HubPage';
+import { MergedPackages } from '@/components/catalogue/MergedPackages';
+import { getFamily } from '@/data/catalogue/manifest';
+import { familyIntro } from '@/data/catalogue/hubs';
+
+const INDUSTRY_HUB = getFamily('F23')!;
 import { company, PLACEHOLDER } from '@/data/company';
 import { whatsappLink } from '@/lib/utilities';
 import { buildMetadata, breadcrumbSchema, faqSchema, serviceSchema, webPageSchema } from '@/lib/seo';
@@ -16,18 +22,26 @@ import { TextGap } from '@/components/ui/TextGap';
 import { PageArt } from '@/components/cinema/PageArt';
 
 export function generateStaticParams() {
-  return solutions.map((s) => ({ slug: s.slug }));
+  // The industry-systems family hub from the catalogue brief shares this route.
+  return [...solutions.map((s) => ({ slug: s.slug })), { slug: INDUSTRY_HUB.hub.replace('/solutions/', '') }];
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const sol = getSolution(params.slug);
-  if (!sol) return {};
+  if (!sol) {
+    return `/solutions/${params.slug}` === INDUSTRY_HUB.hub
+      ? buildMetadata({ title: 'Industry systems | ODOOVATIONS', description: `${familyIntro.F23!.lede} Discovery packages and starting prices in USD. ${familyIntro.F23!.boundary}`, path: INDUSTRY_HUB.hub })
+      : {};
+  }
   return buildMetadata({ title: sol.metaTitle, description: sol.metaDescription, path: sol.href });
 }
 
 export default function SolutionPage({ params }: { params: { slug: string } }) {
   const sol = getSolution(params.slug);
-  if (!sol) notFound();
+  if (!sol) {
+    if (`/solutions/${params.slug}` === INDUSTRY_HUB.hub) return <FamilyHubPage family={INDUSTRY_HUB} />;
+    notFound();
+  }
 
   const crumbs = [
     { name: 'Home', path: '/' },
@@ -171,6 +185,8 @@ export default function SolutionPage({ params }: { params: { slug: string } }) {
             ))}
           </div>
         </section>
+
+        <MergedPackages route={sol.href} />
 
         <CtaBand title={sol.ctaLabel} />
       </article>

@@ -89,5 +89,4 @@ export const ctaForDivision: Record<string, CtaConfig> = {
  */
 export const ctaForService: Record<string, CtaConfig> = {
   'whatsapp-automation': ctas.whatsappAutomation,
-  'aeo-geo-ai-search-optimisation': { label: 'Check My AI Visibility', href: contactHref('AEO / GEO', 'aeo-geo'), service: 'AEO / GEO' },
 };

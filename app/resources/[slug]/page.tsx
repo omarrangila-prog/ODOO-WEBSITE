@@ -38,6 +38,7 @@ function articleSchema(r: NonNullable<ReturnType<typeof getResource>>) {
       logo: { '@type': 'ImageObject', url: `${SITE_URL}/images/odoovations-logo.png` },
     },
     mainEntityOfPage: `${SITE_URL}${r.href}`,
+    ...(r.references?.length ? { citation: r.references.map((c) => ({ '@type': 'CreativeWork', name: c.label, url: c.url })) } : {}),
   };
 }
 
@@ -112,6 +113,24 @@ export default function ResourcePage({ params }: { params: { slug: string } }) {
           </div>
         </section>
 
+        {r.references && r.references.length > 0 && (
+          <section className="theme-light bay-sm" aria-labelledby="refs-h">
+            <div className="shell max-w-[46rem]">
+              <h2 id="refs-h" className="font-heading text-[clamp(22px,2.4vw,30px)] font-semibold tracking-[-0.02em] text-ink">Sources</h2>
+              <p className="mt-2 text-[14.5px] text-ink-muted">Primary references this guide relies on. Provider documentation changes, so check the source before acting.</p>
+              <ul className="mt-4 space-y-2">
+                {r.references.map((c) => (
+                  <li key={c.url}>
+                    <a href={c.url} rel="noopener noreferrer" className="inline-flex min-h-[44px] items-center text-[16px] font-medium text-violet underline underline-offset-4">
+                      {c.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
+
         {/* FAQ */}
         <section className="theme-dark bay-sm">
           <div className="shell grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
@@ -142,7 +161,7 @@ export default function ResourcePage({ params }: { params: { slug: string } }) {
           </section>
         )}
 
-        <CtaBand title="Ready to talk through your Odoo project?" />
+        <CtaBand title={r.cta?.title ?? 'Ready to talk through your project?'} body={r.cta?.body} primaryLabel={r.cta?.label} primaryHref={r.cta?.href} />
       </article>
     </>
   );
@@ -167,7 +186,7 @@ function BlockView({ block }: { block: Block }) {
       );
     case 'table':
       return (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Table (scrollable)">
           <table className="w-full min-w-[520px] border-collapse text-left text-[15px]">
             <thead>
               <tr className="border-b border-line-light">

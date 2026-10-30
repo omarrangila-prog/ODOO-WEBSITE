@@ -11,14 +11,23 @@ import { CtaBand } from '@/components/ui/CtaBand';
 import { Accordion } from '@/components/ui/Accordion';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { TextGap } from '@/components/ui/TextGap';
+import { LeafPage } from '@/components/catalogue/LeafPage';
+import { MergedPackages } from '@/components/catalogue/MergedPackages';
+import { buildableLeaves, getLeafBySlug } from '@/lib/catalogue/leaf';
+
+const INDUSTRY_PREFIX = '/industries/';
 
 export function generateStaticParams() {
-  return industries.map((i) => ({ slug: i.slug }));
+  // Catalogue industry pages share this route; only those with written content are built (lib/catalogue/leaf.ts).
+  return [...industries.map((i) => ({ slug: i.slug })), ...buildableLeaves(INDUSTRY_PREFIX).map((l) => ({ slug: l.slug }))];
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const ind = getIndustry(params.slug);
-  if (!ind) return {};
+  if (!ind) {
+    const leaf = getLeafBySlug(params.slug, INDUSTRY_PREFIX);
+    return leaf ? buildMetadata({ title: `${leaf.brief.title} | ODOOVATIONS`, description: leaf.content.metaDescription, path: leaf.route }) : {};
+  }
   return buildMetadata({ title: ind.metaTitle, description: ind.metaDescription, path: ind.href });
 }
 
@@ -38,7 +47,11 @@ const sharedIndustryFaq = faqs.filter((f) =>
 
 export default function IndustryPage({ params }: { params: { slug: string } }) {
   const ind = getIndustry(params.slug);
-  if (!ind) notFound();
+  if (!ind) {
+    const leaf = getLeafBySlug(params.slug, INDUSTRY_PREFIX);
+    if (!leaf) notFound();
+    return <LeafPage leaf={leaf} />;
+  }
 
   const industryFaq = ind.faqs ?? sharedIndustryFaq;
 
@@ -224,6 +237,8 @@ export default function IndustryPage({ params }: { params: { slug: string } }) {
             </p>
           </div>
         </section>
+
+        <MergedPackages route={ind.href} />
 
         <CtaBand
           title={

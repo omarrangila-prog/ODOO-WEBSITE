@@ -58,7 +58,7 @@ let llmsLinks = [];
   const xml = (await get('/sitemap.xml')).t;
   const svc = [...xml.matchAll(/<loc>[^<]*?(\/services\/[^<]+)<\/loc>/g)].map((m) => m[1]);
   const missing = [];
-  for (const p of svc) { const { t } = await get(p); if (!/What is .* at ODOOVATIONS\?/.test(t)) missing.push(p); }
+  for (const p of svc) { const { t } = await get(p); if (!/<h2[^>]*>\s*(What is|How much) [^<]*\?/.test(t)) missing.push(p); }
   check(svc.length >= 16 && missing.length === 0, `every service page opens with an answer-first summary (${svc.length} pages${missing.length ? '; missing: ' + missing.join(', ') : ''})`);
   const mods = [...xml.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((m) => m[1].slice(0, 10));
   check(new Set(mods).size >= 2, `sitemap lastmod carries real dates, not the build time (${[...new Set(mods)].join(', ')})`);

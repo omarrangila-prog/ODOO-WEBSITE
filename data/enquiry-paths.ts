@@ -136,7 +136,7 @@ export const enquiryPaths: EnquiryPath[] = [
     blurb: 'Marketing, video, design, or not sure yet. Just describe it.',
     service: 'Something Else',
     questions: [
-      { id: 'area', label: 'Which area?', kind: 'choice', options: ['Digital marketing', 'AEO & GEO (AI search)', 'Advertising', 'Video', 'Graphic design', 'Content and social', 'Not sure yet'] },
+      { id: 'area', label: 'Which area?', kind: 'choice', options: ['Digital marketing', 'AI search (AEO and GEO)', 'Advertising', 'Video', 'Graphic design', 'Content and social', 'Not sure yet'] },
     ],
   },
 ];
@@ -163,7 +163,7 @@ const servicePrefill: Record<string, { path: string; answers?: PathAnswers }> = 
   'WooCommerce Integration': { path: 'woocommerce' },
   'QuickBooks Integration': { path: 'quickbooks' },
   Marketing: { path: 'other', answers: { area: 'Digital marketing' } },
-  'AEO / GEO': { path: 'other', answers: { area: 'AEO & GEO (AI search)' } },
+  'AEO / GEO': { path: 'other', answers: { area: 'AI search (AEO and GEO)' } },
   Advertising: { path: 'other', answers: { area: 'Advertising' } },
   Video: { path: 'other', answers: { area: 'Video' } },
   'Graphic Design': { path: 'other', answers: { area: 'Graphic design' } },

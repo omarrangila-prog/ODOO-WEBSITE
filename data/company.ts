@@ -26,7 +26,7 @@ export const company = {
    * Odoo-only company — while staying factual about what is actually delivered.
    */
   description:
-    'ODOOVATIONS is a Karachi-based technology company building custom software, AI automation, Odoo ERP systems, websites, mobile apps, marketing campaigns and creative content for businesses in Pakistan and international clients served remotely.',
+    'ODOOVATIONS is a Karachi-based technology company building custom software, AI automation, Odoo ERP systems, websites, mobile apps, marketing campaigns, AI search optimisation (AEO and GEO) and creative content for businesses in Pakistan and international clients served remotely.',
 
   /** One-line positioning used across hero, footer and answer-first summaries. */
   positioning: 'One Team. Technology, Automation, Software, Creative & Growth.',

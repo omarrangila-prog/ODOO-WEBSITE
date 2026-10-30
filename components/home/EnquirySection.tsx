@@ -17,7 +17,7 @@ export function EnquirySection() {
   return (
     <section id="enquiry" aria-labelledby="enquiry-h" className="band band-tight scroll-mt-20">
       <div className="band-inner">
-        <SectionLabel index="06">Project enquiry</SectionLabel>
+        <SectionLabel index="07">Project enquiry</SectionLabel>
         <h2 id="enquiry-h" className="band-title mt-4 max-w-[34ch]">
           Tell us what you need built or fixed.
         </h2>

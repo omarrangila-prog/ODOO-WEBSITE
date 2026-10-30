@@ -3,6 +3,8 @@ import { contactSchema, validateFileMeta } from '@/lib/validation';
 import { processLead } from '@/lib/leadintel/pipeline';
 import { describePathAnswers, getPath } from '@/data/enquiry-paths';
 import type { SessionData } from '@/lib/leadintel/session';
+import { leadRef, cleanLandingPath } from '@/lib/leadintel/ref';
+import { cleanInterest } from '@/lib/interest';
 
 export const runtime = 'nodejs';
 
@@ -105,7 +107,10 @@ export async function POST(req: Request) {
     const pathLines = describePathAnswers(parsed.data.pathId, parsed.data.pathAnswers);
 
     // Legacy notification email (unchanged behaviour).
-    await deliver(parsed.data, fileMeta, path?.label, pathLines);
+    const ref = leadRef();
+    const landing = cleanLandingPath(form.get('landingPage'));
+    const interest = cleanInterest(form.get('interest'));
+    await deliver(parsed.data, fileMeta, path?.label, pathLines, ref, landing, interest);
 
     // Lead-intelligence pipeline: attach anonymous session, score, route to a
     // sales queue, create/update the Odoo CRM lead, and run consent-aware email
@@ -133,7 +138,7 @@ export async function POST(req: Request) {
           currentSystems: parsed.data.currentSystems,
           timeline: parsed.data.timeline,
           budget: parsed.data.budget,
-          challenge: pathLines.length ? `${parsed.data.challenge}\n\n${path?.label ?? 'Enquiry path'}:\n- ${pathLines.join('\n- ')}` : parsed.data.challenge,
+          challenge: `Reference ${ref}${landing ? `, sent from ${landing}` : ''}.\n${interest ? `Chosen package: ${interest}\n` : ''}` + (pathLines.length ? `${parsed.data.challenge}\n\n${path?.label ?? 'Enquiry path'}:\n- ${pathLines.join('\n- ')}` : parsed.data.challenge),
           services: parsed.data.services,
           preferredContact: parsed.data.preferredContact,
           contactPermission: parsed.data.consent, // asked us to contact them
@@ -171,7 +176,7 @@ interface FileMeta {
   base64: string;
 }
 
-async function deliver(data: ParsedContact, fileMeta: FileMeta | null, pathLabel: string | undefined, pathLines: string[]): Promise<void> {
+async function deliver(data: ParsedContact, fileMeta: FileMeta | null, pathLabel: string | undefined, pathLines: string[], ref: string, landing: string, interest: string): Promise<void> {
   const resendKey = process.env.RESEND_API_KEY;
 
   if (!resendKey) {
@@ -216,6 +221,10 @@ async function deliver(data: ParsedContact, fileMeta: FileMeta | null, pathLabel
   const omitted = optional.filter(([, v]) => !v || v.trim() === '').map(([k]) => k);
 
   const lines = [
+    `Reference: ${ref}`,
+    ...(landing ? [`Sent from: ${landing}`] : []),
+    ...(interest ? [`Chosen package: ${interest}`] : []),
+    '',
     `New enquiry from ${data.fullName}${data.company ? ` (${data.company})` : ''}`,
     '',
     `Email: ${data.email}`,
@@ -239,7 +248,7 @@ async function deliver(data: ParsedContact, fileMeta: FileMeta | null, pathLabel
       from,
       to,
       reply_to: data.email,
-      subject: `New enquiry${pathLabel ? ` (${pathLabel})` : ''} — ${data.company || data.fullName}`,
+      subject: `[${ref}] New enquiry${pathLabel ? ` (${pathLabel})` : ''} — ${data.company || data.fullName}`,
       text: lines,
       ...(fileMeta ? { attachments: [{ filename: fileMeta.name, content: fileMeta.base64 }] } : {}),
     }),

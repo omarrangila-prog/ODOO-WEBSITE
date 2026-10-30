@@ -113,7 +113,7 @@ export const explorerGroups: ExplorerGroup[] = [
     href: '/services/digital-marketing',
     cards: [
       { title: 'Digital marketing', problem: 'Spend with no way to see what came back.', does: 'Campaigns and advertising connected to your CRM so enquiries can be traced.', href: '/services/digital-marketing', visual: 'growth' },
-      { title: 'AEO & GEO', problem: 'AI assistants cannot find you, or name someone else.', does: 'Make your business findable, quotable and correctly described by ChatGPT, Gemini, Claude and Perplexity.', href: '/services/aeo-geo-ai-search-optimisation', visual: 'agent' },
+      { title: 'AI Search (AEO & GEO)', problem: 'AI assistants cannot find you, or describe you wrongly.', does: 'A dated baseline, content and technical fixes and monthly measurement, so AI search can find, describe and cite your business.', href: '/services/ai-search-optimization', visual: 'agent' },
       { title: 'Creative & motion', problem: 'A product that is hard to explain.', does: 'Explainers, software demonstrations, motion graphics and brand visuals.', href: '/services/creative-media', visual: 'film' },
       { title: 'Content & social', problem: 'No time to post, nothing to say.', does: 'Content planning, design and publishing support.', href: '/services/content-social', visual: 'calendar' },
     ],

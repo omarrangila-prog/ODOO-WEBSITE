@@ -115,9 +115,18 @@ Lighthouse: `npx lighthouse <url> --only-categories=performance --chrome-flags="
 (add `--preset=desktop` for desktop). Mobile scores swing by 10-15 points between identical
 runs on a loaded machine, so quote ranges, not one number.
 
+## ODOOVATIONS AI Search (AEO and GEO)
+
+A service line with its own pages, one pricing configuration and a real enquiry flow. Start at `audit/ai-search/README.md`
+(route map, schema summary, pricing, enquiry, external dependencies). Prices and limits live only in
+`data/ai-search-pricing.ts`; `npx tsx scripts/ai-search-check.ts <url>` fails if any page or the JSON-LD disagrees with it.
+The company's internal commercial target is in `audit/ai-search/delivery-model.md` and must never be published.
+Tests: `scripts/ai-search-check.ts`, `scripts/ai-search-route-test.ts` (mail provider stubbed), `scripts/ai-search-form-check.mjs`,
+`scripts/ai-search-a11y-check.mjs`.
+
 ## Search, answer engines and AI assistants
 
-- `/llms.txt` and `/llms-full.txt` (`lib/llms.ts`): the site summarised for language models, generated from
+- `/llms.txt` and `/llms-full.txt` (`lib/llms.ts`): an optional plain-text summary of the site for language models (Google states no AI text file is needed to appear in its AI features), generated from
   the same data as the pages. `lib/facts.ts` is the company fact sheet shared by the brand page, these files
   and the structured data.
 - `app/robots.ts` names every major search and AI crawler; `app/og/route.tsx` draws a PNG share image per page.

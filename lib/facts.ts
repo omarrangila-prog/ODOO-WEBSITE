@@ -15,6 +15,7 @@ import { platformPages } from '@/data/platforms';
 import { teamTotals } from '@/data/team';
 import { publishableProjects } from '@/data/projects';
 import { publishedCaseStudies } from '@/data/case-study-model';
+import { getPlan, formatPrice } from '@/data/ai-search-pricing';
 import { SITE_URL } from './seo';
 
 export interface Fact {
@@ -41,6 +42,11 @@ export function companyFacts(): Fact[] {
       href: '/company/team',
     },
     { label: 'Divisions', value: 'AI & automation; custom software and product development; Odoo & ERP; websites, web and mobile apps; marketing and advertising; creative and media; content and social.' },
+    {
+      label: 'AI Search (AEO & GEO)',
+      value: `ODOOVATIONS AI Search: answer engine optimization and generative engine optimization, with an audit (${formatPrice(getPlan('audit')!)}) and monthly plans (Foundation ${formatPrice(getPlan('foundation')!)}, Growth ${formatPrice(getPlan('growth')!)}, Authority ${formatPrice(getPlan('authority')!)}, Enterprise by quote), in US dollars before taxes. No placement in any AI answer is guaranteed.`,
+      href: '/services/ai-search-optimization',
+    },
     { label: 'Odoo status', value: 'Independent Odoo implementation and development team. Does not claim official, certified or tiered Odoo partner status.' },
     { label: 'Platforms', value: `Builds on and integrates ${platformPages.map((p) => p.name).join(', ')}, Odoo and the WhatsApp Business Platform. No official partnership with any of them is claimed.`, href: '/platforms' },
     { label: 'QuickBooks', value: 'Integration and software work only. No bookkeeping, accounting services or tax advice.', href: '/platforms/quickbooks' },

@@ -15,6 +15,8 @@ import { JourneyRoute } from '@/components/home/JourneyRoute';
 import { MotionRoot } from '@/components/ui/motion/MotionRoot';
 import { TextGap } from '@/components/ui/TextGap';
 import { PageArt } from '@/components/cinema/PageArt';
+import { divisions as catalogueDivisions, families as catalogueFamilies } from '@/data/catalogue/manifest';
+import { divisionIntro } from '@/data/catalogue/hubs';
 
 const PATH = '/services';
 const DESCRIPTION =
@@ -201,6 +203,25 @@ export default function ServicesIndex() {
                     className="mt-0.5 h-4 w-4 shrink-0 text-text-dark-muted transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                     aria-hidden
                   />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="theme-graphite bay-sm" aria-labelledby="expertise-h">
+        <div className="shell">
+          <h2 id="expertise-h" className="page-h2">Every service, by area</h2>
+          <p className="mt-4 max-w-[var(--reading-width)] text-[17px] leading-relaxed text-text-dark-muted">
+            Eight areas, {catalogueFamilies.length} service families and every package with its price. Or <Link href="/pricing" className="font-semibold text-violet underline underline-offset-4 hover:text-white">search all packages</Link>.
+          </p>
+          <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {catalogueDivisions.map((d) => (
+              <li key={d.route}>
+                <Link href={d.route} className="flex min-h-[44px] flex-col rounded-[18px] border border-line p-5 hover:border-line-strong">
+                  <span className="font-heading text-[17px] font-semibold text-white">{d.name}</span>
+                  <span className="mt-2 text-[14px] leading-relaxed text-text-dark-muted">{divisionIntro[d.name]}</span>
                 </Link>
               </li>
             ))}

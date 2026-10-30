@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { SectionLabel } from './SectionLabel';
 
 /**
- * Homepage section 5: how a project runs, in one strip.
+ * Homepage section 6: how a project runs, in one strip.
  *
  * A condensed form of /company/methodology. Each stage says what the client
  * receives, because a process only matters if it produces something you can
@@ -22,7 +22,7 @@ export function DeliveryPeople() {
   return (
     <section aria-labelledby="delivery-h" className="band band-alt band-tight">
       <div className="band-inner">
-        <SectionLabel index="05">How a project runs</SectionLabel>
+        <SectionLabel index="06">How a project runs</SectionLabel>
         <h2 id="delivery-h" className="band-title mt-4 max-w-[40ch]">
           Four stages, each with something you can inspect.
         </h2>

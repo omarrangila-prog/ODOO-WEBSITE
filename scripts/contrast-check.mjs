@@ -24,6 +24,9 @@ const paths = [
   '/services/odoo-implementation-pakistan',
   '/projects/kcci-election', '/projects/whatsapp-digital-connection', '/projects/scrabble-timer',
   '/case-studies/textile-manufacturer', '/contact?path=quickbooks',
+  '/services/ai-search-optimization', '/services/answer-engine-optimization', '/services/generative-engine-optimization',
+  '/services/ai-search-audit', '/services/ai-search-pricing', '/locations/aeo-geo-services-pakistan',
+  '/resources/aeo-vs-geo-vs-seo', '/resources/how-to-measure-ai-search-visibility', '/resources/ai-search-optimization-checklist',
 ];
 const viewports = [['mobile', 390, 844], ['desktop', 1440, 900]];
 const consent = JSON.stringify({ version: 1, necessary: true, analytics: false, marketing: false, updatedAt: new Date().toISOString(), decided: true });

@@ -21,7 +21,7 @@ export const SITE_URL =
  * release that changes page content. A lastmod that changes on every build (the old
  * `new Date()`) tells search engines nothing, so they learn to ignore it.
  */
-export const CONTENT_REVISED = '2026-10-29';
+export const CONTENT_REVISED = '2026-10-30';
 
 /** IndexNow key (Bing, Yandex, Seznam, Naver). The same value is served at /<key>.txt. */
 export const INDEXNOW_KEY = 'ab1171d1534e0cc4a07f1c2fe01d1e40';

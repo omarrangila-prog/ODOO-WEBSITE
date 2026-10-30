@@ -24,6 +24,7 @@ import { getPath, pathForService, type PathAnswers } from '@/data/enquiry-paths'
 import { track } from '@/lib/analytics';
 import { cn } from '@/lib/utilities';
 import { TextGap } from '@/components/ui/TextGap';
+import { cleanInterest } from '@/lib/interest';
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -31,6 +32,8 @@ export function ContactForm() {
   const [status, setStatus] = useState<Status>('idle');
   const [serverError, setServerError] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
+  // The package chosen on a service page, if the visitor came from one (see lib/interest.ts).
+  const [interest, setInterest] = useState('');
   const [pathId, setPathId] = useState('');
   const [answers, setAnswers] = useState<PathAnswers>({});
   const errorSummaryRef = useRef<HTMLDivElement>(null);
@@ -86,6 +89,9 @@ export function ContactForm() {
      * URL, and an unrecognised string would fail the form's own zod check
      * on submit while looking selected to the visitor.
      */
+    const chosen = cleanInterest(sp.get('interest'));
+    if (chosen) setInterest(chosen);
+
     const svc = sp.get('service');
     const pathParam = getPath(sp.get('path'));
     if (pathParam) {
@@ -143,6 +149,8 @@ export function ContactForm() {
       }
       if (file) formData.append('file', file);
 
+      formData.set('landingPage', window.location.pathname);
+      if (interest) formData.set('interest', interest);
       // Attach anonymous session (first-party attribution) on voluntary identify.
       try {
         const raw = window.localStorage.getItem('odv_session');
@@ -204,6 +212,14 @@ export function ContactForm() {
         track('form_started');
       }}
     >
+      {interest && (
+        <p className="rounded-control border border-line px-4 py-3 text-[14.5px] text-text-dark-muted">
+          You chose: <span className="font-semibold text-text-dark">{interest}</span>. We will reply with a written scope; nothing is charged by sending this.{' '}
+          <button type="button" className="py-1 underline underline-offset-4" onClick={() => setInterest('')}>
+            Remove
+          </button>
+        </p>
+      )}
       {/* Error summary for accessibility */}
       {errorList.length > 0 && (
         <div

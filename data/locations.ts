@@ -16,6 +16,8 @@ export interface LocationPage {
   intro: string;
   primaryKeyword: string;
   ctaLabel: string;
+  /** Where the main button goes; the contact form when absent. */
+  ctaHref?: string;
   sections: { heading: string; body: string }[];
   services: { label: string; body: string }[];
   faqs: { question: string; answer: string }[];
@@ -189,6 +191,54 @@ export const locations: LocationPage[] = [
         answer:
           'Often yes. We begin with a short technical review of the existing code and data to establish what is salvageable, and give you an honest assessment before committing. Sometimes the right answer is to continue it; sometimes it is to rebuild, and we will say which.',
       },
+    ],
+  },
+  {
+    slug: 'aeo-geo-services-pakistan',
+    href: '/locations/aeo-geo-services-pakistan',
+    kind: 'country',
+    primaryKeyword: 'AEO and GEO agency in Pakistan',
+    metaTitle: 'AEO & GEO Services in Pakistan | AI Search | ODOOVATIONS',
+    metaDescription:
+      'AEO and GEO services in Pakistan from ODOOVATIONS, based in Karachi: AI search audits, answer-first content and measurement in English and Urdu.',
+    h1: 'AEO & GEO Services in Pakistan',
+    eyebrow: 'Karachi, Pakistan',
+    intro:
+      'ODOOVATIONS provides answer engine optimization (AEO) and generative engine optimization (GEO) from its office in Karachi, for businesses in Pakistan and for international clients served remotely. This page covers what is specific to working in Pakistan. For the service itself, start with the AI Search page; for what it costs, see the packages.',
+    ctaLabel: 'Request an AI Search Review',
+    ctaHref: '/services/ai-search-optimization#enquiry',
+    sections: [
+      {
+        heading: 'What is different about AI search for a Pakistani business',
+        body: 'Buyers here ask in English, in Urdu and in Roman Urdu, and they ask about Karachi, about Pakistan and about suppliers abroad, so one question list rarely covers them. We agree the questions and the languages with you, test each in the search experiences that matter to your buyers, and record the locale of every run. Names matter too: businesses with common or similar names are easily mixed up, which is why the fact sheet, the profiles and the site have to say the same thing.',
+      },
+      {
+        heading: 'Karachi office, remote delivery',
+        body: 'Our office is Office 604, Landmark Plaza, Karachi, and it is our only office. Discovery can be in person in Karachi or on video; for clients elsewhere in Pakistan or abroad the work runs remotely with a written scope and shared reports. Pakistan Standard Time is UTC+5, which overlaps with the working day in the Gulf and with part of the day in Europe and the UK, and we agree a regular call window. Written scope and reports are in English; calls can be in Urdu.',
+      },
+      {
+        heading: 'The sources that matter, and how we treat them',
+        body: 'Assistants lean on sources beyond your own site: your Google Business Profile, your LinkedIn page, directories that list agencies and software firms, reviews, and articles in the technology press. We help you set up and correct the ones that are relevant and ask real customers for reviews. These are examples of the kinds of source, not endorsements, and we never buy links, write reviews or pay for placement presented as editorial.',
+      },
+      {
+        heading: 'Pricing and payment',
+        body: 'Packages are priced in US dollars, before taxes, with the audit as a one-time price and the monthly plans on a 90-day initial programme. A fixed PKR quotation is available on request; we do not show live currency conversions. Nothing is charged by sending an enquiry, and every engagement starts with a written scope.',
+      },
+    ],
+    services: [
+      { label: 'AI Search Audit', body: 'A dated baseline across up to 20 questions and three search experiences, with a written plan.' },
+      { label: 'Answer engine optimization', body: 'Answer-first pages, comparisons and visible evidence for the questions your buyers ask.' },
+      { label: 'Generative engine optimization', body: 'Accurate, consistent descriptions and independent sources, with mentions and citations measured.' },
+      { label: 'Technical foundations', body: 'Indexing, redirects, sitemaps, rendering, structured data and a review of crawler settings.' },
+      { label: 'Profiles, listings and outreach', body: 'Verified profiles and relevant directory and editorial outreach, to an agreed scope.' },
+      { label: 'Measurement and reporting', body: 'Mentions, citations, accuracy, referral traffic and enquiries, each reported separately.' },
+    ],
+    faqs: [
+      { question: 'Do you test questions in Urdu?', answer: 'Yes, where your buyers use them. We agree the languages with you, record the locale of every run and report each language separately, because assistants can answer differently in different languages.' },
+      { question: 'Do you only work with businesses in Karachi?', answer: 'No. We serve businesses across Pakistan and international clients remotely. Karachi is our only office, and we do not claim offices elsewhere.' },
+      { question: 'Can we pay in Pakistani rupees?', answer: 'Prices are in US dollars. We can provide a fixed PKR quotation on request. Taxes are not included in the listed prices.' },
+      { question: 'Can you guarantee that ChatGPT or Google will mention us?', answer: 'No. Nobody controls what an AI assistant says. We improve what it can find and trust, and we measure what it says, with the limits stated.' },
+      { question: 'Do you also build the website and software?', answer: 'Yes. ODOOVATIONS also builds websites, software, Odoo systems and automation, so technical fixes that an AI search plan calls for can be made by the same team if you wish.' },
     ],
   },
 ];

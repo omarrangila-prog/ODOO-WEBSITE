@@ -358,6 +358,7 @@ export const divisions: Division[] = [
           'Ad copywriting',
           'Campaign analytics',
           'Conversion optimisation',
+          'AEO and GEO (AI search optimisation)',
           'Growth consulting',
         ],
       },
@@ -365,7 +366,7 @@ export const divisions: Division[] = [
     ctaLabel: 'Plan My Campaign',
     pages: [
       { label: 'Digital Marketing', href: '/services/digital-marketing' },
-      { label: 'AEO & GEO (AI search)', href: '/services/aeo-geo-ai-search-optimisation' },
+      { label: 'AI Search (AEO & GEO)', href: '/services/ai-search-optimization' },
       { label: 'Creative & Media', href: '/services/creative-media' },
     ],
     weight: 'md',

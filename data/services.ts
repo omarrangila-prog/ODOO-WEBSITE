@@ -1,3 +1,6 @@
+import { getPlan, formatPrice } from './ai-search-pricing';
+const auditPrice = formatPrice(getPlan('audit')!);
+
 export interface Service {
   slug: string;
   href: string;
@@ -33,6 +36,8 @@ export interface Service {
   flow?: { label: string; steps: string[]; note?: string };
   /** Page-specific FAQs. Falls back to the shared Odoo FAQ set when absent. */
   faqs?: { question: string; answer: string }[];
+  /** Has its own page file (app/services/<slug>/page.tsx); the generic [slug] template skips it. */
+  bespoke?: boolean;
 }
 
 export const services: Service[] = [
@@ -1024,56 +1029,117 @@ export const services: Service[] = [
     ],
   },
   {
-    slug: 'aeo-geo-ai-search-optimisation',
-    href: '/services/aeo-geo-ai-search-optimisation',
+    slug: 'ai-search-optimization',
+    href: '/services/ai-search-optimization',
     division: 'marketing',
-    title: 'AEO & GEO: Getting Your Business Into AI Answers',
-    navLabel: 'AEO & GEO (AI Search)',
-    tagline: 'Be the business ChatGPT, Gemini, Claude and Perplexity can describe correctly.',
-    metaTitle: 'AEO & GEO Services: AI Search Optimisation',
+    bespoke: true,
+    title: 'AEO & GEO Services for AI Search Visibility',
+    navLabel: 'AI Search (AEO & GEO)',
+    tagline: 'Help your business become easier to discover, understand and cite in AI answers.',
+    metaTitle: 'AEO & GEO Services | AI Search Optimization | ODOOVATIONS',
     metaDescription:
-      'Answer engine optimisation (AEO) and generative engine optimisation (GEO): make your business findable, quotable and correctly described by ChatGPT, Gemini, Claude, Perplexity and Google AI answers.',
+      'AEO and GEO services from ODOOVATIONS in Karachi: a dated AI search baseline, technical and content work, consistent profiles and monthly measurement.',
     answer:
-      'ODOOVATIONS provides answer engine optimisation (AEO) and generative engine optimisation (GEO): the work that helps AI assistants such as ChatGPT, Gemini, Claude, Perplexity and Google’s AI answers find a business, understand what it does and describe it correctly. It covers a single fact sheet for the business, answer-first page content, structured data, an llms.txt file, crawler access, directory and profile consistency, and repeated testing of what the assistants actually say. No one can guarantee that an AI assistant will name or recommend a business, and we do not.',
+      'ODOOVATIONS AI Search is a service from ODOOVATIONS, a technology company in Karachi, Pakistan, that helps a business become easier for AI search to find, understand and cite. Clients receive a dated baseline of what ChatGPT search, Google AI Overviews and AI Mode, Perplexity and Microsoft Copilot say about them, technical and content improvements, consistent facts across their site and profiles, legitimate outreach, and a monthly report that keeps mentions, citations, referral traffic and enquiries separate. Nobody can guarantee that an AI assistant will mention or cite a business, and we do not.',
     intro:
-      'More buyers now ask an assistant before they search. The assistant answers from what it can read and trust: your own site, directories, reviews, press and profiles. If those sources are thin, inconsistent or hard for a machine to parse, the answer names someone else, or gets you wrong. AEO and GEO fix the parts you control and build the parts you do not yet have.',
-    problems: [
-      'Ask ChatGPT or Perplexity about your business and it finds nothing, or confuses you with someone else.',
-      'Competitors are named in AI answers for searches you should win.',
-      'Your site says different things on different pages, so no single fact is safe to quote.',
-      'Your services are described in marketing language that answers no question.',
-      'Directory listings, social profiles and your website disagree on your name, address or services.',
-    ],
+      'More buyers now ask an assistant before they search. The assistant answers from what it can read and trust: your own pages, your profiles and listings, reviews and articles. AEO and GEO improve the parts you control and build the parts you do not yet have, and measure what the assistants actually say.',
+    problems: ['Weak discoverability', 'Inaccurate descriptions', 'Pages that do not answer', 'Content a crawler cannot read', 'Better-known sources winning'],
     whatWeDo: [
-      { title: 'Entity and fact sheet', body: 'One checked list of facts about the business (name, location, services, what you do not do) published on the site and reused everywhere, so every source says the same thing.' },
-      { title: 'Answer-first content', body: 'Each important page opens with a direct, quotable answer to the question a buyer would ask, followed by the detail. Questions people actually ask become visible FAQs.' },
-      { title: 'Structured data and llms.txt', body: 'An Organization, Service and FAQ graph that links together, and llms.txt files that summarise the site for language models in their own format.' },
-      { title: 'Crawler access and technical health', body: 'Search and AI crawlers allowed and able to read every public page, sitemaps with honest dates, fast pages, share images, Bing and Google verification, and recrawl requests after changes.' },
-      { title: 'Off-site signals', body: 'Consistent Google Business Profile, directory listings and social profiles, plus a plan for the reviews and mentions that assistants weigh when they choose whom to name.' },
-      { title: 'AI visibility testing', body: 'A fixed set of buyer questions asked of the main assistants on a schedule, with the answers recorded, so changes are measured against what the assistants really say rather than assumed.' },
+      { title: 'Baseline measurement', body: 'A dated record of what each search experience says about you and your competitors.' },
+      { title: 'Technical foundations', body: 'Indexability, canonical URLs, redirects, sitemaps, rendered content, performance and matching structured data.' },
+      { title: 'Content improvement', body: 'Pages that answer plainly, with visible evidence and real authorship.' },
+      { title: 'Brand and entity consistency', body: 'One checked set of facts across your site, profiles and listings.' },
+      { title: 'Legitimate authority development', body: 'Editorial and directory outreach, and genuine reviews, with no purchased links.' },
+      { title: 'Reporting and refinement', body: 'Mentions, citations, accuracy, traffic and enquiries, each shown separately.' },
     ],
-    modules: ['AEO', 'GEO', 'Structured Data', 'llms.txt', 'Technical SEO', 'Entity SEO', 'Local SEO', 'AI Visibility Testing'],
-    flow: {
-      label: 'From invisible to quotable',
-      steps: ['Baseline AI answers', 'Fact sheet', 'Answer-first pages', 'Structured data & llms.txt', 'Crawler access', 'Profiles & directories', 'Retest & report'],
-      note: 'The baseline is recorded first, so every later test is compared with what the assistants said before any change.',
-    },
-    outcomes: [
-      'A record of what the main AI assistants say about the business, before and after',
-      'One consistent set of facts across the site, profiles and directories',
-      'Pages that answer buyer questions directly and can be quoted',
-      'A site that search and AI crawlers can read in full',
+    modules: ['AEO', 'GEO', 'AI Search Audit', 'Technical SEO', 'Entity consistency', 'Measurement'],
+    outcomes: ['A dated baseline of what AI search says', 'Pages that answer plainly', 'Consistent facts across the web', 'Reporting with the limits stated'],
+    process: ['Review', 'Prioritise', 'Implement', 'Publish', 'Measure', 'Refine'],
+    ctaLabel: 'Request an AI Search Review',
+  },
+  {
+    slug: 'answer-engine-optimization',
+    href: '/services/answer-engine-optimization',
+    division: 'marketing',
+    bespoke: true,
+    title: 'Answer Engine Optimization (AEO) Services',
+    navLabel: 'Answer Engine Optimization',
+    tagline: 'Make the answer on your page easy to find, trust and quote.',
+    metaTitle: 'Answer Engine Optimization (AEO) Services | ODOOVATIONS',
+    metaDescription:
+      'Answer engine optimization (AEO) services: question research, answer-first pages, comparisons and visible evidence, so your answers can be found and quoted.',
+    answer:
+      'Answer engine optimization (AEO) is the work of making the answer to a buyer’s question easy for a search or AI system to find, understand and quote. ODOOVATIONS researches the questions your customers really ask, rewrites service and product pages so the first lines state the answer plainly, adds useful comparisons, shows the evidence and real authorship, and keeps essential facts as readable text. It builds on SEO, needs no special files or markup, and carries no guarantee of placement.',
+    intro:
+      'An answer engine can only quote what it can read and what is clear. Most business pages open with a slogan, so the plain statement of what you do, for whom and on what terms is nowhere to be found. AEO puts it there.',
+    problems: ['Pages that open with slogans', 'Facts hidden in images or scripts', 'No comparison or evidence', 'Unknown authorship'],
+    whatWeDo: [
+      { title: 'Question research', body: 'The questions buyers ask, in their words, ranked by intent.' },
+      { title: 'Answer-first pages', body: 'A direct answer first, then the detail.' },
+      { title: 'Comparisons and short answers', body: 'The honest comparisons buyers look for.' },
+      { title: 'Visible evidence and authorship', body: 'Who wrote it, when it was updated, and what supports it.' },
+      { title: 'Readable text', body: 'Essential information available as text.' },
     ],
-    process: ['Baseline test', 'Fact sheet', 'Content & schema', 'Technical & crawler access', 'Off-site profiles', 'Retest & report'],
-    ctaLabel: 'Check My AI Visibility',
-    faqs: [
-      { question: 'What is AEO?', answer: 'Answer engine optimisation is the work of making a business’s information easy for answer engines (Google’s AI answers, voice assistants and chat assistants) to find and quote: direct answers to real questions, clear structure and structured data.' },
-      { question: 'What is GEO?', answer: 'Generative engine optimisation focuses on large language model assistants such as ChatGPT, Gemini, Claude and Perplexity: making sure they can read your site, find consistent facts about you across the web, and describe your business correctly when someone asks.' },
-      { question: 'How is this different from SEO?', answer: 'It builds on SEO rather than replacing it. SEO aims for a ranked link; AEO and GEO aim for your business to be the answer, or to be named and described correctly inside one. Consistent facts, direct answers and off-site reputation matter more than they do for classic rankings.' },
-      { question: 'Can you guarantee ChatGPT or Google will recommend us?', answer: 'No. Nobody controls what an AI assistant says, and anyone who guarantees it is not being straight with you. We improve what assistants can read and trust, and we measure what they actually say over time.' },
-      { question: 'How long does it take?', answer: 'Changes to your own site can be made in weeks. Search engines and assistants then need time to recrawl, and off-site signals such as reviews and directory profiles build over months. We report against the recorded baseline so you can see what has moved.' },
-      { question: 'Have you done this for anyone?', answer: 'We applied it to odoovations.com in October 2026: a published fact sheet, answer-first service pages, a linked structured-data graph, llms.txt files, named crawler access and IndexNow submission. Results are still being measured and will be published only with evidence.' },
+    modules: ['Question research', 'Answer-first content', 'Comparisons', 'FAQs', 'Structured data'],
+    outcomes: ['Pages that state the answer plainly', 'Evidence and authorship that can be checked'],
+    process: ['Research', 'Prioritise', 'Write', 'Publish', 'Measure'],
+    ctaLabel: 'Request an AI Search Review',
+  },
+  {
+    slug: 'generative-engine-optimization',
+    href: '/services/generative-engine-optimization',
+    division: 'marketing',
+    bespoke: true,
+    title: 'Generative Engine Optimization (GEO) Services',
+    navLabel: 'Generative Engine Optimization',
+    tagline: 'Help generative AI search describe your business accurately and cite it.',
+    metaTitle: 'Generative Engine Optimization (GEO) Services | ODOOVATIONS',
+    metaDescription:
+      'Generative engine optimization (GEO) services: accurate descriptions, consistent profiles, original evidence and measured mentions and citations.',
+    answer:
+      'Generative engine optimization (GEO) improves how generative AI search systems, such as ChatGPT search, Perplexity, Microsoft Copilot and Google’s AI features, retrieve, describe and cite a business. ODOOVATIONS reviews what can be found, makes descriptions accurate and consistent across your site and profiles, develops content and original evidence worth citing, carries out legitimate editorial and directory outreach, and measures mentions, citations and the accuracy of what is said. We also review crawler settings against each provider’s current documentation and keep the access choices you have made.',
+    intro:
+      'Generative systems build a written answer from sources they retrieve. If those sources are thin, conflicting or absent, the answer is too. GEO works on the sources and measures the answer.',
+    problems: ['Wrong or outdated descriptions', 'Confusion with similarly named businesses', 'Thin or conflicting sources', 'Competitors cited instead'],
+    whatWeDo: [
+      { title: 'Discoverability review', body: 'Which of your useful public content can be found.' },
+      { title: 'Accurate descriptions', body: 'The same, correct description wherever you are described.' },
+      { title: 'Profile consistency', body: 'Verified profiles that agree with your site.' },
+      { title: 'Evidence worth citing', body: 'Original content and data that others have reason to reference.' },
+      { title: 'Legitimate outreach', body: 'Editorial and directory outreach, never purchased links.' },
+      { title: 'Measurement', body: 'Mentions, citations and answer accuracy, reported with limits.' },
     ],
+    modules: ['GEO', 'Entity consistency', 'Outreach', 'Crawler review', 'Measurement'],
+    outcomes: ['Accurate descriptions', 'Consistent profiles', 'Mentions and citations measured'],
+    process: ['Review', 'Correct', 'Develop', 'Reach out', 'Measure'],
+    ctaLabel: 'Request an AI Search Review',
+  },
+  {
+    slug: 'ai-search-audit',
+    href: '/services/ai-search-audit',
+    division: 'marketing',
+    bespoke: true,
+    title: 'AI Search Audit: A Dated Baseline and a Written Plan',
+    navLabel: 'AI Search Audit',
+    tagline: 'See what AI search says about you today, and what to fix first.',
+    metaTitle: 'AI Search Audit | AEO & GEO Baseline | ODOOVATIONS',
+    metaDescription:
+      `AI Search Audit, ${auditPrice}: up to 20 buyer questions, three search experiences, a dated baseline and a prioritised written plan.`,
+    answer:
+      `The ODOOVATIONS AI Search Audit is a one-time paid review for one website and one target market and language. It tests up to 20 buyer questions across three search experiences against up to three competitors, reviews the technical and content foundations, records a dated visibility baseline and delivers a prioritised written action plan with a 30-minute review call, for ${auditPrice}. We aim to deliver five business days after we have the information we need. That is a delivery commitment, not a promise of search results.`,
+    intro:
+      'You cannot improve what you have not measured. The audit records what the main AI search experiences say about you today, finds what is stopping them from saying more, and tells you what to do first, whether or not you work with us afterwards.',
+    problems: ['No record of what AI search says', 'No list of priorities', 'Unsure whether AI search work is worth it'],
+    whatWeDo: [
+      { title: 'Buyer questions', body: 'Up to 20, agreed with you.' },
+      { title: 'Technical and content review', body: 'What stops pages being found, read and quoted.' },
+      { title: 'A dated baseline', body: 'Answers recorded with date, locale and mode.' },
+      { title: 'A written plan', body: 'Prioritised, with the effort and the reason for each item.' },
+    ],
+    modules: ['Baseline', 'Technical review', 'Content review', 'Action plan'],
+    outcomes: ['A dated baseline', 'A prioritised written plan', 'A 30-minute review call'],
+    process: ['Scope', 'Collect', 'Test', 'Review', 'Report', 'Call'],
+    ctaLabel: 'Ask about the audit',
   },
   {
     slug: 'digital-marketing',

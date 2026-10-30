@@ -74,6 +74,18 @@ async function main() {
   check(!/24\/7|guarantee|within \d+ hours/i.test(text), 'acknowledgement: makes no response-time or availability promise');
 }
 
+// 1b. A package chosen on a service page reaches the team; a malformed one is dropped
+{
+  calls = [];
+  await send(form({ interest: 'Technical SEO — Site sprint (USD 1,200)', landingPage: '/contact' }));
+  const text = String(calls.find((c) => String(c.body.to) === 'qa-inbox@example.invalid')?.body.text);
+  check(text.includes('Chosen package: Technical SEO — Site sprint (USD 1,200)'), 'the chosen package reaches the notification');
+  calls = [];
+  await send(form({ interest: '<script>alert(1)</script>' }));
+  const bad = String(calls.find((c) => String(c.body.to) === 'qa-inbox@example.invalid')?.body.text);
+  check(!bad.includes('Chosen package') && !bad.includes('<script>'), 'a malformed package label is dropped');
+}
+
 // 2. No attachment: no attachments key
 {
   calls = [];

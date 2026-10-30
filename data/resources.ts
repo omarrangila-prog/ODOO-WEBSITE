@@ -7,6 +7,7 @@
  */
 
 import { techGuides } from './resources-tech';
+import { catalogueGuides } from './resources-catalogue';
 
 export type Block =
   | { type: 'p'; text: string }
@@ -30,6 +31,10 @@ export interface Resource {
   faqs: { question: string; answer: string }[];
   relatedServices: { label: string; href: string }[];
   relatedResources: string[]; // slugs
+  /** Primary sources the guide relies on, shown at the end and marked up as citations. */
+  references?: { label: string; url: string }[];
+  /** Replaces the default closing call to action. */
+  cta?: { title: string; body?: string; label: string; href: string };
 }
 
 const coreResources: Resource[] = [
@@ -656,7 +661,7 @@ const coreResources: Resource[] = [
 ];
 
 // Guides for the wider technology questions people search (apps, ERP, platforms, AI, AEO/GEO).
-export const resources: Resource[] = [...coreResources, ...techGuides];
+export const resources: Resource[] = [...coreResources, ...techGuides, ...catalogueGuides];
 
 export function getResource(slug: string) {
   return resources.find((r) => r.slug === slug);
