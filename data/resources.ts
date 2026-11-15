@@ -9,6 +9,7 @@
 import { techGuides } from './resources-tech';
 import { catalogueGuides } from './resources-catalogue';
 import { aiGuides2026 } from './resources-ai-2026';
+import { llmPlatformGuides } from './resources-llm-platforms';
 
 export type Block =
   | { type: 'p'; text: string }
@@ -662,7 +663,7 @@ const coreResources: Resource[] = [
 ];
 
 // Guides for the wider technology questions people search (apps, ERP, platforms, AI, AEO/GEO).
-export const resources: Resource[] = [...coreResources, ...techGuides, ...catalogueGuides, ...aiGuides2026];
+export const resources: Resource[] = [...coreResources, ...techGuides, ...catalogueGuides, ...aiGuides2026, ...llmPlatformGuides];
 
 export function getResource(slug: string) {
   return resources.find((r) => r.slug === slug);

@@ -239,6 +239,7 @@ export default function AiSearchHub() {
       <Band tone="dark" id="learn" title="Learn the ground before you buy" intro="Researched guides and free tools. Where platforms document something, we cite them; where reports conflict, we say so.">
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {[
+            ['ChatGPT, Claude, Perplexity, Copilot and Gemini compared', '/resources/how-ai-assistants-choose-sources', 'How each assistant finds and cites websites, which crawler it uses, and what you control.'],
             ['AI search glossary', '/resources/ai-search-glossary', 'AEO, GEO, AI Mode, query fan-out, citation rate, MCP, ACP and more, with how settled each term is.'],
             ['Google AI Mode and AI Overviews', '/resources/google-ai-mode-ai-overviews-guide', 'What Google’s 2026 guidance requires, what it ignores, and the new Search Console controls.'],
             ['AI crawlers: what to allow', '/resources/ai-crawlers-user-agents', 'Search crawlers, user fetchers and training bots, and why they are separate decisions.'],
