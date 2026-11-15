@@ -111,7 +111,7 @@ export default function AiSearchHub() {
       </Band>
 
       <Band tone="graphite" id="compare" title="SEO, AEO and GEO: the same body of work" intro={comparison.note}>
-        <div className="overflow-x-auto rounded-[22px] border border-line">
+        <div className="overflow-x-auto rounded-[22px] border border-line" tabIndex={0} role="region" aria-label="AEO, GEO and SEO compared (scrollable table)">
           <table className="w-full min-w-[760px] border-collapse text-left text-[15px]">
             <caption className="sr-only">Comparison of SEO, AEO and GEO</caption>
             <thead>
@@ -234,6 +234,26 @@ export default function AiSearchHub() {
         </div>
         <SampleReport />
         <div className="mt-8"><SelectedWork /></div>
+      </Band>
+
+      <Band tone="dark" id="learn" title="Learn the ground before you buy" intro="Researched guides and free tools. Where platforms document something, we cite them; where reports conflict, we say so.">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {[
+            ['AI search glossary', '/resources/ai-search-glossary', 'AEO, GEO, AI Mode, query fan-out, citation rate, MCP, ACP and more, with how settled each term is.'],
+            ['Google AI Mode and AI Overviews', '/resources/google-ai-mode-ai-overviews-guide', 'What Google’s 2026 guidance requires, what it ignores, and the new Search Console controls.'],
+            ['AI crawlers: what to allow', '/resources/ai-crawlers-user-agents', 'Search crawlers, user fetchers and training bots, and why they are separate decisions.'],
+            ['llms.txt, MCP and agent files', '/resources/llms-txt-and-agent-files', 'What these files and protocols really do in 2026.'],
+            ['Agentic commerce for sellers', '/resources/agentic-commerce-guide', 'ACP, UCP and AP2, and what to prepare whatever wins.'],
+            ['Buyers in other countries', '/resources/international-ai-search', 'Being found in other languages and markets without thin copies.'],
+            ['Free AI crawler checker', '/tools/ai-crawler-checker', 'Paste your robots.txt; see which AI bots may read your site.'],
+            ['Free llms.txt checker', '/tools/llms-txt-checker', 'Validate the structure of an llms.txt file.'],
+          ].map(([t, h, d]) => (
+            <Link key={h} href={h!} className="block rounded-[18px] border border-line p-5 hover:border-line-strong">
+              <span className="font-heading text-[17px] font-semibold text-white">{t}</span>
+              <span className="mt-2 block text-[14.5px] leading-relaxed text-text-dark-muted">{d}</span>
+            </Link>
+          ))}
+        </div>
       </Band>
 
       <Band tone="graphite" id="faq" title="Questions buyers ask">

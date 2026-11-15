@@ -40,7 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/terms', priority: 0.3 },
   ];
 
-  const serviceRoutes = [...services.map((s) => ({ path: s.href, priority: 0.8 })), ...allLeaves().map((l) => ({ path: l.route, priority: 0.7 })), ...catalogueFamilies.filter((f) => !services.some((s) => s.href === f.hub)).map((f) => ({ path: f.hub, priority: 0.75 })), ...catalogueDivisions.map((d) => ({ path: d.route, priority: 0.75 })), { path: '/demonstrations', priority: 0.6 }, { path: '/programmes', priority: 0.7 }, ...catalogueFamilies.map((f) => ({ path: f.demo.route, priority: 0.5 }))];
+  const serviceRoutes = [...services.map((s) => ({ path: s.href, priority: 0.8 })), ...allLeaves().map((l) => ({ path: l.route, priority: 0.7 })), ...catalogueFamilies.filter((f) => !services.some((s) => s.href === f.hub)).map((f) => ({ path: f.hub, priority: 0.75 })), ...catalogueDivisions.map((d) => ({ path: d.route, priority: 0.75 })), { path: '/demonstrations', priority: 0.6 }, { path: '/programmes', priority: 0.7 }, { path: '/resources/ai-search-glossary', priority: 0.7 }, { path: '/tools/ai-crawler-checker', priority: 0.6 }, { path: '/tools/llms-txt-checker', priority: 0.6 }, ...catalogueFamilies.map((f) => ({ path: f.demo.route, priority: 0.5 }))];
   const industryRoutes = industries.map((i) => ({ path: i.href, priority: 0.8 }));
   const caseRoutes = caseStudies.map((c) => ({
     path: `/case-studies/${c.slug}`,

@@ -1,0 +1,190 @@
+import type { Resource } from './resources';
+
+/**
+ * AI search guides researched in November 2026. Platform facts cite the platform's own documentation where it
+ * exists; where reporting conflicts, the guide says so instead of choosing a version.
+ */
+const U = '2026-11-16';
+const r = (slug: string) => `/resources/${slug}`;
+const AI_SVCS = [
+  { label: 'AI Search (AEO & GEO)', href: '/services/ai-search-optimization' },
+  { label: 'AI Search Audit', href: '/services/ai-search-audit' },
+  { label: 'Technical SEO', href: '/services/technical-seo' },
+];
+
+export const aiGuides2026: Resource[] = [
+  {
+    slug: 'google-ai-mode-ai-overviews-guide', href: r('google-ai-mode-ai-overviews-guide'),
+    metaTitle: 'Google AI Mode and AI Overviews: Site Owner Guide | ODOOVATIONS',
+    metaDescription: 'What Google’s 2026 guidance says about appearing in AI Overviews and AI Mode: no special markup, llms.txt ignored, new Search Console controls and reports.',
+    h1: 'Google AI Mode and AI Overviews: what site owners need to know', eyebrow: 'AI search guide', updated: U, readMinutes: 7,
+    primaryKeyword: 'how to appear in Google AI Mode',
+    summary: 'Google says there are no extra requirements to appear in AI Overviews or AI Mode: a page must be indexed and eligible to show with a snippet, and normal SEO applies. Google Search ignores llms.txt and needs no special AI markup. In 2026 Google added a Search Console setting to include or exclude a site from its generative AI features, and dedicated performance reports to measure them.',
+    blocks: [
+      { type: 'h2', text: 'What Google actually requires' },
+      { type: 'list', items: ['The page is crawlable by Googlebot and indexed.', 'It is eligible to be shown with a snippet (no noindex, nosnippet blocking it).', 'Important content is in text, reachable by internal links.', 'Nothing else: Google states there are no additional technical requirements or special optimisations.'] },
+      { type: 'h2', text: 'What you can skip' },
+      { type: 'p', text: 'Google’s May 2026 optimisation guide says tactics such as chunking content into small blocks or rewriting pages just for AI systems are unnecessary. It also says Google Search ignores llms.txt, so the file neither helps nor harms visibility in Google.' },
+      { type: 'h2', text: 'The controls you have' },
+      { type: 'table', head: ['Control', 'What it does', 'What it does not do'], rows: [
+        ['Search generative AI setting (Search Console)', 'Includes (default) or excludes the site from AI Overviews, AI Mode and generative AI in Discover', 'Does not change normal rankings; reportedly does not cover the Gemini app'],
+        ['Snippet controls (nosnippet, max-snippet, data-nosnippet)', 'Limit what Google may show from a page, including in AI features', 'Also limit ordinary snippets'],
+        ['Google-Extended (robots.txt token)', 'Controls use for Gemini training and grounding in some other Google systems', 'Does not remove you from AI Overviews or AI Mode'],
+        ['noindex', 'Removes the page from Search entirely', 'Is not an AI-only switch'],
+      ] },
+      { type: 'h2', text: 'Measuring it' },
+      { type: 'p', text: 'Traffic from AI Overviews and AI Mode appears in the Search Console performance report, and Google introduced dedicated Search Generative AI performance reports in June 2026, rolled out worldwide by the end of August 2026. Pair them with your own dated record of the questions buyers ask and what the answers say.' },
+      { type: 'h2', text: 'Query fan-out, and the trap to avoid' },
+      { type: 'p', text: 'AI Mode can split one question into several searches and combine the results. That rewards pages that cover a topic properly. It does not justify publishing hundreds of near-identical pages for every variation: Google’s spam policies treat scaled low-value content as abuse.' },
+      { type: 'note', text: 'Platform features change. Facts here were checked against Google Search Central on 16 November 2026; recheck before relying on details such as which features a setting covers.' },
+    ],
+    faqs: [
+      { question: 'Do I need special schema for AI Overviews?', answer: 'No. Google says no special schema.org markup is required. Accurate standard structured data still helps Search understand a page.' },
+      { question: 'Will opting out of AI features hurt my rankings?', answer: 'Google says the Search generative AI setting is not a ranking signal for normal results. Reports suggest it can affect related features such as preferred sources.' },
+      { question: 'Can anyone guarantee I will appear in AI Mode?', answer: 'No. Google decides what appears. Good work makes a page eligible and useful; it cannot promise placement.' },
+    ],
+    relatedServices: AI_SVCS,
+    relatedResources: ['aeo-vs-geo-vs-seo', 'how-to-measure-ai-search-visibility', 'ai-crawlers-user-agents'],
+    references: [
+      { label: 'Google Search Central: AI features and your website', url: 'https://developers.google.com/search/docs/appearance/ai-features' },
+      { label: 'Google: guide to optimizing for generative AI features', url: 'https://developers.google.com/search/docs/fundamentals/ai-optimization-guide' },
+      { label: 'Google: Search Generative AI performance reports (June 2026)', url: 'https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports' },
+      { label: 'Google: preferred sources', url: 'https://developers.google.com/search/docs/appearance/preferred-sources' },
+      { label: 'Google Search spam policies', url: 'https://developers.google.com/search/docs/essentials/spam-policies' },
+    ],
+  },
+  {
+    slug: 'ai-crawlers-user-agents', href: r('ai-crawlers-user-agents'),
+    metaTitle: 'AI Crawlers and User Agents: What to Allow | ODOOVATIONS',
+    metaDescription: 'The AI bots that visit your site, split into search crawlers, user-triggered fetchers and training crawlers, and how to decide what robots.txt should allow.',
+    h1: 'AI crawlers: who they are and what to allow', eyebrow: 'Technical guide', updated: U, readMinutes: 7,
+    primaryKeyword: 'AI crawler user agents robots.txt',
+    summary: 'AI companies send three kinds of visitors: search crawlers that index pages so their assistant can cite you, fetchers that read a page because a user asked, and training crawlers that collect content for future models. Each is controlled separately in robots.txt. Blocking the search crawlers can remove you from that assistant’s answers; blocking training crawlers is a separate business decision.',
+    blocks: [
+      { type: 'h2', text: 'The three kinds of AI visitor' },
+      { type: 'table', head: ['Company', 'Search / indexing', 'User-triggered fetch', 'Training'], rows: [
+        ['OpenAI', 'OAI-SearchBot', 'ChatGPT-User', 'GPTBot'],
+        ['Anthropic', 'Claude-SearchBot', 'Claude-User', 'ClaudeBot'],
+        ['Perplexity', 'PerplexityBot', 'Perplexity-User', '—'],
+        ['Google', 'Googlebot (also feeds AI Overviews and AI Mode)', '—', 'Google-Extended (a robots.txt token, not a separate crawler)'],
+        ['Apple', 'Applebot', '—', 'Applebot-Extended (token)'],
+        ['Microsoft', 'Bingbot (also feeds Copilot)', '—', '—'],
+        ['Meta', '—', '—', 'Meta-ExternalAgent'],
+        ['Common Crawl', '—', '—', 'CCBot (widely used in training datasets)'],
+      ] },
+      { type: 'note', text: 'Vendors document different robots.txt behaviour for user-triggered fetchers, and names change. Check each vendor’s current documentation before acting; third-party lists disagree on details.' },
+      { type: 'h2', text: 'A sensible default for a business that wants to be found' },
+      { type: 'list', items: ['Allow Googlebot and Bingbot: they feed Google’s and Microsoft’s AI answers.', 'Allow the AI search crawlers (OAI-SearchBot, Claude-SearchBot, PerplexityBot) if you want to be cited in those assistants.', 'Decide on training crawlers separately. Blocking GPTBot, for example, does not by itself remove you from ChatGPT search, which uses OAI-SearchBot.', 'Keep private paths (admin, APIs, carts) disallowed for everyone.', 'Remember robots.txt controls crawling, not indexing; use noindex for pages that must stay out.'] },
+      { type: 'h2', text: 'Check your own file' },
+      { type: 'p', text: 'Our free AI crawler checker reads a robots.txt you paste in and shows which of these agents are allowed or blocked from your home page. Nothing is fetched or stored.' },
+    ],
+    faqs: [
+      { question: 'Does blocking GPTBot remove me from ChatGPT?', answer: 'OpenAI documents GPTBot for training and OAI-SearchBot for search as separate controls, so blocking GPTBot alone does not remove a site from ChatGPT search.' },
+      { question: 'Should I block AI training?', answer: 'It is a business choice about how your content is used. It is separate from whether AI search can find and cite you.' },
+      { question: 'Do AI crawlers read llms.txt?', answer: 'There is no confirmation that major AI search crawlers use it; Google says Search ignores it.' },
+    ],
+    relatedServices: AI_SVCS,
+    relatedResources: ['google-ai-mode-ai-overviews-guide', 'llms-txt-and-agent-files', 'ai-search-optimization-checklist'],
+    references: [
+      { label: 'OpenAI: overview of crawlers', url: 'https://platform.openai.com/docs/bots' },
+      { label: 'Google: common crawlers and Google-Extended', url: 'https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers' },
+      { label: 'Anthropic: does Anthropic crawl data from the web?', url: 'https://support.anthropic.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler' },
+      { label: 'Perplexity: crawlers', url: 'https://docs.perplexity.ai/guides/bots' },
+    ],
+  },
+  {
+    slug: 'llms-txt-and-agent-files', href: r('llms-txt-and-agent-files'),
+    metaTitle: 'llms.txt, MCP and Agent Files in 2026 | ODOOVATIONS',
+    metaDescription: 'What llms.txt, AGENTS.md, MCP, WebMCP and NLWeb actually do for a business website in 2026, who uses them, and what to do first.',
+    h1: 'llms.txt, MCP and agent files: what they really do', eyebrow: 'Technical guide', updated: U, readMinutes: 6,
+    primaryKeyword: 'llms.txt 2026',
+    summary: 'llms.txt is a proposed Markdown summary of a site for language models. It is easy to publish and can help developer tools, but Google says Search ignores it and no major AI company has confirmed using it for answers. MCP lets AI assistants call a business’s functions directly and is the more substantive interface; WebMCP and NLWeb are early. None of these replaces a fast, crawlable site with clear content.',
+    blocks: [
+      { type: 'h2', text: 'The files and protocols' },
+      { type: 'table', head: ['Name', 'What it is', 'Who uses it (2026)', 'Do it first?'], rows: [
+        ['llms.txt', 'Markdown summary and link list at /llms.txt', 'Developer tools and some agents; Google Search ignores it', 'Cheap to add; not a ranking factor'],
+        ['AGENTS.md', 'Instructions for AI coding and task agents', 'Developer-facing projects', 'Only for developer products'],
+        ['MCP server', 'Lets assistants call your search, booking or catalogue functions', 'Growing use with AI assistants and platforms', 'When agents should act, not just read'],
+        ['WebMCP', 'Proposal for websites to expose tools to browser agents', 'Early preview', 'Watch'],
+        ['NLWeb', 'Microsoft project giving a site a natural-language question endpoint', 'Low adoption', 'Watch'],
+      ] },
+      { type: 'h2', text: 'What to do, in order' },
+      { type: 'list', items: ['Make sure search and AI search crawlers can reach your pages.', 'Answer buyer questions clearly on your own pages, with prices and facts in text.', 'Keep company facts consistent across your site and profiles.', 'Add accurate standard structured data.', 'Then, optionally, add llms.txt; and an MCP server if customers’ assistants should book, search or buy.'] },
+      { type: 'note', text: 'Adoption figures for llms.txt in 2026 reports conflict widely; treat any single statistic with caution. This site publishes one, as documentation, not as a ranking tactic.' },
+    ],
+    faqs: [
+      { question: 'Will llms.txt get me into ChatGPT or Google AI answers?', answer: 'There is no evidence it does. Google says Search ignores it. It is harmless and can help developer tools.' },
+      { question: 'What is an MCP server for a business?', answer: 'A small service that lets AI assistants use your functions, such as checking stock or booking a slot, through a standard protocol.' },
+      { question: 'Can you check our llms.txt?', answer: 'Yes: our free llms.txt checker validates the structure of a file you paste in.' },
+    ],
+    relatedServices: [...AI_SVCS.slice(0, 2), { label: 'API development', href: '/services/api-development' }],
+    relatedResources: ['ai-crawlers-user-agents', 'google-ai-mode-ai-overviews-guide', 'agentic-commerce-guide'],
+    references: [
+      { label: 'llmstxt.org proposal', url: 'https://llmstxt.org/' },
+      { label: 'Google: AI features and your website (llms.txt ignored)', url: 'https://developers.google.com/search/docs/appearance/ai-features' },
+      { label: 'Model Context Protocol', url: 'https://modelcontextprotocol.io/' },
+    ],
+  },
+  {
+    slug: 'agentic-commerce-guide', href: r('agentic-commerce-guide'),
+    metaTitle: 'Agentic Commerce: ACP, UCP and AP2 for Sellers | ODOOVATIONS',
+    metaDescription: 'What agentic commerce means for online sellers in 2026: AI agents that compare and buy, the ACP, UCP and AP2 protocols, and what to prepare now.',
+    h1: 'Agentic commerce: what online sellers should prepare', eyebrow: 'Commerce guide', updated: U, readMinutes: 7,
+    primaryKeyword: 'agentic commerce ACP UCP AP2',
+    summary: 'Agentic commerce is shopping where an AI agent finds, compares and sometimes buys for a person. Three protocols matter in 2026: ACP from OpenAI and Stripe for checkout, UCP from Google and retail partners for discovery through after-sale, and AP2 for proving a person authorised a payment. Availability and terms are still changing, so the safe preparation is accurate product data, clear policies and a store that machines can read.',
+    blocks: [
+      { type: 'h2', text: 'The protocols in one table' },
+      { type: 'table', head: ['Protocol', 'From', 'Covers', 'Status to verify'], rows: [
+        ['ACP (Agentic Commerce Protocol)', 'OpenAI and Stripe, released September 2025', 'Checkout between buyer, agent and merchant', 'Reports differ on how in-chat checkout is offered today'],
+        ['UCP (Universal Commerce Protocol)', 'Google with retail partners, January 2026', 'Discovery, cart, checkout, post-purchase', 'Merchant access was limited during 2026'],
+        ['AP2 (Agent Payments Protocol)', 'Google-led; governance moving in 2026', 'Proof that a person authorised the agent to pay', 'Check current governance and support'],
+        ['MCP (Model Context Protocol)', 'Open standard', 'Letting agents call tools such as catalogue search', 'Widely supported by assistants'],
+      ] },
+      { type: 'note', text: 'Most public writing on these protocols in 2026 is secondary and some of it conflicts. Plan around the official specifications, not blog summaries.' },
+      { type: 'h2', text: 'What to prepare now (useful whatever wins)' },
+      { type: 'list', items: ['Complete, accurate product data: titles, attributes, GTINs, prices, stock.', 'Clear shipping, returns and warranty policies in text.', 'Structured product data that matches the page.', 'A store and feeds that agents and search crawlers can read.', 'Payment and fraud settings ready for new checkout channels when your platform supports them.'] },
+    ],
+    faqs: [
+      { question: 'Can Pakistani sellers use these protocols?', answer: 'It depends on each programme’s current country and payment-provider support; check eligibility for your business before planning around it.' },
+      { question: 'Does Shopify or WooCommerce support it?', answer: 'Platforms have been adding support during 2026; check your platform’s current documentation.' },
+      { question: 'What should we do first?', answer: 'Fix product data and policies. They help in search, marketplaces and agent channels alike.' },
+    ],
+    relatedServices: [{ label: 'Shopify store development', href: '/services/shopify-store-development' }, { label: 'E-commerce SEO', href: '/services/e-commerce-seo' }, { label: 'AI Search (AEO & GEO)', href: '/services/ai-search-optimization' }],
+    relatedResources: ['commerce-launch-testing-checklist', 'llms-txt-and-agent-files', 'shopify-vs-woocommerce-pakistan'],
+    references: [
+      { label: 'Wikipedia: Agentic commerce', url: 'https://en.wikipedia.org/wiki/Agentic_commerce' },
+      { label: 'Agentic Commerce Protocol (official)', url: 'https://www.agenticcommerce.dev/' },
+      { label: 'Model Context Protocol', url: 'https://modelcontextprotocol.io/' },
+    ],
+  },
+  {
+    slug: 'international-ai-search', href: r('international-ai-search'),
+    metaTitle: 'AI Search for International and Multilingual Buyers | ODOOVATIONS',
+    metaDescription: 'How to be found and cited by buyers in other countries and languages in AI search: language versions, local facts, currencies, and measuring by locale.',
+    h1: 'AI search for buyers in other countries and languages', eyebrow: 'International guide', updated: U, readMinutes: 6,
+    primaryKeyword: 'international AI search optimization',
+    summary: 'AI assistants answer in the buyer’s language and often from sources in that market. To be found abroad you need real pages in the languages your buyers use, clear facts about where and how you deliver, prices in a currency they understand, and measurement run in each target locale. Thin copies of the same page for every country do the opposite.',
+    blocks: [
+      { type: 'h2', text: 'What works across borders' },
+      { type: 'list', items: ['Proper language versions, written or reviewed by fluent people, linked with hreflang.', 'Plain statements of where you are based and how you serve other countries (remote delivery, time zones, contracts).', 'Prices in your billing currency with an indicative local figure at a dated rate.', 'Proof that travels: real projects with their country and scope, where clients allow it.', 'Profiles and listings in the directories buyers in that market actually use.'] },
+      { type: 'h2', text: 'What to avoid' },
+      { type: 'list', items: ['A copy of the same page for every country or city with the name swapped.', 'Claiming offices you do not have.', 'Machine translation published without review.'] },
+      { type: 'h2', text: 'Measuring by market' },
+      { type: 'table', head: ['Setting', 'Why it matters'], rows: [
+        ['Locale and language of each question', 'Answers differ by country and language'],
+        ['Platform and mode', 'ChatGPT search, Google AI Mode and Perplexity cite different sources'],
+        ['Date and repeat runs', 'Answers vary between runs'],
+        ['Competitors in that market', 'Your competition abroad is often different'],
+      ] },
+      { type: 'note', text: 'ODOOVATIONS is based in Karachi and serves international clients remotely. We do not claim offices in other countries.' },
+    ],
+    faqs: [
+      { question: 'Do you measure AI visibility in other countries?', answer: 'Yes. Each agreed question is run in the chosen locale and language, and the report states which.' },
+      { question: 'Which languages?', answer: 'We work in English and Urdu. Other languages are scoped with fluent reviewers and quoted separately.' },
+      { question: 'Do we need a site per country?', answer: 'Usually not. One site with real language versions and clear delivery information is stronger than many thin copies.' },
+    ],
+    relatedServices: [...AI_SVCS.slice(0, 2), { label: 'Global delivery', href: '/company/global-delivery' }],
+    relatedResources: ['how-to-measure-ai-search-visibility', 'aeo-vs-geo-vs-seo', 'outsourcing-software-development-to-pakistan'],
+    references: [{ label: 'Google: managing multi-regional and multilingual sites', url: 'https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites' }],
+  },
+];
