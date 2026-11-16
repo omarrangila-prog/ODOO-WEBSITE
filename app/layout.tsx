@@ -10,6 +10,7 @@ import { MobileCtaBar } from '@/components/layout/MobileCtaBar';
 import { Analytics } from '@/components/seo/Analytics';
 import { VisitorTracker } from '@/components/leadintel/VisitorTracker';
 import { ConsentBanner } from '@/components/leadintel/ConsentBanner';
+import { Concierge } from '@/components/concierge/Concierge';
 import { JsonLd } from '@/components/ui/JsonLd';
 import {
   SITE_URL,
@@ -128,6 +129,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <Footer />
         <MobileCtaBar />
+        <Concierge />
         <Suspense fallback={null}>
           <VisitorTracker />
         </Suspense>

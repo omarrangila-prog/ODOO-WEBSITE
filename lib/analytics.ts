@@ -39,7 +39,16 @@ export type AnalyticsEvent =
   | 'ai_plan_selected'
   | 'ai_review_requested'
   | 'ai_audit_requested'
-  | 'ai_contact_click';
+  | 'ai_contact_click'
+  | 'concierge_opened'
+  | 'concierge_language_selected'
+  | 'concierge_voice_started'
+  | 'concierge_text_started'
+  | 'concierge_connected'
+  | 'concierge_link_clicked'
+  | 'concierge_contact_opened'
+  | 'concierge_whatsapp_shown'
+  | 'concierge_error';
 
 type Props = Record<string, string | number | boolean>;
 

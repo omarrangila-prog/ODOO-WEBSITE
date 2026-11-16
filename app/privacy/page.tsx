@@ -13,7 +13,7 @@ export const metadata: Metadata = buildMetadata({
 
 export default function PrivacyPage() {
   return (
-    <LegalLayout title="Privacy Policy" updated="14 July 2026" crumbLabel="Privacy Policy" crumbPath="/privacy">
+    <LegalLayout title="Privacy Policy" updated="16 November 2026" crumbLabel="Privacy Policy" crumbPath="/privacy">
       <p>
         This Privacy Policy explains how {company.name} (&ldquo;we&rdquo;, &ldquo;us&rdquo;) collects,
         uses and protects the information you provide when you contact us or use this website.
@@ -48,6 +48,18 @@ export default function PrivacyPage() {
         to understand your requirements. We do not publish uploaded files or expose them publicly.
         Retention and storage of uploaded documents depend on the storage strategy configured for
         this website; where no storage is configured, documents are not persisted by the website.
+      </p>
+
+      <h2 id="ai-concierge">AI concierge</h2>
+      <TextGap />
+      <p>
+        The AI concierge in the corner of this website is an automated assistant, not a person. It runs on
+        ElevenLabs, which processes what you type or say to produce its answers. The microphone is used only
+        after you press &ldquo;Talk to me&rdquo; and your browser asks for permission; it stops when you end the
+        conversation or close the panel. Voice audio is not recorded. Conversation transcripts are kept by
+        ElevenLabs for 30 days so we can review and correct the assistant&rsquo;s answers, and are then deleted.
+        Nothing is sent to us as an enquiry unless you submit the contact form yourself. Please do not share
+        passwords, payment details or other sensitive information with the assistant.
       </p>
 
       <h2>Data security</h2>

@@ -2,7 +2,7 @@
   "name": "odoovations",
   "version": "1.0.0",
   "private": true,
-  "description": "ODOOVATIONS \u2014 custom software, AI automation, Odoo ERP, websites, apps, marketing and creative. Karachi-based, serving Pakistan and international clients.",
+  "description": "ODOOVATIONS — custom software, AI automation, Odoo ERP, websites, apps, marketing and creative. Karachi-based, serving Pakistan and international clients.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -17,6 +17,7 @@
     "art:render": "RIBBON_Q=74 node scripts/render-ribbon.mjs public/art/ribbon-wide.webp 1920 1080 0 high && RIBBON_Q=74 node scripts/render-ribbon.mjs public/art/ribbon-mobile.webp 760 860 0 medium && RIBBON_Q=56 node scripts/render-ribbon.mjs public/art/ribbon-page-mobile.webp 520 600 0 medium"
   },
   "dependencies": {
+    "@elevenlabs/react": "1.20.3",
     "@hookform/resolvers": "^3.9.0",
     "framer-motion": "^11.3.19",
     "lucide-react": "^0.416.0",
